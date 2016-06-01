@@ -2,7 +2,7 @@
 
 Welcome to the AGILE API specifications!
 
-*** This document is work in progess and will be properly reviewed and finalized soon ***
+***This document is a work in progess that will be properly reviewed and finalized soon***
 
 In this repository we are going to define and version the internal API exposed by AGILE core modules via DBus IPC.
 
