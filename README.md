@@ -154,5 +154,6 @@ iot.agile.Device:
 ## References
 
 - [DBus API design](https://dbus.freedesktop.org/doc/dbus-api-design.html)
+- [JSON schema](http://spacetelescope.github.io/understanding-json-schema/)
 - [AGILE website](http://agile-iot.eu/)
 - [Get in touch](https://twitter.com/agile_iot)
