@@ -49,7 +49,13 @@ iot.agile.ObjectName:
 
 #### Types:
 
-`TODO: Subtypes should be added accordingly and mapped to DBus supported types`
+`@NOTE: Subtypes should be added accordingly and mapped to DBus supported types`
+
+- In case an `Object` or `Array` is specified a `values` field should be added to describe the content.
+- Use an `*` to indicate a complex variable (like Object and Array) has non specified return type, eg. `Object*`
+- Enum should be defined in the same document of the object using it, eventually with an unique name inside the whole specs
+- Enum should be defined as autonomous types with a field `enum` and a list of `values` with keys
+
 
 ***Primitive types:***
 
@@ -59,7 +65,7 @@ iot.agile.ObjectName:
 
 ***Structured types:***
 
-- Enum: a list of predefined keys
+- **Enum**: a list of predefined keys
 
 ```
 StatusType
@@ -68,7 +74,7 @@ StatusType
     - DISCONNECTED
 ```
 
-- Object: a group of structured informations
+- **Object**: a group of structured informations
 
 ```
 ObjName:
@@ -79,19 +85,13 @@ ObjName:
     address: String
 ```
 
-- Array: an ordered list containing one or more types
+- **Array**: an ordered list containing one or more types
 
 ```
 ArrayField:
   type: Array
   values:  String
 ```
-
-- In case an `Object` or `Array` is specified a `values` field should be added to describe the content.
-- Use an `*` to indicate a complex variable (like Object and Array) has non specified return type, eg. `Object*`
-- Enum should be defined in the same document of the object using it, eventually with an unique name inside the whole specs
-- Enum should be defined as autonomous types with a field `enum` and a list of `values` with keys
-
 
 #### Example definition
 
