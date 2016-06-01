@@ -10,7 +10,19 @@ In this repository we are going to define and version the internal API exposed b
 
 Create an issue to suggest a modification or propose a change by creating a pull request.
 
-###Object description
+Contributors shall follow those guidelines in order to get their contribution accepted.
+
+##Specification
+
+- The model should be a valid [YAML](http://yaml.org/) document
+- All method and property are CamelCased, more precisely (PascalCased)[https://en.wikipedia.org/wiki/CamelCase]
+- Methods *must* indicate a `return` type, with `void` if no return is expected and optionally a list of `arguments`
+- Methods `arguments` *must* be a map with name as key and at least the a `type` field
+- Properties referencing objects must have a `reference` field, eventually in square brackets if it is a list
+- Properties can indicate an `access` field as list of one of  `r`ead, `w`rite, `s`ubscribe
+- Optionally a `description` can be provided on methods, arguments and properties
+
+###Object description example
 
 ```yaml
 
@@ -24,32 +36,18 @@ iot.agile.ObjectName:
         type: <type>
     return: <return type>
 
-  Property:
+  SimpleProperty:
     description: <method description>
     type: <type>
     access: [r, w, s]
 
-  Property:
-    description: <method description>
-    reference: iot.agile.AnotherObject
-
-  ManyProperties:
+  ReferenceProperties:
     description: <method description>
     reference: [iot.agile.AnotherObject]
 
 ```
 
-Summary of specification:
-
-- The model should be a valid [YAML](http://yaml.org/) document
-- All method and property are CamelCased, more precisely (PascalCased)[https://en.wikipedia.org/wiki/CamelCase]
-- Methods *must* indicate a `return` type, with `void` if no return is expected and optionally a list of `arguments`
-- Methods `arguments` *must* be a map with name as key and at least the a `type` field
-- Properties referencing objects must have a `reference` field, eventually in square brackets if it is a list
-- Properties can indicate an `access` field as list of one of  `r`ead, `w`rite, `s`ubscribe
-- Optionally a `description` can be provided on methods, arguments and properties
-
-### Types:
+#### Types:
 
 `TODO: Subtypes should be added accordingly and mapped to DBus supported types`
 
@@ -95,7 +93,7 @@ ArrayField:
 - Enum should be defined as autonomous types with a field `enum` and a list of `values` with keys
 
 
-### Example definition
+#### Example definition
 
 ```yaml
 
@@ -152,8 +150,6 @@ iot.agile.Device:
     reference: iot.agile.Protocol
 
 ```
-
-Contributors shall follow those guidelines in order to get their contribution accepted.
 
 ## References
 
