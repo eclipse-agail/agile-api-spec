@@ -14,7 +14,7 @@ Create an issue to suggest a modification or propose a change by creating a pull
 
 ```yaml
 
-iot.agile.ObjectName
+iot.agile.ObjectName:
 
   MethodName:
     description: <method description>
@@ -39,13 +39,13 @@ iot.agile.ObjectName
 
 ```
 
-Briefly:
+Summary of specification:
 
-- The model should be valid [YAML](http://yaml.org/)
-- All method and property are CamelCased
-- Methods must indicate a `return` type, with `void` if no return is expected
-- Methods must indicate `args` as map with its name as key and at least the a `type` field
-- Properties referencing objects must have a `reference` field , in square brackets if more than one
+- The model should be a valid [YAML](http://yaml.org/) document
+- All method and property are CamelCased, more precisely (PascalCased)[https://en.wikipedia.org/wiki/CamelCase]
+- Methods *must* indicate a `return` type, with `void` if no return is expected and optionally a list of `arguments`
+- Methods `arguments` *must* be a map with name as key and at least the a `type` field
+- Properties referencing objects must have a `reference` field, eventually in square brackets if it is a list
 - Properties can indicate an `access` field as list of one of  `r`ead, `w`rite, `s`ubscribe
 - Optionally a `description` can be provided on methods, arguments and properties
 
@@ -73,7 +73,7 @@ StatusType
 - Object: a group of structured informations
 
 ```
-objName:
+ObjName:
   type: Object
   values:
     name: String
@@ -84,7 +84,7 @@ objName:
 - Array: an ordered list containing one or more types
 
 ```
-arrayField:
+ArrayField:
   type: Array
   values:  String
 ```
@@ -99,7 +99,7 @@ arrayField:
 
 ```yaml
 
-iot.agile.Device
+iot.agile.Device:
   Name:
     description: The device name
     type: String
@@ -127,7 +127,6 @@ iot.agile.Device
          result: boolean,
          resultCode: Number
          response: Object*
-
   Read:
     args:
       sensorName: String
