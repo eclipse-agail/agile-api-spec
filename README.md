@@ -15,7 +15,7 @@ Contributors shall follow those guidelines in order to get their contribution ac
 ##Specification
 
 - The model should be a valid [YAML](http://yaml.org/) document
-- All method and property are CamelCased, more precisely (PascalCased)[https://en.wikipedia.org/wiki/CamelCase]
+- All method and property are CamelCased, more precisely [PascalCased](https://en.wikipedia.org/wiki/CamelCase)
 - Methods *must* indicate a `return` type, with `void` if no return is expected and optionally a list of `arguments`
 - Methods `arguments` *must* be a map with name as key and at least the a `type` field
 - Properties referencing objects must have a `reference` field, eventually in square brackets if it is a list
