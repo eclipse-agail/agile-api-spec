@@ -1,13 +1,34 @@
 iot.agile.ProtocolManager:
-  Devices:
-    type: 
-  Discover:
 
+  Devices:
+    description: Contains the list of devices returned by each Protocol specific discovery, where available
+    access: [r, s]
+    type: Array
+    fields: ProtocolDevice
+
+  Protocols:
+    description: The list of managed Protocols
+    access: [r, s]
+    type: Array
+    fields: ProtocolDevice
+
+  Discover:
+    description: Start discovery on all the managed Protocols
     args:
     return: void
-  Add:
 
-  Remove(str id)
-  Update(str id, obj)
-  Delete(str id)
-  Batch(str op, ..args)
+  Add:
+    description: Add a new Protocol
+    args:
+      protocol:
+        type: String
+        reference: iot.agile.Protocol
+    return: void
+
+  Remove:
+    description: Remove a managed Protocol
+    args:
+      protocol:
+        type: String
+        reference: iot.agile.Protocol
+    return: void

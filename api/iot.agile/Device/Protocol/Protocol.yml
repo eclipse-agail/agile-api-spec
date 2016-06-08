@@ -1,5 +1,5 @@
 
-Devices:
+ProtocolDevice:
   description: |
     List all devices a Protocol knows about.
     The list is updated by the Discover method.
@@ -70,7 +70,7 @@ iot.agile.Protocol:
       - Data Storage
 
   Devices:
-    type: Devices
+    type: ProtocolDevice
 
   Initialize:
     description: |

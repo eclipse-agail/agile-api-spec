@@ -11,7 +11,7 @@ iot.agile.Device:
     description: The device name
     type: String
 
-   Status :
+  Status:
     description: Indicate the current device status
     type: StatusType
 
