@@ -30,6 +30,7 @@ Device:
       Channels:
         # Data is the human readable name
         Data:
+          Type: data
           Id: "f000aa01-0451-4000-b000-000000000000"
           Description: "IR Temperature Data"
           Address: 0xAA01
@@ -49,6 +50,7 @@ Device:
               Off: 00:00
 
         Period:
+          Type: config
           Description: "IR Temperature Measurement Period"
           Id: "f000aa03-0451-4000-b000-000000000000"
           Address: 0xAA03

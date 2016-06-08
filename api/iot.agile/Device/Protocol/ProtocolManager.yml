@@ -1,0 +1,13 @@
+iot.agile.ProtocolManager:
+  Devices:
+    type: 
+  Discover:
+
+    args:
+    return: void
+  Add:
+
+  Remove(str id)
+  Update(str id, obj)
+  Delete(str id)
+  Batch(str op, ..args)

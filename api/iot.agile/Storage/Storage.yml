@@ -1,5 +1,6 @@
 
 RecordObject:
+  group: Data storage
   type: Object
   fields:
     DeviceId: String
@@ -12,6 +13,24 @@ RecordObject:
       type: KeyValue
 
 iot.agile.Storage:
+  description: |
+    The Storage component offer an abstraction for Devices to store and fetch data
+    in a generic way.
+    Write operations happens on all the enabled Drivers;
+    Failure of a single Driver doesn't make faile the whole write but only reported
+    Read operations work on a default driver, if specified, which acts as preferred source.
+    In case default is not available or fails, read will be executed in cascade on
+    the enabled Driver. If none replies the operation fails.
+
+  group: Data storage
+
+  Connections:
+    type: Array
+    reference: iot.agile.Storage.Driver
+
+
+  # Those methods should stay in sync with the one in Driver
+
   Create:
     description: Creates a record
     args:

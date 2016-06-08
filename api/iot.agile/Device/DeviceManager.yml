@@ -39,6 +39,8 @@ DeviceDefinition:
 
 iot.agile.DeviceManager:
 
+  group: Device
+
   Devices:
     description: Return all registered devices
     type: Array

@@ -1,0 +1,88 @@
+DriverStatus:
+  group: Data storage
+  type: Enum
+  fields:
+    - ACTIVE
+    - NOT_CONFIGURED
+    - ERROR
+    - FAILURE
+
+iot.agile.Storage.Driver:
+
+  description: |
+    A Driver component is in charge of data storage and
+    retrieval on a specific implementation.
+    It may be a local database or an online services via APIs
+
+  group: Data storage
+
+  Name:
+    description: The driver friendly name
+    type: String
+    access: [r]
+
+  Enabled: Boolean
+
+  Status:
+    access: [r]
+    description: Indicate the overall status of the Driver.
+    type: DriverStatus
+
+  Error:
+    access: [r, w, s]
+    description: Indicates if an error occured. May be reset once notified.
+    type: Boolean
+
+  Params:
+    description: |
+      Contains Driver specific configurations
+    type: Object*
+    access: [r, w]
+    fields:
+      uri:
+        description: |
+          A parsable connection string composed of key value
+          indicated by `=` symbol, separated with `;`.
+          If value contains a separator (`=` or `;`) it must be escaped with a backslash.
+          This may be exposed to the users with a proper UI to allow insertion of personal keys
+        type: String
+        example: hostname=localhost;password=my \;password;
+
+  Logs:
+    description: A system path to read the logs from
+    type: String
+
+    # Those methods should stay in sync with the one in Driver
+
+  Create:
+    description: Creates a record
+    args:
+      record: RecordObject
+    return:
+      description: Return the Id of the created record
+      type: String
+  Read:
+    description: Load a record by Id
+    args:
+      Id: String
+    return:
+      description: Return the corresponding record
+      type: RecordObject
+  Update:
+    description: Updates a record
+    args:
+      Id: String
+      Record: RecordObject
+    return: void
+  Delete:
+    description: Delete a record by Id
+    args:
+      Id: String
+    return: void
+  Find:
+    description: Search for a set of records by criterias
+    args:
+      query: BaseQuery
+    return:
+      type: Array
+      fields: RecordObject

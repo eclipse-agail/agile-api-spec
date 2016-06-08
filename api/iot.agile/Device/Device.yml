@@ -1,11 +1,12 @@
 StatusType:
+  group: Device
   type: Enum
   fields:
     - CONNECTED
     - DISCONNECTED
 
 iot.agile.Device:
-
+  group: Device
   Name:
     description: The device name
     type: String
@@ -15,11 +16,11 @@ iot.agile.Device:
     type: StatusType
 
   Configuration:
-    description: User and module configuration storage
-    type: Object*
+    description: User configurations storage
+    type: KeyValue
 
   Profile:
-    description: Contains user or DeviceManager provided information on device in order to handle at Protocol level the specific implementation
+    description: Contains protocol specific provided information on device in order to handle at Protocol level the specific implementation
     type: Object*
 
   LastUpdate:

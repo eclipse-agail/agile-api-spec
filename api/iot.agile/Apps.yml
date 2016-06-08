@@ -1,0 +1,80 @@
+iot.agile.Apps:
+  group: Apps
+  description: |
+    Apps API enable the management of AGILE apps and components
+
+  Logs:
+    type: String
+    description: |
+      System path to Apps log file.
+      Contains per-app filterable output.
+
+  Settings:
+    type: Object*
+    fields:
+      Provider:
+        type: String
+        description: Define an installer provider
+        example: docker
+      ApiKey:
+        type: String
+        description: User apiKey if required
+      RepositoryUrl:
+        type: String
+        description: Repository / Marketplace API  url
+
+  Start:
+    args:
+      app:
+        type: String
+        description: Application name to start
+      params:
+        type: Array
+        fields: String
+        description: Application parameters to pass
+        example: [ --start, --verbose, --config, ~/myapp/config.json ]
+    return:
+      description: Return informations regarding the operation results.
+      type: Boolean
+
+  Stop:
+    args:
+      app:
+        type: String
+        description: Application name to stop
+    return:
+      type: Number
+      description: Return the exit code, if available.
+
+  Restart:
+    args:
+      app:
+        type: String
+        description: Application name to restart
+    return: Boolean
+
+  Install:
+    args:
+      app:
+        type: String
+        description: Application name to install
+    return: Boolean
+
+  Uninstall:
+    args:
+      app:
+        type: String
+        description: Application name to uninstall
+    return: Boolean
+
+  Status:
+    args:
+      app:
+        type: String
+        description: Application name to uninstall
+    return:
+      type: Object
+      fields:
+        running: Boolean
+        message: String
+        pid: Number
