@@ -33,8 +33,8 @@ var loadYaml = function() {
           }
         });
       });
-  })
-}
+  });
+};
 
 var findFiles = function() {
   return new Promise(function(resolve, reject) {
@@ -43,7 +43,7 @@ var findFiles = function() {
       resolve(files);
     });
   });
-}
+};
 
 parse().then(function(def) {
   // console.log(require('util').inspect(def, { depth: null }));

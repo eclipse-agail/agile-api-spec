@@ -5,34 +5,31 @@ var Promise = require('bluebird');
 var _ = require("lodash");
 
 var d = require("debug")("agile:gen:parser");
+var dobj = require("debug")("agile:gen:parser:analyzer");
+
+var Clazz = require("./model/Class");
+
+var Definition = require('./model/Definition');
 
 var types = [
   'number', 'string', 'array', 'object', 'enum'
 ];
 
-var definitions = {
-  groups: [],
-  tags: [],
-  classes: {},
-  types: {}
-};
-
 parser.parse = function(doc) {
-  return Promise.all(Object.keys(doc)).each(function(key) {
 
-    var obj = doc[key];
+  var definition = new Definition();
 
-    // is a custom type
-    if(obj.type) {
-      d("Found Type %s", key);
-      definitions.types[key] = obj;
-    }
-    else {
-      d("Found Class %s", key);
-      definitions.classes[key] = obj;
-    }
+  return Promise.all(Object.keys(doc))
+    .each(function(key) {
+      definition.add(key, doc[key]);
+    })
+    .then(function() {
+      var json = definition.toJSON();
+      console.log(require('util').inspect(
+        json
+      ,{ depth: null }));
 
-    // console.log(require('util').inspect(obj, { depth: null }));
-
-  });
+      process.exit();
+    })
+    ;
 };
