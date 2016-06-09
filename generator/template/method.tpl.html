@@ -1,0 +1,28 @@
+<div class="api-class-method" data-type="method">
+  <p>
+
+    <span class="type">
+      <% if(typeLink) { %>
+        <a href="#<%= typeLink %>"><%= type %></a>
+      <% } else { %>
+        <%= type %>
+      <% } %>
+    </span>
+
+    <span class="name"><%= name %>(</span>
+      <span class="args"><%= args %></span>
+    <span class="name">)</span> : <span class="name"><%= returnType %></span>
+
+    <% if(description) { %>
+      <span class="description">
+        <%= description %>
+      </span>
+    <% } %>
+
+    <% if(example) { %>
+      <pre class="example"><%= example %></pre>
+    <% } %>
+
+  </p>
+  <hr />
+</div>

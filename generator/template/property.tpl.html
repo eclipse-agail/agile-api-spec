@@ -1,0 +1,26 @@
+<div class="api-class-property" data-type="property">
+  <p>
+
+    <span class="type">
+      <% if(typeLink) { %>
+        <a href="#<%= typeLink %>"><%= type %></a>
+      <% } else { %>
+        <%= type %>
+      <% } %>
+    </span>
+
+    <%= name %>
+
+    <% if(description) { %>
+      <span class="description">
+        <%= description %>
+      </span>
+    <% } %>
+
+    <% if(example) { %>
+      <pre class="example"><%= example %></pre>
+    <% } %>
+
+  </p>
+  <hr />
+</div>

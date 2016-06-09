@@ -1,35 +1,60 @@
 var parser = module.exports;
 
+var config = require("../config.json");
 
 var Promise = require('bluebird');
 var _ = require("lodash");
+var fs = require('fs');
 
 var d = require("debug")("agile:gen:parser");
-var dobj = require("debug")("agile:gen:parser:analyzer");
 
 var Clazz = require("./model/Class");
-
 var Definition = require('./model/Definition');
 
-var types = [
-  'number', 'string', 'array', 'object', 'enum'
-];
+var loadYaml = function () {
+  var YAML = require('yamljs');
+  return findFiles().then(function (files) {
+    return Promise
+      .all(files)
+      .map(function (file) {
+        return new Promise(function (resolve, reject) {
+          try {
+            d("Loading %s", file);
+            var doc = YAML.load(file);
+            resolve(doc);
+          } catch(e) {
+            d("Cannot load %s: ", file, e.message);
+            resolve();
+          }
+        });
+      });
+  });
+};
 
-parser.parse = function(doc) {
+var findFiles = function () {
+  var glob = require("glob");
+  return new Promise(function (resolve, reject) {
+    glob(config.baseDir + "/**/*.yml", function (err, files) {
+      if(err) return reject(err);
+      resolve(files);
+    });
+  });
+};
 
-  var definition = new Definition();
+var parse = function (doc) {
 
-  return Promise.all(Object.keys(doc))
-    .each(function(key) {
-      definition.add(key, doc[key]);
-    })
-    .then(function() {
-      var json = definition.toJSON();
-      console.log(require('util').inspect(
-        json
-      ,{ depth: null }));
+};
 
-      process.exit();
-    })
-    ;
+module.exports.run = function () {
+  return loadYaml().then(function (docs) {
+
+    var definition = new Definition();
+
+    _.each(docs, function(doc) {
+      _.each(Object.keys(doc), function(key) {
+        definition.add(key, doc[key]);
+      });
+    });
+    return Promise.resolve(definition);
+  });
 };

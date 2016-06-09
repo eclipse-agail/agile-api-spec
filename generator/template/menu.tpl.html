@@ -1,0 +1,17 @@
+<nav class="menu-item">
+  <% menu.forEach(function(group) { %>
+
+    <h3><%= group.title %></h3>
+    <hr />
+
+    <ul class="no-bullet side-nav">
+      <% group.list.forEach(function(title) { %>
+        <li>
+          <a href="#<%= title %>">
+            <%= title %>
+          </a>
+        </li>
+        <% }) %>
+    </ul>
+    <% }) %>
+</nav>

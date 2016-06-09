@@ -1,6 +1,7 @@
 
 var d = require('debug')("agile:gen:class");
 var _ = require('lodash');
+var Promise = require('bluebird');
 
 var util = require('../util');
 
@@ -19,7 +20,6 @@ var Definition = function() {
   };
 
   util.exportProperties(this);
-
 };
 
 Definition.prototype.add = function(key, obj) {
@@ -38,16 +38,17 @@ Definition.prototype.toJSON = function() {
   return util.toJSON(this.data);
 };
 
-Definition.prototype.render = function(format, obj) {
-
+Definition.prototype.render = function(format) {
   var renderer;
+
   try {
     renderer = require("../renderer/" + format);
   }
   catch(e) {
-    throw new Error("Cannot load render format: " + e.message);
+    return Promise.reject(new Error("Cannot load render format: " + e.message));
   }
 
+  return renderer(this);
 };
 
 module.exports = Definition;

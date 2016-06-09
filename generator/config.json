@@ -1,3 +1,4 @@
 {
-  "baseDir": "../api"
+  "baseDir": "../api",
+  "outputFile": "./public/index.html"
 }
