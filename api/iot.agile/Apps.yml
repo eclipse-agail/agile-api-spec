@@ -32,7 +32,7 @@ iot.agile.Apps:
         type: Array
         fields: String
         description: Application parameters to pass
-        example: [ --start, --verbose, --config, ~/myapp/config.json ]
+        example: `[ --start, --verbose, --config, ~/myapp/config.json ]`
     return:
       description: Return informations regarding the operation results.
       type: Boolean

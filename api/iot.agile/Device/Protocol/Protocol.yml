@@ -47,7 +47,7 @@ iot.agile.Protocol:
     Every Device has one Protocol used to establish and use a communication exchange.
 
   Status:
-    type: DeviceStatus
+    type: ProtocolStatus
     access: [r, s]
 
   Driver:

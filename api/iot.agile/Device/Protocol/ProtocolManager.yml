@@ -1,3 +1,11 @@
+
+ProtocolOverview:
+  type: Object
+  fields:
+    name: String
+    id: String
+    status: ProtocolStatus
+
 iot.agile.ProtocolManager:
 
   Devices:
@@ -10,7 +18,7 @@ iot.agile.ProtocolManager:
     description: The list of managed Protocols
     access: [r, s]
     type: Array
-    fields: ProtocolDevice
+    fields: ProtocolOverview
 
   Discover:
     description: Start discovery on all the managed Protocols

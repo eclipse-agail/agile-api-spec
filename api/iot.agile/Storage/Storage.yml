@@ -5,6 +5,7 @@ RecordObject:
   fields:
     DeviceId: String
     StreamId: String
+    ChannelId: String
     LastUpdate:
       description: A UNIX timestamp rapresenting the last update of a record
       type: Number
