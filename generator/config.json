@@ -1,4 +1,4 @@
 {
   "baseDir": "../api",
-  "outputFile": "./public/index.html"
+  "outputDir": "../build"
 }

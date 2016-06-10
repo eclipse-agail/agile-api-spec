@@ -94,14 +94,14 @@ iot.agile.Protocol:
       type: void
       reference: Devices
 
-  Execute:
-    description: |
-      Execute, in a RPC-like style, a command over the Protocol to be executed by the connected device.
-    args:
-      operation: String
-      arguments: Object*
-    return:
-      type: Object*
+  # Execute:
+  #   description: |
+  #     Execute, in a RPC-like style, a command over the Protocol to be executed by the connected device.
+  #   args:
+  #     operation: String
+  #     arguments: Object*
+  #   return:
+  #     type: Object*
 
   Write:
     description: |

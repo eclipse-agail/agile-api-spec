@@ -7,6 +7,11 @@ StatusType:
 
 iot.agile.Device:
   group: Device
+
+  Id:
+    description: The unique device id in the gateway
+    type: String
+
   Name:
     description: The device name
     type: String

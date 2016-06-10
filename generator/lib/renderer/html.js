@@ -126,7 +126,7 @@ HtmlRenderer.prototype.render = function() {
 
   d("Render classes");
   var classes = _.map(this.definition.classes, this.renderClass.bind(this));
-  this.html.push(this.html.join());
+  this.html.push(classes.join());
 
   return this.templates.html({
     content: this.html.join(""),
