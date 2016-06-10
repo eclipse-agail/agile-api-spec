@@ -1,5 +1,5 @@
 
-var d = require('debug')("agile:gen:class");
+var d = require('debug')("agile:gen:model:Definition");
 var _ = require('lodash');
 var Promise = require('bluebird');
 
@@ -14,7 +14,7 @@ var Definition = function() {
 
   this.data = {
     groups: [],
-    tags: [],
+    tags: {},
     classes: {},
     types: {}
   };
@@ -27,28 +27,35 @@ Definition.prototype.add = function(key, obj) {
   // is a custom type
   if(obj.type) {
     d("Add root type %s", key);
-    this.types[key] = new Type(key, obj);
+    var type = new Type(key, obj, this);
+    this.types[key] = type;
   }
   else {
     d("Add class %s", key);
-    var clazz = new Clazz(key, obj);
-    clazz.setParent(this);
+    var clazz = new Clazz(key, obj, this);
     this.classes[key] = clazz;
   }
 };
 
-Definition.prototype.addTag = function(tag) {
-  if(tag instanceof Array)
-    return _.each(tag, this.addTag.bind(this));
-  if(this.tags.indexOf(tag.toLowerCase()) === -1) {
-    this.tags.push(tag);
+Definition.prototype.addTags = function(obj) {
+
+  if(obj.tags) {
+    var tags = obj.tags;
+    d("Add tags %j", tags);
+    var me = this;
+    _.each(tags, function(tag) {
+      me.tags[tag] = this.tags[tag] || [];
+      me.tags[tag].push(obj);
+    });
   }
 };
 
-Definition.prototype.addGroup = function(group, ref) {
-  this.group[group] = this.group[group] || [];
-  if(this.group[group].indexOf(ref.toLowerCase()) === -1) {
-    this.group[group].push(ref);
+Definition.prototype.addGroup = function(obj) {
+  if(obj.group) {
+    var group = obj.group;
+    d("Add group %s", group);
+    this.groups[group] = this.groups[group] || [];
+    this.groups[group].push(obj);
   }
 };
 

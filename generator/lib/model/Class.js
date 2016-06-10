@@ -1,18 +1,17 @@
 
 
-var d = require('debug')("agile:gen:class");
+var d = require('debug')("agile:gen:model:Class");
 var _ = require('lodash');
 
 var util = require('../util');
 var Property = require('./Property');
 var Method = require('./Method');
 
-var Clazz = function(name, obj) {
+var Clazz = function(name, obj, parent) {
 
   var me = this;
 
   this.name = null;
-  this.parent = null;
   this.data = {
     description: null,
     tags: [],
@@ -21,31 +20,27 @@ var Clazz = function(name, obj) {
     properties: {},
   };
 
-  util.exportProperties(this);
-
+  if(parent) this.setParent(parent);
   if(name) this.name = name;
   if(obj) this.load(obj);
-};
 
-Clazz.prototype.getParent = function () {
-  return this.parent;
-};
+  util.exportProperties(this);
 
-Clazz.prototype.setParent = function (p) {
-  this.parent = p;
 };
+require('util').inherits(Clazz, require('./BaseObject'));
 
 Clazz.prototype.load = function (obj) {
 
   var me = this;
 
   _.each(this.data, function(val, key) {
-    d(key);
     me.data[key] = (obj[key] === undefined) ? me.data[key] : obj[key];
   });
 
-  _.each(obj, function(val, key) {
+  this.addGroup();
+  this.addTags();
 
+  _.each(obj, function(val, key) {
     // check if it is a Property or Method (First char must be uppercase)
     if(key.substr(0,1) === key.substr(0,1).toUpperCase()) {
       // is it a Method
@@ -62,12 +57,14 @@ Clazz.prototype.load = function (obj) {
 
 Clazz.prototype.addProperty = function (name, prop) {
   d("Add property %s", name);
-  this.data.properties[name] = new Property(name, prop);
+  this.data.properties[name] = new Property(name, prop, this);
+  // console.warn("Property fields %s %j", name,
+  //     this.data.properties[name].data.fields);
 };
 
 Clazz.prototype.addMethod = function (name, method) {
   d("Add method %s", name);
-  this.data.methods[name] = new Method(name, method);
+  this.data.methods[name] = new Method(name, method, this);
 };
 
 Clazz.prototype.toJSON = function() {

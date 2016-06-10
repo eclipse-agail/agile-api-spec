@@ -1,17 +1,18 @@
-<li class="api-class-property" data-type="property">
+<div class="api-type" data-type="type">
   <p>
 
+    <span class="name" id="<%= name %>">
+      <%= name %>
+    </span>
+
+    :
+    
     <span class="type">
       <% if(typeLink) { %>
         <a href="#<%= typeLink %>"><%= type %></a>
       <% } else { %>
         <%= type %>
       <% } %>
-    </span>
-
-
-    <span class="name" id="<%= name %>">
-      <%= name %>
     </span>
 
     <% if(description) { %>
@@ -21,14 +22,14 @@
     <% } %>
 
     <% if(example) { %>
-      <div class="example-container">
+      <span class="example-container">
         Example: <pre class="example"><%= example %></pre>
-      </div>
+      </span>
     <% } %>
 
-    <!-- <% if(typeDef) { %>
-      <%= typeDef %>
-    <% } %> -->
-  </p>
+    <div class="fields pad-left">
+      <%= fields %>
+    </div>
 
-</li>
+  </p>
+</div>

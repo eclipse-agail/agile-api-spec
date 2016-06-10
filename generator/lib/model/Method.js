@@ -3,9 +3,9 @@ var _ = require("lodash");
 var util = require("../util");
 var Type = require("./Type");
 
-var d = require("debug")("agile:gen:Method");
+var d = require("debug")("agile:gen:model:Method");
 
-var ArgType = function(name, obj) {
+var ArgType = function(name, obj, parent) {
 
   this.name = null;
   this.data = {
@@ -16,15 +16,14 @@ var ArgType = function(name, obj) {
     reference: null
   };
 
-  this.initialize(name, obj);
+  Type.prototype.initialize.apply(this, arguments);
+  // console.warn("arg %s %j", this.name, obj);
 };
-
 require('util').inherits(ArgType, Type);
 
-var ReturnType = function(obj) {
+var ReturnType = function(obj, parent) {
 
   this.name = null;
-  this.parent = null;
   this.data = {
     description: null,
     example: null,
@@ -33,10 +32,9 @@ var ReturnType = function(obj) {
     reference: null
   };
 
-  this.initialize(null, obj);
+  Type.prototype.initialize.call(this, null, obj, parent);
 };
 require('util').inherits(ReturnType, Type);
-
 
 var Method = function (name, obj) {
 
@@ -48,21 +46,15 @@ var Method = function (name, obj) {
     return: null,
   };
 
-  util.exportProperties(this);
 
   if(obj) this.load(obj);
   if(name) this.name = name;
 
+  util.exportProperties(this);
+
   d("Created method %s", this.name);
 };
-
-Method.prototype.getParent = function () {
-  return this.parent;
-};
-
-Method.prototype.setParent = function (p) {
-  this.parent = p;
-};
+require('util').inherits(Method, require('./BaseObject'));
 
 Method.prototype.toJSON = function () {
   return util.toJSON(this.data);
@@ -83,9 +75,9 @@ Method.prototype.load = function (obj) {
 
       _.each(obj[key], function (arg, argName) {
 
-        if(typeof obj[key] === 'string') {
-          obj[key] = {
-            type: obj[key]
+        if(typeof arg === 'string') {
+          arg = {
+            type: arg
           };
         }
 
@@ -96,14 +88,13 @@ Method.prototype.load = function (obj) {
     }
 
     if(key === 'return' && obj[key]) {
-      if(typeof obj[key] === 'string') {
-        obj[key] = {
-          type: obj[key]
+      var returnType = obj[key];
+      if(typeof returnType === 'string') {
+        returnType = {
+          type: returnType
         };
       }
-
-      me.addReturn(obj[key]);
-
+      me.addReturn(returnType);
       return;
     }
 
@@ -112,14 +103,15 @@ Method.prototype.load = function (obj) {
 };
 
 Method.prototype.addArg = function (name, arg) {
-  d("Add methd arg %s", name);
-  var type = new ArgType(name, arg);
+  d("Add method argument %s", name);
+  var type = new ArgType(name, arg, this);
   this.data.args[name] = type;
 };
 
 Method.prototype.addReturn = function (returnType) {
-  // d("Add return type %j", returnType);
-  var type = new ReturnType(returnType);
+  d("Add return type");
+  var type = new ReturnType(returnType, this);
+  // console.warn("returnType: %j %j", returnType, type);
   this.data.return = type;
 };
 

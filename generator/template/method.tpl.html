@@ -1,17 +1,19 @@
-<div class="api-class-method" data-type="method">
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><%= returnType %></span>
+
+    <!-- <span class="type">
       <% if(typeLink) { %>
         <a href="#<%= typeLink %>"><%= type %></a>
       <% } else { %>
         <%= type %>
       <% } %>
-    </span>
+    </span> -->
 
     <span class="name"><%= name %>(</span>
       <span class="args"><%= args %></span>
-    <span class="name">)</span> : <span class="name"><%= returnType %></span>
+    <span class="name">)</span>
 
     <% if(description) { %>
       <span class="description">
@@ -24,5 +26,5 @@
     <% } %>
 
   </p>
-  <hr />
-</div>
+
+</li>

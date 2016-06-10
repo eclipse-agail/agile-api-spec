@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 
 gulp.task('build', function() {
-  require("./index").export("html");
+  require("./index").exportAll();
 });
 
 gulp.task('default', function() {

@@ -1,12 +1,11 @@
 var _ = require('lodash');
 var util = require('../util');
 
-var d = require('debug')("agile:gen:Type");
+var d = require('debug')("agile:gen:model:Type");
 
-var Type = function (name, obj) {
+var Type = function (name, obj, parent) {
 
   this.name = null;
-
   this.data = {
     description: null,
     extends: null,
@@ -16,28 +15,21 @@ var Type = function (name, obj) {
     reference: null
   };
 
-  this.initialize(name, obj);
+  this.initialize(name, obj, parent);
 };
+require('util').inherits(Type, require('./BaseObject'));
 
-Type.prototype.initialize = function(name, obj) {
+Type.prototype.initialize = function(name, obj, parent) {
 
   var me = this;
-  this.parent = null;
 
-  util.exportProperties(this);
-
+  if(parent) this.setParent(parent);
   if(name) this.name = name;
   if(obj) this.load(obj);
 
+  util.exportProperties(this);
+
   d("Added type %s", this.name || "");
-};
-
-Type.prototype.getParent = function() {
-  return this.parent;
-};
-
-Type.prototype.setParent = function(p) {
-  this.parent = p;
 };
 
 Type.prototype.load = function(obj) {
@@ -49,7 +41,6 @@ Type.prototype.load = function(obj) {
 
       // normalize type shortcut eg: `fields: String`
       if(typeof obj[key] === 'string') {
-
         if(obj.type && obj.type.toLowerCase() === 'array') {
           var _type = obj[key];
           obj[key] = {};
@@ -71,16 +62,22 @@ Type.prototype.load = function(obj) {
     }
 
   });
+
+  this.addGroup();
+  this.addTags();
+
 };
 
 Type.prototype.addField = function(name, field) {
+
   if(typeof field === "string") {
     field = {
       type: field
     };
   }
-  var type = new Type(name, field);
-  type.setParent(this);
+
+  d("Add field %s", name);
+  var type = new Type(name, field, this);
   this.data.fields[name] = type;
 };
 
