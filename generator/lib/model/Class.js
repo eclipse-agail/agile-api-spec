@@ -12,6 +12,7 @@ var Clazz = function(name, obj) {
   var me = this;
 
   this.name = null;
+  this.parent = null;
   this.data = {
     description: null,
     tags: [],
@@ -26,6 +27,14 @@ var Clazz = function(name, obj) {
   if(obj) this.load(obj);
 };
 
+Clazz.prototype.getParent = function () {
+  return this.parent;
+};
+
+Clazz.prototype.setParent = function (p) {
+  this.parent = p;
+};
+
 Clazz.prototype.load = function (obj) {
 
   var me = this;
@@ -36,7 +45,7 @@ Clazz.prototype.load = function (obj) {
   });
 
   _.each(obj, function(val, key) {
-    d(key);
+
     // check if it is a Property or Method (First char must be uppercase)
     if(key.substr(0,1) === key.substr(0,1).toUpperCase()) {
       // is it a Method

@@ -24,6 +24,7 @@ require('util').inherits(ArgType, Type);
 var ReturnType = function(obj) {
 
   this.name = null;
+  this.parent = null;
   this.data = {
     description: null,
     example: null,
@@ -53,6 +54,14 @@ var Method = function (name, obj) {
   if(name) this.name = name;
 
   d("Created method %s", this.name);
+};
+
+Method.prototype.getParent = function () {
+  return this.parent;
+};
+
+Method.prototype.setParent = function (p) {
+  this.parent = p;
 };
 
 Method.prototype.toJSON = function () {

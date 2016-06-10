@@ -23,6 +23,7 @@ var Definition = function() {
 };
 
 Definition.prototype.add = function(key, obj) {
+
   // is a custom type
   if(obj.type) {
     d("Add root type %s", key);
@@ -30,7 +31,24 @@ Definition.prototype.add = function(key, obj) {
   }
   else {
     d("Add class %s", key);
-    this.classes[key] = new Clazz(key, obj);
+    var clazz = new Clazz(key, obj);
+    clazz.setParent(this);
+    this.classes[key] = clazz;
+  }
+};
+
+Definition.prototype.addTag = function(tag) {
+  if(tag instanceof Array)
+    return _.each(tag, this.addTag.bind(this));
+  if(this.tags.indexOf(tag.toLowerCase()) === -1) {
+    this.tags.push(tag);
+  }
+};
+
+Definition.prototype.addGroup = function(group, ref) {
+  this.group[group] = this.group[group] || [];
+  if(this.group[group].indexOf(ref.toLowerCase()) === -1) {
+    this.group[group].push(ref);
   }
 };
 
