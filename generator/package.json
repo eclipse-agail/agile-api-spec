@@ -14,5 +14,8 @@
     "glob": "^7.0.3",
     "lodash": "^4.13.1",
     "yamljs": "^0.2.7"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }
