@@ -47,7 +47,7 @@ iot.agile.DeviceManager:
     reference: iot.agile.Device
 
   Find:
-    description: Search for devices bt specific criteria
+    description: Search for devices by specific criteria
     args:
       description: An query object to search for a device
       type: BaseQuery
@@ -56,53 +56,53 @@ iot.agile.DeviceManager:
       type: Array
       reference: iot.agile.Device
 
-    Create:
-      description: Create (register) a new device in the manager
-      args:
-        device:
-          type: DeviceDefinition
-      return:
-        description: Return the AGILE Device ID, unique to identify the device in the gateway
-        type: String
-
-    Read:
-      description: Load a device definition by its ID
-      args:
-        Id:
-          type: String
-      return:
-        description: Return the AGILE Device UUID, unique to identify the device in the gateway
+  Create:
+    description: Create (register) a new device in the manager
+    args:
+      device:
         type: DeviceDefinition
+    return:
+      description: Return the AGILE Device ID, unique to identify the device in the gateway
+      type: String
 
-    Update:
-      description: Updates a device definition by its ID
-      args:
-        Id:
-          type: String
-        Definition:
-          type: DeviceDefinition
-      return: Boolean
+  Read:
+    description: Load a device definition by its ID
+    args:
+      Id:
+        type: String
+    return:
+      description: Return the AGILE Device UUID, unique to identify the device in the gateway
+      type: DeviceDefinition
 
-    Delete:
-      description: Delete a device definition by its ID. This will deactivate the Device DBus object
-      args:
-        Id:
-          type: String
-        Definition:
-          type: DeviceDefinition
-      return: Boolean
+  Update:
+    description: Updates a device definition by its ID
+    args:
+      Id:
+        type: String
+      Definition:
+        type: DeviceDefinition
+    return: Boolean
 
-    Batch:
-      description: Performa a batch operation over a set of devices.
-      args:
-        Op:
-          type: Enum
-          fields:
-            - Create
-            - Update
-            - Delete
-            - Read
-        Arguments:
-          description: An object to be passed to the underlying function call (Create, Update, Delete, Read)
-          type: Object*
-      return: Boolean
+  Delete:
+    description: Delete a device definition by its ID. This will deactivate the Device DBus object
+    args:
+      Id:
+        type: String
+      Definition:
+        type: DeviceDefinition
+    return: Boolean
+
+  Batch:
+    description: Performa a batch operation over a set of devices.
+    args:
+      Op:
+        type: Enum
+        fields:
+          - Create
+          - Update
+          - Delete
+          - Read
+      Arguments:
+        description: An object to be passed to the underlying function call (Create, Update, Delete, Read)
+        type: Object*
+    return: Boolean

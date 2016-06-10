@@ -36,7 +36,7 @@ iot.agile.Storage.Driver:
   Params:
     description: |
       Contains Driver specific configurations
-    type: Object*
+    type: Object
     access: [r, w]
     fields:
       uri:
@@ -47,13 +47,13 @@ iot.agile.Storage.Driver:
           This may be exposed to the users with a proper UI to allow insertion of personal keys
         type: String
         example: hostname=localhost;password=my \;password;
+      options: Object*
 
   Logs:
     description: A system path to read the logs from
     type: String
 
-    # Those methods should stay in sync with the one in Driver
-
+  # Those methods should stay in sync with the one in Driver
   Create:
     description: Creates a record
     args:
@@ -64,20 +64,20 @@ iot.agile.Storage.Driver:
   Read:
     description: Load a record by Id
     args:
-      Id: String
+      id: String
     return:
       description: Return the corresponding record
       type: RecordObject
   Update:
     description: Updates a record
     args:
-      Id: String
-      Record: RecordObject
+      id: String
+      record: RecordObject
     return: void
   Delete:
     description: Delete a record by Id
     args:
-      Id: String
+      id: String
     return: void
   Find:
     description: Search for a set of records by criterias

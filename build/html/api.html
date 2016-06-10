@@ -9,6 +9,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css">
   <meta name="Description" content="AGILE API specification documentation">
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+  <style>
+    .description, .type {
+      color: #333;
+    }
+    .type {
+      font-size: 80%;
+    }
+    .name {
+      font-size: 120%;
+      font-weight: bold;
+    }
+    .pad-left {
+      padding-left: .5em;
+      margin-left: 1em;
+      border-left: 1px solid #EEE;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -164,22 +183,6 @@
         
     </ul>
     
-
-    <h3>Groups</h3>
-    <hr />
-
-    <ul class="no-bullet side-nav">
-      
-    </ul>
-    
-
-    <h3>Tags</h3>
-    <hr />
-
-    <ul class="no-bullet side-nav">
-      
-    </ul>
-    
 </nav>
 
     </div>
@@ -191,16 +194,22 @@
   </h2>
   <hr />
 
-  <div class="api-class-properties" data-type="properties">
-    <div class="api-class-property" data-type="property">
+  <h3>Properties</h3>
+  <hr />
+  <ul class="api-class-properties" data-type="properties">
+    <li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         String
       
     </span>
 
-    Logs
+
+    <span class="name" id="Logs">
+      Logs
+    </span>
 
     
       <span class="description">
@@ -212,171 +221,290 @@ Contains per-app filterable output.
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         Object*
       
     </span>
 
-    Settings
+
+    <span class="name" id="Settings">
+      Settings
+    </span>
 
     
 
     
 
+    <!--  -->
   </p>
+
+</li>
+
+  </ul>
+
+  <h3>Methods</h3>
   <hr />
-</div>
-
-  </div>
-
-  <div class="api-class-methods" data-type="methods">
-    <div class="api-class-method" data-type="method">
+  <ul class="api-class-methods" data-type="methods">
+    <li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Boolean
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Start(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Array
+  
+</span>
+
+<span class="name">
+  params
+</span>
+</span>
+    <span class="name">)</span>
 
     
 
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Number
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Stop(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+</span>
+    <span class="name">)</span>
 
     
 
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Boolean
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Restart(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+</span>
+    <span class="name">)</span>
 
     
 
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Boolean
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Install(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+</span>
+    <span class="name">)</span>
 
     
 
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Boolean
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Uninstall(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+</span>
+    <span class="name">)</span>
 
     
 
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Object
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Status(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+</span>
+    <span class="name">)</span>
 
     
 
     
 
   </p>
-  <hr />
-</div>
 
-  </div>
+</li>
+
+  </ul>
 
 </div>
-,<div class="api-class" data-type="class">
+<div class="api-class" data-type="class">
 
   <h2 id="iot.agile.Device">
     iot.agile.Device
   </h2>
   <hr />
 
-  <div class="api-class-properties" data-type="properties">
-    <div class="api-class-property" data-type="property">
+  <h3>Properties</h3>
+  <hr />
+  <ul class="api-class-properties" data-type="properties">
+    <li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         String
       
     </span>
 
-    Id
+
+    <span class="name" id="Id">
+      Id
+    </span>
 
     
       <span class="description">
@@ -386,18 +514,23 @@ Contains per-app filterable output.
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         String
       
     </span>
 
-    Name
+
+    <span class="name" id="Name">
+      Name
+    </span>
 
     
       <span class="description">
@@ -407,18 +540,23 @@ Contains per-app filterable output.
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         <a href="#[object Object]">StatusType</a>
       
     </span>
 
-    Status
+
+    <span class="name" id="Status">
+      Status
+    </span>
 
     
       <span class="description">
@@ -428,18 +566,50 @@ Contains per-app filterable output.
 
     
 
-  </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+    <!-- 
+      <div class="api-type" data-type="type">
   <p>
+
+    <span class="name" id="">
+      
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+     -->
+  </p>
+
+</li>
+<li class="api-class-property" data-type="property">
+  <p>
+
     <span class="type">
       
         <a href="#[object Object]">KeyValue</a>
       
     </span>
 
-    Configuration
+
+    <span class="name" id="Configuration">
+      Configuration
+    </span>
 
     
       <span class="description">
@@ -449,18 +619,50 @@ Contains per-app filterable output.
 
     
 
-  </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+    <!-- 
+      <div class="api-type" data-type="type">
   <p>
+
+    <span class="name" id="">
+      
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+     -->
+  </p>
+
+</li>
+<li class="api-class-property" data-type="property">
+  <p>
+
     <span class="type">
       
         Object*
       
     </span>
 
-    Profile
+
+    <span class="name" id="Profile">
+      Profile
+    </span>
 
     
       <span class="description">
@@ -470,18 +672,23 @@ Contains per-app filterable output.
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         Number
       
     </span>
 
-    LastUpdate
+
+    <span class="name" id="LastUpdate">
+      LastUpdate
+    </span>
 
     
       <span class="description">
@@ -491,18 +698,23 @@ Contains per-app filterable output.
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         Object*
       
     </span>
 
-    Data
+
+    <span class="name" id="Data">
+      Data
+    </span>
 
     
       <span class="description">
@@ -512,18 +724,23 @@ Contains per-app filterable output.
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         
       
     </span>
 
-    Protocol
+
+    <span class="name" id="Protocol">
+      Protocol
+    </span>
 
     
       <span class="description">
@@ -533,25 +750,53 @@ Contains per-app filterable output.
 
     
 
+    <!--  -->
   </p>
+
+</li>
+
+  </ul>
+
+  <h3>Methods</h3>
   <hr />
-</div>
-
-  </div>
-
-  <div class="api-class-methods" data-type="methods">
-    <div class="api-class-method" data-type="method">
+  <ul class="api-class-methods" data-type="methods">
+    <li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Object
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Execute(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  op
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Object*
+  
+</span>
+
+<span class="name">
+  payload
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -562,60 +807,117 @@ Contains per-app filterable output.
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Object*
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Read(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  sensorName
+</span>
+</span>
+    <span class="name">)</span>
 
     
 
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Boolean
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Write(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  sensorName
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Object*
+  
+</span>
+
+<span class="name">
+  data
+</span>
+</span>
+    <span class="name">)</span>
 
     
 
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Boolean
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Subscribe(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  sensorName
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -628,29 +930,35 @@ the underlying Protocol implementation if supported.
     
 
   </p>
-  <hr />
-</div>
 
-  </div>
+</li>
+
+  </ul>
 
 </div>
-,<div class="api-class" data-type="class">
+<div class="api-class" data-type="class">
 
   <h2 id="iot.agile.DeviceManager">
     iot.agile.DeviceManager
   </h2>
   <hr />
 
-  <div class="api-class-properties" data-type="properties">
-    <div class="api-class-property" data-type="property">
+  <h3>Properties</h3>
+  <hr />
+  <ul class="api-class-properties" data-type="properties">
+    <li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         <a href="#iot.agile.Device">Array[iot.agile.Device]</a>
       
     </span>
 
-    Devices
+
+    <span class="name" id="Devices">
+      Devices
+    </span>
 
     
       <span class="description">
@@ -660,75 +968,368 @@ the underlying Protocol implementation if supported.
 
     
 
+    <!--  -->
   </p>
+
+</li>
+
+  </ul>
+
+  <h3>Methods</h3>
   <hr />
-</div>
-
-  </div>
-
-  <div class="api-class-methods" data-type="methods">
-    <div class="api-class-method" data-type="method">
+  <ul class="api-class-methods" data-type="methods">
+    <li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    <a href="#iot.agile.Device">Array</a>
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Find(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    An query object to search for a device
+  
+</span>
+
+<span class="name">
+  description
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#[object Object]">BaseQuery</a>
+  
+</span>
+
+<span class="name">
+  type
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
-        Search for devices bt specific criteria
+        Search for devices by specific criteria
       </span>
     
 
     
 
   </p>
-  <hr />
-</div>
 
-  </div>
+</li>
+<li class="api-class-method" data-type="method">
+  <p>
+
+    <span class="returnType"><span class="type">
+  
+    String
+  
+</span>
+</span>
+
+    <!-- <span class="type">
+      
+        
+      
+    </span> -->
+
+    <span class="name">Create(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#[object Object]">DeviceDefinition</a>
+  
+</span>
+
+<span class="name">
+  device
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <span class="description">
+        Create (register) a new device in the manager
+      </span>
+    
+
+    
+
+  </p>
+
+</li>
+<li class="api-class-method" data-type="method">
+  <p>
+
+    <span class="returnType"><span class="type">
+  
+    <a href="#[object Object]">DeviceDefinition</a>
+  
+</span>
+</span>
+
+    <!-- <span class="type">
+      
+        
+      
+    </span> -->
+
+    <span class="name">Read(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <span class="description">
+        Load a device definition by its ID
+      </span>
+    
+
+    
+
+  </p>
+
+</li>
+<li class="api-class-method" data-type="method">
+  <p>
+
+    <span class="returnType"><span class="type">
+  
+    Boolean
+  
+</span>
+</span>
+
+    <!-- <span class="type">
+      
+        
+      
+    </span> -->
+
+    <span class="name">Update(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#[object Object]">DeviceDefinition</a>
+  
+</span>
+
+<span class="name">
+  Definition
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <span class="description">
+        Updates a device definition by its ID
+      </span>
+    
+
+    
+
+  </p>
+
+</li>
+<li class="api-class-method" data-type="method">
+  <p>
+
+    <span class="returnType"><span class="type">
+  
+    Boolean
+  
+</span>
+</span>
+
+    <!-- <span class="type">
+      
+        
+      
+    </span> -->
+
+    <span class="name">Delete(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#[object Object]">DeviceDefinition</a>
+  
+</span>
+
+<span class="name">
+  Definition
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <span class="description">
+        Delete a device definition by its ID. This will deactivate the Device DBus object
+      </span>
+    
+
+    
+
+  </p>
+
+</li>
+<li class="api-class-method" data-type="method">
+  <p>
+
+    <span class="returnType"><span class="type">
+  
+    Boolean
+  
+</span>
+</span>
+
+    <!-- <span class="type">
+      
+        
+      
+    </span> -->
+
+    <span class="name">Batch(</span>
+      <span class="args"><span class="type">
+  
+    Enum
+  
+</span>
+
+<span class="name">
+  Op
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Object*
+  
+</span>
+
+<span class="name">
+  Arguments
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <span class="description">
+        Performa a batch operation over a set of devices.
+      </span>
+    
+
+    
+
+  </p>
+
+</li>
+
+  </ul>
 
 </div>
-,<div class="api-class" data-type="class">
+<div class="api-class" data-type="class">
 
   <h2 id="iot.agile.Protocol">
     iot.agile.Protocol
   </h2>
   <hr />
 
-  <div class="api-class-properties" data-type="properties">
-    <div class="api-class-property" data-type="property">
+  <h3>Properties</h3>
+  <hr />
+  <ul class="api-class-properties" data-type="properties">
+    <li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         <a href="#[object Object]">ProtocolStatus</a>
       
     </span>
 
-    Status
+
+    <span class="name" id="Status">
+      Status
+    </span>
 
     
 
     
+
+    <!-- 
+      <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="">
+      
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
 
   </p>
-  <hr />
 </div>
-<div class="api-class-property" data-type="property">
+
+     -->
+  </p>
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         String
       
     </span>
 
-    Driver
+
+    <span class="name" id="Driver">
+      Driver
+    </span>
 
     
       <span class="description">
@@ -737,21 +1338,28 @@ the underlying Protocol implementation if supported.
     
 
     
-      <pre class="example">ble</pre>
+      <div class="example-container">
+        Example: <pre class="example">ble</pre>
+      </div>
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         String
       
     </span>
 
-    Name
+
+    <span class="name" id="Name">
+      Name
+    </span>
 
     
       <span class="description">
@@ -761,18 +1369,23 @@ the underlying Protocol implementation if supported.
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         <a href="#[object Object]">RecordObject</a>
       
     </span>
 
-    DataStore
+
+    <span class="name" id="DataStore">
+      DataStore
+    </span>
 
     
       <span class="description">
@@ -784,42 +1397,120 @@ Is up to the Protocol implementation decide how
 
     
 
-  </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+    <!-- 
+      <div class="api-type" data-type="type">
   <p>
-    <span class="type">
-      
-        <a href="#[object Object]">ProtocolDevice</a>
+
+    <span class="name" id="">
       
     </span>
 
-    Devices
-
+    :
     
-
-    
-
-  </p>
-  <hr />
-</div>
-
-  </div>
-
-  <div class="api-class-methods" data-type="methods">
-    <div class="api-class-method" data-type="method">
-  <p>
-
     <span class="type">
       
         
       
     </span>
 
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+     -->
+  </p>
+
+</li>
+<li class="api-class-property" data-type="property">
+  <p>
+
+    <span class="type">
+      
+        <a href="#[object Object]">ProtocolDevice</a>
+      
+    </span>
+
+
+    <span class="name" id="Devices">
+      Devices
+    </span>
+
+    
+
+    
+
+    <!-- 
+      <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="">
+      
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+     -->
+  </p>
+
+</li>
+
+  </ul>
+
+  <h3>Methods</h3>
+  <hr />
+  <ul class="api-class-methods" data-type="methods">
+    <li class="api-class-method" data-type="method">
+  <p>
+
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
+      
+        
+      
+    </span> -->
+
     <span class="name">Initialize(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    <a href="#[object Object]">ProtocolProfile</a>
+  
+</span>
+
+<span class="name">
+  profile
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -831,20 +1522,27 @@ Is up to the Protocol implementation decide how
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Destroy(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"></span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -856,20 +1554,27 @@ Is up to the Protocol implementation decide how
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Discover(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"></span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -881,20 +1586,45 @@ Is up to the Protocol implementation decide how
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Object*
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Write(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  destination
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Object*
+  
+</span>
+
+<span class="name">
+  arguments
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -906,20 +1636,45 @@ Is up to the Protocol implementation decide how
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    <a href="#[object Object]">RecordObject</a>
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Read(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  name
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Object*
+  
+</span>
+
+<span class="name">
+  arguments
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -932,20 +1687,45 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    <a href="#[object Object]">RecordObject</a>
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Subscribe(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  name
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Object*
+  
+</span>
+
+<span class="name">
+  arguments
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -957,29 +1737,35 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
 
-  </div>
+</li>
+
+  </ul>
 
 </div>
-,<div class="api-class" data-type="class">
+<div class="api-class" data-type="class">
 
   <h2 id="iot.agile.ProtocolManager">
     iot.agile.ProtocolManager
   </h2>
   <hr />
 
-  <div class="api-class-properties" data-type="properties">
-    <div class="api-class-property" data-type="property">
+  <h3>Properties</h3>
+  <hr />
+  <ul class="api-class-properties" data-type="properties">
+    <li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         Array[ProtocolDevice]
       
     </span>
 
-    Devices
+
+    <span class="name" id="Devices">
+      Devices
+    </span>
 
     
       <span class="description">
@@ -989,18 +1775,23 @@ depending on implementation to save resources
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         Array[ProtocolOverview]
       
     </span>
 
-    Protocols
+
+    <span class="name" id="Protocols">
+      Protocols
+    </span>
 
     
       <span class="description">
@@ -1010,25 +1801,35 @@ depending on implementation to save resources
 
     
 
+    <!--  -->
   </p>
+
+</li>
+
+  </ul>
+
+  <h3>Methods</h3>
   <hr />
-</div>
-
-  </div>
-
-  <div class="api-class-methods" data-type="methods">
-    <div class="api-class-method" data-type="method">
+  <ul class="api-class-methods" data-type="methods">
+    <li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Discover(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"></span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1039,20 +1840,36 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Add(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  protocol
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1063,20 +1880,36 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Remove(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  protocol
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1087,29 +1920,35 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
 
-  </div>
+</li>
+
+  </ul>
 
 </div>
-,<div class="api-class" data-type="class">
+<div class="api-class" data-type="class">
 
   <h2 id="iot.agile.Network">
     iot.agile.Network
   </h2>
   <hr />
 
-  <div class="api-class-properties" data-type="properties">
-    <div class="api-class-property" data-type="property">
+  <h3>Properties</h3>
+  <hr />
+  <ul class="api-class-properties" data-type="properties">
+    <li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         Boolean
       
     </span>
 
-    Status
+
+    <span class="name" id="Status">
+      Status
+    </span>
 
     
       <span class="description">
@@ -1119,18 +1958,23 @@ depending on implementation to save resources
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         Array[String]
       
     </span>
 
-    Connections
+
+    <span class="name" id="Connections">
+      Connections
+    </span>
 
     
       <span class="description">
@@ -1140,18 +1984,23 @@ depending on implementation to save resources
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         Array[String]
       
     </span>
 
-    Devices
+
+    <span class="name" id="Devices">
+      Devices
+    </span>
 
     
       <span class="description">
@@ -1161,25 +2010,62 @@ depending on implementation to save resources
 
     
 
+    <!--  -->
   </p>
+
+</li>
+
+  </ul>
+
+  <h3>Methods</h3>
   <hr />
-</div>
-
-  </div>
-
-  <div class="api-class-methods" data-type="methods">
-    <div class="api-class-method" data-type="method">
+  <ul class="api-class-methods" data-type="methods">
+    <li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">CreateAP(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  subnet
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  gateway
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  password
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1190,20 +2076,27 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">ScanWiFi(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"></span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1214,29 +2107,35 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
 
-  </div>
+</li>
+
+  </ul>
 
 </div>
-,<div class="api-class" data-type="class">
+<div class="api-class" data-type="class">
 
   <h2 id="iot.agile.Storage.Driver">
     iot.agile.Storage.Driver
   </h2>
   <hr />
 
-  <div class="api-class-properties" data-type="properties">
-    <div class="api-class-property" data-type="property">
+  <h3>Properties</h3>
+  <hr />
+  <ul class="api-class-properties" data-type="properties">
+    <li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         String
       
     </span>
 
-    Name
+
+    <span class="name" id="Name">
+      Name
+    </span>
 
     
       <span class="description">
@@ -1246,35 +2145,45 @@ depending on implementation to save resources
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         
       
     </span>
 
-    Enabled
+
+    <span class="name" id="Enabled">
+      Enabled
+    </span>
 
     
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         <a href="#[object Object]">DriverStatus</a>
       
     </span>
 
-    Status
+
+    <span class="name" id="Status">
+      Status
+    </span>
 
     
       <span class="description">
@@ -1284,18 +2193,50 @@ depending on implementation to save resources
 
     
 
-  </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+    <!-- 
+      <div class="api-type" data-type="type">
   <p>
+
+    <span class="name" id="">
+      
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+     -->
+  </p>
+
+</li>
+<li class="api-class-property" data-type="property">
+  <p>
+
     <span class="type">
       
         Boolean
       
     </span>
 
-    Error
+
+    <span class="name" id="Error">
+      Error
+    </span>
 
     
       <span class="description">
@@ -1305,18 +2246,23 @@ depending on implementation to save resources
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
-        Object*
+        Object
       
     </span>
 
-    Params
+
+    <span class="name" id="Params">
+      Params
+    </span>
 
     
       <span class="description">
@@ -1327,18 +2273,50 @@ depending on implementation to save resources
 
     
 
-  </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+    <!-- 
+      <div class="api-type" data-type="type">
   <p>
+
+    <span class="name" id="">
+      
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+     -->
+  </p>
+
+</li>
+<li class="api-class-property" data-type="property">
+  <p>
+
     <span class="type">
       
         String
       
     </span>
 
-    Logs
+
+    <span class="name" id="Logs">
+      Logs
+    </span>
 
     
       <span class="description">
@@ -1348,25 +2326,44 @@ depending on implementation to save resources
 
     
 
+    <!--  -->
   </p>
+
+</li>
+
+  </ul>
+
+  <h3>Methods</h3>
   <hr />
-</div>
-
-  </div>
-
-  <div class="api-class-methods" data-type="methods">
-    <div class="api-class-method" data-type="method">
+  <ul class="api-class-methods" data-type="methods">
+    <li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    String
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Create(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    <a href="#[object Object]">RecordObject</a>
+  
+</span>
+
+<span class="name">
+  record
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1377,20 +2374,36 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    <a href="#[object Object]">RecordObject</a>
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Read(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  id
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1401,20 +2414,45 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Update(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  id
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#[object Object]">RecordObject</a>
+  
+</span>
+
+<span class="name">
+  record
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1425,20 +2463,36 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Delete(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  id
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1449,20 +2503,36 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Array
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Find(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    <a href="#[object Object]">BaseQuery</a>
+  
+</span>
+
+<span class="name">
+  query
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1473,29 +2543,35 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
 
-  </div>
+</li>
+
+  </ul>
 
 </div>
-,<div class="api-class" data-type="class">
+<div class="api-class" data-type="class">
 
   <h2 id="iot.agile.Storage.DriverManager">
     iot.agile.Storage.DriverManager
   </h2>
   <hr />
 
-  <div class="api-class-properties" data-type="properties">
-    <div class="api-class-property" data-type="property">
+  <h3>Properties</h3>
+  <hr />
+  <ul class="api-class-properties" data-type="properties">
+    <li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         <a href="#iot.agile.Storage.Driver">Array[iot.agile.Storage.Driver]</a>
       
     </span>
 
-    Enabled
+
+    <span class="name" id="Enabled">
+      Enabled
+    </span>
 
     
       <span class="description">
@@ -1505,18 +2581,23 @@ depending on implementation to save resources
 
     
 
+    <!--  -->
   </p>
-  <hr />
-</div>
-<div class="api-class-property" data-type="property">
+
+</li>
+<li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         <a href="#iot.agile.Storage.Driver">Array[iot.agile.Storage.Driver]</a>
       
     </span>
 
-    List
+
+    <span class="name" id="List">
+      List
+    </span>
 
     
       <span class="description">
@@ -1526,25 +2607,53 @@ depending on implementation to save resources
 
     
 
+    <!--  -->
   </p>
+
+</li>
+
+  </ul>
+
+  <h3>Methods</h3>
   <hr />
-</div>
-
-  </div>
-
-  <div class="api-class-methods" data-type="methods">
-    <div class="api-class-method" data-type="method">
+  <ul class="api-class-methods" data-type="methods">
+    <li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Add(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  driver
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Boolean
+  
+</span>
+
+<span class="name">
+  enable
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1555,20 +2664,36 @@ depending on implementation to save resources
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Remove(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  driver
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1581,20 +2706,36 @@ instance
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Enable(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  driver
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1605,20 +2746,36 @@ instance
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Disable(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  driver
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1629,20 +2786,36 @@ instance
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Object
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Status(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  driver
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1653,53 +2826,78 @@ instance
     
 
   </p>
-  <hr />
-</div>
 
-  </div>
+</li>
+
+  </ul>
 
 </div>
-,<div class="api-class" data-type="class">
+<div class="api-class" data-type="class">
 
   <h2 id="iot.agile.Storage">
     iot.agile.Storage
   </h2>
   <hr />
 
-  <div class="api-class-properties" data-type="properties">
-    <div class="api-class-property" data-type="property">
+  <h3>Properties</h3>
+  <hr />
+  <ul class="api-class-properties" data-type="properties">
+    <li class="api-class-property" data-type="property">
   <p>
+
     <span class="type">
       
         <a href="#iot.agile.Storage.Driver">Array[iot.agile.Storage.Driver]</a>
       
     </span>
 
-    Connections
+
+    <span class="name" id="Connections">
+      Connections
+    </span>
 
     
 
     
 
+    <!--  -->
   </p>
+
+</li>
+
+  </ul>
+
+  <h3>Methods</h3>
   <hr />
-</div>
-
-  </div>
-
-  <div class="api-class-methods" data-type="methods">
-    <div class="api-class-method" data-type="method">
+  <ul class="api-class-methods" data-type="methods">
+    <li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    String
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Create(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    <a href="#[object Object]">RecordObject</a>
+  
+</span>
+
+<span class="name">
+  record
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1710,20 +2908,36 @@ instance
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    <a href="#[object Object]">RecordObject</a>
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Read(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1734,20 +2948,45 @@ instance
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Update(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#[object Object]">RecordObject</a>
+  
+</span>
+
+<span class="name">
+  Record
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1758,20 +2997,36 @@ instance
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    void
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Delete(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1782,20 +3037,36 @@ instance
     
 
   </p>
-  <hr />
-</div>
-<div class="api-class-method" data-type="method">
+
+</li>
+<li class="api-class-method" data-type="method">
   <p>
 
-    <span class="type">
+    <span class="returnType"><span class="type">
+  
+    Array
+  
+</span>
+</span>
+
+    <!-- <span class="type">
       
         
       
-    </span>
+    </span> -->
 
     <span class="name">Find(</span>
-      <span class="args">foo, bar</span>
-    <span class="name">)</span> : <span class="name">baz</span>
+      <span class="args"><span class="type">
+  
+    <a href="#[object Object]">BaseQuery</a>
+  
+</span>
+
+<span class="name">
+  query
+</span>
+</span>
+    <span class="name">)</span>
 
     
       <span class="description">
@@ -1806,7 +3077,1035 @@ instance
     
 
   </p>
+
+</li>
+
+  </ul>
+
+</div>
+
+<div class="api-types" data-type="root-types">
+
+  <h2>Types</h2>
   <hr />
+
+  <div class="types-list">
+    <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="StatusType">
+      StatusType
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      <ul><li>CONNECTED</li><li>DISCONNECTED</li></ul>
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="ChannelTypeEnum">
+      ChannelTypeEnum
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      <ul></ul>
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="DeviceStreamChannel">
+      DeviceStreamChannel
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="description">
+        A channel contains a single measurement value of a sensor
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="name">
+      name
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="type">
+      type
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        <a href="#[object Object]">ChannelTypeEnum</a>
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="DeviceStream">
+      DeviceStream
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="description">
+        A stream contains a set of measurement values for a sensor
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="name">
+      name
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="channels">
+      channels
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Array[DeviceStreamChannel]
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="__arrayType">
+      __arrayType
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        <a href="#[object Object]">DeviceStreamChannel</a>
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+    </div>
+
+  </p>
+</div>
+
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="DeviceDefinition">
+      DeviceDefinition
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="description">
+        A device definition that contains informations describing the current device
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="id">
+      id
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="name">
+      name
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="description">
+      description
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="properties">
+      properties
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="streams">
+      streams
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Array[DeviceStream]
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="__arrayType">
+      __arrayType
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        <a href="#[object Object]">DeviceStream</a>
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+    </div>
+
+  </p>
+</div>
+
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="ProtocolDevice">
+      ProtocolDevice
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Array
+      
+    </span>
+
+    
+      <span class="description">
+        List all devices a Protocol knows about.
+The list is updated by the Discover method.
+Devices may be provisioned programmatically during the initialization phase.
+
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="type">
+      type
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="fields">
+      fields
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="ProtocolStatus">
+      ProtocolStatus
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="description">
+        Identify a status of the Protocol, indicating if operational (AVAILABLE) or
+if for some reason further user-side checks are required.
+
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      <ul><li>AVAILABLE</li><li>NOT_CONFIGURED</li><li>UNAVAILABLE</li><li>DISABLED</li><li>FATAL</li></ul>
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="ProtocolProfile">
+      ProtocolProfile
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="description">
+        A Protocol set of settings that translate human readable properties
+to actual Protocol implementation details.
+
+For example, the user request the temperature value over a BLE connected
+device and the Protocol receive all the specific informations (like
+services and characteristics ids) to enable the data reading.
+
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="ProtocolOverview">
+      ProtocolOverview
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="name">
+      name
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="id">
+      id
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="status">
+      status
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        <a href="#[object Object]">ProtocolStatus</a>
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="DriverStatus">
+      DriverStatus
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      <ul><li>ACTIVE</li><li>NOT_CONFIGURED</li><li>ERROR</li><li>FAILURE</li></ul>
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="RecordObject">
+      RecordObject
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="DeviceId">
+      DeviceId
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="StreamId">
+      StreamId
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="ChannelId">
+      ChannelId
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="LastUpdate">
+      LastUpdate
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+      <span class="description">
+        A UNIX timestamp rapresenting the last update of a record
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="Channels">
+      Channels
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        <a href="#[object Object]">KeyValue</a>
+      
+    </span>
+
+    
+      <span class="description">
+        A list of key/value matching those indicated in the DeviceDefinition
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="KeyValue">
+      KeyValue
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="description">
+        A list of key/value pairs
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="BaseQuery">
+      BaseQuery
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+
+    
+
+    <div class="fields pad-left">
+      <div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="Criteria">
+      Criteria
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="description">
+        A key-value series of field-value to query for.
+- Use `*` to indicate a fuzzy search
+- Use an Array to indicate an IN like query
+
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="OrderBy">
+      OrderBy
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="description">
+        A key-value series of field-value to order the result for.
+
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="Limit">
+      Limit
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+      <span class="description">
+        The limit of records founds to return
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+<div class="api-type" data-type="type">
+  <p>
+
+    <span class="name" id="Offset">
+      Offset
+    </span>
+
+    :
+    
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+      <span class="description">
+        The position for the first record to take from the list of results
+      </span>
+    
+
+    
+
+    <div class="fields pad-left">
+      
+    </div>
+
+  </p>
+</div>
+
+    </div>
+
+  </p>
 </div>
 
   </div>

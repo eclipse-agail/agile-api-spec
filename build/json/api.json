@@ -147,7 +147,9 @@
         },
         "Read": {
           "args": {
-            "sensorName": {}
+            "sensorName": {
+              "type": "String"
+            }
           },
           "return": {
             "type": "Object*"
@@ -155,8 +157,12 @@
         },
         "Write": {
           "args": {
-            "sensorName": {},
-            "data": {}
+            "sensorName": {
+              "type": "String"
+            },
+            "data": {
+              "type": "Object*"
+            }
           },
           "return": {
             "type": "Boolean"
@@ -165,7 +171,9 @@
         "Subscribe": {
           "description": "Enable subscription to a specific sensor or data stream, triggering\nthe underlying Protocol implementation if supported.\n",
           "args": {
-            "sensorName": {}
+            "sensorName": {
+              "type": "String"
+            }
           },
           "return": {
             "type": "Boolean"
@@ -211,15 +219,100 @@
       "group": "Device",
       "methods": {
         "Find": {
-          "description": "Search for devices bt specific criteria",
+          "description": "Search for devices by specific criteria",
           "args": {
-            "description": {},
-            "type": {}
+            "description": {
+              "type": "An query object to search for a device"
+            },
+            "type": {
+              "type": "BaseQuery"
+            }
           },
           "return": {
             "description": "A list with all matching registered devices results, eventually sorted and sliced",
             "type": "Array",
             "reference": "iot.agile.Device"
+          }
+        },
+        "Create": {
+          "description": "Create (register) a new device in the manager",
+          "args": {
+            "device": {
+              "type": "DeviceDefinition"
+            }
+          },
+          "return": {
+            "description": "Return the AGILE Device ID, unique to identify the device in the gateway",
+            "type": "String"
+          }
+        },
+        "Read": {
+          "description": "Load a device definition by its ID",
+          "args": {
+            "Id": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "description": "Return the AGILE Device UUID, unique to identify the device in the gateway",
+            "type": "DeviceDefinition"
+          }
+        },
+        "Update": {
+          "description": "Updates a device definition by its ID",
+          "args": {
+            "Id": {
+              "type": "String"
+            },
+            "Definition": {
+              "type": "DeviceDefinition"
+            }
+          },
+          "return": {
+            "type": "Boolean"
+          }
+        },
+        "Delete": {
+          "description": "Delete a device definition by its ID. This will deactivate the Device DBus object",
+          "args": {
+            "Id": {
+              "type": "String"
+            },
+            "Definition": {
+              "type": "DeviceDefinition"
+            }
+          },
+          "return": {
+            "type": "Boolean"
+          }
+        },
+        "Batch": {
+          "description": "Performa a batch operation over a set of devices.",
+          "args": {
+            "Op": {
+              "type": "Enum",
+              "fields": {
+                "0": {
+                  "type": "Create"
+                },
+                "1": {
+                  "type": "Update"
+                },
+                "2": {
+                  "type": "Delete"
+                },
+                "3": {
+                  "type": "Read"
+                }
+              }
+            },
+            "Arguments": {
+              "description": "An object to be passed to the underlying function call (Create, Update, Delete, Read)",
+              "type": "Object*"
+            }
+          },
+          "return": {
+            "type": "Boolean"
           }
         }
       },
@@ -259,21 +352,15 @@
             "reference": "Devices"
           }
         },
-        "Execute": {
-          "description": "Execute, in a RPC-like style, a command over the Protocol to be executed by the connected device.\n",
-          "args": {
-            "operation": {},
-            "arguments": {}
-          },
-          "return": {
-            "type": "Object*"
-          }
-        },
         "Write": {
           "description": "Send data over the protocol\n",
           "args": {
-            "destination": {},
-            "arguments": {}
+            "destination": {
+              "type": "String"
+            },
+            "arguments": {
+              "type": "Object*"
+            }
           },
           "return": {
             "type": "Object*"
@@ -286,7 +373,9 @@
               "description": "Human readable data source name as defined in the ProtocolProfile object",
               "type": "String"
             },
-            "arguments": {}
+            "arguments": {
+              "type": "Object*"
+            }
           },
           "return": {
             "type": "RecordObject"
@@ -299,7 +388,9 @@
               "description": "Human readable data source name as defined in the ProtocolProfile object",
               "type": "String"
             },
-            "arguments": {}
+            "arguments": {
+              "type": "Object*"
+            }
           },
           "return": {
             "type": "RecordObject",
@@ -449,7 +540,9 @@
         "Create": {
           "description": "Creates a record",
           "args": {
-            "record": {}
+            "record": {
+              "type": "RecordObject"
+            }
           },
           "return": {
             "description": "Return the Id of the created record",
@@ -459,7 +552,9 @@
         "Read": {
           "description": "Load a record by Id",
           "args": {
-            "Id": {}
+            "id": {
+              "type": "String"
+            }
           },
           "return": {
             "description": "Return the corresponding record",
@@ -469,8 +564,12 @@
         "Update": {
           "description": "Updates a record",
           "args": {
-            "Id": {},
-            "Record": {}
+            "id": {
+              "type": "String"
+            },
+            "record": {
+              "type": "RecordObject"
+            }
           },
           "return": {
             "type": "void"
@@ -479,7 +578,9 @@
         "Delete": {
           "description": "Delete a record by Id",
           "args": {
-            "Id": {}
+            "id": {
+              "type": "String"
+            }
           },
           "return": {
             "type": "void"
@@ -488,7 +589,9 @@
         "Find": {
           "description": "Search for a set of records by criterias",
           "args": {
-            "query": {}
+            "query": {
+              "type": "BaseQuery"
+            }
           },
           "return": {
             "type": "Array",
@@ -527,12 +630,15 @@
             "0": "r",
             "1": "w"
           },
-          "type": "Object*",
+          "type": "Object",
           "fields": {
             "uri": {
               "description": "A parsable connection string composed of key value\nindicated by `=` symbol, separated with `;`.\nIf value contains a separator (`=` or `;`) it must be escaped with a backslash.\nThis may be exposed to the users with a proper UI to allow insertion of personal keys\n",
               "example": "hostname=localhost;password=my \\;password;",
               "type": "String"
+            },
+            "options": {
+              "type": "Object*"
             }
           }
         },
@@ -654,7 +760,9 @@
         "Create": {
           "description": "Creates a record",
           "args": {
-            "record": {}
+            "record": {
+              "type": "RecordObject"
+            }
           },
           "return": {
             "description": "Return the Id of the created record",
@@ -664,7 +772,9 @@
         "Read": {
           "description": "Load a record by Id",
           "args": {
-            "Id": {}
+            "Id": {
+              "type": "String"
+            }
           },
           "return": {
             "description": "Return the corresponding record",
@@ -674,8 +784,12 @@
         "Update": {
           "description": "Updates a record",
           "args": {
-            "Id": {},
-            "Record": {}
+            "Id": {
+              "type": "String"
+            },
+            "Record": {
+              "type": "RecordObject"
+            }
           },
           "return": {
             "type": "void"
@@ -684,7 +798,9 @@
         "Delete": {
           "description": "Delete a record by Id",
           "args": {
-            "Id": {}
+            "Id": {
+              "type": "String"
+            }
           },
           "return": {
             "type": "void"
@@ -693,7 +809,9 @@
         "Find": {
           "description": "Search for a set of records by criterias",
           "args": {
-            "query": {}
+            "query": {
+              "type": "BaseQuery"
+            }
           },
           "return": {
             "type": "Array",
