@@ -4,13 +4,32 @@
 <head>
   <title>AGILE API spec</title>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/plugins/foundation.sticky.js"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.7.1/lunr.min.js"></script>
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css">
+
   <meta name="Description" content="AGILE API specification documentation">
+
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 
   <style>
+
+    .overview {
+      cursor: pointer;
+    }
+
+    .details, .overview.open {
+      background: #EEE;
+    }
+
+    .overview:hover, .overview:active {
+      background-color: #EEE;
+    }
+
     .description, .type {
       color: #333;
     }
@@ -18,7 +37,6 @@
       font-size: 80%;
     }
     .name {
-      font-size: 120%;
       font-weight: bold;
     }
     .pad-left {
@@ -26,158 +44,219 @@
       margin-left: 1em;
       border-left: 1px solid #EEE;
     }
+
+    nav.menu {
+      overflow-y: scroll;
+      max-height: 480px;
+    }
+
   </style>
 
 </head>
 
 <body>
   <div class="row">
-    <div class="columns large-3">
-      <nav class="menu-item">
+    <div class="columns large-3" id="leftbar" data-sticky-container>
+      <div id="menu-wrapper" data-sticky>
+
+        <div class="text-center">
+          <a href="http://agile-iot.eu/">
+            <img
+              src="http://www.agile-project-iot.eu/wp-content/uploads/2016/03/logo-png-transparent-02_small.png"
+              style="width: 100%; max-width: 100px"
+            />
+          </a>
+          <h5 class="text-center">API spec</h5>
+        </div>
+
+
+        <form id="searchbox">
+  <div class="row">
+    <div class="medium-12 columns">
+      <input type="search" placeholder="search.." id="searchtxt">
+    </div>
+  </div>
+</form>
+
+<script>
+  jQuery(function() {
+
+    var index = lunr(function () {
+      this.field('object', {boost: 8})
+      this.field('method', {boost: 8})
+      this.field('property', {boost: 8})
+      this.field('description', {boost: 6})
+      this.field('type', {boost: 8})
+      this.ref('id')
+    })
+
+    var doSearch = function() {
+
+      var hideAll = function() {
+        $('.api-class, .api-type').hide();
+        $('.menu .types li, .menu .object li').hide();
+      };
+
+      var showAll = function() {
+        $('.api-class, .api-type').show();
+        $('.menu .types li, .menu .object li').show();
+      };
+
+      var text = $('#searchtxt').val();
+
+      if(text.length < 2) {
+        return showAll();
+      }
+
+      var results = index.search(text);
+
+      if(!results.length) {
+        return hideAll();
+      }
+
+      hideAll();
+
+      results.forEach(function(result) {
+
+        var res = result.ref.split('|');
+        var type = res.pop();
+
+        if(type === 'class' || type === 'property' || type === 'method') {
+          var classNameId = res[0].replace(/\./g, '_');
+          $('#' + classNameId).show();
+          console.log('.menu .object li[data-for="'+ classNameId +'"]')
+          $('.menu .object a[data-for="'+ classNameId +'"]').parent().show();
+        }
+        else {
+          var typeName = res[0];
+          $('#' + typeName).show();
+          $('.menu .types a[data-for="'+ typeName +'"]').parent().show();
+        }
+
+        // console.warn(type, res);
+
+      });
+
+    }
+
+    $('#searchbox').on('submit', function() {
+      doSearch();
+      return false;
+    })
+    $('#searchbox').on('keyup', function() {
+      doSearch();
+    });
+
+
+    $.getJSON('/json/api.json').then(function(res) {
+
+      // console.warn(res);
+
+      Object.keys(res.types).forEach(function(typeName) {
+
+        var type = res.types[typeName];
+
+        index.add({
+          id: typeName + '|type',
+          type: typeName,
+          description: type.description,
+          _type: 'type',
+        })
+      });
+
+      Object.keys(res.classes).forEach(function(className) {
+
+        var clazz = res.classes[className];
+
+        index.add({
+          id: className + '|class',
+          object: className,
+          description: clazz.description,
+          _type: 'class',
+        })
+
+        Object.keys(clazz.methods).forEach(function(methodName) {
+
+          var method = clazz.methods[methodName];
+
+          index.add({
+            id: className + '|' + methodName + '|method',
+            object: className,
+            method: methodName,
+            description: method.description,
+            _type: 'method',
+          })
+        });
+
+        Object.keys(clazz.properties).forEach(function(propName) {
+
+          var prop = clazz.properties[propName];
+
+          index.add({
+            id: className + '|' + propName + '|property',
+            object: className,
+            property: propName,
+            description: prop.description,
+            _type: 'property',
+          })
+        });
+
+      });
+
+    })
+  });
+</script>
+
+
+        <nav class="menu">
   
 
-    <h3>Objects</h3>
+    <h5>Objects</h5>
     <hr />
 
-    <ul class="no-bullet side-nav">
+    <ul class="no-bullet side-nav object" data-magellan>
       
         <li>
-          <a href="#iot.agile.Apps">
-            iot.agile.Apps
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot.agile.Device">
-            iot.agile.Device
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot.agile.DeviceManager">
-            iot.agile.DeviceManager
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot.agile.Protocol">
+          <a href="#iot_agile_Protocol" data-for="iot_agile_Protocol">
             iot.agile.Protocol
           </a>
         </li>
         
         <li>
-          <a href="#iot.agile.ProtocolManager">
+          <a href="#iot_agile_ProtocolManager" data-for="iot_agile_ProtocolManager">
             iot.agile.ProtocolManager
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot.agile.Network">
-            iot.agile.Network
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot.agile.Storage.Driver">
-            iot.agile.Storage.Driver
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot.agile.Storage.DriverManager">
-            iot.agile.Storage.DriverManager
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot.agile.Storage">
-            iot.agile.Storage
           </a>
         </li>
         
     </ul>
     
 
-    <h3>Types</h3>
+    <h5>Types</h5>
     <hr />
 
-    <ul class="no-bullet side-nav">
+    <ul class="no-bullet side-nav types" data-magellan>
       
         <li>
-          <a href="#StatusType">
-            StatusType
-          </a>
-        </li>
-        
-        <li>
-          <a href="#ChannelTypeEnum">
-            ChannelTypeEnum
-          </a>
-        </li>
-        
-        <li>
-          <a href="#DeviceStreamChannel">
-            DeviceStreamChannel
-          </a>
-        </li>
-        
-        <li>
-          <a href="#DeviceStream">
-            DeviceStream
-          </a>
-        </li>
-        
-        <li>
-          <a href="#DeviceDefinition">
-            DeviceDefinition
-          </a>
-        </li>
-        
-        <li>
-          <a href="#ProtocolDevice">
+          <a href="#ProtocolDevice" data-for="ProtocolDevice">
             ProtocolDevice
           </a>
         </li>
         
         <li>
-          <a href="#ProtocolStatus">
+          <a href="#ProtocolStatus" data-for="ProtocolStatus">
             ProtocolStatus
           </a>
         </li>
         
         <li>
-          <a href="#ProtocolProfile">
+          <a href="#ProtocolProfile" data-for="ProtocolProfile">
             ProtocolProfile
           </a>
         </li>
         
         <li>
-          <a href="#ProtocolOverview">
+          <a href="#ProtocolOverview" data-for="ProtocolOverview">
             ProtocolOverview
-          </a>
-        </li>
-        
-        <li>
-          <a href="#DriverStatus">
-            DriverStatus
-          </a>
-        </li>
-        
-        <li>
-          <a href="#RecordObject">
-            RecordObject
-          </a>
-        </li>
-        
-        <li>
-          <a href="#KeyValue">
-            KeyValue
-          </a>
-        </li>
-        
-        <li>
-          <a href="#BaseQuery">
-            BaseQuery
           </a>
         </li>
         
@@ -185,1098 +264,35 @@
     
 </nav>
 
+
+      </div>
     </div>
     <div class="columns large-9">
-      <div class="api-class" data-type="class">
-
-  <h2 id="iot.agile.Apps">
-    iot.agile.Apps
-  </h2>
-  <hr />
-
-  <h3>Properties</h3>
-  <hr />
-  <ul class="api-class-properties" data-type="properties">
-    <li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        String
-      
-    </span>
-
-
-    <span class="name" id="Logs">
-      Logs
-    </span>
-
-    
-      <span class="description">
-        System path to Apps log file.
-Contains per-app filterable output.
-
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        Object*
-      
-    </span>
-
-
-    <span class="name" id="Settings">
-      Settings
-    </span>
-
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-
-  </ul>
-
-  <h3>Methods</h3>
-  <hr />
-  <ul class="api-class-methods" data-type="methods">
-    <li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Boolean
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Start(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  app
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    Array
-  
-</span>
-
-<span class="name">
-  params
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Number
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Stop(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  app
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Boolean
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Restart(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  app
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Boolean
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Install(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  app
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Boolean
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Uninstall(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  app
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Object
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Status(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  app
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-
-    
-
-  </p>
-
-</li>
-
-  </ul>
-
-</div>
-<div class="api-class" data-type="class">
-
-  <h2 id="iot.agile.Device">
-    iot.agile.Device
-  </h2>
-  <hr />
-
-  <h3>Properties</h3>
-  <hr />
-  <ul class="api-class-properties" data-type="properties">
-    <li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        String
-      
-    </span>
-
-
-    <span class="name" id="Id">
-      Id
-    </span>
-
-    
-      <span class="description">
-        The unique device id in the gateway
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        String
-      
-    </span>
-
-
-    <span class="name" id="Name">
-      Name
-    </span>
-
-    
-      <span class="description">
-        The device name
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        <a href="#[object Object]">StatusType</a>
-      
-    </span>
-
-
-    <span class="name" id="Status">
-      Status
-    </span>
-
-    
-      <span class="description">
-        Indicate the current device status
-      </span>
-    
-
-    
-
-    <!-- 
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="">
-      
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-     -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        <a href="#[object Object]">KeyValue</a>
-      
-    </span>
-
-
-    <span class="name" id="Configuration">
-      Configuration
-    </span>
-
-    
-      <span class="description">
-        User configurations storage
-      </span>
-    
-
-    
-
-    <!-- 
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="">
-      
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-     -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        Object*
-      
-    </span>
-
-
-    <span class="name" id="Profile">
-      Profile
-    </span>
-
-    
-      <span class="description">
-        Contains protocol specific provided information on device in order to handle at Protocol level the specific implementation
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        Number
-      
-    </span>
-
-
-    <span class="name" id="LastUpdate">
-      LastUpdate
-    </span>
-
-    
-      <span class="description">
-        A UNIX timestamp to indicate the last data update received by the Device
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        Object*
-      
-    </span>
-
-
-    <span class="name" id="Data">
-      Data
-    </span>
-
-    
-      <span class="description">
-        Retain the most recent updates of a sensor or data stream, received asynchronously from Subscribe call
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        
-      
-    </span>
-
-
-    <span class="name" id="Protocol">
-      Protocol
-    </span>
-
-    
-      <span class="description">
-        Device-specific communication Protocol instance. Available to access protocol specific methods and properties
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-
-  </ul>
-
-  <h3>Methods</h3>
-  <hr />
-  <ul class="api-class-methods" data-type="methods">
-    <li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Object
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Execute(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  op
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    Object*
-  
-</span>
-
-<span class="name">
-  payload
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Execute an operation on the device triggering the underline Protocol implementation
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Object*
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Read(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  sensorName
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Boolean
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Write(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  sensorName
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    Object*
-  
-</span>
-
-<span class="name">
-  data
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Boolean
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Subscribe(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  sensorName
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Enable subscription to a specific sensor or data stream, triggering
-the underlying Protocol implementation if supported.
-
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-
-  </ul>
-
-</div>
-<div class="api-class" data-type="class">
-
-  <h2 id="iot.agile.DeviceManager">
-    iot.agile.DeviceManager
-  </h2>
-  <hr />
-
-  <h3>Properties</h3>
-  <hr />
-  <ul class="api-class-properties" data-type="properties">
-    <li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        <a href="#iot.agile.Device">Array[iot.agile.Device]</a>
-      
-    </span>
-
-
-    <span class="name" id="Devices">
-      Devices
-    </span>
-
-    
-      <span class="description">
-        Return all registered devices
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-
-  </ul>
-
-  <h3>Methods</h3>
-  <hr />
-  <ul class="api-class-methods" data-type="methods">
-    <li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    <a href="#iot.agile.Device">Array</a>
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Find(</span>
-      <span class="args"><span class="type">
-  
-    An query object to search for a device
-  
-</span>
-
-<span class="name">
-  description
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    <a href="#[object Object]">BaseQuery</a>
-  
-</span>
-
-<span class="name">
-  type
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Search for devices by specific criteria
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    String
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Create(</span>
-      <span class="args"><span class="type">
-  
-    <a href="#[object Object]">DeviceDefinition</a>
-  
-</span>
-
-<span class="name">
-  device
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Create (register) a new device in the manager
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    <a href="#[object Object]">DeviceDefinition</a>
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Read(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  Id
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Load a device definition by its ID
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Boolean
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Update(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  Id
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    <a href="#[object Object]">DeviceDefinition</a>
-  
-</span>
-
-<span class="name">
-  Definition
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Updates a device definition by its ID
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Boolean
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Delete(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  Id
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    <a href="#[object Object]">DeviceDefinition</a>
-  
-</span>
-
-<span class="name">
-  Definition
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Delete a device definition by its ID. This will deactivate the Device DBus object
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Boolean
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Batch(</span>
-      <span class="args"><span class="type">
-  
-    Enum
-  
-</span>
-
-<span class="name">
-  Op
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    Object*
-  
-</span>
-
-<span class="name">
-  Arguments
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Performa a batch operation over a set of devices.
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-
-  </ul>
-
-</div>
-<div class="api-class" data-type="class">
-
-  <h2 id="iot.agile.Protocol">
+      <div class="api-class"
+  data-type="class"
+  data-magellan-target="iot_agile_Protocol"
+  id="iot_agile_Protocol"
+  >
+
+  <h3>
     iot.agile.Protocol
-  </h2>
+  </h3>
+  <div class="description">A Protocol object abstract operations over a specific protocol implementation.
+Every Device has one Protocol used to establish and use a communication exchange.
+</div>
   <hr />
 
-  <h3>Properties</h3>
-  <hr />
+  <h4>Properties</h4>
   <ul class="api-class-properties" data-type="properties">
-    <li class="api-class-property" data-type="property">
-  <p>
+    <li class="api-class-property" data-type="property" data-id="iot.agile.Protocol.Status">
+
+  <div class="overview">
 
     <span class="type">
       
-        <a href="#[object Object]">ProtocolStatus</a>
+        <a href="#ProtocolStatus">ProtocolStatus</a>
       
     </span>
-
 
     <span class="name" id="Status">
       Status
@@ -1284,71 +300,49 @@ the underlying Protocol implementation if supported.
 
     
 
-    
+  </div>
 
-    <!-- 
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="">
-      
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        
-      
-    </span>
+  <div class="details hidden" data-for="iot.agile.Protocol.Status">
 
     
 
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-     -->
-  </p>
-
+  </div>
 </li>
-<li class="api-class-property" data-type="property">
-  <p>
+<li class="api-class-property" data-type="property" data-id="iot.agile.Protocol.Driver">
+
+  <div class="overview">
 
     <span class="type">
       
         String
       
     </span>
-
 
     <span class="name" id="Driver">
       Driver
     </span>
 
     
-      <span class="description">
+      <div class="description">
         Driver unique code name
-      </span>
-    
-
-    
-      <div class="example-container">
-        Example: <pre class="example">ble</pre>
       </div>
     
 
-    <!--  -->
-  </p>
+  </div>
 
+  <div class="details hidden" data-for="iot.agile.Protocol.Driver">
+
+    
+      <div class="example-container">
+        Example <pre class="example">ble</pre>
+      </div>
+    
+
+  </div>
 </li>
-<li class="api-class-property" data-type="property">
-  <p>
+<li class="api-class-property" data-type="property" data-id="iot.agile.Protocol.Name">
+
+  <div class="overview">
 
     <span class="type">
       
@@ -1356,87 +350,63 @@ the underlying Protocol implementation if supported.
       
     </span>
 
-
     <span class="name" id="Name">
       Name
     </span>
 
     
-      <span class="description">
+      <div class="description">
         Driver name
-      </span>
+      </div>
     
 
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.Protocol.Name">
+
     
 
-    <!--  -->
-  </p>
-
+  </div>
 </li>
-<li class="api-class-property" data-type="property">
-  <p>
+<li class="api-class-property" data-type="property" data-id="iot.agile.Protocol.DataStore">
+
+  <div class="overview">
 
     <span class="type">
       
-        <a href="#[object Object]">RecordObject</a>
+        RecordObject
       
     </span>
-
 
     <span class="name" id="DataStore">
       DataStore
     </span>
 
     
-      <span class="description">
+      <div class="description">
         Store the last record(s) received by a Read or Subscribe operation.
 Is up to the Protocol implementation decide how
 
-      </span>
+      </div>
     
 
-    
+  </div>
 
-    <!-- 
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="">
-      
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        
-      
-    </span>
+  <div class="details hidden" data-for="iot.agile.Protocol.DataStore">
 
     
 
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-     -->
-  </p>
-
+  </div>
 </li>
-<li class="api-class-property" data-type="property">
-  <p>
+<li class="api-class-property" data-type="property" data-id="iot.agile.Protocol.Devices">
+
+  <div class="overview">
 
     <span class="type">
       
-        <a href="#[object Object]">ProtocolDevice</a>
+        <a href="#ProtocolDevice">ProtocolDevice</a>
       
     </span>
-
 
     <span class="name" id="Devices">
       Devices
@@ -1444,65 +414,38 @@ Is up to the Protocol implementation decide how
 
     
 
-    
+  </div>
 
-    <!-- 
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="">
-      
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        
-      
-    </span>
+  <div class="details hidden" data-for="iot.agile.Protocol.Devices">
 
     
 
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-     -->
-  </p>
-
+  </div>
 </li>
 
   </ul>
 
-  <h3>Methods</h3>
-  <hr />
+  <h4>Methods</h4>
   <ul class="api-class-methods" data-type="methods">
-    <li class="api-class-method" data-type="method">
-  <p>
+    <li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Initialize">
 
-    <span class="returnType"><span class="type">
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
   
     void
   
 </span>
-</span>
 
-    <!-- <span class="type">
       
-        
-      
-    </span> -->
+    </span>
 
     <span class="name">Initialize(</span>
       <span class="args"><span class="type">
   
-    <a href="#[object Object]">ProtocolProfile</a>
+    <a href="#ProtocolProfile">ProtocolProfile</a>
   
 </span>
 
@@ -1513,96 +456,240 @@ Is up to the Protocol implementation decide how
     <span class="name">)</span>
 
     
-      <span class="description">
+      <div class="description">
         Abstract a setup or initialization phase for a Protocol
 
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.Protocol.Initialize">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Arguments
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="profile">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#ProtocolProfile">ProtocolProfile</a>
+      
+    </span>
+
+    
+      <span class="name">
+        profile
       </span>
     
+  </div>
+
+  <div class="details hidden">
+    
 
     
 
-  </p>
+    
+  </div>
 
 </li>
-<li class="api-class-method" data-type="method">
-  <p>
 
-    <span class="returnType"><span class="type">
+  </ul>
+</div>
+<div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Destroy">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
   
     void
   
 </span>
-</span>
 
-    <!-- <span class="type">
       
-        
-      
-    </span> -->
+    </span>
 
     <span class="name">Destroy(</span>
       <span class="args"></span>
     <span class="name">)</span>
 
     
-      <span class="description">
+      <div class="description">
         Abstract tear down for a Protocol, may be disconnection or deinitialization
 
-      </span>
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.Protocol.Destroy">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
     
 
     
 
-  </p>
+    
+  </div>
 
 </li>
-<li class="api-class-method" data-type="method">
-  <p>
 
-    <span class="returnType"><span class="type">
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Discover">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
   
     void
   
 </span>
-</span>
 
-    <!-- <span class="type">
       
-        
-      
-    </span> -->
+    </span>
 
     <span class="name">Discover(</span>
       <span class="args"></span>
     <span class="name">)</span>
 
     
-      <span class="description">
+      <div class="description">
         Initiate a discovery operation
 
-      </span>
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.Protocol.Discover">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
     
 
     
 
-  </p>
+    
+  </div>
 
 </li>
-<li class="api-class-method" data-type="method">
-  <p>
 
-    <span class="returnType"><span class="type">
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Write">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
   
     Object*
   
 </span>
-</span>
 
-    <!-- <span class="type">
       
-        
-      
-    </span> -->
+    </span>
 
     <span class="name">Write(</span>
       <span class="args"><span class="type">
@@ -1627,32 +714,127 @@ Is up to the Protocol implementation decide how
     <span class="name">)</span>
 
     
-      <span class="description">
+      <div class="description">
         Send data over the protocol
 
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.Protocol.Write">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Arguments
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="destination">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        destination
       </span>
     
+  </div>
+
+  <div class="details hidden">
+    
 
     
 
-  </p>
+    
+  </div>
 
 </li>
-<li class="api-class-method" data-type="method">
-  <p>
+<li class="api-type" data-type="type" id="arguments">
 
-    <span class="returnType"><span class="type">
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="name">
+        arguments
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Read">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
   
-    <a href="#[object Object]">RecordObject</a>
+    RecordObject
   
 </span>
-</span>
 
-    <!-- <span class="type">
       
-        
-      
-    </span> -->
+    </span>
 
     <span class="name">Read(</span>
       <span class="args"><span class="type">
@@ -1677,33 +859,132 @@ Is up to the Protocol implementation decide how
     <span class="name">)</span>
 
     
-      <span class="description">
+      <div class="description">
         Read data over the Protocol, may be cached in the Data property
 depending on implementation to save resources
 
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.Protocol.Read">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Arguments
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        Human readable data source name as defined in the ProtocolProfile object
       </span>
     
 
     
 
-  </p>
+    
+  </div>
 
 </li>
-<li class="api-class-method" data-type="method">
-  <p>
+<li class="api-type" data-type="type" id="arguments">
 
-    <span class="returnType"><span class="type">
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="name">
+        arguments
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        RecordObject
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Subscribe">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
   
-    <a href="#[object Object]">RecordObject</a>
+    RecordObject
   
 </span>
-</span>
 
-    <!-- <span class="type">
       
-        
-      
-    </span> -->
+    </span>
 
     <span class="name">Subscribe(</span>
       <span class="args"><span class="type">
@@ -1728,33 +1009,138 @@ depending on implementation to save resources
     <span class="name">)</span>
 
     
-      <span class="description">
+      <div class="description">
         Subscribe to data updates over the Protocol
 
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.Protocol.Subscribe">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Arguments
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        Human readable data source name as defined in the ProtocolProfile object
       </span>
     
 
     
 
-  </p>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="arguments">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="name">
+        arguments
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        RecordObject
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
 
 </li>
 
   </ul>
 
 </div>
-<div class="api-class" data-type="class">
+<div class="api-class"
+  data-type="class"
+  data-magellan-target="iot_agile_ProtocolManager"
+  id="iot_agile_ProtocolManager"
+  >
 
-  <h2 id="iot.agile.ProtocolManager">
+  <h3>
     iot.agile.ProtocolManager
-  </h2>
+  </h3>
+  <div class="description"></div>
   <hr />
 
-  <h3>Properties</h3>
-  <hr />
+  <h4>Properties</h4>
   <ul class="api-class-properties" data-type="properties">
-    <li class="api-class-property" data-type="property">
-  <p>
+    <li class="api-class-property" data-type="property" data-id="iot.agile.ProtocolManager.Devices">
+
+  <div class="overview">
 
     <span class="type">
       
@@ -1762,25 +1148,27 @@ depending on implementation to save resources
       
     </span>
 
-
     <span class="name" id="Devices">
       Devices
     </span>
 
     
-      <span class="description">
+      <div class="description">
         Contains the list of devices returned by each Protocol specific discovery, where available
-      </span>
+      </div>
     
 
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.ProtocolManager.Devices">
+
     
 
-    <!--  -->
-  </p>
-
+  </div>
 </li>
-<li class="api-class-property" data-type="property">
-  <p>
+<li class="api-class-property" data-type="property" data-id="iot.agile.ProtocolManager.Protocols">
+
+  <div class="overview">
 
     <span class="type">
       
@@ -1788,75 +1176,111 @@ depending on implementation to save resources
       
     </span>
 
-
     <span class="name" id="Protocols">
       Protocols
     </span>
 
     
-      <span class="description">
+      <div class="description">
         The list of managed Protocols
-      </span>
+      </div>
     
 
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.ProtocolManager.Protocols">
+
     
 
-    <!--  -->
-  </p>
-
+  </div>
 </li>
 
   </ul>
 
-  <h3>Methods</h3>
-  <hr />
+  <h4>Methods</h4>
   <ul class="api-class-methods" data-type="methods">
-    <li class="api-class-method" data-type="method">
-  <p>
+    <li class="api-class-method" data-type="method" data-id="iot.agile.ProtocolManager.Discover">
 
-    <span class="returnType"><span class="type">
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
   
     void
   
 </span>
-</span>
 
-    <!-- <span class="type">
       
-        
-      
-    </span> -->
+    </span>
 
     <span class="name">Discover(</span>
       <span class="args"></span>
     <span class="name">)</span>
 
     
-      <span class="description">
+      <div class="description">
         Start discovery on all the managed Protocols
-      </span>
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.ProtocolManager.Discover">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
     
 
     
 
-  </p>
+    
+  </div>
 
 </li>
-<li class="api-class-method" data-type="method">
-  <p>
 
-    <span class="returnType"><span class="type">
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li class="api-class-method" data-type="method" data-id="iot.agile.ProtocolManager.Add">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
   
     void
   
 </span>
-</span>
 
-    <!-- <span class="type">
       
-        
-      
-    </span> -->
+    </span>
 
     <span class="name">Add(</span>
       <span class="args"><span class="type">
@@ -1872,31 +1296,101 @@ depending on implementation to save resources
     <span class="name">)</span>
 
     
-      <span class="description">
+      <div class="description">
         Add a new Protocol
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.ProtocolManager.Add">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Arguments
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="protocol">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        protocol
       </span>
     
+  </div>
+
+  <div class="details hidden">
+    
 
     
 
-  </p>
+    
+  </div>
 
 </li>
-<li class="api-class-method" data-type="method">
-  <p>
 
-    <span class="returnType"><span class="type">
+  </ul>
+</div>
+<div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li class="api-class-method" data-type="method" data-id="iot.agile.ProtocolManager.Remove">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
   
     void
   
 </span>
-</span>
 
-    <!-- <span class="type">
       
-        
-      
-    </span> -->
+    </span>
 
     <span class="name">Remove(</span>
       <span class="args"><span class="type">
@@ -1912,1171 +1406,85 @@ depending on implementation to save resources
     <span class="name">)</span>
 
     
-      <span class="description">
+      <div class="description">
         Remove a managed Protocol
-      </span>
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.ProtocolManager.Remove">
+
     
 
     
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Arguments
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="protocol">
 
-  </p>
-
-</li>
-
-  </ul>
-
-</div>
-<div class="api-class" data-type="class">
-
-  <h2 id="iot.agile.Network">
-    iot.agile.Network
-  </h2>
-  <hr />
-
-  <h3>Properties</h3>
-  <hr />
-  <ul class="api-class-properties" data-type="properties">
-    <li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        Boolean
-      
-    </span>
-
-
-    <span class="name" id="Status">
-      Status
-    </span>
-
-    
-      <span class="description">
-        Indicates if an internet connection is available
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        Array[String]
-      
-    </span>
-
-
-    <span class="name" id="Connections">
-      Connections
-    </span>
-
-    
-      <span class="description">
-        List available internet connections
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        Array[String]
-      
-    </span>
-
-
-    <span class="name" id="Devices">
-      Devices
-    </span>
-
-    
-      <span class="description">
-        List available network system devices
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-
-  </ul>
-
-  <h3>Methods</h3>
-  <hr />
-  <ul class="api-class-methods" data-type="methods">
-    <li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    void
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">CreateAP(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  subnet
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  gateway
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  password
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Create a local access point
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    void
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">ScanWiFi(</span>
-      <span class="args"></span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Search for available WiFi
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-
-  </ul>
-
-</div>
-<div class="api-class" data-type="class">
-
-  <h2 id="iot.agile.Storage.Driver">
-    iot.agile.Storage.Driver
-  </h2>
-  <hr />
-
-  <h3>Properties</h3>
-  <hr />
-  <ul class="api-class-properties" data-type="properties">
-    <li class="api-class-property" data-type="property">
-  <p>
-
+  <div class="overview">
     <span class="type">
       
         String
       
     </span>
 
-
-    <span class="name" id="Name">
-      Name
-    </span>
-
     
-      <span class="description">
-        The driver friendly name
+      <span class="name">
+        protocol
       </span>
     
+  </div>
+
+  <div class="details hidden">
+    
 
     
 
-    <!--  -->
-  </p>
+    
+  </div>
 
 </li>
-<li class="api-class-property" data-type="property">
-  <p>
 
+  </ul>
+</div>
+<div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
     <span class="type">
       
-        
+        void
       
     </span>
 
+    
+  </div>
 
-    <span class="name" id="Enabled">
-      Enabled
-    </span>
-
+  <div class="details hidden">
     
 
     
 
-    <!--  -->
-  </p>
+    
+  </div>
 
 </li>
-<li class="api-class-property" data-type="property">
-  <p>
 
-    <span class="type">
-      
-        <a href="#[object Object]">DriverStatus</a>
-      
-    </span>
-
-
-    <span class="name" id="Status">
-      Status
-    </span>
-
-    
-      <span class="description">
-        Indicate the overall status of the Driver.
-      </span>
-    
-
-    
-
-    <!-- 
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="">
-      
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
+  </ul>
 </div>
 
-     -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        Boolean
-      
-    </span>
-
-
-    <span class="name" id="Error">
-      Error
-    </span>
-
+      </div>
     
-      <span class="description">
-        Indicates if an error occured. May be reset once notified.
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-
-    <span class="name" id="Params">
-      Params
-    </span>
-
-    
-      <span class="description">
-        Contains Driver specific configurations
-
-      </span>
-    
-
-    
-
-    <!-- 
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="">
-      
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-     -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        String
-      
-    </span>
-
-
-    <span class="name" id="Logs">
-      Logs
-    </span>
-
-    
-      <span class="description">
-        A system path to read the logs from
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-
-  </ul>
-
-  <h3>Methods</h3>
-  <hr />
-  <ul class="api-class-methods" data-type="methods">
-    <li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    String
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Create(</span>
-      <span class="args"><span class="type">
-  
-    <a href="#[object Object]">RecordObject</a>
-  
-</span>
-
-<span class="name">
-  record
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Creates a record
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    <a href="#[object Object]">RecordObject</a>
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Read(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  id
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Load a record by Id
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    void
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Update(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  id
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    <a href="#[object Object]">RecordObject</a>
-  
-</span>
-
-<span class="name">
-  record
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Updates a record
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    void
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Delete(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  id
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Delete a record by Id
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Array
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Find(</span>
-      <span class="args"><span class="type">
-  
-    <a href="#[object Object]">BaseQuery</a>
-  
-</span>
-
-<span class="name">
-  query
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Search for a set of records by criterias
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-
-  </ul>
-
-</div>
-<div class="api-class" data-type="class">
-
-  <h2 id="iot.agile.Storage.DriverManager">
-    iot.agile.Storage.DriverManager
-  </h2>
-  <hr />
-
-  <h3>Properties</h3>
-  <hr />
-  <ul class="api-class-properties" data-type="properties">
-    <li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        <a href="#iot.agile.Storage.Driver">Array[iot.agile.Storage.Driver]</a>
-      
-    </span>
-
-
-    <span class="name" id="Enabled">
-      Enabled
-    </span>
-
-    
-      <span class="description">
-        List of enabled Drivers.
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-<li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        <a href="#iot.agile.Storage.Driver">Array[iot.agile.Storage.Driver]</a>
-      
-    </span>
-
-
-    <span class="name" id="List">
-      List
-    </span>
-
-    
-      <span class="description">
-        List of all available Drivers.
-      </span>
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-
-  </ul>
-
-  <h3>Methods</h3>
-  <hr />
-  <ul class="api-class-methods" data-type="methods">
-    <li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    void
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Add(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  driver
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    Boolean
-  
-</span>
-
-<span class="name">
-  enable
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Add a driver reference instance
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    void
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Remove(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  driver
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Remove (and implicitly disable) a driver reference
-instance
-
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    void
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Enable(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  driver
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Enable a driver reference instance
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    void
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Disable(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  driver
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Disable a driver reference instance
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Object
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Status(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  driver
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Query a Driver to report the current status.
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-
-  </ul>
-
-</div>
-<div class="api-class" data-type="class">
-
-  <h2 id="iot.agile.Storage">
-    iot.agile.Storage
-  </h2>
-  <hr />
-
-  <h3>Properties</h3>
-  <hr />
-  <ul class="api-class-properties" data-type="properties">
-    <li class="api-class-property" data-type="property">
-  <p>
-
-    <span class="type">
-      
-        <a href="#iot.agile.Storage.Driver">Array[iot.agile.Storage.Driver]</a>
-      
-    </span>
-
-
-    <span class="name" id="Connections">
-      Connections
-    </span>
-
-    
-
-    
-
-    <!--  -->
-  </p>
-
-</li>
-
-  </ul>
-
-  <h3>Methods</h3>
-  <hr />
-  <ul class="api-class-methods" data-type="methods">
-    <li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    String
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Create(</span>
-      <span class="args"><span class="type">
-  
-    <a href="#[object Object]">RecordObject</a>
-  
-</span>
-
-<span class="name">
-  record
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Creates a record
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    <a href="#[object Object]">RecordObject</a>
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Read(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  Id
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Load a record by Id
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    void
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Update(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  Id
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    <a href="#[object Object]">RecordObject</a>
-  
-</span>
-
-<span class="name">
-  Record
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Updates a record
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    void
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Delete(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  Id
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Delete a record by Id
-      </span>
-    
-
-    
-
-  </p>
-
-</li>
-<li class="api-class-method" data-type="method">
-  <p>
-
-    <span class="returnType"><span class="type">
-  
-    Array
-  
-</span>
-</span>
-
-    <!-- <span class="type">
-      
-        
-      
-    </span> -->
-
-    <span class="name">Find(</span>
-      <span class="args"><span class="type">
-  
-    <a href="#[object Object]">BaseQuery</a>
-  
-</span>
-
-<span class="name">
-  query
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-      <span class="description">
-        Search for a set of records by criterias
-      </span>
-    
-
-    
-
-  </p>
+  </div>
 
 </li>
 
@@ -3090,433 +1498,23 @@ instance
   <hr />
 
   <div class="types-list">
-    <div class="api-type" data-type="type">
-  <p>
+    <li class="api-type" data-type="type" id="ProtocolDevice">
 
-    <span class="name" id="StatusType">
-      StatusType
-    </span>
-
-    :
-    
+  <div class="overview">
     <span class="type">
       
-        Enum
+        Array[Object]
       
     </span>
 
     
-
-    
-
-    <div class="fields pad-left">
-      <ul><li>CONNECTED</li><li>DISCONNECTED</li></ul>
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="ChannelTypeEnum">
-      ChannelTypeEnum
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Enum
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      <ul></ul>
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="DeviceStreamChannel">
-      DeviceStreamChannel
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="description">
-        A channel contains a single measurement value of a sensor
+      <span class="name">
+        ProtocolDevice
       </span>
     
+  </div>
 
-    
-
-    <div class="fields pad-left">
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="name">
-      name
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="type">
-      type
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        <a href="#[object Object]">ChannelTypeEnum</a>
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="DeviceStream">
-      DeviceStream
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="description">
-        A stream contains a set of measurement values for a sensor
-      </span>
-    
-
-    
-
-    <div class="fields pad-left">
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="name">
-      name
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="channels">
-      channels
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Array[DeviceStreamChannel]
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="__arrayType">
-      __arrayType
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        <a href="#[object Object]">DeviceStreamChannel</a>
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-    </div>
-
-  </p>
-</div>
-
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="DeviceDefinition">
-      DeviceDefinition
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="description">
-        A device definition that contains informations describing the current device
-      </span>
-    
-
-    
-
-    <div class="fields pad-left">
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="id">
-      id
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="name">
-      name
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="description">
-      description
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="properties">
-      properties
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Object*
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="streams">
-      streams
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Array[DeviceStream]
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="__arrayType">
-      __arrayType
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        <a href="#[object Object]">DeviceStream</a>
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-    </div>
-
-  </p>
-</div>
-
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="ProtocolDevice">
-      ProtocolDevice
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Array
-      
-    </span>
-
+  <div class="details hidden">
     
       <span class="description">
         List all devices a Protocol knows about.
@@ -3528,16 +1526,11 @@ Devices may be provisioned programmatically during the initialization phase.
 
     
 
-    <div class="fields pad-left">
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="type">
-      type
-    </span>
-
-    :
     
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
     <span class="type">
       
         Object
@@ -3545,60 +1538,123 @@ Devices may be provisioned programmatically during the initialization phase.
     </span>
 
     
+  </div>
+
+  <div class="details hidden">
+    
 
     
 
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="fields">
-      fields
-    </span>
-
-    :
     
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
     <span class="type">
       
-        
+        String
       
     </span>
 
     
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
 
     
 
-    <div class="fields pad-left">
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="id">
+
+  <div class="overview">
+    <span class="type">
       
-    </div>
-
-  </p>
-</div>
-
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="ProtocolStatus">
-      ProtocolStatus
+        String
+      
     </span>
 
-    :
     
+      <span class="name">
+        id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="status">
+
+  <div class="overview">
     <span class="type">
       
         Enum
       
     </span>
 
+    
+      <span class="name">
+        status
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>CONNECTED</li><li>DISCONNECTED</li>
+      </ul>
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolStatus">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        ProtocolStatus
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
     
       <span class="description">
         Identify a status of the Protocol, indicating if operational (AVAILABLE) or
@@ -3609,27 +1665,31 @@ if for some reason further user-side checks are required.
 
     
 
-    <div class="fields pad-left">
-      <ul><li>AVAILABLE</li><li>NOT_CONFIGURED</li><li>UNAVAILABLE</li><li>DISABLED</li><li>FATAL</li></ul>
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="ProtocolProfile">
-      ProtocolProfile
-    </span>
-
-    :
     
+      <ul class="fields pad-left no-bullet">
+        <li>AVAILABLE</li><li>NOT_CONFIGURED</li><li>UNAVAILABLE</li><li>DISABLED</li><li>FATAL</li>
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolProfile">
+
+  <div class="overview">
     <span class="type">
       
         Object*
       
     </span>
 
+    
+      <span class="name">
+        ProtocolProfile
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
     
       <span class="description">
         A Protocol set of settings that translate human readable properties
@@ -3644,21 +1704,13 @@ services and characteristics ids) to enable the data reading.
 
     
 
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="ProtocolOverview">
-      ProtocolOverview
-    </span>
-
-    :
     
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolOverview">
+
+  <div class="overview">
     <span class="type">
       
         Object
@@ -3666,19 +1718,22 @@ services and characteristics ids) to enable the data reading.
     </span>
 
     
+      <span class="name">
+        ProtocolOverview
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
 
     
 
-    <div class="fields pad-left">
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="name">
-      name
-    </span>
-
-    :
     
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
     <span class="type">
       
         String
@@ -3686,24 +1741,24 @@ services and characteristics ids) to enable the data reading.
     </span>
 
     
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
 
     
 
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="id">
-      id
-    </span>
-
-    :
     
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="id">
+
+  <div class="overview">
     <span class="type">
       
         String
@@ -3711,402 +1766,52 @@ services and characteristics ids) to enable the data reading.
     </span>
 
     
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="status">
-      status
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        <a href="#[object Object]">ProtocolStatus</a>
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="DriverStatus">
-      DriverStatus
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Enum
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      <ul><li>ACTIVE</li><li>NOT_CONFIGURED</li><li>ERROR</li><li>FAILURE</li></ul>
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="RecordObject">
-      RecordObject
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="DeviceId">
-      DeviceId
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="StreamId">
-      StreamId
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="ChannelId">
-      ChannelId
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="LastUpdate">
-      LastUpdate
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Number
-      
-    </span>
-
-    
-      <span class="description">
-        A UNIX timestamp rapresenting the last update of a record
+      <span class="name">
+        id
       </span>
     
+  </div>
+
+  <div class="details hidden">
+    
 
     
 
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="Channels">
-      Channels
-    </span>
-
-    :
     
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="status">
+
+  <div class="overview">
     <span class="type">
       
-        <a href="#[object Object]">KeyValue</a>
+        <a href="#ProtocolStatus">ProtocolStatus</a>
       
     </span>
 
     
-      <span class="description">
-        A list of key/value matching those indicated in the DeviceDefinition
+      <span class="name">
+        status
       </span>
     
+  </div>
 
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="KeyValue">
-      KeyValue
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Object*
-      
-    </span>
-
-    
-      <span class="description">
-        A list of key/value pairs
-      </span>
+  <div class="details hidden">
     
 
     
 
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="BaseQuery">
-      BaseQuery
-    </span>
-
-    :
     
-    <span class="type">
-      
-        Object
-      
-    </span>
+  </div>
 
+</li>
+
+      </ul>
     
+  </div>
 
-    
-
-    <div class="fields pad-left">
-      <div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="Criteria">
-      Criteria
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Object*
-      
-    </span>
-
-    
-      <span class="description">
-        A key-value series of field-value to query for.
-- Use `*` to indicate a fuzzy search
-- Use an Array to indicate an IN like query
-
-      </span>
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="OrderBy">
-      OrderBy
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Object*
-      
-    </span>
-
-    
-      <span class="description">
-        A key-value series of field-value to order the result for.
-
-      </span>
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="Limit">
-      Limit
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Number
-      
-    </span>
-
-    
-      <span class="description">
-        The limit of records founds to return
-      </span>
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-<div class="api-type" data-type="type">
-  <p>
-
-    <span class="name" id="Offset">
-      Offset
-    </span>
-
-    :
-    
-    <span class="type">
-      
-        Number
-      
-    </span>
-
-    
-      <span class="description">
-        The position for the first record to take from the list of results
-      </span>
-    
-
-    
-
-    <div class="fields pad-left">
-      
-    </div>
-
-  </p>
-</div>
-
-    </div>
-
-  </p>
-</div>
+</li>
 
   </div>
 
@@ -4114,5 +1819,29 @@ services and characteristics ids) to enable the data reading.
 
     </div>
   </div>
+
+  <!-- Fork me on Github  -->
+  <a href="https://github.com/Agile-IoT/agile-api-spec">
+    <img style="position: absolute; top: 0; right: 0; border: 0;"
+      src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" />
+  </a>
+
+  <script>
+    jQuery(function($) {
+
+      $('body').foundation();
+
+      $(".hidden").hide();
+
+      $(".overview").click(function() {
+        $(this).toggleClass("open");
+        $(this).next().toggle();
+      })
+
+      $(".details .overview").off("click");
+      $(".details .hidden").show();
+
+    });
+  </script>
 </body>
 </html>
