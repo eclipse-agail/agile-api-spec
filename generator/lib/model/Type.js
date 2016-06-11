@@ -56,7 +56,10 @@ Type.prototype.load = function(obj) {
       // }
 
       var fields = obj.fields;
-      if(fields.type) {
+      // TODO: check if obj is an actual object definition or a list of properties
+      var objType = obj.type.toLowerCase();
+      var isType =  typeof fields.type === 'string' &&  (objType === 'object' || objType === 'array' || objType === 'enum');
+      if(fields.type && isType) {
         fields = {
           '__field' : fields
         };
