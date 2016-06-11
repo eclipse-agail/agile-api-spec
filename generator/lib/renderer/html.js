@@ -49,6 +49,8 @@ HtmlRenderer.prototype.isStructuredType = function (type) {
 
 HtmlRenderer.prototype.getTypeLabel = function (obj) {
 
+  if(!obj) return null;
+
   var label = obj.type;
 
   if(obj.type && obj.type.toLowerCase() === "array") {
