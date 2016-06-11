@@ -1,7 +1,7 @@
 
 ChannelTypeEnum:
   type: Enum
-  fiels:
+  fields:
     - Number
     - String
     - Boolean
