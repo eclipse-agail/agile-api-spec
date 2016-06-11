@@ -81,6 +81,8 @@
 <script>
   jQuery(function() {
 
+    var JSON_API_URL = '/build/json/api.json';
+
     var index = lunr(function () {
       this.field('object', {boost: 8})
       this.field('method', {boost: 8})
@@ -124,7 +126,7 @@
         if(type === 'class' || type === 'property' || type === 'method') {
           var classNameId = res[0].replace(/\./g, '_');
           $('#' + classNameId).show();
-          console.log('.menu .object li[data-for="'+ classNameId +'"]')
+          // console.log('.menu .object li[data-for="'+ classNameId +'"]')
           $('.menu .object a[data-for="'+ classNameId +'"]').parent().show();
         }
         else {
@@ -148,7 +150,7 @@
     });
 
 
-    $.getJSON('/json/api.json').then(function(res) {
+    $.getJSON(JSON_API_URL).then(function(res) {
 
       // console.warn(res);
 
