@@ -36,7 +36,7 @@ var ReturnType = function(obj, parent) {
 };
 require('util').inherits(ReturnType, Type);
 
-var Method = function (name, obj) {
+var Method = function (name, obj, parent) {
 
   this.name = null;
   this.data = {
@@ -47,6 +47,7 @@ var Method = function (name, obj) {
   };
 
 
+  if(parent) this.setParent(parent);
   if(obj) this.load(obj);
   if(name) this.name = name;
 

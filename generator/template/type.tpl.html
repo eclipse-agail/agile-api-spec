@@ -1,12 +1,6 @@
-<div class="api-type" data-type="type">
-  <p>
+<li class="api-type" data-type="type" id="<%= name %>">
 
-    <span class="name" id="<%= name %>">
-      <%= name %>
-    </span>
-
-    :
-    
+  <div class="overview">
     <span class="type">
       <% if(typeLink) { %>
         <a href="#<%= typeLink %>"><%= type %></a>
@@ -15,6 +9,14 @@
       <% } %>
     </span>
 
+    <% if(name) { %>
+      <span class="name">
+        <%= name %>
+      </span>
+    <% } %>
+  </div>
+
+  <div class="details hidden">
     <% if(description) { %>
       <span class="description">
         <%= description %>
@@ -22,14 +24,16 @@
     <% } %>
 
     <% if(example) { %>
-      <span class="example-container">
-        Example: <pre class="example"><%= example %></pre>
-      </span>
+      <div class="example-container">
+        Example <pre class="example"><%= example %></pre>
+      </div>
     <% } %>
 
-    <div class="fields pad-left">
-      <%= fields %>
-    </div>
+    <% if(fields) { %>
+      <ul class="fields pad-left no-bullet">
+        <%= fields %>
+      </ul>
+    <% } %>
+  </div>
 
-  </p>
-</div>
+</li>

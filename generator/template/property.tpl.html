@@ -1,5 +1,6 @@
-<li class="api-class-property" data-type="property">
-  <p>
+<li class="api-class-property" data-type="property" data-id="<%= className %>.<%= name %>">
+
+  <div class="overview">
 
     <span class="type">
       <% if(typeLink) { %>
@@ -9,26 +10,25 @@
       <% } %>
     </span>
 
-
     <span class="name" id="<%= name %>">
       <%= name %>
     </span>
 
     <% if(description) { %>
-      <span class="description">
+      <div class="description">
         <%= description %>
-      </span>
-    <% } %>
-
-    <% if(example) { %>
-      <div class="example-container">
-        Example: <pre class="example"><%= example %></pre>
       </div>
     <% } %>
 
-    <!-- <% if(typeDef) { %>
-      <%= typeDef %>
-    <% } %> -->
-  </p>
+  </div>
 
+  <div class="details hidden" data-for="<%= className %>.<%= name %>">
+
+    <% if(example) { %>
+      <div class="example-container">
+        Example <pre class="example"><%= example %></pre>
+      </div>
+    <% } %>
+
+  </div>
 </li>
