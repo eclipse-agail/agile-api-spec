@@ -10,6 +10,7 @@ var Type = function (name, obj, parent) {
     description: null,
     extends: null,
     example: null,
+    access: [],
     type: null,
     fields: {},
     reference: null
@@ -37,20 +38,30 @@ Type.prototype.load = function(obj) {
   var me = this;
 
   _.each(this.data, function (val, key) {
-    if(key === 'fields' && obj[key]) {
+    if(key === 'fields' && obj.fields) {
 
       // normalize type shortcut eg: `fields: String`
-      if(typeof obj[key] === 'string') {
+      if(typeof obj.fields === 'string') {
         if(obj.type && obj.type.toLowerCase() === 'array') {
-          var _type = obj[key];
-          obj[key] = {};
-          obj[key].__arrayType = {
-            type: _type
+          obj.fields = {
+            __arrayType: {
+              type: obj.fields
+            }
           };
         }
       }
 
-      _.each(obj[key], function (field, fieldName) {
+      // if(obj.type.toLowerCase() === 'enum' &&
+      //       obj.fields instanceof Array) {
+      // }
+
+      var fields = obj.fields;
+      if(fields.type) {
+        fields = {
+          '__field' : fields
+        };
+      }
+      _.each(fields, function (field, fieldName) {
         me.addField(fieldName, field);
       });
 

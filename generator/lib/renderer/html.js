@@ -19,6 +19,8 @@ var getTemplates = function () {
     type: tpl('type'),
     arg: tpl('arg'),
     return: tpl('return'),
+    wrapper: tpl('wrapper'),
+    search: tpl('search'),
   };
 };
 
@@ -49,15 +51,20 @@ HtmlRenderer.prototype.getTypeLabel = function (obj) {
 
   var label = obj.type;
 
-
-  // console.warn("%j", obj);
-
   if(obj.type && obj.type.toLowerCase() === "array") {
-    if(obj.fields && obj.fields.__arrayType) {
-      label = obj.type + "[" + obj.fields.__arrayType.type + "]";
-    } else if(obj.reference) {
-      label = obj.type + "[" + obj.reference + "]";
+
+    if(obj.fields) {
+      if(obj.fields.__arrayType) {
+        label = obj.type + "[" + obj.fields.__arrayType.type + "]";
+      }
+      else if(obj.fields.__field) {
+        label = obj.type + "[" + obj.fields.__field.type + "]";
+      }
+      else if(obj.reference) {
+        label = obj.type + "[" + obj.reference + "]";
+      }
     }
+
   }
 
   return label;
@@ -65,11 +72,20 @@ HtmlRenderer.prototype.getTypeLabel = function (obj) {
 
 HtmlRenderer.prototype.getTypeLink = function (obj) {
 
+  if(!obj) return null;
+
   var typeLink = this.definition.types[obj.type] || false;
+
+  if(typeLink) {
+    return typeLink.name;
+  }
 
   if(obj.type && obj.type.toLowerCase() === "array") {
     if(obj.reference) {
       typeLink = obj.reference;
+    }
+    else if(obj.fields.__field && obj.fields.__field.type) {
+      typeLink = this.definition.types[obj.fields.__field.type];
     }
   }
 
@@ -86,6 +102,8 @@ HtmlRenderer.prototype.renderClass = function (clazz, className) {
     className: className,
       methods: methods,
       properties: properties,
+      description: clazz.description,
+      group: clazz.group,
   });
 };
 
@@ -112,24 +130,48 @@ HtmlRenderer.prototype.renderMethod = function (method, methodName) {
   var typeLabel = this.getTypeLabel(method);
   var typeLink = this.getTypeLink(method);
 
+  var returnTypeLink = this.getTypeLink(method.return);
   var returnType = this.renderReturnType(method.return);
 
   var args = _.map(method.args, this.renderArg.bind(this)).join('<span class="args-glue">, </span>');
 
+
+  var details = "";
+  if(_.size(method.args)) {
+    details += this.templates.wrapper({
+      title: "Arguments",
+      content: _.map(method.args, this.renderType.bind(this)).join(''),
+    });
+  }
+
+  if(method.return) {
+    details += this.templates.wrapper({
+      title: "Return type",
+      content: this.renderType(method.return.data, null),
+    });
+  }
+
   return this.templates.method({
+
+    className: method.getParent().name,
+
     description: method.description,
+
     type: type,
     typeLink: typeLink,
+
     access: method.access,
     example: method.example,
     name: methodName,
+
     returnType: returnType,
+    returnTypeLink: returnTypeLink,
+
     args: args,
+    details: details
   });
 
 };
-
-
 
 HtmlRenderer.prototype.renderProperty = function (property, propertyName) {
 
@@ -148,12 +190,18 @@ HtmlRenderer.prototype.renderProperty = function (property, propertyName) {
   }
 
   return this.templates.property({
+
+    className: property.getParent().name,
+
     description: property.description,
+
     type: typeLabel,
     typeLink: typeLink,
+
     access: property.access,
     example: property.example,
     name: propertyName,
+
     typeDef: typeDetail,
   });
 };
@@ -171,13 +219,26 @@ HtmlRenderer.prototype.renderType = function (typeDef, typeDefName) {
 
   var fields = "";
 
-  if(type === "Enum") {
+  var _type = type ? type.toLowerCase() : null;
+  if(_type === "array") {
+    if(typeDef.fields && typeDef.fields.__field) {
+      // console.log(typeDef.name, require('util').inspect(typeDef.fields.__field.data, { depth: 3 }));
+      fields = this.renderType(typeDef.fields.__field);
+    }
+  }
+  else if(_type === "enum") {
     fields = _.map(typeDef.fields, function (val, key) {
       return "<li>" + val.type + "</li>";
     });
-    fields = "<ul>" + fields.join('') + "</ul>";
-  } else if(typeDef.fields) {
+    fields = fields.join('');
+  }
+  else if(typeDef.fields) {
     fields = _.map(typeDef.fields, this.renderType.bind(this)).join('');
+  }
+
+  var name = (typeDefName || typeDef.name || "").toString();
+  if(name && name.substr(0,2) === '__') {
+    name = '';
   }
 
   return this.templates.type({
@@ -186,7 +247,7 @@ HtmlRenderer.prototype.renderType = function (typeDef, typeDefName) {
     typeLink: typeLink,
     access: typeDef.access,
     example: typeDef.example,
-    name: typeDefName,
+    name: name,
     fields: fields
   });
 
@@ -241,6 +302,7 @@ HtmlRenderer.prototype.render = function () {
   return this.templates.html({
     content: this.html.join(''),
     menu: this.renderMenu(),
+    search: this.templates.search({}),
   });
 
 };
