@@ -61,29 +61,38 @@ iot.agile.Protocol:
     type: String
     access: [r]
 
-  DataStore:
+  Data:
     description: |
       Store the last record(s) received by a Read or Subscribe operation.
-      Is up to the Protocol implementation decide how
+      Is up to the Protocol implementation decide how. Devices will receive data
+      from different sensor an will need to filter out the correct ones
     type: RecordObject
     tags:
       - Data Storage
+    access: [r, s]
 
   Devices:
     type: ProtocolDevice
+    access: [r, s]
 
-  Initialize:
+  Connect:
     description: |
-      Abstract a setup or initialization phase for a Protocol
+      Abstract a connection, setup or initialization phase for a Protocol
     args:
+      deviceId:
+        description: The protocol internal id rapresenting a device
+        type: String
       profile:
         type: ProtocolProfile
     return: void
 
-  Destroy:
+  Disconnect:
     description: |
-      Abstract tear down for a Protocol, may be disconnection or deinitialization
+      Abstract disconnect, tear down or uninitailization process for a Protocol, may be disconnection or deinitialization
     args:
+      deviceId:
+        description: The protocol internal id rapresenting a device
+        type: String
     return: void
 
   Discover:

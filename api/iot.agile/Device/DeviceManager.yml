@@ -32,6 +32,9 @@ DeviceDefinition:
     id: String
     name: String
     description: String
+    path:
+      type: String
+      description: DBus specific path to reach the object instance
     properties: Object*
     streams:
       type: Array
