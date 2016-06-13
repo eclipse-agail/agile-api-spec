@@ -1,0 +1,39 @@
+<li class="api-type" data-type="type" id="<%= name %>">
+
+  <div class="overview">
+    <span class="type">
+      <% if(typeLink) { %>
+        <a href="#<%= typeLink %>"><%= type %></a>
+      <% } else { %>
+        <%= type %>
+      <% } %>
+    </span>
+
+    <% if(name) { %>
+      <span class="name">
+        <%= name %>
+      </span>
+    <% } %>
+  </div>
+
+  <div class="details hidden">
+    <% if(description) { %>
+      <span class="description">
+        <%= description %>
+      </span>
+    <% } %>
+
+    <% if(example) { %>
+      <div class="example-container">
+        Example <pre class="example"><%= example %></pre>
+      </div>
+    <% } %>
+
+    <% if(fields) { %>
+      <ul class="fields pad-left no-bullet">
+        <%= fields %>
+      </ul>
+    <% } %>
+  </div>
+
+</li>

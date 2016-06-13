@@ -1,0 +1,108 @@
+
+ChannelTypeEnum:
+  type: Enum
+  fields:
+    - Number
+    - String
+    - Boolean
+    - GeoPoint
+    - Object
+
+DeviceStreamChannel:
+  description: A channel contains a single measurement value of a sensor
+  type: Object
+  fields:
+    name: String
+    type:
+      type: ChannelTypeEnum
+
+DeviceStream:
+  description: A stream contains a set of measurement values for a sensor
+  type: Object
+  fields:
+    name: String
+    channels:
+      type: Array
+      fields: DeviceStreamChannel
+
+DeviceDefinition:
+  description: A device definition that contains informations describing the current device
+  type: Object
+  fields:
+    id: String
+    name: String
+    description: String
+    properties: Object*
+    streams:
+      type: Array
+      fields: DeviceStream
+
+iot.agile.DeviceManager:
+
+  group: Device
+
+  Devices:
+    description: Return all registered devices
+    type: Array
+    reference: iot.agile.Device
+
+  Find:
+    description: Search for devices by specific criteria
+    args:
+      description: An query object to search for a device
+      type: BaseQuery
+    return:
+      description: A list with all matching registered devices results, eventually sorted and sliced
+      type: Array
+      reference: iot.agile.Device
+
+  Create:
+    description: Create (register) a new device in the manager
+    args:
+      device:
+        type: DeviceDefinition
+    return:
+      description: Return the AGILE Device ID, unique to identify the device in the gateway
+      type: String
+
+  Read:
+    description: Load a device definition by its ID
+    args:
+      Id:
+        type: String
+    return:
+      description: Return the AGILE Device UUID, unique to identify the device in the gateway
+      type: DeviceDefinition
+
+  Update:
+    description: Updates a device definition by its ID
+    args:
+      Id:
+        type: String
+      Definition:
+        type: DeviceDefinition
+    return: Boolean
+
+  Delete:
+    description: Delete a device definition by its ID. This will deactivate the Device DBus object
+    args:
+      Id:
+        type: String
+      Definition:
+        type: DeviceDefinition
+    return: Boolean
+
+  Batch:
+    description: Performa a batch operation over a set of devices.
+    args:
+      Op:
+        type: Enum
+        fields:
+          - Create
+          - Update
+          - Delete
+          - Read
+      Arguments:
+        description: An object to be passed to the underlying function call (Create, Update, Delete, Read)
+        type: Object*
+    return: Boolean

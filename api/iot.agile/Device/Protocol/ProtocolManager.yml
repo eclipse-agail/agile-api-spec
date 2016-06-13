@@ -1,0 +1,42 @@
+
+ProtocolOverview:
+  type: Object
+  fields:
+    name: String
+    id: String
+    status: ProtocolStatus
+
+iot.agile.ProtocolManager:
+
+  Devices:
+    description: Contains the list of devices returned by each Protocol specific discovery, where available
+    access: [r, s]
+    type: Array
+    fields: ProtocolDevice
+
+  Protocols:
+    description: The list of managed Protocols
+    access: [r, s]
+    type: Array
+    fields: ProtocolOverview
+
+  Discover:
+    description: Start discovery on all the managed Protocols
+    args:
+    return: void
+
+  Add:
+    description: Add a new Protocol
+    args:
+      protocol:
+        type: String
+        reference: iot.agile.Protocol
+    return: void
+
+  Remove:
+    description: Remove a managed Protocol
+    args:
+      protocol:
+        type: String
+        reference: iot.agile.Protocol
+    return: void

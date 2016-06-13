@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>AGILE API spec</title>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/plugins/foundation.sticky.js"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.7.1/lunr.min.js"></script>
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css">
+
+  <meta name="Description" content="AGILE API specification documentation">
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+  <style>
+
+    .overview {
+      cursor: pointer;
+    }
+
+    .details, .overview.open {
+      background: #EEE;
+    }
+
+    .overview:hover, .overview:active {
+      background-color: #EEE;
+    }
+
+    .description, .type {
+      color: #333;
+    }
+    .type {
+      font-size: 80%;
+    }
+    .name {
+      font-weight: bold;
+    }
+    .pad-left {
+      padding-left: .5em;
+      margin-left: 1em;
+      border-left: 1px solid #EEE;
+    }
+
+    nav.menu {
+      overflow-y: scroll;
+      max-height: 480px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <div class="row">
+    <div class="columns large-3" id="leftbar" data-sticky-container>
+      <div id="menu-wrapper" data-sticky>
+
+        <div class="text-center">
+          <a href="http://agile-iot.eu/">
+            <img
+              src="http://www.agile-project-iot.eu/wp-content/uploads/2016/03/logo-png-transparent-02_small.png"
+              style="width: 100%; max-width: 100px"
+            />
+          </a>
+          <h5 class="text-center">API spec</h5>
+        </div>
+
+
+        <%= search %>
+
+        <%= menu %>
+
+      </div>
+    </div>
+    <div class="columns large-9">
+      <%= content %>
+    </div>
+  </div>
+
+  <!-- Fork me on Github  -->
+  <a href="https://github.com/Agile-IoT/agile-api-spec">
+    <img style="position: absolute; top: 0; right: 0; border: 0;"
+      src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" />
+  </a>
+
+  <script>
+    jQuery(function($) {
+
+      $('body').foundation();
+
+      $(".hidden").hide();
+
+      $(".overview").click(function() {
+        $(this).toggleClass("open");
+        $(this).next().toggle();
+      })
+
+      $(".details .overview").off("click");
+      $(".details .hidden").show();
+
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<form id="searchbox">
+  <div class="row">
+    <div class="medium-12 columns">
+      <input type="search" placeholder="search.." id="searchtxt">
+    </div>
+  </div>
+</form>
+
+<script>
+  jQuery(function() {
+
+    var JSON_API_URL = '../json/api.json';
+
+    var index = lunr(function () {
+      this.field('object', {boost: 8})
+      this.field('method', {boost: 8})
+      this.field('property', {boost: 8})
+      this.field('description', {boost: 6})
+      this.field('type', {boost: 8})
+      this.ref('id')
+    })
+
+    var doSearch = function() {
+
+      var hideAll = function() {
+        $('.api-class, .api-type').hide();
+        $('.menu .types li, .menu .object li').hide();
+      };
+
+      var showAll = function() {
+        $('.api-class, .api-type').show();
+        $('.menu .types li, .menu .object li').show();
+      };
+
+      var text = $('#searchtxt').val();
+
+      if(text.length < 2) {
+        return showAll();
+      }
+
+      var results = index.search(text);
+
+      if(!results.length) {
+        return hideAll();
+      }
+
+      hideAll();
+
+      results.forEach(function(result) {
+
+        var res = result.ref.split('|');
+        var type = res.pop();
+
+        if(type === 'class' || type === 'property' || type === 'method') {
+          var classNameId = res[0].replace(/\./g, '_');
+          $('#' + classNameId).show();
+          // console.log('.menu .object li[data-for="'+ classNameId +'"]')
+          $('.menu .object a[data-for="'+ classNameId +'"]').parent().show();
+        }
+        else {
+          var typeName = res[0];
+          $('#' + typeName).show();
+          $('.menu .types a[data-for="'+ typeName +'"]').parent().show();
+        }
+
+        // console.warn(type, res);
+
+      });
+
+    }
+
+    $('#searchbox').on('submit', function() {
+      doSearch();
+      return false;
+    })
+    $('#searchbox').on('keyup', function() {
+      doSearch();
+    });
+
+
+    $.getJSON(JSON_API_URL).then(function(res) {
+
+      // console.warn(res);
+
+      Object.keys(res.types).forEach(function(typeName) {
+
+        var type = res.types[typeName];
+
+        index.add({
+          id: typeName + '|type',
+          type: typeName,
+          description: type.description,
+          _type: 'type',
+        })
+      });
+
+      Object.keys(res.classes).forEach(function(className) {
+
+        var clazz = res.classes[className];
+
+        index.add({
+          id: className + '|class',
+          object: className,
+          description: clazz.description,
+          _type: 'class',
+        })
+
+        Object.keys(clazz.methods).forEach(function(methodName) {
+
+          var method = clazz.methods[methodName];
+
+          index.add({
+            id: className + '|' + methodName + '|method',
+            object: className,
+            method: methodName,
+            description: method.description,
+            _type: 'method',
+          })
+        });
+
+        Object.keys(clazz.properties).forEach(function(propName) {
+
+          var prop = clazz.properties[propName];
+
+          index.add({
+            id: className + '|' + propName + '|property',
+            object: className,
+            property: propName,
+            description: prop.description,
+            _type: 'property',
+          })
+        });
+
+      });
+
+    })
+  });
+</script>
