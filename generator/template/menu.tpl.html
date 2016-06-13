@@ -1,0 +1,17 @@
+<nav class="menu">
+  <% menu.forEach(function(group) { %>
+
+    <h5><%= group.title %></h5>
+    <hr />
+
+    <ul class="no-bullet side-nav <%= group.type %>" data-magellan>
+      <% group.list.forEach(function(title) { %>
+        <li>
+          <a href="#<%= title.replace(/\./g, '_') %>" data-for="<%= title.replace(/\./g, '_') %>">
+            <%= title %>
+          </a>
+        </li>
+        <% }) %>
+    </ul>
+    <% }) %>
+</nav>

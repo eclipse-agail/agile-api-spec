@@ -1,0 +1,141 @@
+
+ProtocolDevice:
+  description: |
+    List all devices a Protocol knows about.
+    The list is updated by the Discover method.
+    Devices may be provisioned programmatically during the initialization phase.
+  access: [r, s]
+  type: Array
+  fields:
+    type: Object
+    fields:
+      name: String
+      id: String
+      status:
+        type: Enum
+        fields:
+          - CONNECTED
+          - DISCONNECTED
+
+ProtocolStatus:
+  description: |
+    Identify a status of the Protocol, indicating if operational (AVAILABLE) or
+    if for some reason further user-side checks are required.
+  type: Enum
+  fields:
+    - AVAILABLE
+    - NOT_CONFIGURED
+    - UNAVAILABLE
+    - DISABLED
+    - FATAL
+
+ProtocolProfile:
+  group: Device
+  description: |
+    A Protocol set of settings that translate human readable properties
+    to actual Protocol implementation details.
+
+    For example, the user request the temperature value over a BLE connected
+    device and the Protocol receive all the specific informations (like
+    services and characteristics ids) to enable the data reading.
+  type: Object*
+
+iot.agile.Protocol:
+  group: Device
+  description: |
+    A Protocol object abstract operations over a specific protocol implementation.
+    Every Device has one Protocol used to establish and use a communication exchange.
+
+  Status:
+    type: ProtocolStatus
+    access: [r, s]
+
+  Driver:
+    description: Driver unique code name
+    type: String
+    access: [r]
+    example: ble
+
+  Name:
+    description: Driver name
+    type: String
+    access: [r]
+
+  DataStore:
+    description: |
+      Store the last record(s) received by a Read or Subscribe operation.
+      Is up to the Protocol implementation decide how
+    type: RecordObject
+    tags:
+      - Data Storage
+
+  Devices:
+    type: ProtocolDevice
+
+  Initialize:
+    description: |
+      Abstract a setup or initialization phase for a Protocol
+    args:
+      profile:
+        type: ProtocolProfile
+    return: void
+
+  Destroy:
+    description: |
+      Abstract tear down for a Protocol, may be disconnection or deinitialization
+    args:
+    return: void
+
+  Discover:
+    description: |
+      Initiate a discovery operation
+    args:
+    return:
+      type: void
+      reference: Devices
+
+  # Execute:
+  #   description: |
+  #     Execute, in a RPC-like style, a command over the Protocol to be executed by the connected device.
+  #   args:
+  #     operation: String
+  #     arguments: Object*
+  #   return:
+  #     type: Object*
+
+  Write:
+    description: |
+      Send data over the protocol
+    args:
+      destination: String
+      arguments: Object*
+    return:
+      type: Object*
+
+  Read:
+    description: |
+      Read data over the Protocol, may be cached in the Data property
+      depending on implementation to save resources
+    args:
+      name:
+        type: String
+        description: Human readable data source name as defined in the ProtocolProfile object
+      arguments: Object*
+    return:
+      type: RecordObject
+      tags:
+        - Data Storage
+
+  Subscribe:
+    description: |
+      Subscribe to data updates over the Protocol
+    args:
+      name:
+        type: String
+        description: Human readable data source name as defined in the ProtocolProfile object
+      arguments: Object*
+    return:
+      type: RecordObject
+      reference: Data
+      tags:
+        - Data Storage

@@ -1,0 +1,40 @@
+<li class="api-class-method" data-type="method" data-id="<%= className %>.<%= name %>">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      <% if(returnTypeLink) { %>
+        <a href="#<%= returnTypeLink %>"><%= returnType %></a>
+      <% } else { %>
+        <%= returnType %>
+      <% } %>
+    </span>
+
+    <span class="name"><%= name %>(</span>
+      <span class="args"><%= args %></span>
+    <span class="name">)</span>
+
+    <% if(description) { %>
+      <div class="description">
+        <%= description %>
+      </div>
+    <% } %>
+
+  </div>
+
+  <div class="details hidden" data-for="<%= className %>.<%= name %>">
+
+    <% if(example) { %>
+      <div class="example-container">
+        Example <pre class="example"><%= example %></pre>
+      </div>
+    <% } %>
+
+    <% if(details) { %>
+      <div class="method-overview">
+        <%= details %>
+      </div>
+    <% } %>
+  </div>
+
+</li>
