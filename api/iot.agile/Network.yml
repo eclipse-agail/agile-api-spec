@@ -1,0 +1,36 @@
+iot.agile.Network:
+
+  Status:
+    type: Boolean
+    description: Indicates if an internet connection is available
+
+  Connections:
+    description: List available internet connections
+    type: Array
+    fields: String
+    access: [r, s]
+
+  Devices:
+    description: List available network system devices
+    type: Array
+    fields: String
+
+  CreateAP:
+    description: Create a local access point
+    args:
+      subnet:
+        type: String
+        description: A valid subnet to use to setup the access point
+        example: 10.0.0.0/8
+      gateway:
+        type: String
+        description: The default gateway to use for routing / natting
+        example: 192.168.0.1
+      password:
+        type: String
+        description: The default access password / key used to login depending on AP setup
+
+  ScanWiFi:
+    description: Search for available WiFi
+    return: void
+    reference: Connections

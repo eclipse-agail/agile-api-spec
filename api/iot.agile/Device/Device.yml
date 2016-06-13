@@ -1,0 +1,78 @@
+StatusType:
+  group: Device
+  type: Enum
+  fields:
+    - CONNECTED
+    - DISCONNECTED
+
+iot.agile.Device:
+  group: Device
+
+  Id:
+    description: The unique device id in the gateway
+    type: String
+
+  Name:
+    description: The device name
+    type: String
+
+  Status:
+    description: Indicate the current device status
+    type: StatusType
+
+  Configuration:
+    description: User configurations storage
+    type: KeyValue
+
+  Profile:
+    description: Contains protocol specific provided information on device in order to handle at Protocol level the specific implementation
+    type: Object*
+
+  LastUpdate:
+    description: A UNIX timestamp to indicate the last data update received by the Device
+    type: Number
+
+  Data:
+    description: Retain the most recent updates of a sensor or data stream, received asynchronously from Subscribe call
+    type: Object*
+
+  Protocol:
+    description: Device-specific communication Protocol instance. Available to access protocol specific methods and properties
+    reference: iot.agile.Protocol
+
+  Execute:
+    description: Execute an operation on the device triggering the underline Protocol implementation
+    args:
+      op:
+        description: Operation name or code as string
+        type: String
+      payload:
+        description: Payload for the Protocol command
+        type: Object*
+    return:
+       type: Object
+       fields:
+         result: Boolean,
+         resultCode: Number
+         response: Object*
+  Read:
+    args:
+      sensorName: String
+    return: Object*
+
+  Write:
+    args:
+      sensorName: String
+      data: Object*
+    return: Boolean
+
+  Subscribe:
+    description: |
+      Enable subscription to a specific sensor or data stream, triggering
+      the underlying Protocol implementation if supported.
+    args:
+      sensorName: String
+    return: Boolean
+    reference:
+      - DataReceived
+      - Data

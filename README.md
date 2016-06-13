@@ -15,12 +15,18 @@ Contributors shall follow those guidelines in order to get their contribution ac
 ##Specification
 
 - The model should be a valid [YAML](http://yaml.org/) document
-- All method and property are CamelCased, more precisely [PascalCased](https://en.wikipedia.org/wiki/CamelCase)
+- All method and property names are CamelCased, more precisely [PascalCased](https://en.wikipedia.org/wiki/CamelCase)
+- All top level definitions *may* have a `group` text or text list to aggregate different object in categories. A `tags` list is used to aggregate different object on various topics.
 - Methods *must* indicate a `return` type, with `void` if no return is expected and optionally a list of `arguments`
-- Methods `arguments` *must* be a map with name as key and at least the a `type` field
-- Properties referencing objects must have a `reference` field, eventually in square brackets if it is a list
+- Methods `arguments` *must* be a map with name as key and at least the `type` field specified as value
+- Methods `arguments` and `properties` *may* have a `default` value to indicate a predefined value if non is specified.
+- Asynchronous Methods *must* indicate a `reference` field indicating one or more Properties that receive updates from the call
+- Properties referencing *one* object must have a `reference` field. If it is a list there will be a type `Array` with the `reference` field.
 - Properties can indicate an `access` field as list of one of  `r`ead, `w`rite, `s`ubscribe
 - Optionally a `description` can be provided on methods, arguments and properties
+- Optionally an `example` can be provided on methods, arguments and properties in a JSON like format, eg. `example: { key1: value1, key2: value42 }`
+
+
 
 ###Object description example
 
@@ -51,10 +57,11 @@ iot.agile.ObjectName:
 
 `@NOTE: Subtypes should be added accordingly and mapped to DBus supported types`
 
-- In case an `Object` or `Array` is specified a `values` field should be added to describe the content.
+- In case an `Object` or `Array` is specified a `fields` field should be added to describe the content.
 - Use an `*` to indicate a complex variable (like Object and Array) has non specified return type, eg. `Object*`
 - Enum should be defined in the same document of the object using it, eventually with an unique name inside the whole specs
-- Enum should be defined as autonomous types with a field `enum` and a list of `values` with keys
+- Enum should be defined as autonomous types with a field `enum` and a list of `fields` with keys
+- `void` indicates a null value
 
 
 ***Primitive types:***
@@ -67,19 +74,20 @@ iot.agile.ObjectName:
 
 - **Enum**: a list of predefined keys
 
-```
-StatusType
-  enum:
+```yaml
+StatusType:
+  type: Enum
+  fields:
     - CONNECTED
     - DISCONNECTED
 ```
 
 - **Object**: a group of structured informations
 
-```
+```yaml
 ObjName:
   type: Object
-  values:
+  fields:
     name: String
     id: Number
     address: String
@@ -87,10 +95,10 @@ ObjName:
 
 - **Array**: an ordered list containing one or more types
 
-```
+```yaml
 ArrayField:
   type: Array
-  values:  String
+  fields:  String
 ```
 
 #### Example definition
@@ -104,50 +112,16 @@ iot.agile.Device:
    Status :
     description: Indicate the current device status
     type: StatusType
-  Configuration:
-    description: User and module configuration storage
-    type: Object*
   Profile:
     description: Contains user provided information on device in order to handle at Protocol level the specific implementation
     type: Object*
-  Execute:
-    description: Execute an operation on the device triggering the underline Protocol implementation
-    args:
-      op:
-        description: Operation name or code as string
-        type: String
-      payload:
-        description: Payload for the Protocol command
-        type: Object*
-    return:
-       type: Object
-       values:
-         result: boolean,
-         resultCode: Number
-         response: Object*
+  Protocol:
+    description: Protocol instance
+    reference: iot.agile.Protocol
   Read:
     args:
       sensorName: String
     return: Object
-
-  Write:
-    args:
-      sensorName: String
-      data: Object*
-    return: Boolean
-
-  Subscribe:
-    args:
-      property: String
-    return: Boolean
-
-  DataReceived:
-    type: Array
-    values: Object*
-
-  Protocol:
-    description: Protocol instance
-    reference: iot.agile.Protocol
 
 ```
 
