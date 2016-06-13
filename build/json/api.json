@@ -328,9 +328,13 @@
       "description": "A Protocol object abstract operations over a specific protocol implementation.\nEvery Device has one Protocol used to establish and use a communication exchange.\n",
       "group": "Device",
       "methods": {
-        "Initialize": {
-          "description": "Abstract a setup or initialization phase for a Protocol\n",
+        "Connect": {
+          "description": "Abstract a connection, setup or initialization phase for a Protocol\n",
           "args": {
+            "deviceId": {
+              "description": "The protocol internal id rapresenting a device",
+              "type": "String"
+            },
             "profile": {
               "type": "ProtocolProfile"
             }
@@ -339,8 +343,14 @@
             "type": "void"
           }
         },
-        "Destroy": {
-          "description": "Abstract tear down for a Protocol, may be disconnection or deinitialization\n",
+        "Disconnect": {
+          "description": "Abstract disconnect, tear down or uninitailization process for a Protocol, may be disconnection or deinitialization\n",
+          "args": {
+            "deviceId": {
+              "description": "The protocol internal id rapresenting a device",
+              "type": "String"
+            }
+          },
           "return": {
             "type": "void"
           }
@@ -421,11 +431,19 @@
           },
           "type": "String"
         },
-        "DataStore": {
-          "description": "Store the last record(s) received by a Read or Subscribe operation.\nIs up to the Protocol implementation decide how\n",
+        "Data": {
+          "description": "Store the last record(s) received by a Read or Subscribe operation.\nIs up to the Protocol implementation decide how. Devices will receive data\nfrom different sensor an will need to filter out the correct ones\n",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
           "type": "RecordObject"
         },
         "Devices": {
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
           "type": "ProtocolDevice"
         }
       }
@@ -895,6 +913,10 @@
           "type": "String"
         },
         "description": {
+          "type": "String"
+        },
+        "path": {
+          "description": "DBus specific path to reach the object instance",
           "type": "String"
         },
         "properties": {
