@@ -3036,7 +3036,7 @@ Every Device has one Protocol used to establish and use a communication exchange
 
   </div>
 </li>
-<li class="api-class-property" data-type="property" data-id="iot.agile.Protocol.DataStore">
+<li class="api-class-property" data-type="property" data-id="iot.agile.Protocol.Data">
 
   <div class="overview">
 
@@ -3046,21 +3046,22 @@ Every Device has one Protocol used to establish and use a communication exchange
       
     </span>
 
-    <span class="name" id="DataStore">
-      DataStore
+    <span class="name" id="Data">
+      Data
     </span>
 
     
       <div class="description">
         Store the last record(s) received by a Read or Subscribe operation.
-Is up to the Protocol implementation decide how
+Is up to the Protocol implementation decide how. Devices will receive data
+from different sensor an will need to filter out the correct ones
 
       </div>
     
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.DataStore">
+  <div class="details hidden" data-for="iot.agile.Protocol.Data">
 
     
 
@@ -3095,7 +3096,7 @@ Is up to the Protocol implementation decide how
 
   <h4>Methods</h4>
   <ul class="api-class-methods" data-type="methods">
-    <li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Initialize">
+    <li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Connect">
 
   <div class="overview">
 
@@ -3110,8 +3111,17 @@ Is up to the Protocol implementation decide how
       
     </span>
 
-    <span class="name">Initialize(</span>
+    <span class="name">Connect(</span>
       <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  deviceId
+</span>
+<span class="args-glue">, </span><span class="type">
   
     <a href="#ProtocolProfile">ProtocolProfile</a>
   
@@ -3125,14 +3135,14 @@ Is up to the Protocol implementation decide how
 
     
       <div class="description">
-        Abstract a setup or initialization phase for a Protocol
+        Abstract a connection, setup or initialization phase for a Protocol
 
       </div>
     
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.Initialize">
+  <div class="details hidden" data-for="iot.agile.Protocol.Connect">
 
     
 
@@ -3143,7 +3153,36 @@ Is up to the Protocol implementation decide how
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="profile">
+    <li class="api-type" data-type="type" id="deviceId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        deviceId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        The protocol internal id rapresenting a device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="profile">
 
   <div class="overview">
     <span class="type">
@@ -3206,7 +3245,7 @@ Is up to the Protocol implementation decide how
   </div>
 
 </li>
-<li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Destroy">
+<li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Disconnect">
 
   <div class="overview">
 
@@ -3221,26 +3260,72 @@ Is up to the Protocol implementation decide how
       
     </span>
 
-    <span class="name">Destroy(</span>
-      <span class="args"></span>
+    <span class="name">Disconnect(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  deviceId
+</span>
+</span>
     <span class="name">)</span>
 
     
       <div class="description">
-        Abstract tear down for a Protocol, may be disconnection or deinitialization
+        Abstract disconnect, tear down or uninitailization process for a Protocol, may be disconnection or deinitialization
 
       </div>
     
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.Destroy">
+  <div class="details hidden" data-for="iot.agile.Protocol.Disconnect">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
+  <div class="title">
+    Arguments
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="deviceId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        deviceId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        The protocol internal id rapresenting a device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
   <div class="title">
     Return type
   </div>
@@ -7057,6 +7142,35 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="path">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        path
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        DBus specific path to reach the object instance
+      </span>
     
 
     
