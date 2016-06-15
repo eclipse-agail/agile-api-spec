@@ -188,6 +188,10 @@
           "args": {
             "sensorName": {
               "type": "String"
+            },
+            "params": {
+              "description": "Custom parameters to pass, like eg. frequency",
+              "type": "Object*"
             }
           },
           "return": {
