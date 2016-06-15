@@ -24,6 +24,12 @@
 
   <div class="details hidden" data-for="<%= className %>.<%= name %>">
 
+    <% if(access) { %>
+      <div class="access-container">
+        Access type <%= access %>
+      </div>
+    <% } %>
+
     <% if(example) { %>
       <div class="example-container">
         Example <pre class="example"><%= example %></pre>

@@ -55,6 +55,16 @@ iot.agile.Device:
          result: Boolean,
          resultCode: Number
          response: Object*
+
+  Connect:
+    args:
+      sensorId: String
+    return: Object*
+
+  Disconnect:
+    args:
+    return: void
+
   Read:
     args:
       sensorName: String
@@ -72,6 +82,9 @@ iot.agile.Device:
       the underlying Protocol implementation if supported.
     args:
       sensorName: String
+      params:
+        type: Object*
+        description: Custom parameters to pass, like eg. frequency
     return: Boolean
     reference:
       - DataReceived

@@ -145,6 +145,21 @@
             }
           }
         },
+        "Connect": {
+          "args": {
+            "sensorId": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "Object*"
+          }
+        },
+        "Disconnect": {
+          "return": {
+            "type": "void"
+          }
+        },
         "Read": {
           "args": {
             "sensorName": {
@@ -173,6 +188,10 @@
           "args": {
             "sensorName": {
               "type": "String"
+            },
+            "params": {
+              "description": "Custom parameters to pass, like eg. frequency",
+              "type": "Object*"
             }
           },
           "return": {
@@ -334,9 +353,6 @@
             "deviceId": {
               "description": "The protocol internal id rapresenting a device",
               "type": "String"
-            },
-            "profile": {
-              "type": "ProtocolProfile"
             }
           },
           "return": {

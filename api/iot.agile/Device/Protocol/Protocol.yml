@@ -82,8 +82,8 @@ iot.agile.Protocol:
       deviceId:
         description: The protocol internal id rapresenting a device
         type: String
-      profile:
-        type: ProtocolProfile
+      # profile:
+        # type: ProtocolProfile
     return: void
 
   Disconnect:
