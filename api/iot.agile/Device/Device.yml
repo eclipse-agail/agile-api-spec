@@ -82,6 +82,9 @@ iot.agile.Device:
       the underlying Protocol implementation if supported.
     args:
       sensorName: String
+      params:
+        type: Object*
+        description: Custom parameters to pass, like eg. frequency
     return: Boolean
     reference:
       - DataReceived
