@@ -55,6 +55,16 @@ iot.agile.Device:
          result: Boolean,
          resultCode: Number
          response: Object*
+
+  Connect:
+    args:
+      sensorId: String
+    return: Object*
+
+  Disconnect:
+    args:
+    return: void
+
   Read:
     args:
       sensorName: String
