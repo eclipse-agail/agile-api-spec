@@ -146,11 +146,6 @@
           }
         },
         "Connect": {
-          "args": {
-            "sensorId": {
-              "type": "String"
-            }
-          },
           "return": {
             "type": "Object*"
           }
