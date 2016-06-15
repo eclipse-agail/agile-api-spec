@@ -58,7 +58,6 @@ iot.agile.Device:
 
   Connect:
     args:
-      sensorId: String
     return: Object*
 
   Disconnect:
