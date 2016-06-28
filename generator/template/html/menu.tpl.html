@@ -1,9 +1,7 @@
 <nav class="menu">
   <% menu.forEach(function(group) { %>
-
     <h5><%= group.title %></h5>
     <hr />
-
     <ul class="no-bullet side-nav <%= group.type %>" data-magellan>
       <% group.list.forEach(function(title) { %>
         <li>
@@ -14,4 +12,9 @@
         <% }) %>
     </ul>
     <% }) %>
+      <ul class="no-bullet side-nav api-docs">
+        <li>
+          <a href="../raml/rest-api.html"><small>[alpha]</small> REST API docs </a>
+        </li>
+      </ul>
 </nav>
