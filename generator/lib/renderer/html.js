@@ -5,7 +5,7 @@ var fs = require('fs');
 var Type = require("../model/Type");
 
 var tpl = function (name) {
-  return _.template(fs.readFileSync(__dirname + '/../../template/' + name + '.tpl.html', 'utf8'));
+  return _.template(fs.readFileSync(__dirname + '/../../template/html/' + name + '.tpl.html', 'utf8'));
 };
 
 var getTemplates = function () {

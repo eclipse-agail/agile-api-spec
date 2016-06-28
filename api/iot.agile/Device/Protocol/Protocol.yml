@@ -1,21 +1,24 @@
 
+
+DeviceOverview:
+  type: Object
+  fields:
+    name: String
+    id: String
+    status:
+      type: Enum
+      fields:
+        - CONNECTED
+        - DISCONNECTED
+
 ProtocolDevice:
   description: |
     List all devices a Protocol knows about.
-    The list is updated by the Discover method.
-    Devices may be provisioned programmatically during the initialization phase.
+    The list is updated by the StartDiscovery method.
+    Devices may also be provisioned programmatically during the initialization phase.
   access: [r, s]
   type: Array
-  fields:
-    type: Object
-    fields:
-      name: String
-      id: String
-      status:
-        type: Enum
-        fields:
-          - CONNECTED
-          - DISCONNECTED
+  fields: DeviceOverview
 
 ProtocolStatus:
   description: |
@@ -24,10 +27,11 @@ ProtocolStatus:
   type: Enum
   fields:
     - AVAILABLE
-    - NOT_CONFIGURED
     - UNAVAILABLE
+    - NOT_CONFIGURED
     - DISABLED
-    - FATAL
+    - ENABLED
+    - FAILURE
 
 ProtocolProfile:
   group: Device

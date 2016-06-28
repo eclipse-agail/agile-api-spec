@@ -1,3 +1,4 @@
+
 StatusType:
   group: Device
   type: Enum
@@ -6,7 +7,59 @@ StatusType:
     - DISCONNECTED
 
 iot.agile.Device:
+
   group: Device
+
+  http:
+
+    /{deviceId}/{streamId}/execute/{operation}:
+      post:
+        body:
+          type: object
+        description: Perform an action on the device
+        (reference): Device.Execute
+
+    /{deviceId}/{streamId}/subscribe:
+      post:
+        body:
+          type: object
+        description: |
+          Enable a subscription to a data stream. Asynchronous data updates will
+          be delivered via websocket.
+        (reference): Device.Subscribe
+      delete:
+        body:
+          type: object
+        description: Disable a subscription to a data stream
+        (reference): Device.Unsubscribe
+
+    # Data storage ops
+    /{deviceId}/{streamId}:
+      get:
+        body:
+          type: RecordObject
+        description: Get the list of data stored for a stream
+        (reference): Storage.Get
+      put:
+        body:
+          type: RecordObject
+        description: Store a data record for the stream
+        (reference): Storage.Create
+      delete:
+        body:
+        description: Delete all data related to a stream
+        (reference): Storage.Delete
+      post:
+        body:
+          type: BaseQuery
+        description: Search for a stream recordset
+        (reference): Storage.Find
+    /{deviceId}/{streamId}/lastUpdate:
+      get:
+        body:
+          type: RecordObject
+        description: Get the last stored record for a stream
+        (reference): Device.Read
 
   Id:
     description: The unique device id in the gateway
@@ -41,13 +94,15 @@ iot.agile.Device:
     reference: iot.agile.Protocol
 
   Execute:
-    description: Execute an operation on the device triggering the underline Protocol implementation
+    description: |
+      Perform an action on the device or sensor side triggering the
+      underline Protocol specific implementation.
     args:
       op:
         description: Operation name or code as string
         type: String
       payload:
-        description: Payload for the Protocol command
+        description: Arguments for the actuation on the device
         type: Object*
     return:
        type: Object
@@ -66,12 +121,12 @@ iot.agile.Device:
 
   Read:
     args:
-      sensorName: String
+      streamName: String
     return: Object*
 
   Write:
     args:
-      sensorName: String
+      streamName: String
       data: Object*
     return: Boolean
 
@@ -80,10 +135,29 @@ iot.agile.Device:
       Enable subscription to a specific sensor or data stream, triggering
       the underlying Protocol implementation if supported.
     args:
-      sensorName: String
+      streamName:
+        type: String
+        description: The stream or sensor reference to subscribe for updates
       params:
+        required: false
         type: Object*
-        description: Custom parameters to pass, like eg. frequency
+        description: |
+          Custom parameters set to pass spcific to the device
+          or sensor, like eg. frequency
+
+    return: Boolean
+    reference:
+      - DataReceived
+      - Data
+
+  Unsubscribe:
+    description: |
+      Disable a subscription to a specific sensor or data stream, triggering
+      the underlying Protocol implementation if supported.
+    args:
+      streamName:
+        type: String
+        description: The stream or sensor reference to unsubscribe from
     return: Boolean
     reference:
       - DataReceived

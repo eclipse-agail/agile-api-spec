@@ -12,8 +12,44 @@ module.exports.export = function (format) {
       d("Loaded %s classes", _.size(definition.classes));
       return definition.render(format);
     })
-    .then(function (html) {
-      require('fs').writeFileSync(config.outputDir + "/" + format + "/api." + format, html);
+    .then(function (outputs) {
+      if(typeof outputs === 'string') {
+        outputs = [
+          {
+            filename: "/api." + format,
+            content: outputs
+          }
+        ];
+      }
+
+      return Promise.all(outputs.map(function(file) {
+        try {
+
+          var fs = require('fs');
+          var path = require('path');
+
+          var filepath = config.outputDir +
+            path.sep + format +
+            path.sep + file.filename;
+
+          var dirname = path.dirname(filepath);
+
+          if(!fs.existsSync(dirname)) {
+            d("Create directory %s", dirname);
+            require('mkdirp').sync(dirname);
+          }
+
+          d("Writing %s", filepath);
+          require('fs').writeFileSync(
+            filepath,
+            file.content
+          );
+          return Promise.resolve();
+        }
+        catch(e) {
+          return Promise.reject(e);
+        }
+      }));
     })
     .catch(function (e) {
       throw e;

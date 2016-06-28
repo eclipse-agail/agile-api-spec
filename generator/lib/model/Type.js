@@ -10,10 +10,10 @@ var Type = function (name, obj, parent) {
     description: null,
     extends: null,
     example: null,
-    access: [],
     type: null,
     fields: {},
-    reference: null
+    reference: null,
+    required: true
   };
 
   this.initialize(name, obj, parent);

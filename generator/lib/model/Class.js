@@ -18,6 +18,7 @@ var Clazz = function(name, obj, parent) {
     group: null,
     methods: {},
     properties: {},
+    http: null
   };
 
   if(parent) this.setParent(parent);
@@ -28,6 +29,7 @@ var Clazz = function(name, obj, parent) {
 
 };
 require('util').inherits(Clazz, require('./BaseObject'));
+
 
 Clazz.prototype.load = function (obj) {
 

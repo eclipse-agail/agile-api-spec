@@ -1,9 +1,3 @@
-# Some generic type definitions
-
-KeyValue:
-  description: A list of key/value pairs
-  type: Object*
-
 BaseQuery:
   type: Object
   fields:
