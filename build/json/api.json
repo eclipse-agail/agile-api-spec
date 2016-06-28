@@ -78,13 +78,16 @@
             "type": "Object",
             "fields": {
               "running": {
-                "type": "Boolean"
+                "type": "Boolean",
+                "required": true
               },
               "message": {
-                "type": "String"
+                "type": "String",
+                "required": true
               },
               "pid": {
-                "type": "Number"
+                "type": "Number",
+                "required": true
               }
             }
           }
@@ -101,15 +104,18 @@
             "Provider": {
               "description": "Define an installer provider",
               "example": "docker",
-              "type": "String"
+              "type": "String",
+              "required": true
             },
             "ApiKey": {
               "description": "User apiKey if required",
-              "type": "String"
+              "type": "String",
+              "required": true
             },
             "RepositoryUrl": {
               "description": "Repository / Marketplace API  url",
-              "type": "String"
+              "type": "String",
+              "required": true
             }
           }
         }
@@ -119,14 +125,14 @@
       "group": "Device",
       "methods": {
         "Execute": {
-          "description": "Execute an operation on the device triggering the underline Protocol implementation",
+          "description": "Perform an action on the device or sensor side triggering the\nunderline Protocol specific implementation.\n",
           "args": {
             "op": {
               "description": "Operation name or code as string",
               "type": "String"
             },
             "payload": {
-              "description": "Payload for the Protocol command",
+              "description": "Arguments for the actuation on the device",
               "type": "Object*"
             }
           },
@@ -134,13 +140,16 @@
             "type": "Object",
             "fields": {
               "result": {
-                "type": "Boolean,"
+                "type": "Boolean,",
+                "required": true
               },
               "resultCode": {
-                "type": "Number"
+                "type": "Number",
+                "required": true
               },
               "response": {
-                "type": "Object*"
+                "type": "Object*",
+                "required": true
               }
             }
           }
@@ -157,7 +166,7 @@
         },
         "Read": {
           "args": {
-            "sensorName": {
+            "streamName": {
               "type": "String"
             }
           },
@@ -167,7 +176,7 @@
         },
         "Write": {
           "args": {
-            "sensorName": {
+            "streamName": {
               "type": "String"
             },
             "data": {
@@ -181,12 +190,25 @@
         "Subscribe": {
           "description": "Enable subscription to a specific sensor or data stream, triggering\nthe underlying Protocol implementation if supported.\n",
           "args": {
-            "sensorName": {
+            "streamName": {
+              "description": "The stream or sensor reference to subscribe for updates",
               "type": "String"
             },
             "params": {
-              "description": "Custom parameters to pass, like eg. frequency",
+              "description": "Custom parameters set to pass spcific to the device\nor sensor, like eg. frequency\n",
               "type": "Object*"
+            }
+          },
+          "return": {
+            "type": "Boolean"
+          }
+        },
+        "Unsubscribe": {
+          "description": "Disable a subscription to a specific sensor or data stream, triggering\nthe underlying Protocol implementation if supported.\n",
+          "args": {
+            "streamName": {
+              "description": "The stream or sensor reference to unsubscribe from",
+              "type": "String"
             }
           },
           "return": {
@@ -226,6 +248,55 @@
         "Protocol": {
           "description": "Device-specific communication Protocol instance. Available to access protocol specific methods and properties",
           "reference": "iot.agile.Protocol"
+        }
+      },
+      "http": {
+        "/{deviceId}/{streamId}/execute/{operation}": {
+          "post": {
+            "body": "object",
+            "description": "Perform an action on the device",
+            "(reference)": "Device.Execute"
+          }
+        },
+        "/{deviceId}/{streamId}/subscribe": {
+          "post": {
+            "body": "object",
+            "description": "Enable a subscription to a data stream. Asynchronous data updates will\nbe delivered via websocket.\n",
+            "(reference)": "Device.Subscribe"
+          },
+          "delete": {
+            "body": "object",
+            "description": "Disable a subscription to a data stream",
+            "(reference)": "Device.Unsubscribe"
+          }
+        },
+        "/{deviceId}/{streamId}": {
+          "get": {
+            "body": "RecordObject",
+            "description": "Get the list of data stored for a stream",
+            "(reference)": "Storage.Get"
+          },
+          "put": {
+            "body": "RecordObject",
+            "description": "Store a data record for the stream",
+            "(reference)": "Storage.Create"
+          },
+          "delete": {
+            "description": "Delete all data related to a stream",
+            "(reference)": "Storage.Delete"
+          },
+          "post": {
+            "body": "BaseQuery",
+            "description": "Search for a stream recordset",
+            "(reference)": "Storage.Find"
+          }
+        },
+        "/{deviceId}/{streamId}/lastUpdate": {
+          "get": {
+            "body": "RecordObject",
+            "description": "Get the last stored record for a stream",
+            "(reference)": "Device.Read"
+          }
         }
       }
     },
@@ -307,16 +378,20 @@
               "type": "Enum",
               "fields": {
                 "0": {
-                  "type": "Create"
+                  "type": "Create",
+                  "required": true
                 },
                 "1": {
-                  "type": "Update"
+                  "type": "Update",
+                  "required": true
                 },
                 "2": {
-                  "type": "Delete"
+                  "type": "Delete",
+                  "required": true
                 },
                 "3": {
-                  "type": "Read"
+                  "type": "Read",
+                  "required": true
                 }
               }
             },
@@ -335,6 +410,32 @@
           "description": "Return all registered devices",
           "type": "Array",
           "reference": "iot.agile.Device"
+        }
+      },
+      "http": {
+        "/devices": {
+          "get": {
+            "body": "DeviceDefinition",
+            "description": "List all registered devices"
+          },
+          "post": {
+            "body": "DeviceDefinition",
+            "description": "Creates a new device definition"
+          },
+          "/{deviceId}": {
+            "get": {
+              "body": "DeviceDefinition",
+              "description": "Get a device definition"
+            },
+            "put": {
+              "body": "DeviceDefinition",
+              "description": "Update a device definition"
+            },
+            "delete": {
+              "body": "DeviceDefinition",
+              "description": "Delete a device definition and uregister it"
+            }
+          }
         }
       }
     },
@@ -460,9 +561,21 @@
       }
     },
     "iot.agile.ProtocolManager": {
+      "group": "Protocol",
       "methods": {
-        "Discover": {
+        "StartDiscovery": {
           "description": "Start discovery on all the managed Protocols",
+          "args": {
+            "params": {
+              "type": "DiscoverParam"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "StopDiscovery": {
+          "description": "Stop the ongoing discovery on all the managed Protocols",
           "return": {
             "type": "void"
           }
@@ -510,6 +623,80 @@
           },
           "type": "Array",
           "fields": "ProtocolOverview"
+        }
+      },
+      "http": {
+        "/protocols": {
+          "get": {
+            "description": "Get the list of registered protocols",
+            "body": {
+              "type": "ProtocolOverview[]",
+              "example": {
+                "0": {
+                  "id": "BLE",
+                  "name": "Bluetooth LE",
+                  "interface": "iot.agile.protocol.BLE",
+                  "status": "AVAILABLE"
+                }
+              }
+            }
+          },
+          "put": {
+            "description": "Register a new protocol based on an active DBus interface",
+            "body": {
+              "type": "ProtocolOverview",
+              "example": {
+                "name": "TCP over Pigeon",
+                "id": "TCPoP",
+                "interface": "corp.acme.protocol.TCPoP"
+              }
+            },
+            "responses": {
+              "202": {
+                "description": "Protocol has been added"
+              },
+              "400": {
+                "description": "An error occured processing the request"
+              }
+            }
+          },
+          "delete": {
+            "description": "Unregister a protocol by providing the protocol id\n",
+            "body": {
+              "type": "ProtocolOverview",
+              "examples": {
+                "0": {
+                  "id": "TCPoP"
+                }
+              }
+            }
+          },
+          "/discovery": {
+            "post": {
+              "(reference)": "ProtocolManager.StartDiscovery",
+              "description": "Start a device discovery on all available protocols",
+              "responses": {
+                "204": {
+                  "description": "The discovery has been successfully started on all the regitered\nprotocols; asynchronous updates will be sent via websocket\n"
+                },
+                "409": {
+                  "description": "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
+                }
+              }
+            },
+            "delete": {
+              "(reference)": "ProtocolManager.StopDiscovery",
+              "description": "Stop a device discovery previously initiated",
+              "responses": {
+                "204": {
+                  "description": "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
+                },
+                "409": {
+                  "description": "Indicates that discovery has been requested to stop on the underlying\nprotocols but one or more reported a failure\n"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -664,10 +851,12 @@
             "uri": {
               "description": "A parsable connection string composed of key value\nindicated by `=` symbol, separated with `;`.\nIf value contains a separator (`=` or `;`) it must be escaped with a backslash.\nThis may be exposed to the users with a proper UI to allow insertion of personal keys\n",
               "example": "hostname=localhost;password=my \\;password;",
-              "type": "String"
+              "type": "String",
+              "required": true
             },
             "options": {
-              "type": "Object*"
+              "type": "Object*",
+              "required": true
             }
           }
         },
@@ -755,15 +944,18 @@
             "type": "Object",
             "fields": {
               "enabled": {
-                "type": "Boolean"
+                "type": "Boolean",
+                "required": true
               },
               "status": {
-                "type": "DriverStatus"
+                "type": "DriverStatus",
+                "required": true
               },
               "logs": {
                 "description": "A system path where to read the Driver logs",
                 "example": "/var/log/agile-driver/storage.log",
-                "type": "String"
+                "type": "String",
+                "required": true
               }
             }
           }
@@ -861,218 +1053,295 @@
       "type": "Enum",
       "fields": {
         "0": {
-          "type": "CONNECTED"
+          "type": "CONNECTED",
+          "required": true
         },
         "1": {
-          "type": "DISCONNECTED"
+          "type": "DISCONNECTED",
+          "required": true
         }
-      }
+      },
+      "required": true
     },
     "ChannelTypeEnum": {
       "type": "Enum",
       "fields": {
         "0": {
-          "type": "Number"
+          "type": "Number",
+          "required": true
         },
         "1": {
-          "type": "String"
+          "type": "String",
+          "required": true
         },
         "2": {
-          "type": "Boolean"
+          "type": "Boolean",
+          "required": true
         },
         "3": {
-          "type": "GeoPoint"
+          "type": "GeoPoint",
+          "required": true
         },
         "4": {
-          "type": "Object"
+          "type": "Object",
+          "required": true
         }
-      }
+      },
+      "required": true
     },
     "DeviceStreamChannel": {
       "description": "A channel contains a single measurement value of a sensor",
       "type": "Object",
       "fields": {
         "name": {
-          "type": "String"
+          "type": "String",
+          "required": true
         },
         "type": {
-          "type": "ChannelTypeEnum"
+          "type": "ChannelTypeEnum",
+          "required": true
         }
-      }
+      },
+      "required": true
     },
     "DeviceStream": {
       "description": "A stream contains a set of measurement values for a sensor",
       "type": "Object",
       "fields": {
         "name": {
-          "type": "String"
+          "type": "String",
+          "required": true
         },
         "channels": {
           "type": "Array",
-          "fields": "DeviceStreamChannel"
+          "fields": "DeviceStreamChannel",
+          "required": true
         }
-      }
+      },
+      "required": true
     },
     "DeviceDefinition": {
       "description": "A device definition that contains informations describing the current device",
       "type": "Object",
       "fields": {
         "id": {
-          "type": "String"
+          "type": "String",
+          "required": true
         },
         "name": {
-          "type": "String"
+          "type": "String",
+          "required": true
         },
         "description": {
-          "type": "String"
+          "type": "String",
+          "required": true
         },
         "path": {
           "description": "DBus specific path to reach the object instance",
-          "type": "String"
+          "type": "String",
+          "required": true
         },
         "properties": {
-          "type": "Object*"
+          "type": "Object*",
+          "required": true
         },
         "streams": {
           "type": "Array",
-          "fields": "DeviceStream"
+          "fields": "DeviceStream",
+          "required": true
         }
-      }
+      },
+      "required": true
+    },
+    "DeviceOverview": {
+      "type": "Object",
+      "fields": {
+        "name": {
+          "type": "String",
+          "required": true
+        },
+        "id": {
+          "type": "String",
+          "required": true
+        },
+        "status": {
+          "type": "Enum",
+          "fields": {
+            "0": {
+              "type": "CONNECTED",
+              "required": true
+            },
+            "1": {
+              "type": "DISCONNECTED",
+              "required": true
+            }
+          },
+          "required": true
+        }
+      },
+      "required": true
     },
     "ProtocolDevice": {
-      "description": "List all devices a Protocol knows about.\nThe list is updated by the Discover method.\nDevices may be provisioned programmatically during the initialization phase.\n",
-      "access": {
-        "0": "r",
-        "1": "s"
-      },
+      "description": "List all devices a Protocol knows about.\nThe list is updated by the StartDiscovery method.\nDevices may also be provisioned programmatically during the initialization phase.\n",
       "type": "Array",
-      "fields": {
-        "__field": {
-          "type": "Object",
-          "fields": {
-            "name": {
-              "type": "String"
-            },
-            "id": {
-              "type": "String"
-            },
-            "status": {
-              "type": "Enum",
-              "fields": {
-                "0": {
-                  "type": "CONNECTED"
-                },
-                "1": {
-                  "type": "DISCONNECTED"
-                }
-              }
-            }
-          }
-        }
-      }
+      "fields": "DeviceOverview",
+      "required": true
     },
     "ProtocolStatus": {
       "description": "Identify a status of the Protocol, indicating if operational (AVAILABLE) or\nif for some reason further user-side checks are required.\n",
       "type": "Enum",
       "fields": {
         "0": {
-          "type": "AVAILABLE"
+          "type": "AVAILABLE",
+          "required": true
         },
         "1": {
-          "type": "NOT_CONFIGURED"
+          "type": "UNAVAILABLE",
+          "required": true
         },
         "2": {
-          "type": "UNAVAILABLE"
+          "type": "NOT_CONFIGURED",
+          "required": true
         },
         "3": {
-          "type": "DISABLED"
+          "type": "DISABLED",
+          "required": true
         },
         "4": {
-          "type": "FATAL"
+          "type": "ENABLED",
+          "required": true
+        },
+        "5": {
+          "type": "FAILURE",
+          "required": true
         }
-      }
+      },
+      "required": true
     },
     "ProtocolProfile": {
       "description": "A Protocol set of settings that translate human readable properties\nto actual Protocol implementation details.\n\nFor example, the user request the temperature value over a BLE connected\ndevice and the Protocol receive all the specific informations (like\nservices and characteristics ids) to enable the data reading.\n",
-      "type": "Object*"
+      "type": "Object*",
+      "required": true
+    },
+    "DiscoverParam": {
+      "type": "Object",
+      "fields": {
+        "duration": {
+          "description": "The duration in seconds the discovery process will last before\nit should be stopped\n",
+          "type": "Number",
+          "required": false
+        }
+      },
+      "required": true
     },
     "ProtocolOverview": {
       "type": "Object",
       "fields": {
         "name": {
-          "type": "String"
+          "description": "The protocol name",
+          "example": "Bluetooth LE",
+          "type": "String",
+          "required": false
         },
         "id": {
-          "type": "String"
+          "description": "the internal code identifying the protocol",
+          "example": "BLE",
+          "type": "String",
+          "required": true
+        },
+        "interface": {
+          "description": "The DBus interface reference",
+          "example": "iot.agile.protocol.BLE",
+          "type": "String",
+          "required": false
         },
         "status": {
-          "type": "ProtocolStatus"
+          "type": "ProtocolStatus",
+          "required": false
         }
-      }
+      },
+      "required": true
     },
     "DriverStatus": {
       "type": "Enum",
       "fields": {
         "0": {
-          "type": "ACTIVE"
+          "type": "ACTIVE",
+          "required": true
         },
         "1": {
-          "type": "NOT_CONFIGURED"
+          "type": "NOT_CONFIGURED",
+          "required": true
         },
         "2": {
-          "type": "ERROR"
+          "type": "ERROR",
+          "required": true
         },
         "3": {
-          "type": "FAILURE"
+          "type": "FAILURE",
+          "required": true
         }
-      }
+      },
+      "required": true
     },
     "RecordObject": {
       "type": "Object",
       "fields": {
         "DeviceId": {
-          "type": "String"
+          "type": "String",
+          "required": true
         },
         "StreamId": {
-          "type": "String"
+          "type": "String",
+          "required": true
         },
         "ChannelId": {
-          "type": "String"
+          "type": "String",
+          "required": true
         },
         "LastUpdate": {
           "description": "A UNIX timestamp rapresenting the last update of a record",
-          "type": "Number"
+          "type": "Number",
+          "required": true
         },
         "Channels": {
           "description": "A list of key/value matching those indicated in the DeviceDefinition",
-          "type": "KeyValue"
+          "type": "KeyValue",
+          "required": true
         }
-      }
-    },
-    "KeyValue": {
-      "description": "A list of key/value pairs",
-      "type": "Object*"
+      },
+      "required": true
     },
     "BaseQuery": {
       "type": "Object",
       "fields": {
         "Criteria": {
           "description": "A key-value series of field-value to query for.\n- Use `*` to indicate a fuzzy search\n- Use an Array to indicate an IN like query\n",
-          "type": "Object*"
+          "type": "Object*",
+          "required": true
         },
         "OrderBy": {
           "description": "A key-value series of field-value to order the result for.\n",
-          "type": "Object*"
+          "type": "Object*",
+          "required": true
         },
         "Limit": {
           "description": "The limit of records founds to return",
-          "type": "Number"
+          "type": "Number",
+          "required": true
         },
         "Offset": {
           "description": "The position for the first record to take from the list of results",
-          "type": "Number"
+          "type": "Number",
+          "required": true
         }
-      }
+      },
+      "required": true
+    },
+    "KeyValue": {
+      "description": "A list of key/value pairs",
+      "type": "Object*",
+      "required": true
     }
   }
 }

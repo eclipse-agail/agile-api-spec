@@ -311,6 +311,12 @@
         </li>
         
         <li>
+          <a href="#DeviceOverview" data-for="DeviceOverview">
+            DeviceOverview
+          </a>
+        </li>
+        
+        <li>
           <a href="#ProtocolDevice" data-for="ProtocolDevice">
             ProtocolDevice
           </a>
@@ -325,6 +331,12 @@
         <li>
           <a href="#ProtocolProfile" data-for="ProtocolProfile">
             ProtocolProfile
+          </a>
+        </li>
+        
+        <li>
+          <a href="#DiscoverParam" data-for="DiscoverParam">
+            DiscoverParam
           </a>
         </li>
         
@@ -347,14 +359,14 @@
         </li>
         
         <li>
-          <a href="#KeyValue" data-for="KeyValue">
-            KeyValue
+          <a href="#BaseQuery" data-for="BaseQuery">
+            BaseQuery
           </a>
         </li>
         
         <li>
-          <a href="#BaseQuery" data-for="BaseQuery">
-            BaseQuery
+          <a href="#KeyValue" data-for="KeyValue">
+            KeyValue
           </a>
         </li>
         
@@ -1575,7 +1587,9 @@ Contains per-app filterable output.
 
     
       <div class="description">
-        Execute an operation on the device triggering the underline Protocol implementation
+        Perform an action on the device or sensor side triggering the
+underline Protocol specific implementation.
+
       </div>
     
 
@@ -1640,7 +1654,7 @@ Contains per-app filterable output.
   <div class="details hidden">
     
       <span class="description">
-        Payload for the Protocol command
+        Arguments for the actuation on the device
       </span>
     
 
@@ -1918,7 +1932,7 @@ Contains per-app filterable output.
 </span>
 
 <span class="name">
-  sensorName
+  streamName
 </span>
 </span>
     <span class="name">)</span>
@@ -1938,7 +1952,7 @@ Contains per-app filterable output.
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="sensorName">
+    <li class="api-type" data-type="type" id="streamName">
 
   <div class="overview">
     <span class="type">
@@ -1949,7 +1963,7 @@ Contains per-app filterable output.
 
     
       <span class="name">
-        sensorName
+        streamName
       </span>
     
   </div>
@@ -2024,7 +2038,7 @@ Contains per-app filterable output.
 </span>
 
 <span class="name">
-  sensorName
+  streamName
 </span>
 <span class="args-glue">, </span><span class="type">
   
@@ -2053,7 +2067,7 @@ Contains per-app filterable output.
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="sensorName">
+    <li class="api-type" data-type="type" id="streamName">
 
   <div class="overview">
     <span class="type">
@@ -2064,7 +2078,7 @@ Contains per-app filterable output.
 
     
       <span class="name">
-        sensorName
+        streamName
       </span>
     
   </div>
@@ -2164,7 +2178,7 @@ Contains per-app filterable output.
 </span>
 
 <span class="name">
-  sensorName
+  streamName
 </span>
 <span class="args-glue">, </span><span class="type">
   
@@ -2199,7 +2213,7 @@ the underlying Protocol implementation if supported.
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="sensorName">
+    <li class="api-type" data-type="type" id="streamName">
 
   <div class="overview">
     <span class="type">
@@ -2210,12 +2224,16 @@ the underlying Protocol implementation if supported.
 
     
       <span class="name">
-        sensorName
+        streamName
       </span>
     
   </div>
 
   <div class="details hidden">
+    
+      <span class="description">
+        The stream or sensor reference to subscribe for updates
+      </span>
     
 
     
@@ -2243,7 +2261,125 @@ the underlying Protocol implementation if supported.
   <div class="details hidden">
     
       <span class="description">
-        Custom parameters to pass, like eg. frequency
+        Custom parameters set to pass spcific to the device
+or sensor, like eg. frequency
+
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Boolean
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li class="api-class-method" data-type="method" data-id="iot.agile.Device.Unsubscribe">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    Boolean
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Unsubscribe(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  streamName
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Disable a subscription to a specific sensor or data stream, triggering
+the underlying Protocol implementation if supported.
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.Device.Unsubscribe">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Arguments
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="streamName">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        streamName
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        The stream or sensor reference to unsubscribe from
       </span>
     
 
@@ -4192,7 +4328,7 @@ depending on implementation to save resources
 
   <h4>Methods</h4>
   <ul class="api-class-methods" data-type="methods">
-    <li class="api-class-method" data-type="method" data-id="iot.agile.ProtocolManager.Discover">
+    <li class="api-class-method" data-type="method" data-id="iot.agile.ProtocolManager.StartDiscovery">
 
   <div class="overview">
 
@@ -4207,8 +4343,17 @@ depending on implementation to save resources
       
     </span>
 
-    <span class="name">Discover(</span>
-      <span class="args"></span>
+    <span class="name">StartDiscovery(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#DiscoverParam">DiscoverParam</a>
+  
+</span>
+
+<span class="name">
+  params
+</span>
+</span>
     <span class="name">)</span>
 
     
@@ -4219,7 +4364,108 @@ depending on implementation to save resources
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.ProtocolManager.Discover">
+  <div class="details hidden" data-for="iot.agile.ProtocolManager.StartDiscovery">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Arguments
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="params">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#DiscoverParam">DiscoverParam</a>
+      
+    </span>
+
+    
+      <span class="name">
+        params
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li class="api-class-method" data-type="method" data-id="iot.agile.ProtocolManager.StopDiscovery">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">StopDiscovery(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Stop the ongoing discovery on all the managed Protocols
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.ProtocolManager.StopDiscovery">
 
     
 
@@ -7547,37 +7793,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
 </li>
-<li class="api-type" data-type="type" id="ProtocolDevice">
-
-  <div class="overview">
-    <span class="type">
-      
-        Array[Object]
-      
-    </span>
-
-    
-      <span class="name">
-        ProtocolDevice
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-    
-      <span class="description">
-        List all devices a Protocol knows about.
-The list is updated by the Discover method.
-Devices may be provisioned programmatically during the initialization phase.
-
-      </span>
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li class="api-type" data-type="type" id="">
+<li class="api-type" data-type="type" id="DeviceOverview">
 
   <div class="overview">
     <span class="type">
@@ -7586,6 +7802,10 @@ Devices may be provisioned programmatically during the initialization phase.
       
     </span>
 
+    
+      <span class="name">
+        DeviceOverview
+      </span>
     
   </div>
 
@@ -7681,8 +7901,34 @@ Devices may be provisioned programmatically during the initialization phase.
   </div>
 
 </li>
+<li class="api-type" data-type="type" id="ProtocolDevice">
 
-      </ul>
+  <div class="overview">
+    <span class="type">
+      
+        Array[DeviceOverview]
+      
+    </span>
+
+    
+      <span class="name">
+        ProtocolDevice
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        List all devices a Protocol knows about.
+The list is updated by the StartDiscovery method.
+Devices may also be provisioned programmatically during the initialization phase.
+
+      </span>
+    
+
+    
+
     
   </div>
 
@@ -7716,7 +7962,7 @@ if for some reason further user-side checks are required.
 
     
       <ul class="fields pad-left no-bullet">
-        <li>AVAILABLE</li><li>NOT_CONFIGURED</li><li>UNAVAILABLE</li><li>DISABLED</li><li>FATAL</li>
+        <li>AVAILABLE</li><li>UNAVAILABLE</li><li>NOT_CONFIGURED</li><li>DISABLED</li><li>ENABLED</li><li>FAILURE</li>
       </ul>
     
   </div>
@@ -7753,6 +7999,66 @@ services and characteristics ids) to enable the data reading.
 
     
 
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="DiscoverParam">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DiscoverParam
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="duration">
+
+  <div class="overview">
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+      <span class="name">
+        duration
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        The duration in seconds the discovery process will last before
+it should be stopped
+
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
     
   </div>
 
@@ -7798,7 +8104,15 @@ services and characteristics ids) to enable the data reading.
 
   <div class="details hidden">
     
+      <span class="description">
+        The protocol name
+      </span>
+    
 
+    
+      <div class="example-container">
+        Example <pre class="example">Bluetooth LE</pre>
+      </div>
     
 
     
@@ -7823,7 +8137,48 @@ services and characteristics ids) to enable the data reading.
 
   <div class="details hidden">
     
+      <span class="description">
+        the internal code identifying the protocol
+      </span>
+    
 
+    
+      <div class="example-container">
+        Example <pre class="example">BLE</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="interface">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        interface
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        The DBus interface reference
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">iot.agile.protocol.BLE</pre>
+      </div>
     
 
     
@@ -8052,35 +8407,6 @@ services and characteristics ids) to enable the data reading.
   </div>
 
 </li>
-<li class="api-type" data-type="type" id="KeyValue">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object*
-      
-    </span>
-
-    
-      <span class="name">
-        KeyValue
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-    
-      <span class="description">
-        A list of key/value pairs
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
 <li class="api-type" data-type="type" id="BaseQuery">
 
   <div class="overview">
@@ -8226,6 +8552,35 @@ services and characteristics ids) to enable the data reading.
 </li>
 
       </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="KeyValue">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="name">
+        KeyValue
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        A list of key/value pairs
+      </span>
+    
+
+    
+
     
   </div>
 
