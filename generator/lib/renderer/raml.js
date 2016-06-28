@@ -61,17 +61,17 @@ RamlRenderer.prototype.renderApi = function () {
   var classes = _.values(this.definition.classes);
 
   var api = {};
-  var endpoints = classes.filter(function(clazz) {
-    return clazz.http;
-  })
-  .map(function(clazz) {
-    return clazz.http;
-  })
-  .forEach(function(http) {
-    _.forEach(http, function(v, k) {
-      api[k] = v;
+  var endpoints = classes.filter(function (clazz) {
+      return clazz.http;
+    })
+    .map(function (clazz) {
+      return clazz.http;
+    })
+    .forEach(function (http) {
+      _.forEach(http, function (v, k) {
+        api[k] = v;
+      });
     });
-  });
 
   return api;
 };
@@ -79,7 +79,7 @@ RamlRenderer.prototype.render = function () {
 
   var outputs = [];
 
-  outputs.push({
+  var ramlApi = {
     filename: "api.raml",
     content: this.templates.root({
       title: "AGILE HTTP API",
@@ -90,9 +90,34 @@ RamlRenderer.prototype.render = function () {
         return "  " + line;
       }).join("\n")
     })
-  });
+  };
 
-  return Promise.resolve(outputs);
+  outputs.push(ramlApi);
+
+  return new Promise(function (resolve, reject) {
+    var raml2html = require('raml2html');
+    var configWithDefaultTemplates = raml2html.getDefaultConfig();
+    // var configWithCustomTemplates = raml2html.getDefaultConfig('my-custom-template.nunjucks', __dirname);
+
+    var f = '/tmp/api.raml';
+    require('fs').writeFileSync(f, ramlApi.content);
+
+    // source can either be a filename, url, file contents (string) or parsed RAML object
+    raml2html.render(f, configWithDefaultTemplates).then(function (result) {
+
+      var ramlHtml = {
+        filename: "rest-api.html",
+        content: result
+      };
+
+      outputs.push(ramlHtml);
+
+      resolve(outputs);
+    }, function (error) {
+      reject(error);
+    });
+
+  });
 };
 
 module.exports = function (definition) {
