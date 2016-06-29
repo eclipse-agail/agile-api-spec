@@ -1,8 +1,0 @@
-#!/usr/bin/env node
-
-var generator = require("../index");
-
-if(process.argv[2])
-  generator.export(process.argv[2]);
-else
-  generator.exportAll();
