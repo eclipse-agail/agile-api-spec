@@ -63,6 +63,15 @@ iot.agile.DeviceManager:
           200:
             description: Device created
       /{deviceId}:
+
+        parameters:
+          -
+            name: deviceId
+            in: path
+            description: Agile device Id
+            required: true
+            type: string
+
         get:
           body:
             type: DeviceDefinition

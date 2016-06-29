@@ -11,9 +11,27 @@ iot.agile.Device:
   group: Device
 
   http:
-
     /{deviceId}/{streamId}/execute/{operation}:
+      parameters:
+        -
+          name: deviceId
+          in: path
+          description: Agile device Id
+          required: true
+          type: string
+        -
+          name: streamId
+          in: path
+          description: Agile stream Id
+          required: true
+          type: string
       post:
+        parameters:
+          - name: operation
+            in: path
+            description: Operation name to be performed
+            required: true
+            type: string
         body:
           type: object
         description: Perform an action on the device
@@ -25,6 +43,20 @@ iot.agile.Device:
             description: Action sent, no response received
 
     /{deviceId}/{streamId}/subscribe:
+      parameters:
+        -
+          name: deviceId
+          in: path
+          description: Agile device Id
+          required: true
+          type: string
+        -
+          name: streamId
+          in: path
+          description: Agile stream Id
+          required: true
+          type: string
+
       post:
         body:
           type: object
@@ -46,6 +78,20 @@ iot.agile.Device:
 
     # Data storage ops
     /{deviceId}/{streamId}:
+      parameters:
+        -
+          name: deviceId
+          in: path
+          description: Agile device Id
+          required: true
+          type: string
+        -
+          name: streamId
+          in: path
+          description: Agile stream Id
+          required: true
+          type: string
+
       get:
         body:
           type: RecordObject
@@ -82,6 +128,20 @@ iot.agile.Device:
           204:
             description: Query executed succesfully but gave no results
     /{deviceId}/{streamId}/lastUpdate:
+      parameters:
+        -
+          name: deviceId
+          in: path
+          description: Agile device Id
+          required: true
+          type: string
+        -
+          name: streamId
+          in: path
+          description: Agile stream Id
+          required: true
+          type: string
+      
       get:
         body:
           type: RecordObject
