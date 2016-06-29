@@ -18,6 +18,11 @@ iot.agile.Device:
           type: object
         description: Perform an action on the device
         (reference): Device.Execute
+        responses:
+          200:
+            description: Action sent
+          200:
+            description: Action sent, no response received
 
     /{deviceId}/{streamId}/subscribe:
       post:
@@ -27,11 +32,17 @@ iot.agile.Device:
           Enable a subscription to a data stream. Asynchronous data updates will
           be delivered via websocket.
         (reference): Device.Subscribe
+        responses:
+          200:
+            description: Subscription registered
       delete:
         body:
           type: object
         description: Disable a subscription to a data stream
         (reference): Device.Unsubscribe
+        responses:
+          200:
+            description: Subscription unregistered
 
     # Data storage ops
     /{deviceId}/{streamId}:
@@ -40,26 +51,49 @@ iot.agile.Device:
           type: RecordObject
         description: Get the list of data stored for a stream
         (reference): Storage.Get
-      put:
-        body:
-          type: RecordObject
-        description: Store a data record for the stream
-        (reference): Storage.Create
+        responses:
+          200:
+            description: Data loaded
+          204:
+            description: No data available
+      # put:
+      #   body:
+      #     type: RecordObject
+      #   description: Store a data record for the stream
+      #   (reference): Storage.Create
+      #   responses:
+      #     200:
+      #       description: Added record to storage
       delete:
         body:
         description: Delete all data related to a stream
         (reference): Storage.Delete
+        responses:
+          200:
+            description: Data has been deleted
       post:
         body:
           type: BaseQuery
         description: Search for a stream recordset
         (reference): Storage.Find
+        responses:
+          200:
+            description: Query executed succesfully
+          204:
+            description: Query executed succesfully but gave no results
     /{deviceId}/{streamId}/lastUpdate:
       get:
         body:
           type: RecordObject
         description: Get the last stored record for a stream
         (reference): Device.Read
+        responses:
+          200:
+            description: Record fetched
+          204:
+            description: No data available
+          404:
+            description: Device or stream not available
 
   Id:
     description: The unique device id in the gateway

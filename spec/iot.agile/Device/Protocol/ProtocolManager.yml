@@ -46,7 +46,12 @@ iot.agile.ProtocolManager:
                 name: Bluetooth LE
                 interface: iot.agile.protocol.BLE
                 status: AVAILABLE
-      put:
+        responses:
+          200:
+            description: Protocols list provided
+          204:
+            description: No protocols registered.
+      post:
         description: Register a new protocol based on an active DBus interface
         body:
           type: ProtocolOverview
@@ -55,18 +60,34 @@ iot.agile.ProtocolManager:
             id: TCPoP
             interface: corp.acme.protocol.TCPoP
         responses:
-          202:
+          200:
             description: Protocol has been added
           400:
             description: An error occured processing the request
+      /protocols/{protocolId}:
+        put:
+          description: Update protocol information
+          body:
+            type: ProtocolOverview
+            example:
+              name: TCP over Pigeon
+              id: TCPoP
+              interface: corp.acme.protocol.TCPoP
+          responses:
+            202:
+              description: Protocol has been added
+            400:
+              description: An error occured processing the request
+            404:
+              description: Protocol not found
 
-      delete:
-        description: |
-          Unregister a protocol by providing the protocol id
-        body:
-          type: ProtocolOverview
-          examples:
-            - id: TCPoP
+        delete:
+          description: Unregister a protocol
+          responses:
+            200:
+              description: Protocol unregistered
+            404:
+              description: Protocol not found
       /discovery:
         post:
           (reference): ProtocolManager.StartDiscovery

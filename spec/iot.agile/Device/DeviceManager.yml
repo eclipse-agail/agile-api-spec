@@ -24,7 +24,7 @@ DeviceStream:
     channels:
       type: Array
       fields: DeviceStreamChannel
- 
+
 DeviceDefinition:
   description: A device definition that contains informations describing the current device
   type: Object
@@ -50,23 +50,47 @@ iot.agile.DeviceManager:
         body:
           type: DeviceDefinition
         description: List all registered devices
+        responses:
+          200:
+            description: Device list loaded
+          204:
+            description: Device list is empty
       post:
         body:
           type: DeviceDefinition
         description: Creates a new device definition
+        responses:
+          200:
+            description: Device created
       /{deviceId}:
         get:
           body:
             type: DeviceDefinition
           description: Get a device definition
+          responses:
+            200:
+              description: Device loaded
+            404:
+              description: Device not found
         put:
           body:
             type: DeviceDefinition
           description: Update a device definition
+          responses:
+            200:
+              description: Device updated
+            404:
+              description: Device not found
         delete:
           body:
             type: DeviceDefinition
           description: Delete a device definition and uregister it
+          responses:
+            200:
+              description: Device removed
+            404:
+              description: Device not found
+
 
   Devices:
     description: Return all registered devices
