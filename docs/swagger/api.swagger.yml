@@ -1,0 +1,224 @@
+swagger: '2.0'
+info:
+  title: Agile HTTP API
+  description: The Agile HTTP API to interact with local DBus objects
+  version: 1.0.0
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+# the domain of the service
+host: gw.agile.local
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /api
+consumes:
+  - application/json
+produces:
+  - application/json
+# security:
+#   - type: basic
+#     in: header
+#   - type: oauth2
+#     authorizationUrl: /api/oauth
+#     flow: [implicit, password, application, accessCode]
+externalDocs:
+  url: http://agile-iot.github.io/agile-api-spec/build/html/api.html
+  description: DBus AGILE API spec
+paths:
+  '/{deviceId}/{streamId}/execute/{operation}':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: streamId
+        in: path
+        description: 'Agile stream Id'
+        required: true
+        type: string
+    post:
+      parameters:
+        -
+          name: operation
+          in: path
+          description: 'Operation name to be performed'
+          required: true
+          type: string
+      description: 'Perform an action on the device'
+      responses:
+        '200':
+          description: 'Action sent'
+  '/{deviceId}/{streamId}/subscribe':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: streamId
+        in: path
+        description: 'Agile stream Id'
+        required: true
+        type: string
+    post:
+      description: "Enable a subscription to a data stream. Asynchronous data updates will\nbe delivered via websocket.\n"
+      responses:
+        '200':
+          description: 'Subscription registered'
+    delete:
+      description: 'Disable a subscription to a data stream'
+      responses:
+        '200':
+          description: 'Subscription unregistered'
+  '/{deviceId}/{streamId}':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: streamId
+        in: path
+        description: 'Agile stream Id'
+        required: true
+        type: string
+    get:
+      description: 'Get the list of data stored for a stream'
+      responses:
+        '200':
+          description: 'Data loaded'
+        '204':
+          description: 'No data available'
+    delete:
+      description: 'Delete all data related to a stream'
+      responses:
+        '200':
+          description: 'Data has been deleted'
+    post:
+      description: 'Search for a stream recordset'
+      responses:
+        '200':
+          description: 'Query executed succesfully'
+        '204':
+          description: 'Query executed succesfully but gave no results'
+  '/{deviceId}/{streamId}/lastUpdate':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: streamId
+        in: path
+        description: 'Agile stream Id'
+        required: true
+        type: string
+    get:
+      description: 'Get the last stored record for a stream'
+      responses:
+        '200':
+          description: 'Record fetched'
+        '204':
+          description: 'No data available'
+        '404':
+          description: 'Device or stream not available'
+  '/devices/{deviceId}':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+    get:
+      description: 'Get a device definition'
+      responses:
+        '200':
+          description: 'Device loaded'
+        '404':
+          description: 'Device not found'
+    put:
+      description: 'Update a device definition'
+      responses:
+        '200':
+          description: 'Device updated'
+        '404':
+          description: 'Device not found'
+    delete:
+      description: 'Delete a device definition and uregister it'
+      responses:
+        '200':
+          description: 'Device removed'
+        '404':
+          description: 'Device not found'
+  /devices:
+    get:
+      description: 'List all registered devices'
+      responses:
+        '200':
+          description: 'Device list loaded'
+        '204':
+          description: 'Device list is empty'
+    post:
+      description: 'Creates a new device definition'
+      responses:
+        '200':
+          description: 'Device created'
+  /protocols:
+    get:
+      description: 'Get the list of registered protocols'
+      responses:
+        '200':
+          description: 'Protocols list provided'
+        '204':
+          description: 'No protocols registered.'
+    post:
+      description: 'Register a new protocol based on an active DBus interface'
+      responses:
+        '200':
+          description: 'Protocol has been added'
+        '400':
+          description: 'An error occured processing the request'
+  
+definitions:
+  DeviceStreamChannel:
+    description: 'A channel contains a single measurement value of a sensor'
+    type: object
+    properties:
+      name:
+        type: object
+      type:
+        type: object
+  DeviceStream:
+    description: 'A stream contains a set of measurement values for a sensor'
+    type: object
+    properties:
+      name:
+        type: object
+      channels:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceStreamChannel'
+  DeviceOverview:
+    type: object
+    properties:
+      name:
+        type: object
+      id:
+        type: object
+      status:
+        enum:
+          - CONNECTED
+          - DISCONNECTED
+  
