@@ -27,7 +27,7 @@ externalDocs:
   url: http://agile-iot.github.io/agile-api-spec/build/html/api.html
   description: DBus AGILE API spec
 paths:
-  '/{deviceId}/{streamId}/execute/{operation}':
+  '/{deviceId}/{componentId}/execute/{operation}':
     parameters:
       -
         name: deviceId
@@ -36,9 +36,9 @@ paths:
         required: true
         type: string
       -
-        name: streamId
+        name: componentId
         in: path
-        description: 'Agile stream Id'
+        description: 'Agile component Id'
         required: true
         type: string
     post:
@@ -53,7 +53,7 @@ paths:
       responses:
         '200':
           description: 'Action sent'
-  '/{deviceId}/{streamId}/subscribe':
+  '/{deviceId}/{componentId}/subscribe':
     parameters:
       -
         name: deviceId
@@ -62,9 +62,9 @@ paths:
         required: true
         type: string
       -
-        name: streamId
+        name: componentId
         in: path
-        description: 'Agile stream Id'
+        description: 'Agile component Id'
         required: true
         type: string
     post:
@@ -77,7 +77,7 @@ paths:
       responses:
         '200':
           description: 'Subscription unregistered'
-  '/{deviceId}/{streamId}':
+  '/{deviceId}/{componentId}':
     parameters:
       -
         name: deviceId
@@ -86,9 +86,9 @@ paths:
         required: true
         type: string
       -
-        name: streamId
+        name: componentId
         in: path
-        description: 'Agile stream Id'
+        description: 'Agile component Id'
         required: true
         type: string
     get:
@@ -110,7 +110,7 @@ paths:
           description: 'Query executed succesfully'
         '204':
           description: 'Query executed succesfully but gave no results'
-  '/{deviceId}/{streamId}/lastUpdate':
+  '/{deviceId}/{componentId}/lastUpdate':
     parameters:
       -
         name: deviceId
@@ -119,9 +119,9 @@ paths:
         required: true
         type: string
       -
-        name: streamId
+        name: componentId
         in: path
-        description: 'Agile stream Id'
+        description: 'Agile component Id'
         required: true
         type: string
     get:
@@ -142,6 +142,13 @@ paths:
         required: true
         type: string
     get:
+      parameters:
+        -
+          name: body
+          in: body
+          description: 'The request body describing a device'
+          required: true
+          $ref: DeviceDefinition
       description: 'Get a device definition'
       responses:
         '200':
@@ -149,6 +156,13 @@ paths:
         '404':
           description: 'Device not found'
     put:
+      parameters:
+        -
+          name: body
+          in: body
+          description: 'The request body describing a device'
+          required: true
+          $ref: DeviceDefinition
       description: 'Update a device definition'
       responses:
         '200':
@@ -156,7 +170,14 @@ paths:
         '404':
           description: 'Device not found'
     delete:
-      description: 'Delete a device definition and uregister it'
+      parameters:
+        -
+          name: body
+          in: body
+          description: 'The request body describing a device'
+          required: true
+          $ref: DeviceDefinition
+      description: 'Delete a device definition and unregister it'
       responses:
         '200':
           description: 'Device removed'
@@ -164,6 +185,13 @@ paths:
           description: 'Device not found'
   /devices:
     get:
+      parameters:
+        -
+          name: body
+          in: body
+          description: 'The request body describing a device'
+          required: true
+          $ref: DeviceDefinition
       description: 'List all registered devices'
       responses:
         '200':
@@ -171,6 +199,13 @@ paths:
         '204':
           description: 'Device list is empty'
     post:
+      parameters:
+        -
+          name: body
+          in: body
+          description: 'The request body describing a device'
+          required: true
+          $ref: DeviceDefinition
       description: 'Creates a new device definition'
       responses:
         '200':
@@ -178,18 +213,84 @@ paths:
   /protocols:
     get:
       description: 'Get the list of registered protocols'
+      parameters:
+        -
+          name: protocols
+          description: 'Returns a list of registered protocols'
+          in: body
+          schema:
+            type: Array
+            $ref: '#/definitions/ProtocolOverview'
       responses:
         '200':
           description: 'Protocols list provided'
+          example:
+            -
+              id: BLE
+              name: 'Bluetooth LE'
+              interface: iot.agile.protocol.BLE
+              status: AVAILABLE
+            -
+              id: ZigBee
+              name: 'ZigBee communication protocol'
+              interface: iot.agile.protocol.ZigBee
+              status: AVAILABLE
         '204':
           description: 'No protocols registered.'
     post:
       description: 'Register a new protocol based on an active DBus interface'
+      parameters:
+        -
+          name: protocol
+          in: body
+          schema:
+            $ref: '#/definitions/ProtocolOverview'
       responses:
         '200':
           description: 'Protocol has been added'
+          schema:
+            $ref: '#/definitions/ProtocolOverview'
         '400':
           description: 'An error occured processing the request'
+  '/protocols/{protocolId}/discovery':
+    post:
+      description: 'Start a device discovery on all available protocols'
+      responses:
+        '204':
+          description: "The discovery has been successfully started on all the regitered\nprotocols; asynchronous updates will be sent via websocket\n"
+        '409':
+          description: "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
+    delete:
+      description: 'Stop a device discovery previously initiated'
+      responses:
+        '204':
+          description: "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
+        '409':
+          description: "Indicates that discovery has been requested to stop on the underlying\nprotocols but one or more reported a failure\n"
+  '/protocols/{protocolId}':
+    parameters:
+      -
+        name: protocolId
+        in: path
+        description: 'Agile protocol Id'
+        required: true
+        type: string
+    put:
+      description: 'Update protocol information'
+      responses:
+        '202':
+          description: 'Protocol has been added'
+        '400':
+          description: 'An error occured processing the request'
+        '404':
+          description: 'Protocol not found'
+    delete:
+      description: 'Unregister a protocol'
+      responses:
+        '200':
+          description: 'Protocol unregistered'
+        '404':
+          description: 'Protocol not found'
   
 definitions:
   DeviceStreamChannel:

@@ -251,7 +251,7 @@
         }
       },
       "http": {
-        "/{deviceId}/{streamId}/execute/{operation}": {
+        "/{deviceId}/{componentId}/execute/{operation}": {
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -261,9 +261,9 @@
               "type": "string"
             },
             "1": {
-              "name": "streamId",
+              "name": "componentId",
               "in": "path",
-              "description": "Agile stream Id",
+              "description": "Agile component Id",
               "required": true,
               "type": "string"
             }
@@ -288,7 +288,7 @@
             }
           }
         },
-        "/{deviceId}/{streamId}/subscribe": {
+        "/{deviceId}/{componentId}/subscribe": {
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -298,9 +298,9 @@
               "type": "string"
             },
             "1": {
-              "name": "streamId",
+              "name": "componentId",
               "in": "path",
-              "description": "Agile stream Id",
+              "description": "Agile component Id",
               "required": true,
               "type": "string"
             }
@@ -326,7 +326,7 @@
             }
           }
         },
-        "/{deviceId}/{streamId}": {
+        "/{deviceId}/{componentId}": {
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -336,9 +336,9 @@
               "type": "string"
             },
             "1": {
-              "name": "streamId",
+              "name": "componentId",
               "in": "path",
-              "description": "Agile stream Id",
+              "description": "Agile component Id",
               "required": true,
               "type": "string"
             }
@@ -379,7 +379,7 @@
             }
           }
         },
-        "/{deviceId}/{streamId}/lastUpdate": {
+        "/{deviceId}/{componentId}/lastUpdate": {
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -389,9 +389,9 @@
               "type": "string"
             },
             "1": {
-              "name": "streamId",
+              "name": "componentId",
               "in": "path",
-              "description": "Agile stream Id",
+              "description": "Agile component Id",
               "required": true,
               "type": "string"
             }
@@ -530,7 +530,15 @@
       "http": {
         "/devices": {
           "get": {
-            "body": "DeviceDefinition",
+            "parameters": {
+              "0": {
+                "name": "body",
+                "in": "body",
+                "description": "The request body describing a device",
+                "required": true,
+                "$ref": "DeviceDefinition"
+              }
+            },
             "description": "List all registered devices",
             "responses": {
               "200": {
@@ -542,7 +550,15 @@
             }
           },
           "post": {
-            "body": "DeviceDefinition",
+            "parameters": {
+              "0": {
+                "name": "body",
+                "in": "body",
+                "description": "The request body describing a device",
+                "required": true,
+                "$ref": "DeviceDefinition"
+              }
+            },
             "description": "Creates a new device definition",
             "responses": {
               "200": {
@@ -561,7 +577,15 @@
               }
             },
             "get": {
-              "body": "DeviceDefinition",
+              "parameters": {
+                "0": {
+                  "name": "body",
+                  "in": "body",
+                  "description": "The request body describing a device",
+                  "required": true,
+                  "$ref": "DeviceDefinition"
+                }
+              },
               "description": "Get a device definition",
               "responses": {
                 "200": {
@@ -573,7 +597,15 @@
               }
             },
             "put": {
-              "body": "DeviceDefinition",
+              "parameters": {
+                "0": {
+                  "name": "body",
+                  "in": "body",
+                  "description": "The request body describing a device",
+                  "required": true,
+                  "$ref": "DeviceDefinition"
+                }
+              },
               "description": "Update a device definition",
               "responses": {
                 "200": {
@@ -585,8 +617,16 @@
               }
             },
             "delete": {
-              "body": "DeviceDefinition",
-              "description": "Delete a device definition and uregister it",
+              "parameters": {
+                "0": {
+                  "name": "body",
+                  "in": "body",
+                  "description": "The request body describing a device",
+                  "required": true,
+                  "$ref": "DeviceDefinition"
+                }
+              },
+              "description": "Delete a device definition and unregister it",
               "responses": {
                 "200": {
                   "description": "Device removed"
@@ -723,53 +763,6 @@
     },
     "iot.agile.ProtocolManager": {
       "group": "Protocol",
-      "http": {
-        "/protocols": {
-          "get": {
-            "description": "Get the list of registered protocols",
-            "body": {
-              "type": "ProtocolOverview[]",
-              "example": {
-                "0": {
-                  "id": "BLE",
-                  "name": "Bluetooth LE",
-                  "interface": "iot.agile.protocol.BLE",
-                  "status": "AVAILABLE"
-                }
-              }
-            },
-            "responses": {
-              "200": {
-                "description": "Protocols list provided"
-              },
-              "204": {
-                "description": "No protocols registered."
-              }
-            }
-          },
-          "post": {
-            "description": "Register a new protocol based on an active DBus interface",
-            "body": {
-              "type": "ProtocolOverview",
-              "example": {
-                "name": "TCP over Pigeon",
-                "id": "TCPoP",
-                "interface": "corp.acme.protocol.TCPoP"
-              }
-            },
-            "responses": {
-              "200": {
-                "description": "Protocol has been added"
-              },
-              "400": {
-                "description": "An error occured processing the request"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/protocols/{protocolId}": {
       "methods": {
         "StartDiscovery": {
           "description": "Start discovery on all the managed Protocols",
@@ -814,7 +807,6 @@
         }
       },
       "properties": {
-        "/discovery": {},
         "Devices": {
           "description": "Contains the list of devices returned by each Protocol specific discovery, where available",
           "access": {
@@ -832,6 +824,136 @@
           },
           "type": "Array",
           "fields": "ProtocolOverview"
+        }
+      },
+      "http": {
+        "/protocols": {
+          "get": {
+            "description": "Get the list of registered protocols",
+            "parameters": {
+              "0": {
+                "type": "Array",
+                "$ref": "ProtocolOverview",
+                "in": "body",
+                "name": "body",
+                "description": "Returns a list of registered pro"
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Protocols list provided",
+                "example": {
+                  "0": {
+                    "id": "BLE",
+                    "name": "Bluetooth LE",
+                    "interface": "iot.agile.protocol.BLE",
+                    "status": "AVAILABLE"
+                  },
+                  "1": {
+                    "id": "ZigBee",
+                    "name": "ZigBee communication protocol",
+                    "interface": "iot.agile.protocol.ZigBee",
+                    "status": "AVAILABLE"
+                  }
+                }
+              },
+              "204": {
+                "description": "No protocols registered."
+              }
+            }
+          },
+          "post": {
+            "description": "Register a new protocol based on an active DBus interface",
+            "parameters": {
+              "0": {
+                "$ref": "ProtocolOverview",
+                "in": "body",
+                "example": {
+                  "name": "TCP over Pigeon",
+                  "id": "TCPoP",
+                  "interface": "corp.acme.protocol.TCPoP"
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Protocol has been added"
+              },
+              "400": {
+                "description": "An error occured processing the request"
+              }
+            }
+          }
+        },
+        "/protocols/{protocolId}": {
+          "parameters": {
+            "0": {
+              "name": "protocolId",
+              "in": "path",
+              "description": "Agile protocol Id",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "put": {
+            "description": "Update protocol information",
+            "body": {
+              "type": "ProtocolOverview",
+              "example": {
+                "name": "TCP over Pigeon",
+                "id": "TCPoP",
+                "interface": "corp.acme.protocol.TCPoP"
+              }
+            },
+            "responses": {
+              "202": {
+                "description": "Protocol has been added"
+              },
+              "400": {
+                "description": "An error occured processing the request"
+              },
+              "404": {
+                "description": "Protocol not found"
+              }
+            }
+          },
+          "delete": {
+            "description": "Unregister a protocol",
+            "responses": {
+              "200": {
+                "description": "Protocol unregistered"
+              },
+              "404": {
+                "description": "Protocol not found"
+              }
+            }
+          },
+          "/discovery": {
+            "post": {
+              "(reference)": "ProtocolManager.StartDiscovery",
+              "description": "Start a device discovery on all available protocols",
+              "responses": {
+                "204": {
+                  "description": "The discovery has been successfully started on all the regitered\nprotocols; asynchronous updates will be sent via websocket\n"
+                },
+                "409": {
+                  "description": "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
+                }
+              }
+            },
+            "delete": {
+              "(reference)": "ProtocolManager.StopDiscovery",
+              "description": "Stop a device discovery previously initiated",
+              "responses": {
+                "204": {
+                  "description": "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
+                },
+                "409": {
+                  "description": "Indicates that discovery has been requested to stop on the underlying\nprotocols but one or more reported a failure\n"
+                }
+              }
+            }
+          }
         }
       }
     },

@@ -40,29 +40,39 @@ iot.agile.ProtocolManager:
 
       get:
         description: Get the list of registered protocols
-        body:
-          type: ProtocolOverview[]
-          example:
-              - id: BLE
-                name: Bluetooth LE
-                interface: iot.agile.protocol.BLE
-                status: AVAILABLE
+        parameters:
+          - name: protocols
+            description: Returns a list of registered protocols
+            in: body
+            schema:
+              type: Array
+              $ref: "#/definitions/ProtocolOverview"
         responses:
           200:
             description: Protocols list provided
+            example:
+                - id: BLE
+                  name: Bluetooth LE
+                  interface: iot.agile.protocol.BLE
+                  status: AVAILABLE
+                - id: ZigBee
+                  name: ZigBee communication protocol
+                  interface: iot.agile.protocol.ZigBee
+                  status: AVAILABLE
           204:
             description: No protocols registered.
       post:
         description: Register a new protocol based on an active DBus interface
-        body:
-          type: ProtocolOverview
-          example:
-            name: TCP over Pigeon
-            id: TCPoP
-            interface: corp.acme.protocol.TCPoP
+        parameters:
+          - name: protocol
+            in: body
+            schema:
+              $ref: "#/definitions/ProtocolOverview"
         responses:
           200:
             description: Protocol has been added
+            schema:
+              $ref: "#/definitions/ProtocolOverview"
           400:
             description: An error occured processing the request
 
