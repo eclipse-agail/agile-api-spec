@@ -56,8 +56,16 @@ iot.agile.DeviceManager:
           204:
             description: Device list is empty
       post:
-        body:
-          type: DeviceDefinition
+
+        parameters:
+          -
+            name: body
+            in: body
+            description: The request body describing a device
+            required: true
+            # type: string
+            $ref: DeviceDefinition
+
         description: Creates a new device definition
         responses:
           200:
@@ -93,13 +101,12 @@ iot.agile.DeviceManager:
         delete:
           body:
             type: DeviceDefinition
-          description: Delete a device definition and uregister it
+          description: Delete a device definition and unregister it
           responses:
             200:
               description: Device removed
             404:
               description: Device not found
-
 
   Devices:
     description: Return all registered devices

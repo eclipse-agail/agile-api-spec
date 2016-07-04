@@ -11,7 +11,7 @@ iot.agile.Device:
   group: Device
 
   http:
-    /{deviceId}/{streamId}/execute/{operation}:
+    /{deviceId}/{componentId}/execute/{operation}:
       parameters:
         -
           name: deviceId
@@ -20,9 +20,9 @@ iot.agile.Device:
           required: true
           type: string
         -
-          name: streamId
+          name: componentId
           in: path
-          description: Agile stream Id
+          description: Agile component Id
           required: true
           type: string
       post:
@@ -42,7 +42,7 @@ iot.agile.Device:
           200:
             description: Action sent, no response received
 
-    /{deviceId}/{streamId}/subscribe:
+    /{deviceId}/{componentId}/subscribe:
       parameters:
         -
           name: deviceId
@@ -51,9 +51,9 @@ iot.agile.Device:
           required: true
           type: string
         -
-          name: streamId
+          name: componentId
           in: path
-          description: Agile stream Id
+          description: Agile component Id
           required: true
           type: string
 
@@ -77,7 +77,7 @@ iot.agile.Device:
             description: Subscription unregistered
 
     # Data storage ops
-    /{deviceId}/{streamId}:
+    /{deviceId}/{componentId}:
       parameters:
         -
           name: deviceId
@@ -86,9 +86,9 @@ iot.agile.Device:
           required: true
           type: string
         -
-          name: streamId
+          name: componentId
           in: path
-          description: Agile stream Id
+          description: Agile component Id
           required: true
           type: string
 
@@ -127,7 +127,7 @@ iot.agile.Device:
             description: Query executed succesfully
           204:
             description: Query executed succesfully but gave no results
-    /{deviceId}/{streamId}/lastUpdate:
+    /{deviceId}/{componentId}/lastUpdate:
       parameters:
         -
           name: deviceId
@@ -136,9 +136,9 @@ iot.agile.Device:
           required: true
           type: string
         -
-          name: streamId
+          name: componentId
           in: path
-          description: Agile stream Id
+          description: Agile component Id
           required: true
           type: string
       
