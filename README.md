@@ -27,8 +27,7 @@ Contributors shall follow those guidelines in order to get their contribution ac
 - Properties can indicate an `access` field as list of one of  `r`ead, `w`rite, `s`ubscribe
 - Optionally a `description` can be provided on methods, arguments and properties
 - Optionally an `example` can be provided on methods, arguments and properties in a JSON like format, eg. `example: { key1: value1, key2: value42 }`
-
-
+- Every object can expose an `http` field containing compliant `Swagger 2.0`  routes specifications
 
 ###Object description example
 
@@ -129,6 +128,7 @@ iot.agile.Device:
 
 ## References
 
+- [API generation tool](https://github.com/muka/agile-api-generator)
 - [DBus API design](https://dbus.freedesktop.org/doc/dbus-api-design.html)
 - [JSON schema](http://spacetelescope.github.io/understanding-json-schema/)
 - [AGILE website](http://agile-iot.eu/)
