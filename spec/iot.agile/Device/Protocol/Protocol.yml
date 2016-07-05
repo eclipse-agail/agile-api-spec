@@ -1,4 +1,10 @@
 
+ProtocolMessage:
+  type: Object
+  fields:
+    data: String
+    format: String
+
 DeviceOverview:
   type: Object
   fields:
@@ -44,6 +50,93 @@ ProtocolProfile:
   type: Object*
 
 iot.agile.Protocol:
+  http:
+    /protocols/{protocolId}/connection:
+      parameters:
+        -
+          name: protocolId
+          in: path
+          description: Agile internal Id of the protocol
+          required: true
+          type: string
+      post:
+        description: Connect to the device
+        responses:
+          200:
+            description: Connection initialized
+          404:
+            description: Device not found
+      delete:
+        description: Disconnect from the device
+        responses:
+          200:
+            description: Disconnection completed
+          404:
+            description: Device not found
+
+    /protocols/{protocolId}/discovery:
+      parameters:
+        -
+          name: protocolId
+          in: path
+          description: Agile internal Id of the protocol
+          required: true
+          type: string
+      post:
+        description: Start the discovery process
+        responses:
+          200:
+            description: Discovery started
+          404:
+            description: Device not found
+      delete:
+        description: Stop the discovery process
+        responses:
+          200:
+            description: Discovery process stopped
+          404:
+            description: Device not found
+
+    /protocols/{protocolId}/{componentId}:
+      parameters:
+        -
+          name: protocolId
+          in: path
+          description: Agile internal Id of the protocol
+          required: true
+          type: string
+        -
+          name: componentId
+          in: path
+          description: Protocol component Id, like a sensor name
+          required: true
+          type: string
+      post:
+        description: Call a write at protocol level
+        parameters:
+          -
+            name: data
+            in: body
+            description: An object containing the content to write
+            required: true
+            schema:
+              $ref: "#/definitions/ProtocolMessage"
+
+        responses:
+          200:
+            description: Write suceed
+          404:
+            description: Device or component not found
+      get:
+        description: Call a read at protocol level
+        responses:
+          200:
+            description: Read suceeded
+            schema:
+              $ref: "#/definitions/RecordObject"
+          404:
+            description: Device or component not found
+
   group: Device
   description: |
     A Protocol object abstract operations over a specific protocol implementation.
@@ -119,19 +212,23 @@ iot.agile.Protocol:
     description: |
       Send data over the protocol
     args:
-      destination: String
+      deviceId: String
       arguments: Object*
     return:
-      type: Object*
+      type: ProtocolMessage
 
   Read:
     description: |
       Read data over the Protocol, may be cached in the Data property
       depending on implementation to save resources
     args:
-      name:
+      deviceId:
         type: String
-        description: Human readable data source name as defined in the ProtocolProfile object
+        description: The internal device reference id
+      componentId:
+        type: String
+        description: Component reference of the device, may be a sensor
+        example: temperature
       arguments: Object*
     return:
       type: RecordObject
@@ -142,10 +239,16 @@ iot.agile.Protocol:
     description: |
       Subscribe to data updates over the Protocol
     args:
-      name:
+      deviceId:
         type: String
-        description: Human readable data source name as defined in the ProtocolProfile object
-      arguments: Object*
+        description: The internal device reference id
+      componentId:
+        type: String
+        description: Component reference of the device, may be a sensor
+        example: temperature
+      arguments:
+        type: Object*
+        description: Additional arguments required to contextualize the subscription request
     return:
       type: RecordObject
       reference: Data

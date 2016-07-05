@@ -307,6 +307,18 @@
         </li>
         
         <li>
+          <a href="#DiscoverParam" data-for="DiscoverParam">
+            DiscoverParam
+          </a>
+        </li>
+        
+        <li>
+          <a href="#ProtocolMessage" data-for="ProtocolMessage">
+            ProtocolMessage
+          </a>
+        </li>
+        
+        <li>
           <a href="#DeviceOverview" data-for="DeviceOverview">
             DeviceOverview
           </a>
@@ -327,12 +339,6 @@
         <li>
           <a href="#ProtocolProfile" data-for="ProtocolProfile">
             ProtocolProfile
-          </a>
-        </li>
-        
-        <li>
-          <a href="#DiscoverParam" data-for="DiscoverParam">
-            DiscoverParam
           </a>
         </li>
         
@@ -3808,12 +3814,12 @@ from different sensor an will need to filter out the correct ones
 
     <span class="returnType type secondary">
       
-        <span class="type">
+        <a href="#ProtocolMessage"><span class="type">
   
-    Object*
+    <a href="#ProtocolMessage">ProtocolMessage</a>
   
 </span>
-
+</a>
       
     </span>
 
@@ -3825,7 +3831,7 @@ from different sensor an will need to filter out the correct ones
 </span>
 
 <span class="name">
-  destination
+  deviceId
 </span>
 <span class="args-glue">, </span><span class="type">
   
@@ -3859,7 +3865,7 @@ from different sensor an will need to filter out the correct ones
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="destination">
+    <li class="api-type" data-type="type" id="deviceId">
 
   <div class="overview">
     <span class="type">
@@ -3870,7 +3876,7 @@ from different sensor an will need to filter out the correct ones
 
     
       <span class="name">
-        destination
+        deviceId
       </span>
     
   </div>
@@ -3922,7 +3928,7 @@ from different sensor an will need to filter out the correct ones
   <div class="overview">
     <span class="type">
       
-        Object*
+        <a href="#ProtocolMessage">ProtocolMessage</a>
       
     </span>
 
@@ -3970,7 +3976,16 @@ from different sensor an will need to filter out the correct ones
 </span>
 
 <span class="name">
-  name
+  deviceId
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  componentId
 </span>
 <span class="args-glue">, </span><span class="type">
   
@@ -4005,7 +4020,7 @@ depending on implementation to save resources
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="name">
+    <li class="api-type" data-type="type" id="deviceId">
 
   <div class="overview">
     <span class="type">
@@ -4016,7 +4031,7 @@ depending on implementation to save resources
 
     
       <span class="name">
-        name
+        deviceId
       </span>
     
   </div>
@@ -4024,10 +4039,43 @@ depending on implementation to save resources
   <div class="details hidden">
     
       <span class="description">
-        Human readable data source name as defined in the ProtocolProfile object
+        The internal device reference id
       </span>
     
 
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="componentId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        componentId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        Component reference of the device, may be a sensor
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">temperature</pre>
+      </div>
     
 
     
@@ -4120,7 +4168,16 @@ depending on implementation to save resources
 </span>
 
 <span class="name">
-  name
+  deviceId
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  componentId
 </span>
 <span class="args-glue">, </span><span class="type">
   
@@ -4154,7 +4211,7 @@ depending on implementation to save resources
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="name">
+    <li class="api-type" data-type="type" id="deviceId">
 
   <div class="overview">
     <span class="type">
@@ -4165,7 +4222,7 @@ depending on implementation to save resources
 
     
       <span class="name">
-        name
+        deviceId
       </span>
     
   </div>
@@ -4173,10 +4230,43 @@ depending on implementation to save resources
   <div class="details hidden">
     
       <span class="description">
-        Human readable data source name as defined in the ProtocolProfile object
+        The internal device reference id
       </span>
     
 
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="componentId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        componentId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        Component reference of the device, may be a sensor
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">temperature</pre>
+      </div>
     
 
     
@@ -4200,6 +4290,10 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+    
+      <span class="description">
+        Additional arguments required to contextualize the subscription request
+      </span>
     
 
     
@@ -7802,6 +7896,145 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
 </li>
+<li class="api-type" data-type="type" id="DiscoverParam">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DiscoverParam
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="duration">
+
+  <div class="overview">
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+      <span class="name">
+        duration
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+      <span class="description">
+        The duration in seconds the discovery process will last before
+it should be stopped
+
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolMessage">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        ProtocolMessage
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="data">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        data
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="format">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        format
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
 <li class="api-type" data-type="type" id="DeviceOverview">
 
   <div class="overview">
@@ -8008,66 +8241,6 @@ services and characteristics ids) to enable the data reading.
 
     
 
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="DiscoverParam">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="name">
-        DiscoverParam
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li class="api-type" data-type="type" id="duration">
-
-  <div class="overview">
-    <span class="type">
-      
-        Number
-      
-    </span>
-
-    
-      <span class="name">
-        duration
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-    
-      <span class="description">
-        The duration in seconds the discovery process will last before
-it should be stopped
-
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
-
-      </ul>
     
   </div>
 

@@ -1,0 +1,21 @@
+ProtocolOverview:
+  type: Object
+  fields:
+    name:
+      required: false
+      type: String
+      description: The protocol name
+      example: Bluetooth LE
+    id:
+      type: String
+      required: true
+      description: the internal code identifying the protocol
+      example: BLE
+    interface:
+      type: String
+      required: false
+      description: The DBus interface reference
+      example: iot.agile.protocol.BLE
+    status:
+      type: ProtocolStatus
+      required: false

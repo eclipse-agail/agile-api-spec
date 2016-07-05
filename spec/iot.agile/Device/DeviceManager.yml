@@ -1,45 +1,3 @@
-
-ChannelTypeEnum:
-  type: Enum
-  fields:
-    - Number
-    - String
-    - Boolean
-    - GeoPoint
-    - Object
-
-DeviceStreamChannel:
-  description: A channel contains a single measurement value of a sensor
-  type: Object
-  fields:
-    name: String
-    type:
-      type: ChannelTypeEnum
-
-DeviceStream:
-  description: A stream contains a set of measurement values for a sensor
-  type: Object
-  fields:
-    name: String
-    channels:
-      type: Array
-      fields: DeviceStreamChannel
-
-DeviceDefinition:
-  description: A device definition that contains informations describing the current device
-  type: Object
-  fields:
-    id: String
-    name: String
-    description: String
-    path:
-      type: String
-      description: DBus specific path to reach the object instance
-    properties: Object*
-    streams:
-      type: Array
-      fields: DeviceStream
-
 iot.agile.DeviceManager:
 
   group: Device
@@ -47,18 +5,10 @@ iot.agile.DeviceManager:
   http:
     /devices:
       get:
-        parameters:
-          -
-            name: body
-            in: body
-            description: The request body describing a device
-            required: true
-            # type: string
-            $ref: DeviceDefinition
         description: List all registered devices
         responses:
           200:
-            description: Device list loaded
+            description: List the registered device
           204:
             description: Device list is empty
       post:
@@ -68,67 +18,67 @@ iot.agile.DeviceManager:
             in: body
             description: The request body describing a device
             required: true
-            # type: string
-            $ref: DeviceDefinition
+            schema:
+              $ref: "#/definitions/DeviceDefinition"
         description: Creates a new device definition
         responses:
           200:
             description: Device created
-      /{deviceId}:
+    /devices/{deviceId}:
 
+      parameters:
+        -
+          name: deviceId
+          in: path
+          description: Agile device Id
+          required: true
+          type: string
+
+      get:
         parameters:
           -
-            name: deviceId
-            in: path
-            description: Agile device Id
+            name: body
+            in: body
+            description: The request body describing a device
             required: true
-            type: string
-
-        get:
-          parameters:
-            -
-              name: body
-              in: body
-              description: The request body describing a device
-              required: true
-              # type: string
-              $ref: DeviceDefinition
-          description: Get a device definition
-          responses:
-            200:
-              description: Device loaded
-            404:
-              description: Device not found
-        put:
-          parameters:
-            -
-              name: body
-              in: body
-              description: The request body describing a device
-              required: true
-              # type: string
-              $ref: DeviceDefinition
-          description: Update a device definition
-          responses:
-            200:
-              description: Device updated
-            404:
-              description: Device not found
-        delete:
-          parameters:
-            -
-              name: body
-              in: body
-              description: The request body describing a device
-              required: true
-              # type: string
-              $ref: DeviceDefinition
-          description: Delete a device definition and unregister it
-          responses:
-            200:
-              description: Device removed
-            404:
-              description: Device not found
+            schema:
+              $ref: "#/definitions/DeviceDefinition"
+        description: Get a device definition
+        responses:
+          200:
+            description: Device loaded
+          404:
+            description: Device not found
+      put:
+        parameters:
+          -
+            name: body
+            in: body
+            description: The request body describing a device
+            required: true
+            schema:
+              $ref: "#/definitions/DeviceDefinition"
+        description: Update a device definition
+        responses:
+          200:
+            description: Device updated
+          404:
+            description: Device not found
+      delete:
+        parameters:
+          -
+            name: body
+            in: body
+            description: The request body describing a device
+            required: true
+            schema:
+              $ref: "#/definitions/DeviceDefinition"
+        description: Delete a device definition and unregister it
+        responses:
+          200:
+            description: Device removed
+          404:
+            description: Device not found
 
   Devices:
     description: Return all registered devices

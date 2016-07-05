@@ -133,6 +133,27 @@ paths:
           description: 'No data available'
         '404':
           description: 'Device or stream not available'
+  /devices:
+    get:
+      description: 'List all registered devices'
+      responses:
+        '200':
+          description: 'List the registered device'
+        '204':
+          description: 'Device list is empty'
+    post:
+      parameters:
+        -
+          name: body
+          in: body
+          description: 'The request body describing a device'
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceDefinition'
+      description: 'Creates a new device definition'
+      responses:
+        '200':
+          description: 'Device created'
   '/devices/{deviceId}':
     parameters:
       -
@@ -148,7 +169,8 @@ paths:
           in: body
           description: 'The request body describing a device'
           required: true
-          $ref: DeviceDefinition
+          schema:
+            $ref: '#/definitions/DeviceDefinition'
       description: 'Get a device definition'
       responses:
         '200':
@@ -162,7 +184,8 @@ paths:
           in: body
           description: 'The request body describing a device'
           required: true
-          $ref: DeviceDefinition
+          schema:
+            $ref: '#/definitions/DeviceDefinition'
       description: 'Update a device definition'
       responses:
         '200':
@@ -176,65 +199,114 @@ paths:
           in: body
           description: 'The request body describing a device'
           required: true
-          $ref: DeviceDefinition
+          schema:
+            $ref: '#/definitions/DeviceDefinition'
       description: 'Delete a device definition and unregister it'
       responses:
         '200':
           description: 'Device removed'
         '404':
           description: 'Device not found'
-  /devices:
-    get:
-      parameters:
-        -
-          name: body
-          in: body
-          description: 'The request body describing a device'
-          required: true
-          $ref: DeviceDefinition
-      description: 'List all registered devices'
-      responses:
-        '200':
-          description: 'Device list loaded'
-        '204':
-          description: 'Device list is empty'
+  '/protocols/{protocolId}/connection':
+    parameters:
+      -
+        name: protocolId
+        in: path
+        description: 'Agile internal Id of the protocol'
+        required: true
+        type: string
     post:
-      parameters:
-        -
-          name: body
-          in: body
-          description: 'The request body describing a device'
-          required: true
-          $ref: DeviceDefinition
-      description: 'Creates a new device definition'
+      description: 'Connect to the device'
       responses:
         '200':
-          description: 'Device created'
+          description: 'Connection initialized'
+        '404':
+          description: 'Device not found'
+    delete:
+      description: 'Disconnect from the device'
+      responses:
+        '200':
+          description: 'Disconnection completed'
+        '404':
+          description: 'Device not found'
+  '/protocols/{protocolId}/discovery':
+    parameters:
+      -
+        name: protocolId
+        in: path
+        description: 'Agile internal Id of the protocol'
+        required: true
+        type: string
+    post:
+      description: 'Start the discovery process'
+      responses:
+        '200':
+          description: 'Discovery started'
+        '404':
+          description: 'Device not found'
+    delete:
+      description: 'Stop the discovery process'
+      responses:
+        '200':
+          description: 'Discovery process stopped'
+        '404':
+          description: 'Device not found'
+  '/protocols/{protocolId}/{componentId}':
+    parameters:
+      -
+        name: protocolId
+        in: path
+        description: 'Agile internal Id of the protocol'
+        required: true
+        type: string
+      -
+        name: componentId
+        in: path
+        description: 'Protocol component Id, like a sensor name'
+        required: true
+        type: string
+    post:
+      description: 'Call a write at protocol level'
+      parameters:
+        -
+          name: data
+          in: body
+          description: 'An object containing the content to write'
+          required: true
+          schema:
+            $ref: '#/definitions/ProtocolMessage'
+      responses:
+        '200':
+          description: 'Write suceed'
+        '404':
+          description: 'Device or component not found'
+    get:
+      description: 'Call a read at protocol level'
+      responses:
+        '200':
+          description: 'Read suceeded'
+          schema:
+            $ref: '#/definitions/RecordObject'
+        '404':
+          description: 'Device or component not found'
   /protocols:
     get:
       description: 'Get the list of registered protocols'
-      parameters:
-        -
-          name: protocols
-          description: 'Returns a list of registered protocols'
-          in: body
-          schema:
-            type: Array
-            $ref: '#/definitions/ProtocolOverview'
       responses:
         '200':
           description: 'Protocols list provided'
-          example:
-            -
-              id: BLE
-              name: 'Bluetooth LE'
-              interface: iot.agile.protocol.BLE
-              status: AVAILABLE
-            -
-              id: ZigBee
-              name: 'ZigBee communication protocol'
-              interface: iot.agile.protocol.ZigBee
-              status: AVAILABLE
+          examples:
+            application/json:
+              -
+                id: BLE
+                name: 'Bluetooth LE'
+                interface: iot.agile.protocol.BLE
+                status: AVAILABLE
+              -
+                id: ZigBee
+                name: 'ZigBee communication protocol'
+                interface: iot.agile.protocol.ZigBee
+                status: AVAILABLE
         '204':
           description: 'No protocols registered.'
     post:
@@ -252,21 +324,6 @@ paths:
             $ref: '#/definitions/ProtocolOverview'
         '400':
           description: 'An error occured processing the request'
-  '/protocols/{protocolId}/discovery':
-    post:
-      description: 'Start a device discovery on all available protocols'
-      responses:
-        '204':
-          description: "The discovery has been successfully started on all the regitered\nprotocols; asynchronous updates will be sent via websocket\n"
-        '409':
-          description: "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
-    delete:
-      description: 'Stop a device discovery previously initiated'
-      responses:
-        '204':
-          description: "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
-        '409':
-          description: "Indicates that discovery has been requested to stop on the underlying\nprotocols but one or more reported a failure\n"
   '/protocols/{protocolId}':
     parameters:
       -
@@ -277,6 +334,14 @@ paths:
         type: string
     put:
       description: 'Update protocol information'
+      parameters:
+        -
+          name: protocol
+          in: body
+          description: 'Agile protocol Id'
+          required: true
+          schema:
+            $ref: '#/definitions/ProtocolOverview'
       responses:
         '202':
           description: 'Protocol has been added'
@@ -291,6 +356,21 @@ paths:
           description: 'Protocol unregistered'
         '404':
           description: 'Protocol not found'
+  /protocols/discovery:
+    post:
+      description: 'Start a device discovery on all available protocols'
+      responses:
+        '204':
+          description: "The discovery has been successfully started on all the regitered\nprotocols; asynchronous updates will be sent via websocket\n"
+        '409':
+          description: "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
+    delete:
+      description: 'Stop a device discovery previously initiated'
+      responses:
+        '204':
+          description: "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
+        '409':
+          description: "Indicates that discovery has been requested to stop on the underlying\nprotocols but one or more reported a failure\n"
   
 definitions:
   DeviceStreamChannel:
@@ -311,6 +391,32 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/DeviceStreamChannel'
+  DeviceDefinition:
+    description: 'A device definition that contains informations describing the current device'
+    type: object
+    properties:
+      id:
+        type: object
+      name:
+        type: object
+      description:
+        type: object
+      path:
+        description: 'DBus specific path to reach the object instance'
+        type: object
+      properties:
+        type: object
+      streams:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceStream'
+  ProtocolMessage:
+    type: object
+    properties:
+      data:
+        type: object
+      format:
+        type: object
   DeviceOverview:
     type: object
     properties:
@@ -322,4 +428,33 @@ definitions:
         enum:
           - CONNECTED
           - DISCONNECTED
+  ProtocolOverview:
+    type: object
+    properties:
+      name:
+        description: 'The protocol name'
+        type: object
+      id:
+        description: 'the internal code identifying the protocol'
+        type: object
+      interface:
+        description: 'The DBus interface reference'
+        type: object
+      status:
+        type: object
+  RecordObject:
+    type: object
+    properties:
+      DeviceId:
+        type: object
+      StreamId:
+        type: object
+      ChannelId:
+        type: object
+      LastUpdate:
+        description: 'A UNIX timestamp rapresenting the last update of a record'
+        type: object
+      Channels:
+        description: 'A list of key/value matching those indicated in the DeviceDefinition'
+        type: object
   

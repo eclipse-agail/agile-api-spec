@@ -1,56 +1,17 @@
 
-DiscoverParam:
-  type: Object
-  fields:
-    duration:
-      type: Number
-      required: false
-      description: |
-        The duration in seconds the discovery process will last before
-        it should be stopped
-
-ProtocolOverview:
-  type: Object
-  fields:
-    name:
-      required: false
-      type: String
-      description: The protocol name
-      example: Bluetooth LE
-    id:
-      type: String
-      required: true
-      description: the internal code identifying the protocol
-      example: BLE
-    interface:
-      type: String
-      required: false
-      description: The DBus interface reference
-      example: iot.agile.protocol.BLE
-    status:
-      type: ProtocolStatus
-      required: false
-
 iot.agile.ProtocolManager:
 
   group: Protocol
 
   http:
     /protocols:
-
       get:
         description: Get the list of registered protocols
-        parameters:
-          - name: protocols
-            description: Returns a list of registered protocols
-            in: body
-            schema:
-              type: Array
-              $ref: "#/definitions/ProtocolOverview"
         responses:
           200:
             description: Protocols list provided
-            example:
+            examples:
+              application/json:
                 - id: BLE
                   name: Bluetooth LE
                   interface: iot.agile.protocol.BLE
@@ -75,7 +36,6 @@ iot.agile.ProtocolManager:
               $ref: "#/definitions/ProtocolOverview"
           400:
             description: An error occured processing the request
-
     /protocols/{protocolId}:
       parameters:
         -
@@ -86,12 +46,14 @@ iot.agile.ProtocolManager:
           type: string
       put:
         description: Update protocol information
-        body:
-          type: ProtocolOverview
-          example:
-            name: TCP over Pigeon
-            id: TCPoP
-            interface: corp.acme.protocol.TCPoP
+        parameters:
+          -
+            name: protocol
+            in: body
+            description: Agile protocol Id
+            required: true
+            schema:
+              $ref: "#/definitions/ProtocolOverview"
         responses:
           202:
             description: Protocol has been added
@@ -107,33 +69,33 @@ iot.agile.ProtocolManager:
             description: Protocol unregistered
           404:
             description: Protocol not found
-      /discovery:
-        post:
-          (reference): ProtocolManager.StartDiscovery
-          body:
-          description: Start a device discovery on all available protocols
-          responses:
-            204:
-              description: |
-                The discovery has been successfully started on all the regitered
-                protocols; asynchronous updates will be sent via websocket
-            409:
-              description: |
-                Indicates that discovery has been requested to the underlying
-                protocols but one or more reported a failure
-        delete:
-          (reference): ProtocolManager.StopDiscovery
-          body:
-          description: Stop a device discovery previously initiated
-          responses:
-            204:
-              description: |
-                The discovery has been successfully stopped on all the regitered
-                protocols; There will be no further device updates via websocket
-            409:
-              description: |
-                Indicates that discovery has been requested to stop on the underlying
-                protocols but one or more reported a failure
+    /protocols/discovery:
+      post:
+        (reference): ProtocolManager.StartDiscovery
+        body:
+        description: Start a device discovery on all available protocols
+        responses:
+          204:
+            description: |
+              The discovery has been successfully started on all the regitered
+              protocols; asynchronous updates will be sent via websocket
+          409:
+            description: |
+              Indicates that discovery has been requested to the underlying
+              protocols but one or more reported a failure
+      delete:
+        (reference): ProtocolManager.StopDiscovery
+        body:
+        description: Stop a device discovery previously initiated
+        responses:
+          204:
+            description: |
+              The discovery has been successfully stopped on all the regitered
+              protocols; There will be no further device updates via websocket
+          409:
+            description: |
+              Indicates that discovery has been requested to stop on the underlying
+              protocols but one or more reported a failure
 
   Devices:
     description: Contains the list of devices returned by each Protocol specific discovery, where available

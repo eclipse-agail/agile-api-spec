@@ -530,19 +530,10 @@
       "http": {
         "/devices": {
           "get": {
-            "parameters": {
-              "0": {
-                "name": "body",
-                "in": "body",
-                "description": "The request body describing a device",
-                "required": true,
-                "$ref": "DeviceDefinition"
-              }
-            },
             "description": "List all registered devices",
             "responses": {
               "200": {
-                "description": "Device list loaded"
+                "description": "List the registered device"
               },
               "204": {
                 "description": "Device list is empty"
@@ -556,7 +547,9 @@
                 "in": "body",
                 "description": "The request body describing a device",
                 "required": true,
-                "$ref": "DeviceDefinition"
+                "schema": {
+                  "$ref": "#/definitions/DeviceDefinition"
+                }
               }
             },
             "description": "Creates a new device definition",
@@ -565,75 +558,81 @@
                 "description": "Device created"
               }
             }
+          }
+        },
+        "/devices/{deviceId}": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            }
           },
-          "/{deviceId}": {
+          "get": {
             "parameters": {
               "0": {
-                "name": "deviceId",
-                "in": "path",
-                "description": "Agile device Id",
+                "name": "body",
+                "in": "body",
+                "description": "The request body describing a device",
                 "required": true,
-                "type": "string"
-              }
-            },
-            "get": {
-              "parameters": {
-                "0": {
-                  "name": "body",
-                  "in": "body",
-                  "description": "The request body describing a device",
-                  "required": true,
-                  "$ref": "DeviceDefinition"
-                }
-              },
-              "description": "Get a device definition",
-              "responses": {
-                "200": {
-                  "description": "Device loaded"
-                },
-                "404": {
-                  "description": "Device not found"
+                "schema": {
+                  "$ref": "#/definitions/DeviceDefinition"
                 }
               }
             },
-            "put": {
-              "parameters": {
-                "0": {
-                  "name": "body",
-                  "in": "body",
-                  "description": "The request body describing a device",
-                  "required": true,
-                  "$ref": "DeviceDefinition"
-                }
+            "description": "Get a device definition",
+            "responses": {
+              "200": {
+                "description": "Device loaded"
               },
-              "description": "Update a device definition",
-              "responses": {
-                "200": {
-                  "description": "Device updated"
-                },
-                "404": {
-                  "description": "Device not found"
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          },
+          "put": {
+            "parameters": {
+              "0": {
+                "name": "body",
+                "in": "body",
+                "description": "The request body describing a device",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/DeviceDefinition"
                 }
               }
             },
-            "delete": {
-              "parameters": {
-                "0": {
-                  "name": "body",
-                  "in": "body",
-                  "description": "The request body describing a device",
-                  "required": true,
-                  "$ref": "DeviceDefinition"
-                }
+            "description": "Update a device definition",
+            "responses": {
+              "200": {
+                "description": "Device updated"
               },
-              "description": "Delete a device definition and unregister it",
-              "responses": {
-                "200": {
-                  "description": "Device removed"
-                },
-                "404": {
-                  "description": "Device not found"
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          },
+          "delete": {
+            "parameters": {
+              "0": {
+                "name": "body",
+                "in": "body",
+                "description": "The request body describing a device",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/DeviceDefinition"
                 }
+              }
+            },
+            "description": "Delete a device definition and unregister it",
+            "responses": {
+              "200": {
+                "description": "Device removed"
+              },
+              "404": {
+                "description": "Device not found"
               }
             }
           }
@@ -678,7 +677,7 @@
         "Write": {
           "description": "Send data over the protocol\n",
           "args": {
-            "destination": {
+            "deviceId": {
               "type": "String"
             },
             "arguments": {
@@ -686,14 +685,19 @@
             }
           },
           "return": {
-            "type": "Object*"
+            "type": "ProtocolMessage"
           }
         },
         "Read": {
           "description": "Read data over the Protocol, may be cached in the Data property\ndepending on implementation to save resources\n",
           "args": {
-            "name": {
-              "description": "Human readable data source name as defined in the ProtocolProfile object",
+            "deviceId": {
+              "description": "The internal device reference id",
+              "type": "String"
+            },
+            "componentId": {
+              "description": "Component reference of the device, may be a sensor",
+              "example": "temperature",
               "type": "String"
             },
             "arguments": {
@@ -707,11 +711,17 @@
         "Subscribe": {
           "description": "Subscribe to data updates over the Protocol\n",
           "args": {
-            "name": {
-              "description": "Human readable data source name as defined in the ProtocolProfile object",
+            "deviceId": {
+              "description": "The internal device reference id",
+              "type": "String"
+            },
+            "componentId": {
+              "description": "Component reference of the device, may be a sensor",
+              "example": "temperature",
               "type": "String"
             },
             "arguments": {
+              "description": "Additional arguments required to contextualize the subscription request",
               "type": "Object*"
             }
           },
@@ -758,6 +768,128 @@
             "1": "s"
           },
           "type": "ProtocolDevice"
+        }
+      },
+      "http": {
+        "/protocols/{protocolId}/connection": {
+          "parameters": {
+            "0": {
+              "name": "protocolId",
+              "in": "path",
+              "description": "Agile internal Id of the protocol",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "description": "Connect to the device",
+            "responses": {
+              "200": {
+                "description": "Connection initialized"
+              },
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          },
+          "delete": {
+            "description": "Disconnect from the device",
+            "responses": {
+              "200": {
+                "description": "Disconnection completed"
+              },
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          }
+        },
+        "/protocols/{protocolId}/discovery": {
+          "parameters": {
+            "0": {
+              "name": "protocolId",
+              "in": "path",
+              "description": "Agile internal Id of the protocol",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "description": "Start the discovery process",
+            "responses": {
+              "200": {
+                "description": "Discovery started"
+              },
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          },
+          "delete": {
+            "description": "Stop the discovery process",
+            "responses": {
+              "200": {
+                "description": "Discovery process stopped"
+              },
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          }
+        },
+        "/protocols/{protocolId}/{componentId}": {
+          "parameters": {
+            "0": {
+              "name": "protocolId",
+              "in": "path",
+              "description": "Agile internal Id of the protocol",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "componentId",
+              "in": "path",
+              "description": "Protocol component Id, like a sensor name",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "description": "Call a write at protocol level",
+            "parameters": {
+              "0": {
+                "name": "data",
+                "in": "body",
+                "description": "An object containing the content to write",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/ProtocolMessage"
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Write suceed"
+              },
+              "404": {
+                "description": "Device or component not found"
+              }
+            }
+          },
+          "get": {
+            "description": "Call a read at protocol level",
+            "responses": {
+              "200": {
+                "description": "Read suceeded",
+                "schema": {
+                  "$ref": "#/definitions/RecordObject"
+                }
+              },
+              "404": {
+                "description": "Device or component not found"
+              }
+            }
+          }
         }
       }
     },
@@ -830,30 +962,23 @@
         "/protocols": {
           "get": {
             "description": "Get the list of registered protocols",
-            "parameters": {
-              "0": {
-                "type": "Array",
-                "$ref": "ProtocolOverview",
-                "in": "body",
-                "name": "body",
-                "description": "Returns a list of registered pro"
-              }
-            },
             "responses": {
               "200": {
                 "description": "Protocols list provided",
-                "example": {
-                  "0": {
-                    "id": "BLE",
-                    "name": "Bluetooth LE",
-                    "interface": "iot.agile.protocol.BLE",
-                    "status": "AVAILABLE"
-                  },
-                  "1": {
-                    "id": "ZigBee",
-                    "name": "ZigBee communication protocol",
-                    "interface": "iot.agile.protocol.ZigBee",
-                    "status": "AVAILABLE"
+                "examples": {
+                  "application/json": {
+                    "0": {
+                      "id": "BLE",
+                      "name": "Bluetooth LE",
+                      "interface": "iot.agile.protocol.BLE",
+                      "status": "AVAILABLE"
+                    },
+                    "1": {
+                      "id": "ZigBee",
+                      "name": "ZigBee communication protocol",
+                      "interface": "iot.agile.protocol.ZigBee",
+                      "status": "AVAILABLE"
+                    }
                   }
                 }
               },
@@ -866,18 +991,19 @@
             "description": "Register a new protocol based on an active DBus interface",
             "parameters": {
               "0": {
-                "$ref": "ProtocolOverview",
+                "name": "protocol",
                 "in": "body",
-                "example": {
-                  "name": "TCP over Pigeon",
-                  "id": "TCPoP",
-                  "interface": "corp.acme.protocol.TCPoP"
+                "schema": {
+                  "$ref": "#/definitions/ProtocolOverview"
                 }
               }
             },
             "responses": {
               "200": {
-                "description": "Protocol has been added"
+                "description": "Protocol has been added",
+                "schema": {
+                  "$ref": "#/definitions/ProtocolOverview"
+                }
               },
               "400": {
                 "description": "An error occured processing the request"
@@ -897,12 +1023,15 @@
           },
           "put": {
             "description": "Update protocol information",
-            "body": {
-              "type": "ProtocolOverview",
-              "example": {
-                "name": "TCP over Pigeon",
-                "id": "TCPoP",
-                "interface": "corp.acme.protocol.TCPoP"
+            "parameters": {
+              "0": {
+                "name": "protocol",
+                "in": "body",
+                "description": "Agile protocol Id",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/ProtocolOverview"
+                }
               }
             },
             "responses": {
@@ -927,30 +1056,30 @@
                 "description": "Protocol not found"
               }
             }
-          },
-          "/discovery": {
-            "post": {
-              "(reference)": "ProtocolManager.StartDiscovery",
-              "description": "Start a device discovery on all available protocols",
-              "responses": {
-                "204": {
-                  "description": "The discovery has been successfully started on all the regitered\nprotocols; asynchronous updates will be sent via websocket\n"
-                },
-                "409": {
-                  "description": "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
-                }
+          }
+        },
+        "/protocols/discovery": {
+          "post": {
+            "(reference)": "ProtocolManager.StartDiscovery",
+            "description": "Start a device discovery on all available protocols",
+            "responses": {
+              "204": {
+                "description": "The discovery has been successfully started on all the regitered\nprotocols; asynchronous updates will be sent via websocket\n"
+              },
+              "409": {
+                "description": "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
               }
-            },
-            "delete": {
-              "(reference)": "ProtocolManager.StopDiscovery",
-              "description": "Stop a device discovery previously initiated",
-              "responses": {
-                "204": {
-                  "description": "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
-                },
-                "409": {
-                  "description": "Indicates that discovery has been requested to stop on the underlying\nprotocols but one or more reported a failure\n"
-                }
+            }
+          },
+          "delete": {
+            "(reference)": "ProtocolManager.StopDiscovery",
+            "description": "Stop a device discovery previously initiated",
+            "responses": {
+              "204": {
+                "description": "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
+              },
+              "409": {
+                "description": "Indicates that discovery has been requested to stop on the underlying\nprotocols but one or more reported a failure\n"
               }
             }
           }
@@ -1410,6 +1539,31 @@
       },
       "required": true
     },
+    "DiscoverParam": {
+      "type": "Object",
+      "fields": {
+        "duration": {
+          "description": "The duration in seconds the discovery process will last before\nit should be stopped\n",
+          "type": "Number",
+          "required": false
+        }
+      },
+      "required": true
+    },
+    "ProtocolMessage": {
+      "type": "Object",
+      "fields": {
+        "data": {
+          "type": "String",
+          "required": true
+        },
+        "format": {
+          "type": "String",
+          "required": true
+        }
+      },
+      "required": true
+    },
     "DeviceOverview": {
       "type": "Object",
       "fields": {
@@ -1478,17 +1632,6 @@
     "ProtocolProfile": {
       "description": "A Protocol set of settings that translate human readable properties\nto actual Protocol implementation details.\n\nFor example, the user request the temperature value over a BLE connected\ndevice and the Protocol receive all the specific informations (like\nservices and characteristics ids) to enable the data reading.\n",
       "type": "Object*",
-      "required": true
-    },
-    "DiscoverParam": {
-      "type": "Object",
-      "fields": {
-        "duration": {
-          "description": "The duration in seconds the discovery process will last before\nit should be stopped\n",
-          "type": "Number",
-          "required": false
-        }
-      },
       "required": true
     },
     "ProtocolOverview": {

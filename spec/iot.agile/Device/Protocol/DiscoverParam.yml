@@ -1,0 +1,9 @@
+DiscoverParam:
+  type: Object
+  fields:
+    duration:
+      type: Number
+      required: false
+      description: |
+        The duration in seconds the discovery process will last before
+        it should be stopped
