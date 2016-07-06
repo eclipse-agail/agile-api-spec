@@ -1,0 +1,8 @@
+
+ProtocolMessage:
+  type: Object
+  fields:
+    data:
+      type: String
+    format:
+      type: String

@@ -1,64 +1,21 @@
 
-ProtocolMessage:
-  type: Object
-  fields:
-    data: String
-    format: String
-
-DeviceOverview:
-  type: Object
-  fields:
-    name: String
-    id: String
-    status:
-      type: Enum
-      fields:
-        - CONNECTED
-        - DISCONNECTED
-
-ProtocolDevice:
-  description: |
-    List all devices a Protocol knows about.
-    The list is updated by the StartDiscovery method.
-    Devices may also be provisioned programmatically during the initialization phase.
-  access: [r, s]
-  type: Array
-  fields: DeviceOverview
-
-ProtocolStatus:
-  description: |
-    Identify a status of the Protocol, indicating if operational (AVAILABLE) or
-    if for some reason further user-side checks are required.
-  type: Enum
-  fields:
-    - AVAILABLE
-    - UNAVAILABLE
-    - NOT_CONFIGURED
-    - DISABLED
-    - ENABLED
-    - FAILURE
-
-ProtocolProfile:
-  group: Device
-  description: |
-    A Protocol set of settings that translate human readable properties
-    to actual Protocol implementation details.
-
-    For example, the user request the temperature value over a BLE connected
-    device and the Protocol receive all the specific informations (like
-    services and characteristics ids) to enable the data reading.
-  type: Object*
-
 iot.agile.Protocol:
   http:
-    /protocols/{protocolId}/connection:
+    /protocol/{protocolId}/connection/{deviceId}:
       parameters:
         -
           name: protocolId
           in: path
+          description: Agile Id of the protocol
+          required: true
+          type: string
+        -
+          name: deviceId
+          in: path
           description: Agile internal Id of the protocol
           required: true
           type: string
+
       post:
         description: Connect to the device
         responses:
@@ -74,12 +31,12 @@ iot.agile.Protocol:
           404:
             description: Device not found
 
-    /protocols/{protocolId}/discovery:
+    /protocol/{protocolId}/discovery:
       parameters:
         -
           name: protocolId
           in: path
-          description: Agile internal Id of the protocol
+          description: Agile Id of the protocol
           required: true
           type: string
       post:
@@ -97,7 +54,7 @@ iot.agile.Protocol:
           404:
             description: Device not found
 
-    /protocols/{protocolId}/{componentId}:
+    /protocol/{protocolId}/{deviceId}:
       parameters:
         -
           name: protocolId
@@ -106,13 +63,13 @@ iot.agile.Protocol:
           required: true
           type: string
         -
-          name: componentId
+          name: deviceId
           in: path
-          description: Protocol component Id, like a sensor name
+          description: Agile protocol Id of the device
           required: true
           type: string
       post:
-        description: Call a write at protocol level
+        description: Call a write via protocol
         parameters:
           -
             name: data
@@ -124,11 +81,11 @@ iot.agile.Protocol:
 
         responses:
           200:
-            description: Write suceed
+            description: Write suceeded
           404:
             description: Device or component not found
       get:
-        description: Call a read at protocol level
+        description: Call a read via protocol
         responses:
           200:
             description: Read suceeded
@@ -144,7 +101,8 @@ iot.agile.Protocol:
 
   Status:
     type: ProtocolStatus
-    access: [r, s]
+    description: Return the status for the protocol
+    access: [r]
 
   Driver:
     description: Driver unique code name
@@ -154,6 +112,7 @@ iot.agile.Protocol:
 
   Name:
     description: Driver name
+    example: Bluetooth LE
     type: String
     access: [r]
 
@@ -168,36 +127,47 @@ iot.agile.Protocol:
     access: [r, s]
 
   Devices:
-    type: ProtocolDevice
+    type: Array
+    reference: ProtocolDevice
+    description: A list of devices found or available via this protocol.
     access: [r, s]
 
   Connect:
     description: |
-      Abstract a connection, setup or initialization phase for a Protocol
+      Abstract a connection, setup or initialization for a protocol managed device
     args:
       deviceId:
-        description: The protocol internal id rapresenting a device
+        description: The protocol internal reference of a device
         type: String
+        required: true
       # profile:
         # type: ProtocolProfile
     return: void
 
   Disconnect:
     description: |
-      Abstract disconnect, tear down or uninitailization process for a Protocol, may be disconnection or deinitialization
+      Abstract disconnect, tear down or uninitailization process for a managed device
     args:
       deviceId:
-        description: The protocol internal id rapresenting a device
+        description: The protocol internal reference of a device
         type: String
+        required: true
     return: void
 
-  Discover:
+  StartDiscovery:
     description: |
       Initiate a discovery operation
     args:
     return:
       type: void
       reference: Devices
+
+  StopDiscovery:
+    description: |
+      Stop a discovery operation
+    args:
+    return:
+      type: void
 
   # Execute:
   #   description: |
@@ -212,8 +182,13 @@ iot.agile.Protocol:
     description: |
       Send data over the protocol
     args:
-      deviceId: String
-      arguments: Object*
+      deviceId:
+        type: String
+        description: The internal device reference identifier
+        required: true
+      arguments:
+        type: KeyValue
+        description: A list of specific parameters to pass to the protocol
     return:
       type: ProtocolMessage
 
@@ -224,12 +199,11 @@ iot.agile.Protocol:
     args:
       deviceId:
         type: String
-        description: The internal device reference id
-      componentId:
-        type: String
-        description: Component reference of the device, may be a sensor
-        example: temperature
-      arguments: Object*
+        description: The internal device reference identifier
+        required: true
+      arguments:
+        type: KeyValue
+        description: A list of specific parameters to pass to the protocol
     return:
       type: RecordObject
       tags:
@@ -241,14 +215,31 @@ iot.agile.Protocol:
     args:
       deviceId:
         type: String
-        description: The internal device reference id
-      componentId:
-        type: String
-        description: Component reference of the device, may be a sensor
-        example: temperature
+        description: The internal device reference identifier
+        required: true
       arguments:
-        type: Object*
+        type: KeyValue
         description: Additional arguments required to contextualize the subscription request
+        required: false
+    return:
+      type: void
+      # type: RecordObject
+      reference: Data
+      tags:
+        - Data Storage
+
+  Unsubscribe:
+    description: |
+      Unsubscribe to data updates over the Protocol
+    args:
+      deviceId:
+        type: String
+        description: The internal device reference identifier
+        required: true
+      arguments:
+        type: KeyValue
+        description: Additional arguments required to contextualize the subscription request
+        required: false
     return:
       type: RecordObject
       reference: Data

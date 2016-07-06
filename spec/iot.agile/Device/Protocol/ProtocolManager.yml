@@ -10,6 +10,8 @@ iot.agile.ProtocolManager:
         responses:
           200:
             description: Protocols list provided
+            schema:
+              $ref: "#/definitions/DeviceOverview"
             examples:
               application/json:
                 - id: BLE
@@ -44,16 +46,10 @@ iot.agile.ProtocolManager:
           description: Agile protocol Id
           required: true
           type: string
-      put:
-        description: Update protocol information
-        parameters:
-          -
-            name: protocol
-            in: body
-            description: Agile protocol Id
-            required: true
-            schema:
-              $ref: "#/definitions/ProtocolOverview"
+
+      post:
+        (reference): ProtocolManager.Add
+        description: Register a new Dbus object implementing the protocol API
         responses:
           202:
             description: Protocol has been added
@@ -63,12 +59,25 @@ iot.agile.ProtocolManager:
             description: Protocol not found
 
       delete:
-        description: Unregister a protocol
+        (reference): ProtocolManager.Remove
+        description: Register a new Dbus object implementing the protocol API
         responses:
           200:
             description: Protocol unregistered
           404:
             description: Protocol not found
+
+    /protocols/devices:
+      get:
+        (reference): ProtocolManager.Devices
+        description: Start a device discovery on all available protocols
+        responses:
+          200:
+            description: |
+              The list of multiprotocol devices
+            schema:
+              $ref: "#/definitions/DeviceOverview"
+
     /protocols/discovery:
       post:
         (reference): ProtocolManager.StartDiscovery
@@ -86,7 +95,7 @@ iot.agile.ProtocolManager:
       delete:
         (reference): ProtocolManager.StopDiscovery
         body:
-        description: Stop a device discovery previously initiated
+        description: Stop a device discovery if previously initiated
         responses:
           204:
             description: |
@@ -99,15 +108,18 @@ iot.agile.ProtocolManager:
 
   Devices:
     description: Contains the list of devices returned by each Protocol specific discovery, where available
+    description: |
+      All devices a Protocol knows about. This list may be updated by the StartDiscovery method.
+      Devices may also be provisioned programmatically during the initialization phase.
     access: [r, s]
     type: Array
-    fields: ProtocolDevice
+    reference: DeviceOverview
 
   Protocols:
     description: The list of managed Protocols
     access: [r, s]
     type: Array
-    fields: ProtocolOverview
+    reference: ProtocolOverview
 
   StartDiscovery:
     description: Start discovery on all the managed Protocols
@@ -125,14 +137,14 @@ iot.agile.ProtocolManager:
     description: Add a new Protocol
     args:
       protocol:
-        type: String
-        reference: iot.agile.Protocol
+        description: The DBus object interface reference of the Protocol
+        type: iot.agile.Protocol
     return: void
 
   Remove:
     description: Remove a managed Protocol
     args:
       protocol:
-        type: String
-        reference: iot.agile.Protocol
+        description: The DBus object interface reference of the Protocol
+        type: iot.agile.Protocol
     return: void

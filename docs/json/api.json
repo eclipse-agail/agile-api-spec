@@ -423,10 +423,8 @@
         "Find": {
           "description": "Search for devices by specific criteria",
           "args": {
-            "description": {
-              "type": "An query object to search for a device"
-            },
-            "type": {
+            "query": {
+              "description": "An query object to search for a device",
               "type": "BaseQuery"
             }
           },
@@ -491,7 +489,7 @@
         "Batch": {
           "description": "Performa a batch operation over a set of devices.",
           "args": {
-            "Op": {
+            "operation": {
               "type": "Enum",
               "fields": {
                 "0": {
@@ -512,7 +510,7 @@
                 }
               }
             },
-            "Arguments": {
+            "arguments": {
               "description": "An object to be passed to the underlying function call (Create, Update, Delete, Read)",
               "type": "Object*"
             }
@@ -646,10 +644,10 @@
       "group": "Device",
       "methods": {
         "Connect": {
-          "description": "Abstract a connection, setup or initialization phase for a Protocol\n",
+          "description": "Abstract a connection, setup or initialization for a protocol managed device\n",
           "args": {
             "deviceId": {
-              "description": "The protocol internal id rapresenting a device",
+              "description": "The protocol internal reference of a device",
               "type": "String"
             }
           },
@@ -658,10 +656,10 @@
           }
         },
         "Disconnect": {
-          "description": "Abstract disconnect, tear down or uninitailization process for a Protocol, may be disconnection or deinitialization\n",
+          "description": "Abstract disconnect, tear down or uninitailization process for a managed device\n",
           "args": {
             "deviceId": {
-              "description": "The protocol internal id rapresenting a device",
+              "description": "The protocol internal reference of a device",
               "type": "String"
             }
           },
@@ -669,21 +667,29 @@
             "type": "void"
           }
         },
-        "Discover": {
+        "StartDiscovery": {
           "description": "Initiate a discovery operation\n",
           "return": {
             "type": "void",
             "reference": "Devices"
           }
         },
+        "StopDiscovery": {
+          "description": "Stop a discovery operation\n",
+          "return": {
+            "type": "void"
+          }
+        },
         "Write": {
           "description": "Send data over the protocol\n",
           "args": {
             "deviceId": {
+              "description": "The internal device reference identifier",
               "type": "String"
             },
             "arguments": {
-              "type": "Object*"
+              "description": "A list of specific parameters to pass to the protocol",
+              "type": "KeyValue"
             }
           },
           "return": {
@@ -694,16 +700,12 @@
           "description": "Read data over the Protocol, may be cached in the Data property\ndepending on implementation to save resources\n",
           "args": {
             "deviceId": {
-              "description": "The internal device reference id",
-              "type": "String"
-            },
-            "componentId": {
-              "description": "Component reference of the device, may be a sensor",
-              "example": "temperature",
+              "description": "The internal device reference identifier",
               "type": "String"
             },
             "arguments": {
-              "type": "Object*"
+              "description": "A list of specific parameters to pass to the protocol",
+              "type": "KeyValue"
             }
           },
           "return": {
@@ -714,17 +716,29 @@
           "description": "Subscribe to data updates over the Protocol\n",
           "args": {
             "deviceId": {
-              "description": "The internal device reference id",
-              "type": "String"
-            },
-            "componentId": {
-              "description": "Component reference of the device, may be a sensor",
-              "example": "temperature",
+              "description": "The internal device reference identifier",
               "type": "String"
             },
             "arguments": {
               "description": "Additional arguments required to contextualize the subscription request",
-              "type": "Object*"
+              "type": "KeyValue"
+            }
+          },
+          "return": {
+            "type": "void",
+            "reference": "Data"
+          }
+        },
+        "Unsubscribe": {
+          "description": "Unsubscribe to data updates over the Protocol\n",
+          "args": {
+            "deviceId": {
+              "description": "The internal device reference identifier",
+              "type": "String"
+            },
+            "arguments": {
+              "description": "Additional arguments required to contextualize the subscription request",
+              "type": "KeyValue"
             }
           },
           "return": {
@@ -735,9 +749,9 @@
       },
       "properties": {
         "Status": {
+          "description": "Return the status for the protocol",
           "access": {
-            "0": "r",
-            "1": "s"
+            "0": "r"
           },
           "type": "ProtocolStatus"
         },
@@ -754,6 +768,7 @@
           "access": {
             "0": "r"
           },
+          "example": "Bluetooth LE",
           "type": "String"
         },
         "Data": {
@@ -765,18 +780,27 @@
           "type": "RecordObject"
         },
         "Devices": {
+          "description": "A list of devices found or available via this protocol.",
           "access": {
             "0": "r",
             "1": "s"
           },
-          "type": "ProtocolDevice"
+          "type": "Array",
+          "reference": "ProtocolDevice"
         }
       },
       "http": {
-        "/protocols/{protocolId}/connection": {
+        "/protocol/{protocolId}/connection/{deviceId}": {
           "parameters": {
             "0": {
               "name": "protocolId",
+              "in": "path",
+              "description": "Agile Id of the protocol",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "deviceId",
               "in": "path",
               "description": "Agile internal Id of the protocol",
               "required": true,
@@ -806,12 +830,12 @@
             }
           }
         },
-        "/protocols/{protocolId}/discovery": {
+        "/protocol/{protocolId}/discovery": {
           "parameters": {
             "0": {
               "name": "protocolId",
               "in": "path",
-              "description": "Agile internal Id of the protocol",
+              "description": "Agile Id of the protocol",
               "required": true,
               "type": "string"
             }
@@ -839,7 +863,7 @@
             }
           }
         },
-        "/protocols/{protocolId}/{componentId}": {
+        "/protocol/{protocolId}/{deviceId}": {
           "parameters": {
             "0": {
               "name": "protocolId",
@@ -849,15 +873,15 @@
               "type": "string"
             },
             "1": {
-              "name": "componentId",
+              "name": "deviceId",
               "in": "path",
-              "description": "Protocol component Id, like a sensor name",
+              "description": "Agile protocol Id of the device",
               "required": true,
               "type": "string"
             }
           },
           "post": {
-            "description": "Call a write at protocol level",
+            "description": "Call a write via protocol",
             "parameters": {
               "0": {
                 "name": "data",
@@ -871,7 +895,7 @@
             },
             "responses": {
               "200": {
-                "description": "Write suceed"
+                "description": "Write suceeded"
               },
               "404": {
                 "description": "Device or component not found"
@@ -879,7 +903,7 @@
             }
           },
           "get": {
-            "description": "Call a read at protocol level",
+            "description": "Call a read via protocol",
             "responses": {
               "200": {
                 "description": "Read suceeded",
@@ -919,8 +943,8 @@
           "description": "Add a new Protocol",
           "args": {
             "protocol": {
-              "type": "String",
-              "reference": "iot.agile.Protocol"
+              "description": "The DBus object interface reference of the Protocol",
+              "type": "iot.agile.Protocol"
             }
           },
           "return": {
@@ -931,8 +955,8 @@
           "description": "Remove a managed Protocol",
           "args": {
             "protocol": {
-              "type": "String",
-              "reference": "iot.agile.Protocol"
+              "description": "The DBus object interface reference of the Protocol",
+              "type": "iot.agile.Protocol"
             }
           },
           "return": {
@@ -948,7 +972,7 @@
             "1": "s"
           },
           "type": "Array",
-          "fields": "ProtocolDevice"
+          "reference": "DeviceOverview"
         },
         "Protocols": {
           "description": "The list of managed Protocols",
@@ -957,7 +981,7 @@
             "1": "s"
           },
           "type": "Array",
-          "fields": "ProtocolOverview"
+          "reference": "ProtocolOverview"
         }
       },
       "http": {
@@ -967,6 +991,9 @@
             "responses": {
               "200": {
                 "description": "Protocols list provided",
+                "schema": {
+                  "$ref": "#/definitions/DeviceOverview"
+                },
                 "examples": {
                   "application/json": {
                     "0": {
@@ -1023,19 +1050,9 @@
               "type": "string"
             }
           },
-          "put": {
-            "description": "Update protocol information",
-            "parameters": {
-              "0": {
-                "name": "protocol",
-                "in": "body",
-                "description": "Agile protocol Id",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/ProtocolOverview"
-                }
-              }
-            },
+          "post": {
+            "(reference)": "ProtocolManager.Add",
+            "description": "Register a new Dbus object implementing the protocol API",
             "responses": {
               "202": {
                 "description": "Protocol has been added"
@@ -1049,13 +1066,28 @@
             }
           },
           "delete": {
-            "description": "Unregister a protocol",
+            "(reference)": "ProtocolManager.Remove",
+            "description": "Register a new Dbus object implementing the protocol API",
             "responses": {
               "200": {
                 "description": "Protocol unregistered"
               },
               "404": {
                 "description": "Protocol not found"
+              }
+            }
+          }
+        },
+        "/protocols/devices": {
+          "get": {
+            "(reference)": "ProtocolManager.Devices",
+            "description": "Start a device discovery on all available protocols",
+            "responses": {
+              "200": {
+                "description": "The list of multiprotocol devices\n",
+                "schema": {
+                  "$ref": "#/definitions/DeviceOverview"
+                }
               }
             }
           }
@@ -1075,7 +1107,7 @@
           },
           "delete": {
             "(reference)": "ProtocolManager.StopDiscovery",
-            "description": "Stop a device discovery previously initiated",
+            "description": "Stop a device discovery if previously initiated",
             "responses": {
               "204": {
                 "description": "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
@@ -1451,6 +1483,134 @@
       },
       "required": true
     },
+    "DeviceOverview": {
+      "description": "An overview of a device a protocol knows about",
+      "type": "Object",
+      "fields": {
+        "name": {
+          "description": "Friendly name of the device",
+          "type": "String",
+          "required": true
+        },
+        "id": {
+          "description": "Protocol level id used to identify and access the device",
+          "type": "String",
+          "required": true
+        },
+        "status": {
+          "type": "Enum",
+          "fields": {
+            "0": {
+              "type": "CONNECTED",
+              "required": true
+            },
+            "1": {
+              "type": "DISCONNECTED",
+              "required": true
+            },
+            "2": {
+              "type": "AVAILABLE",
+              "required": true
+            },
+            "3": {
+              "type": "UNAVAILABLE",
+              "required": true
+            }
+          },
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "DiscoverParam": {
+      "type": "Object",
+      "fields": {
+        "duration": {
+          "description": "The duration in seconds the discovery process will last before\nit should be stopped\n",
+          "type": "Number",
+          "required": false
+        }
+      },
+      "required": true
+    },
+    "ProtocolMessage": {
+      "type": "Object",
+      "fields": {
+        "data": {
+          "type": "String",
+          "required": true
+        },
+        "format": {
+          "type": "String",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "ProtocolOverview": {
+      "type": "Object",
+      "fields": {
+        "name": {
+          "description": "The protocol name",
+          "example": "Bluetooth LE",
+          "type": "String",
+          "required": false
+        },
+        "id": {
+          "description": "the internal code identifying the protocol",
+          "example": "BLE",
+          "type": "String",
+          "required": true
+        },
+        "interface": {
+          "description": "The DBus interface reference",
+          "example": "iot.agile.protocol.BLE",
+          "type": "String",
+          "required": false
+        },
+        "status": {
+          "type": "ProtocolStatus",
+          "required": false
+        }
+      },
+      "required": true
+    },
+    "ProtocolProfile": {
+      "description": "A Protocol set of settings that translate human readable properties\nto actual Protocol implementation details.\n\nFor example, the user request the temperature value over a BLE connected\ndevice and the Protocol receive all the specific informations (like\nservices and characteristics ids) to enable the data reading.\n",
+      "type": "Object*",
+      "required": true
+    },
+    "ProtocolStatus": {
+      "description": "Identify a status of the Protocol, indicating if operational (AVAILABLE) or\nif for some reason further user-side checks are required.\n",
+      "type": "Enum",
+      "fields": {
+        "0": {
+          "type": "AVAILABLE",
+          "required": true
+        },
+        "1": {
+          "type": "UNAVAILABLE",
+          "required": true
+        },
+        "2": {
+          "type": "NOT_CONFIGURED",
+          "required": true
+        },
+        "3": {
+          "type": "DISABLED",
+          "required": true
+        },
+        "4": {
+          "type": "ENABLED",
+          "required": true
+        },
+        "5": {
+          "type": "FAILURE",
+          "required": true
+        }
+      },
+      "required": true
+    },
     "ChannelTypeEnum": {
       "type": "Enum",
       "fields": {
@@ -1541,129 +1701,6 @@
       },
       "required": true
     },
-    "DiscoverParam": {
-      "type": "Object",
-      "fields": {
-        "duration": {
-          "description": "The duration in seconds the discovery process will last before\nit should be stopped\n",
-          "type": "Number",
-          "required": false
-        }
-      },
-      "required": true
-    },
-    "ProtocolMessage": {
-      "type": "Object",
-      "fields": {
-        "data": {
-          "type": "String",
-          "required": true
-        },
-        "format": {
-          "type": "String",
-          "required": true
-        }
-      },
-      "required": true
-    },
-    "DeviceOverview": {
-      "type": "Object",
-      "fields": {
-        "name": {
-          "type": "String",
-          "required": true
-        },
-        "id": {
-          "type": "String",
-          "required": true
-        },
-        "status": {
-          "type": "Enum",
-          "fields": {
-            "0": {
-              "type": "CONNECTED",
-              "required": true
-            },
-            "1": {
-              "type": "DISCONNECTED",
-              "required": true
-            }
-          },
-          "required": true
-        }
-      },
-      "required": true
-    },
-    "ProtocolDevice": {
-      "description": "List all devices a Protocol knows about.\nThe list is updated by the StartDiscovery method.\nDevices may also be provisioned programmatically during the initialization phase.\n",
-      "type": "Array",
-      "fields": "DeviceOverview",
-      "required": true
-    },
-    "ProtocolStatus": {
-      "description": "Identify a status of the Protocol, indicating if operational (AVAILABLE) or\nif for some reason further user-side checks are required.\n",
-      "type": "Enum",
-      "fields": {
-        "0": {
-          "type": "AVAILABLE",
-          "required": true
-        },
-        "1": {
-          "type": "UNAVAILABLE",
-          "required": true
-        },
-        "2": {
-          "type": "NOT_CONFIGURED",
-          "required": true
-        },
-        "3": {
-          "type": "DISABLED",
-          "required": true
-        },
-        "4": {
-          "type": "ENABLED",
-          "required": true
-        },
-        "5": {
-          "type": "FAILURE",
-          "required": true
-        }
-      },
-      "required": true
-    },
-    "ProtocolProfile": {
-      "description": "A Protocol set of settings that translate human readable properties\nto actual Protocol implementation details.\n\nFor example, the user request the temperature value over a BLE connected\ndevice and the Protocol receive all the specific informations (like\nservices and characteristics ids) to enable the data reading.\n",
-      "type": "Object*",
-      "required": true
-    },
-    "ProtocolOverview": {
-      "type": "Object",
-      "fields": {
-        "name": {
-          "description": "The protocol name",
-          "example": "Bluetooth LE",
-          "type": "String",
-          "required": false
-        },
-        "id": {
-          "description": "the internal code identifying the protocol",
-          "example": "BLE",
-          "type": "String",
-          "required": true
-        },
-        "interface": {
-          "description": "The DBus interface reference",
-          "example": "iot.agile.protocol.BLE",
-          "type": "String",
-          "required": false
-        },
-        "status": {
-          "type": "ProtocolStatus",
-          "required": false
-        }
-      },
-      "required": true
-    },
     "DriverStatus": {
       "type": "Enum",
       "fields": {
@@ -1690,25 +1727,29 @@
       "type": "Object",
       "fields": {
         "DeviceId": {
+          "description": "The Agile Id for the device",
           "type": "String",
           "required": true
         },
-        "StreamId": {
+        "ComponentId": {
+          "description": "The component Id for the device, like the sensor name",
+          "example": "temperature",
           "type": "String",
           "required": true
         },
-        "ChannelId": {
+        "Value": {
+          "description": "The value stored",
+          "type": "String",
+          "required": true
+        },
+        "Format": {
+          "description": "A format description to read the data value",
           "type": "String",
           "required": true
         },
         "LastUpdate": {
           "description": "A UNIX timestamp rapresenting the last update of a record",
           "type": "Number",
-          "required": true
-        },
-        "Channels": {
-          "description": "A list of key/value matching those indicated in the DeviceDefinition",
-          "type": "KeyValue",
           "required": true
         }
       },

@@ -166,6 +166,42 @@
               </li>
               
               <li>
+                <a href="#DeviceOverview" data-for="DeviceOverview">
+                  DeviceOverview
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DiscoverParam" data-for="DiscoverParam">
+                  DiscoverParam
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolMessage" data-for="ProtocolMessage">
+                  ProtocolMessage
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolOverview" data-for="ProtocolOverview">
+                  ProtocolOverview
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolProfile" data-for="ProtocolProfile">
+                  ProtocolProfile
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolStatus" data-for="ProtocolStatus">
+                  ProtocolStatus
+                </a>
+              </li>
+              
+              <li>
                 <a href="#ChannelTypeEnum" data-for="ChannelTypeEnum">
                   ChannelTypeEnum
                 </a>
@@ -186,48 +222,6 @@
               <li>
                 <a href="#DeviceDefinition" data-for="DeviceDefinition">
                   DeviceDefinition
-                </a>
-              </li>
-              
-              <li>
-                <a href="#DiscoverParam" data-for="DiscoverParam">
-                  DiscoverParam
-                </a>
-              </li>
-              
-              <li>
-                <a href="#ProtocolMessage" data-for="ProtocolMessage">
-                  ProtocolMessage
-                </a>
-              </li>
-              
-              <li>
-                <a href="#DeviceOverview" data-for="DeviceOverview">
-                  DeviceOverview
-                </a>
-              </li>
-              
-              <li>
-                <a href="#ProtocolDevice" data-for="ProtocolDevice">
-                  ProtocolDevice
-                </a>
-              </li>
-              
-              <li>
-                <a href="#ProtocolStatus" data-for="ProtocolStatus">
-                  ProtocolStatus
-                </a>
-              </li>
-              
-              <li>
-                <a href="#ProtocolProfile" data-for="ProtocolProfile">
-                  ProtocolProfile
-                </a>
-              </li>
-              
-              <li>
-                <a href="#ProtocolOverview" data-for="ProtocolOverview">
-                  ProtocolOverview
                 </a>
               </li>
               
@@ -2548,21 +2542,12 @@ the underlying Protocol implementation if supported.
     <span class="name">Find(</span>
       <span class="args"><span class="type">
   
-    An query object to search for a device
-  
-</span>
-
-<span class="name">
-  description
-</span>
-<span class="args-glue">, </span><span class="type">
-  
     <a href="#BaseQuery">BaseQuery</a>
   
 </span>
 
 <span class="name">
-  type
+  query
 </span>
 </span>
     <span class="name">)</span>
@@ -2586,33 +2571,7 @@ the underlying Protocol implementation if supported.
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="description">
-
-  <div class="overview">
-    <span class="type">
-      
-        An query object to search for a device
-      
-    </span>
-
-    
-      <span class="name">
-        description
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="type">
+    <li class="api-type" data-type="type" id="query">
 
   <div class="overview">
     <span class="type">
@@ -2623,13 +2582,17 @@ the underlying Protocol implementation if supported.
 
     
       <span class="name">
-        type
+        query
       </span>
     
   </div>
 
   <div class="details hidden">
 
+    
+      <span class="description">
+        An query object to search for a device
+      </span>
     
 
     
@@ -3230,7 +3193,7 @@ the underlying Protocol implementation if supported.
 </span>
 
 <span class="name">
-  Op
+  operation
 </span>
 <span class="args-glue">, </span><span class="type">
   
@@ -3239,7 +3202,7 @@ the underlying Protocol implementation if supported.
 </span>
 
 <span class="name">
-  Arguments
+  arguments
 </span>
 </span>
     <span class="name">)</span>
@@ -3263,7 +3226,7 @@ the underlying Protocol implementation if supported.
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="Op">
+    <li class="api-type" data-type="type" id="operation">
 
   <div class="overview">
     <span class="type">
@@ -3274,7 +3237,7 @@ the underlying Protocol implementation if supported.
 
     
       <span class="name">
-        Op
+        operation
       </span>
     
   </div>
@@ -3293,7 +3256,7 @@ the underlying Protocol implementation if supported.
   </div>
 
 </li>
-<li class="api-type" data-type="type" id="Arguments">
+<li class="api-type" data-type="type" id="arguments">
 
   <div class="overview">
     <span class="type">
@@ -3304,7 +3267,7 @@ the underlying Protocol implementation if supported.
 
     
       <span class="name">
-        Arguments
+        arguments
       </span>
     
   </div>
@@ -3401,6 +3364,10 @@ Every Device has one Protocol used to establish and use a communication exchange
   <div class="pad-left details hidden" data-for="iot.agile.Protocol.Status">
 
     
+      <div class="description">
+        Return the status for the protocol
+      </div>
+    
 
     
       <div class="access-container">
@@ -3410,12 +3377,6 @@ Every Device has one Protocol used to establish and use a communication exchange
             <li>
               <span class="property-access access-[object Object]">
                 <b>R</b>ead
-              </span>
-            </li>
-          
-            <li>
-              <span class="property-access access-[object Object]">
-                <b>S</b>ubscribe
               </span>
             </li>
           
@@ -3514,6 +3475,10 @@ Every Device has one Protocol used to establish and use a communication exchange
     
 
     
+      <div class="example-container">
+        Example <pre class="example">Bluetooth LE</pre>
+      </div>
+    
 
   </div>
 </li>
@@ -3575,7 +3540,7 @@ from different sensor an will need to filter out the correct ones
 
     <span class="type">
       
-        <a href="#ProtocolDevice">ProtocolDevice</a>
+        <a href="#ProtocolDevice">Array[ProtocolDevice]</a>
       
     </span>
 
@@ -3587,6 +3552,10 @@ from different sensor an will need to filter out the correct ones
 
   <div class="pad-left details hidden" data-for="iot.agile.Protocol.Devices">
 
+    
+      <div class="description">
+        A list of devices found or available via this protocol.
+      </div>
     
 
     
@@ -3649,7 +3618,7 @@ from different sensor an will need to filter out the correct ones
 
     
       <div class="description">
-        Abstract a connection, setup or initialization phase for a Protocol
+        Abstract a connection, setup or initialization for a protocol managed device
 
       </div>
     
@@ -3687,7 +3656,7 @@ from different sensor an will need to filter out the correct ones
 
     
       <span class="description">
-        The protocol internal id rapresenting a device
+        The protocol internal reference of a device
       </span>
     
 
@@ -3766,7 +3735,7 @@ from different sensor an will need to filter out the correct ones
 
     
       <div class="description">
-        Abstract disconnect, tear down or uninitailization process for a Protocol, may be disconnection or deinitialization
+        Abstract disconnect, tear down or uninitailization process for a managed device
 
       </div>
     
@@ -3804,7 +3773,7 @@ from different sensor an will need to filter out the correct ones
 
     
       <span class="description">
-        The protocol internal id rapresenting a device
+        The protocol internal reference of a device
       </span>
     
 
@@ -3853,7 +3822,7 @@ from different sensor an will need to filter out the correct ones
   </div>
 
 </li>
-<li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Discover">
+<li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.StartDiscovery">
 
   <div class="overview">
 
@@ -3868,7 +3837,7 @@ from different sensor an will need to filter out the correct ones
       
     </span>
 
-    <span class="name">Discover(</span>
+    <span class="name">StartDiscovery(</span>
       <span class="args"></span>
     <span class="name">)</span>
 
@@ -3881,7 +3850,77 @@ from different sensor an will need to filter out the correct ones
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.Discover">
+  <div class="details hidden" data-for="iot.agile.Protocol.StartDiscovery">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.StopDiscovery">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">StopDiscovery(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Stop a discovery operation
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.Protocol.StopDiscovery">
 
     
 
@@ -3950,7 +3989,7 @@ from different sensor an will need to filter out the correct ones
 </span>
 <span class="args-glue">, </span><span class="type">
   
-    Object*
+    <a href="#KeyValue">KeyValue</a>
   
 </span>
 
@@ -3999,6 +4038,10 @@ from different sensor an will need to filter out the correct ones
   <div class="details hidden">
 
     
+      <span class="description">
+        The internal device reference identifier
+      </span>
+    
 
     
 
@@ -4011,7 +4054,7 @@ from different sensor an will need to filter out the correct ones
   <div class="overview">
     <span class="type">
       
-        Object*
+        <a href="#KeyValue">KeyValue</a>
       
     </span>
 
@@ -4024,6 +4067,10 @@ from different sensor an will need to filter out the correct ones
 
   <div class="details hidden">
 
+    
+      <span class="description">
+        A list of specific parameters to pass to the protocol
+      </span>
     
 
     
@@ -4098,16 +4145,7 @@ from different sensor an will need to filter out the correct ones
 </span>
 <span class="args-glue">, </span><span class="type">
   
-    String
-  
-</span>
-
-<span class="name">
-  componentId
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    Object*
+    <a href="#KeyValue">KeyValue</a>
   
 </span>
 
@@ -4158,44 +4196,10 @@ depending on implementation to save resources
 
     
       <span class="description">
-        The internal device reference id
+        The internal device reference identifier
       </span>
     
 
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="componentId">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        componentId
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        Component reference of the device, may be a sensor
-      </span>
-    
-
-    
-      <div class="example-container">
-        Example <pre class="example">temperature</pre>
-      </div>
     
 
     
@@ -4207,7 +4211,7 @@ depending on implementation to save resources
   <div class="overview">
     <span class="type">
       
-        Object*
+        <a href="#KeyValue">KeyValue</a>
       
     </span>
 
@@ -4220,6 +4224,10 @@ depending on implementation to save resources
 
   <div class="details hidden">
 
+    
+      <span class="description">
+        A list of specific parameters to pass to the protocol
+      </span>
     
 
     
@@ -4273,12 +4281,12 @@ depending on implementation to save resources
 
     <span class="returnType type secondary">
       
-        <a href="#RecordObject"><span class="type">
+        <span class="type">
   
-    <a href="#RecordObject">RecordObject</a>
+    void
   
 </span>
-</a>
+
       
     </span>
 
@@ -4294,16 +4302,7 @@ depending on implementation to save resources
 </span>
 <span class="args-glue">, </span><span class="type">
   
-    String
-  
-</span>
-
-<span class="name">
-  componentId
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    Object*
+    <a href="#KeyValue">KeyValue</a>
   
 </span>
 
@@ -4353,44 +4352,10 @@ depending on implementation to save resources
 
     
       <span class="description">
-        The internal device reference id
+        The internal device reference identifier
       </span>
     
 
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="componentId">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        componentId
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        Component reference of the device, may be a sensor
-      </span>
-    
-
-    
-      <div class="example-container">
-        Example <pre class="example">temperature</pre>
-      </div>
     
 
     
@@ -4402,7 +4367,163 @@ depending on implementation to save resources
   <div class="overview">
     <span class="type">
       
-        Object*
+        <a href="#KeyValue">KeyValue</a>
+      
+    </span>
+
+    
+      <span class="name">
+        arguments
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Additional arguments required to contextualize the subscription request
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <div class="title">
+    Return type
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Unsubscribe">
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#RecordObject"><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">Unsubscribe(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  deviceId
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#KeyValue">KeyValue</a>
+  
+</span>
+
+<span class="name">
+  arguments
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Unsubscribe to data updates over the Protocol
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden" data-for="iot.agile.Protocol.Unsubscribe">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <div class="title">
+    Arguments
+  </div>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="deviceId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        deviceId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The internal device reference identifier
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="arguments">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#KeyValue">KeyValue</a>
       
     </span>
 
@@ -4490,7 +4611,7 @@ depending on implementation to save resources
 
     <span class="type">
       
-        Array[ProtocolDevice]
+        <a href="#DeviceOverview">Array[DeviceOverview]</a>
       
     </span>
 
@@ -4539,7 +4660,7 @@ depending on implementation to save resources
 
     <span class="type">
       
-        Array[ProtocolOverview]
+        <a href="#ProtocolOverview">Array[ProtocolOverview]</a>
       
     </span>
 
@@ -4786,7 +4907,7 @@ depending on implementation to save resources
     <span class="name">Add(</span>
       <span class="args"><span class="type">
   
-    <a href="#iot.agile.Protocol">String</a>
+    <a href="#iot.agile.Protocol">iot.agile.Protocol</a>
   
 </span>
 
@@ -4820,7 +4941,7 @@ depending on implementation to save resources
   <div class="overview">
     <span class="type">
       
-        <a href="#iot.agile.Protocol">String</a>
+        <a href="#iot.agile.Protocol">iot.agile.Protocol</a>
       
     </span>
 
@@ -4833,6 +4954,10 @@ depending on implementation to save resources
 
   <div class="details hidden">
 
+    
+      <span class="description">
+        The DBus object interface reference of the Protocol
+      </span>
     
 
     
@@ -4898,7 +5023,7 @@ depending on implementation to save resources
     <span class="name">Remove(</span>
       <span class="args"><span class="type">
   
-    <a href="#iot.agile.Protocol">String</a>
+    <a href="#iot.agile.Protocol">iot.agile.Protocol</a>
   
 </span>
 
@@ -4932,7 +5057,7 @@ depending on implementation to save resources
   <div class="overview">
     <span class="type">
       
-        <a href="#iot.agile.Protocol">String</a>
+        <a href="#iot.agile.Protocol">iot.agile.Protocol</a>
       
     </span>
 
@@ -4945,6 +5070,10 @@ depending on implementation to save resources
 
   <div class="details hidden">
 
+    
+      <span class="description">
+        The DBus object interface reference of the Protocol
+      </span>
     
 
     
@@ -7759,6 +7888,504 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
 </li>
+<li class="api-type" data-type="type" id="DeviceOverview">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DeviceOverview
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        An overview of a device a protocol knows about
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Friendly name of the device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Protocol level id used to identify and access the device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="status">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        status
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>CONNECTED</li><li>DISCONNECTED</li><li>AVAILABLE</li><li>UNAVAILABLE</li>
+      </ul>
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="DiscoverParam">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DiscoverParam
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="duration">
+
+  <div class="overview">
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+      <span class="name">
+        duration
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The duration in seconds the discovery process will last before
+it should be stopped
+
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolMessage">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        ProtocolMessage
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="data">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        data
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="format">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        format
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolOverview">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        ProtocolOverview
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The protocol name
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">Bluetooth LE</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        the internal code identifying the protocol
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">BLE</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="interface">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        interface
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The DBus interface reference
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">iot.agile.protocol.BLE</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="status">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#ProtocolStatus">ProtocolStatus</a>
+      
+    </span>
+
+    
+      <span class="name">
+        status
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolProfile">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="name">
+        ProtocolProfile
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A Protocol set of settings that translate human readable properties
+to actual Protocol implementation details.
+
+For example, the user request the temperature value over a BLE connected
+device and the Protocol receive all the specific informations (like
+services and characteristics ids) to enable the data reading.
+
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolStatus">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        ProtocolStatus
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Identify a status of the Protocol, indicating if operational (AVAILABLE) or
+if for some reason further user-side checks are required.
+
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>AVAILABLE</li><li>UNAVAILABLE</li><li>NOT_CONFIGURED</li><li>DISABLED</li><li>ENABLED</li><li>FAILURE</li>
+      </ul>
+    
+  </div>
+
+</li>
 <li class="api-type" data-type="type" id="ChannelTypeEnum">
 
   <div class="overview">
@@ -8155,525 +8782,6 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
 </li>
-<li class="api-type" data-type="type" id="DiscoverParam">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="name">
-        DiscoverParam
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li class="api-type" data-type="type" id="duration">
-
-  <div class="overview">
-    <span class="type">
-      
-        Number
-      
-    </span>
-
-    
-      <span class="name">
-        duration
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        The duration in seconds the discovery process will last before
-it should be stopped
-
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
-
-      </ul>
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="ProtocolMessage">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="name">
-        ProtocolMessage
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li class="api-type" data-type="type" id="data">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        data
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="format">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        format
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-
-      </ul>
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="DeviceOverview">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="name">
-        DeviceOverview
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li class="api-type" data-type="type" id="name">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        name
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="id">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        id
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="status">
-
-  <div class="overview">
-    <span class="type">
-      
-        Enum
-      
-    </span>
-
-    
-      <span class="name">
-        status
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li>CONNECTED</li><li>DISCONNECTED</li>
-      </ul>
-    
-  </div>
-
-</li>
-
-      </ul>
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="ProtocolDevice">
-
-  <div class="overview">
-    <span class="type">
-      
-        Array[DeviceOverview]
-      
-    </span>
-
-    
-      <span class="name">
-        ProtocolDevice
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        List all devices a Protocol knows about.
-The list is updated by the StartDiscovery method.
-Devices may also be provisioned programmatically during the initialization phase.
-
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="ProtocolStatus">
-
-  <div class="overview">
-    <span class="type">
-      
-        Enum
-      
-    </span>
-
-    
-      <span class="name">
-        ProtocolStatus
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        Identify a status of the Protocol, indicating if operational (AVAILABLE) or
-if for some reason further user-side checks are required.
-
-      </span>
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li>AVAILABLE</li><li>UNAVAILABLE</li><li>NOT_CONFIGURED</li><li>DISABLED</li><li>ENABLED</li><li>FAILURE</li>
-      </ul>
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="ProtocolProfile">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object*
-      
-    </span>
-
-    
-      <span class="name">
-        ProtocolProfile
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        A Protocol set of settings that translate human readable properties
-to actual Protocol implementation details.
-
-For example, the user request the temperature value over a BLE connected
-device and the Protocol receive all the specific informations (like
-services and characteristics ids) to enable the data reading.
-
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="ProtocolOverview">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="name">
-        ProtocolOverview
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li class="api-type" data-type="type" id="name">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        name
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        The protocol name
-      </span>
-    
-
-    
-      <div class="example-container">
-        Example <pre class="example">Bluetooth LE</pre>
-      </div>
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="id">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        id
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        the internal code identifying the protocol
-      </span>
-    
-
-    
-      <div class="example-container">
-        Example <pre class="example">BLE</pre>
-      </div>
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="interface">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        interface
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        The DBus interface reference
-      </span>
-    
-
-    
-      <div class="example-container">
-        Example <pre class="example">iot.agile.protocol.BLE</pre>
-      </div>
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="status">
-
-  <div class="overview">
-    <span class="type">
-      
-        <a href="#ProtocolStatus">ProtocolStatus</a>
-      
-    </span>
-
-    
-      <span class="name">
-        status
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-
-      </ul>
-    
-  </div>
-
-</li>
 <li class="api-type" data-type="type" id="DriverStatus">
 
   <div class="overview">
@@ -8747,6 +8855,10 @@ services and characteristics ids) to enable the data reading.
   <div class="details hidden">
 
     
+      <span class="description">
+        The Agile Id for the device
+      </span>
+    
 
     
 
@@ -8754,7 +8866,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
 </li>
-<li class="api-type" data-type="type" id="StreamId">
+<li class="api-type" data-type="type" id="ComponentId">
 
   <div class="overview">
     <span class="type">
@@ -8765,7 +8877,7 @@ services and characteristics ids) to enable the data reading.
 
     
       <span class="name">
-        StreamId
+        ComponentId
       </span>
     
   </div>
@@ -8773,14 +8885,22 @@ services and characteristics ids) to enable the data reading.
   <div class="details hidden">
 
     
+      <span class="description">
+        The component Id for the device, like the sensor name
+      </span>
+    
 
+    
+      <div class="example-container">
+        Example <pre class="example">temperature</pre>
+      </div>
     
 
     
   </div>
 
 </li>
-<li class="api-type" data-type="type" id="ChannelId">
+<li class="api-type" data-type="type" id="Value">
 
   <div class="overview">
     <span class="type">
@@ -8791,13 +8911,47 @@ services and characteristics ids) to enable the data reading.
 
     
       <span class="name">
-        ChannelId
+        Value
       </span>
     
   </div>
 
   <div class="details hidden">
 
+    
+      <span class="description">
+        The value stored
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="Format">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        Format
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A format description to read the data value
+      </span>
     
 
     
@@ -8827,36 +8981,6 @@ services and characteristics ids) to enable the data reading.
     
       <span class="description">
         A UNIX timestamp rapresenting the last update of a record
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="Channels">
-
-  <div class="overview">
-    <span class="type">
-      
-        <a href="#KeyValue">KeyValue</a>
-      
-    </span>
-
-    
-      <span class="name">
-        Channels
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        A list of key/value matching those indicated in the DeviceDefinition
       </span>
     
 

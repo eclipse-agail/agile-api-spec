@@ -1,0 +1,10 @@
+ProtocolProfile:
+  group: Device
+  description: |
+    A Protocol set of settings that translate human readable properties
+    to actual Protocol implementation details.
+
+    For example, the user request the temperature value over a BLE connected
+    device and the Protocol receive all the specific informations (like
+    services and characteristics ids) to enable the data reading.
+  type: Object*

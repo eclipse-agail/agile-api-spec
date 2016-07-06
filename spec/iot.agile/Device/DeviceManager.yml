@@ -88,8 +88,9 @@ iot.agile.DeviceManager:
   Find:
     description: Search for devices by specific criteria
     args:
-      description: An query object to search for a device
-      type: BaseQuery
+      query:
+        description: An query object to search for a device
+        type: BaseQuery
     return:
       description: A list with all matching registered devices results, eventually sorted and sliced
       type: Array
@@ -134,14 +135,14 @@ iot.agile.DeviceManager:
   Batch:
     description: Performa a batch operation over a set of devices.
     args:
-      Op:
+      operation:
         type: Enum
         fields:
           - Create
           - Update
           - Delete
           - Read
-      Arguments:
+      arguments:
         description: An object to be passed to the underlying function call (Create, Update, Delete, Read)
         type: Object*
     return: Boolean

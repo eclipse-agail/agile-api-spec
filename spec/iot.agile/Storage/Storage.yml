@@ -1,18 +1,4 @@
 
-RecordObject:
-  group: Data storage
-  type: Object
-  fields:
-    DeviceId: String
-    StreamId: String
-    ChannelId: String
-    LastUpdate:
-      description: A UNIX timestamp rapresenting the last update of a record
-      type: Number
-    Channels:
-      description: A list of key/value matching those indicated in the DeviceDefinition
-      type: KeyValue
-
 iot.agile.Storage:
   description: |
     The Storage component offer an abstraction for Devices to store and fetch data
@@ -35,32 +21,38 @@ iot.agile.Storage:
   Create:
     description: Creates a record
     args:
-      record: RecordObject
+      record:
+        type: RecordObject
     return:
       description: Return the Id of the created record
       type: String
   Read:
     description: Load a record by Id
     args:
-      Id: String
+      Id:
+        type: String
     return:
       description: Return the corresponding record
       type: RecordObject
   Update:
     description: Updates a record
     args:
-      Id: String
-      Record: RecordObject
+      Id:
+        type: String
+      Record:
+        type: RecordObject
     return: void
   Delete:
     description: Delete a record by Id
     args:
-      Id: String
+      Id:
+        type: String
     return: void
   Find:
     description: Search for a set of records by criterias
     args:
-      query: BaseQuery
+      query:
+        type: BaseQuery
     return:
       type: Array
       fields: RecordObject

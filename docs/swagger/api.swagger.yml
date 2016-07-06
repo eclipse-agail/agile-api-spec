@@ -207,10 +207,16 @@ paths:
           description: 'Device removed'
         '404':
           description: 'Device not found'
-  '/protocols/{protocolId}/connection':
+  '/protocol/{protocolId}/connection/{deviceId}':
     parameters:
       -
         name: protocolId
+        in: path
+        description: 'Agile Id of the protocol'
+        required: true
+        type: string
+      -
+        name: deviceId
         in: path
         description: 'Agile internal Id of the protocol'
         required: true
@@ -229,12 +235,12 @@ paths:
           description: 'Disconnection completed'
         '404':
           description: 'Device not found'
-  '/protocols/{protocolId}/discovery':
+  '/protocol/{protocolId}/discovery':
     parameters:
       -
         name: protocolId
         in: path
-        description: 'Agile internal Id of the protocol'
+        description: 'Agile Id of the protocol'
         required: true
         type: string
     post:
@@ -251,7 +257,7 @@ paths:
           description: 'Discovery process stopped'
         '404':
           description: 'Device not found'
-  '/protocols/{protocolId}/{componentId}':
+  '/protocol/{protocolId}/{deviceId}':
     parameters:
       -
         name: protocolId
@@ -260,13 +266,13 @@ paths:
         required: true
         type: string
       -
-        name: componentId
+        name: deviceId
         in: path
-        description: 'Protocol component Id, like a sensor name'
+        description: 'Agile protocol Id of the device'
         required: true
         type: string
     post:
-      description: 'Call a write at protocol level'
+      description: 'Call a write via protocol'
       parameters:
         -
           name: data
@@ -277,11 +283,11 @@ paths:
             $ref: '#/definitions/ProtocolMessage'
       responses:
         '200':
-          description: 'Write suceed'
+          description: 'Write suceeded'
         '404':
           description: 'Device or component not found'
     get:
-      description: 'Call a read at protocol level'
+      description: 'Call a read via protocol'
       responses:
         '200':
           description: 'Read suceeded'
@@ -295,6 +301,8 @@ paths:
       responses:
         '200':
           description: 'Protocols list provided'
+          schema:
+            $ref: '#/definitions/DeviceOverview'
           examples:
             application/json:
               -
@@ -332,16 +340,8 @@ paths:
         description: 'Agile protocol Id'
         required: true
         type: string
-    put:
-      description: 'Update protocol information'
-      parameters:
-        -
-          name: protocol
-          in: body
-          description: 'Agile protocol Id'
-          required: true
-          schema:
-            $ref: '#/definitions/ProtocolOverview'
+    post:
+      description: 'Register a new Dbus object implementing the protocol API'
       responses:
         '202':
           description: 'Protocol has been added'
@@ -350,12 +350,20 @@ paths:
         '404':
           description: 'Protocol not found'
     delete:
-      description: 'Unregister a protocol'
+      description: 'Register a new Dbus object implementing the protocol API'
       responses:
         '200':
           description: 'Protocol unregistered'
         '404':
           description: 'Protocol not found'
+  /protocols/devices:
+    get:
+      description: 'Start a device discovery on all available protocols'
+      responses:
+        '200':
+          description: "The list of multiprotocol devices\n"
+          schema:
+            $ref: '#/definitions/DeviceOverview'
   /protocols/discovery:
     post:
       description: 'Start a device discovery on all available protocols'
@@ -365,7 +373,7 @@ paths:
         '409':
           description: "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
     delete:
-      description: 'Stop a device discovery previously initiated'
+      description: 'Stop a device discovery if previously initiated'
       responses:
         '204':
           description: "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
@@ -373,6 +381,43 @@ paths:
           description: "Indicates that discovery has been requested to stop on the underlying\nprotocols but one or more reported a failure\n"
   
 definitions:
+  DeviceOverview:
+    description: 'An overview of a device a protocol knows about'
+    type: object
+    properties:
+      name:
+        description: 'Friendly name of the device'
+        type: object
+      id:
+        description: 'Protocol level id used to identify and access the device'
+        type: object
+      status:
+        enum:
+          - CONNECTED
+          - DISCONNECTED
+          - AVAILABLE
+          - UNAVAILABLE
+  ProtocolMessage:
+    type: object
+    properties:
+      data:
+        type: object
+      format:
+        type: object
+  ProtocolOverview:
+    type: object
+    properties:
+      name:
+        description: 'The protocol name'
+        type: object
+      id:
+        description: 'the internal code identifying the protocol'
+        type: object
+      interface:
+        description: 'The DBus interface reference'
+        type: object
+      status:
+        type: object
   DeviceStreamChannel:
     description: 'A channel contains a single measurement value of a sensor'
     type: object
@@ -410,51 +455,22 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/DeviceStream'
-  ProtocolMessage:
-    type: object
-    properties:
-      data:
-        type: object
-      format:
-        type: object
-  DeviceOverview:
-    type: object
-    properties:
-      name:
-        type: object
-      id:
-        type: object
-      status:
-        enum:
-          - CONNECTED
-          - DISCONNECTED
-  ProtocolOverview:
-    type: object
-    properties:
-      name:
-        description: 'The protocol name'
-        type: object
-      id:
-        description: 'the internal code identifying the protocol'
-        type: object
-      interface:
-        description: 'The DBus interface reference'
-        type: object
-      status:
-        type: object
   RecordObject:
     type: object
     properties:
       DeviceId:
+        description: 'The Agile Id for the device'
         type: object
-      StreamId:
+      ComponentId:
+        description: 'The component Id for the device, like the sensor name'
         type: object
-      ChannelId:
+      Value:
+        description: 'The value stored'
+        type: object
+      Format:
+        description: 'A format description to read the data value'
         type: object
       LastUpdate:
         description: 'A UNIX timestamp rapresenting the last update of a record'
-        type: object
-      Channels:
-        description: 'A list of key/value matching those indicated in the DeviceDefinition'
         type: object
   
