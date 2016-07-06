@@ -27,7 +27,7 @@ externalDocs:
   url: http://agile-iot.github.io/agile-api-spec/build/html/api.html
   description: DBus AGILE API spec
 paths:
-  '/{deviceId}/{componentId}/execute/{operation}':
+  '/device/{deviceId}/execute/{command}':
     parameters:
       -
         name: deviceId
@@ -36,35 +36,30 @@ paths:
         required: true
         type: string
       -
-        name: componentId
+        name: command
         in: path
-        description: 'Agile component Id'
+        description: 'Operation name to be performed'
         required: true
         type: string
+      -
+        name: payload
+        in: body
+        description: "The content to be sent to the device to perform an actuation\n"
+        required: false
+        type: string
     post:
-      parameters:
-        -
-          name: operation
-          in: path
-          description: 'Operation name to be performed'
-          required: true
-          type: string
       description: 'Perform an action on the device'
       responses:
         '200':
           description: 'Action sent'
-  '/{deviceId}/{componentId}/subscribe':
+        '204':
+          description: 'Action sent, no response received'
+  '/device/{deviceId}/subscribe':
     parameters:
       -
         name: deviceId
         in: path
         description: 'Agile device Id'
-        required: true
-        type: string
-      -
-        name: componentId
-        in: path
-        description: 'Agile component Id'
         required: true
         type: string
     post:
@@ -73,11 +68,11 @@ paths:
         '200':
           description: 'Subscription registered'
     delete:
-      description: 'Disable a subscription to a data stream'
+      description: 'Unsubscribe from a data stream'
       responses:
         '200':
-          description: 'Subscription unregistered'
-  '/{deviceId}/{componentId}':
+          description: Unsubscribed
+  '/device/{deviceId}/{componentId}':
     parameters:
       -
         name: deviceId
@@ -88,29 +83,24 @@ paths:
       -
         name: componentId
         in: path
-        description: 'Agile component Id'
+        description: 'Agile component name, like a sensor'
         required: true
         type: string
     get:
-      description: 'Get the list of data stored for a stream'
+      description: 'Read from a device component'
       responses:
         '200':
-          description: 'Data loaded'
+          description: 'Read done'
         '204':
           description: 'No data available'
-    delete:
-      description: 'Delete all data related to a stream'
-      responses:
-        '200':
-          description: 'Data has been deleted'
     post:
-      description: 'Search for a stream recordset'
+      description: 'Write to a device component'
       responses:
         '200':
-          description: 'Query executed succesfully'
+          description: 'Write sent'
         '204':
-          description: 'Query executed succesfully but gave no results'
-  '/{deviceId}/{componentId}/lastUpdate':
+          description: 'Write sent, no results returned'
+  '/device/{deviceId}/lastUpdate':
     parameters:
       -
         name: deviceId
@@ -118,21 +108,15 @@ paths:
         description: 'Agile device Id'
         required: true
         type: string
-      -
-        name: componentId
-        in: path
-        description: 'Agile component Id'
-        required: true
-        type: string
     get:
-      description: 'Get the last stored record for a stream'
+      description: 'Get the last record fetched from the device'
       responses:
         '200':
           description: 'Record fetched'
         '204':
           description: 'No data available'
         '404':
-          description: 'Device or stream not available'
+          description: 'Device not available'
   /devices:
     get:
       description: 'List all registered devices'

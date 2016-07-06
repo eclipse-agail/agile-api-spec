@@ -1,6 +1,10 @@
 
 iot.agile.ProtocolManager:
 
+  description: |
+    The ProtocolManager list the managed protocols in the gateway. From this
+    interface is possible to add and remove protocols and start/stop multiprotocol discovery
+
   group: Protocol
 
   http:

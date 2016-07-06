@@ -1,0 +1,7 @@
+
+StatusType:
+  group: Device
+  type: Enum
+  fields:
+    - CONNECTED
+    - DISCONNECTED

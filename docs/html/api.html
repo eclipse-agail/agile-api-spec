@@ -160,12 +160,6 @@
           <ul class="menu vertical types">
             
               <li>
-                <a href="#StatusType" data-for="StatusType">
-                  StatusType
-                </a>
-              </li>
-              
-              <li>
                 <a href="#DeviceOverview" data-for="DeviceOverview">
                   DeviceOverview
                 </a>
@@ -222,6 +216,12 @@
               <li>
                 <a href="#DeviceDefinition" data-for="DeviceDefinition">
                   DeviceDefinition
+                </a>
+              </li>
+              
+              <li>
+                <a href="#StatusType" data-for="StatusType">
+                  StatusType
                 </a>
               </li>
               
@@ -1316,7 +1316,9 @@ Contains per-app filterable output.
   <h3>
     iot.agile.Device
   </h3>
-  <div class="description"></div>
+  <div class="description">The Device API abstracts operations over the real device.
+It send commands to a Protocol API instance to which is binded.
+</div>
   <hr />
 
   <h4>Properties</h4>
@@ -1521,7 +1523,7 @@ Contains per-app filterable output.
 
     
       <div class="description">
-        Retain the most recent updates of a sensor or data stream, received asynchronously from Subscribe call
+        Retain the most recent updates from a sensor or data stream, received asynchronously from Subscribe call
       </div>
     
 
@@ -1966,7 +1968,7 @@ underline Protocol specific implementation.
 </span>
 
 <span class="name">
-  streamName
+  component
 </span>
 </span>
     <span class="name">)</span>
@@ -1986,7 +1988,7 @@ underline Protocol specific implementation.
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="streamName">
+    <li class="api-type" data-type="type" id="component">
 
   <div class="overview">
     <span class="type">
@@ -1997,7 +1999,7 @@ underline Protocol specific implementation.
 
     
       <span class="name">
-        streamName
+        component
       </span>
     
   </div>
@@ -2074,11 +2076,11 @@ underline Protocol specific implementation.
 </span>
 
 <span class="name">
-  streamName
+  component
 </span>
 <span class="args-glue">, </span><span class="type">
   
-    Object*
+    Object
   
 </span>
 
@@ -2103,7 +2105,7 @@ underline Protocol specific implementation.
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="streamName">
+    <li class="api-type" data-type="type" id="component">
 
   <div class="overview">
     <span class="type">
@@ -2114,7 +2116,7 @@ underline Protocol specific implementation.
 
     
       <span class="name">
-        streamName
+        component
       </span>
     
   </div>
@@ -2134,7 +2136,7 @@ underline Protocol specific implementation.
   <div class="overview">
     <span class="type">
       
-        Object*
+        Object
       
     </span>
 
@@ -2151,6 +2153,70 @@ underline Protocol specific implementation.
 
     
 
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="data">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        data
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The data to write as plain text
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="format">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        format
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The format of the data for later conversion
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
     
   </div>
 
@@ -2217,7 +2283,7 @@ underline Protocol specific implementation.
 </span>
 
 <span class="name">
-  streamName
+  component
 </span>
 <span class="args-glue">, </span><span class="type">
   
@@ -2252,7 +2318,7 @@ the underlying Protocol implementation if supported.
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="streamName">
+    <li class="api-type" data-type="type" id="component">
 
   <div class="overview">
     <span class="type">
@@ -2263,7 +2329,7 @@ the underlying Protocol implementation if supported.
 
     
       <span class="name">
-        streamName
+        component
       </span>
     
   </div>
@@ -2376,7 +2442,7 @@ or sensor, like eg. frequency
 </span>
 
 <span class="name">
-  streamName
+  component
 </span>
 </span>
     <span class="name">)</span>
@@ -2402,7 +2468,7 @@ the underlying Protocol implementation if supported.
     Arguments
   </div>
   <ul class="content">
-    <li class="api-type" data-type="type" id="streamName">
+    <li class="api-type" data-type="type" id="component">
 
   <div class="overview">
     <span class="type">
@@ -2413,7 +2479,7 @@ the underlying Protocol implementation if supported.
 
     
       <span class="name">
-        streamName
+        component
       </span>
     
   </div>
@@ -4600,7 +4666,9 @@ depending on implementation to save resources
   <h3>
     iot.agile.ProtocolManager
   </h3>
-  <div class="description"></div>
+  <div class="description">The ProtocolManager list the managed protocols in the gateway. From this
+interface is possible to add and remove protocols and start/stop multiprotocol discovery
+</div>
   <hr />
 
   <h4>Properties</h4>
@@ -7858,37 +7926,7 @@ the enabled Driver. If none replies the operation fails.
   <hr />
 
   <div class="types-list">
-    <li class="api-type" data-type="type" id="StatusType">
-
-  <div class="overview">
-    <span class="type">
-      
-        Enum
-      
-    </span>
-
-    
-      <span class="name">
-        StatusType
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li>CONNECTED</li><li>DISCONNECTED</li>
-      </ul>
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="DeviceOverview">
+    <li class="api-type" data-type="type" id="DeviceOverview">
 
   <div class="overview">
     <span class="type">
@@ -8777,6 +8815,36 @@ if for some reason further user-side checks are required.
 
 </li>
 
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="StatusType">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        StatusType
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>CONNECTED</li><li>DISCONNECTED</li>
       </ul>
     
   </div>

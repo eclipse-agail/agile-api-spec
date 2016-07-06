@@ -122,6 +122,7 @@
       }
     },
     "iot.agile.Device": {
+      "description": "The Device API abstracts operations over the real device.\nIt send commands to a Protocol API instance to which is binded.\n",
       "group": "Device",
       "methods": {
         "Execute": {
@@ -168,7 +169,7 @@
         },
         "Read": {
           "args": {
-            "streamName": {
+            "component": {
               "type": "String"
             }
           },
@@ -178,11 +179,23 @@
         },
         "Write": {
           "args": {
-            "streamName": {
+            "component": {
               "type": "String"
             },
             "data": {
-              "type": "Object*"
+              "type": "Object",
+              "fields": {
+                "data": {
+                  "description": "The data to write as plain text",
+                  "type": "String",
+                  "required": true
+                },
+                "format": {
+                  "description": "The format of the data for later conversion",
+                  "type": "String",
+                  "required": true
+                }
+              }
             }
           },
           "return": {
@@ -192,7 +205,7 @@
         "Subscribe": {
           "description": "Enable subscription to a specific sensor or data stream, triggering\nthe underlying Protocol implementation if supported.\n",
           "args": {
-            "streamName": {
+            "component": {
               "description": "The stream or sensor reference to subscribe for updates",
               "type": "String"
             },
@@ -208,7 +221,7 @@
         "Unsubscribe": {
           "description": "Disable a subscription to a specific sensor or data stream, triggering\nthe underlying Protocol implementation if supported.\n",
           "args": {
-            "streamName": {
+            "component": {
               "description": "The stream or sensor reference to unsubscribe from",
               "type": "String"
             }
@@ -244,7 +257,7 @@
           "type": "Number"
         },
         "Data": {
-          "description": "Retain the most recent updates of a sensor or data stream, received asynchronously from Subscribe call",
+          "description": "Retain the most recent updates from a sensor or data stream, received asynchronously from Subscribe call",
           "type": "Object*"
         },
         "Protocol": {
@@ -253,7 +266,7 @@
         }
       },
       "http": {
-        "/{deviceId}/{componentId}/execute/{operation}": {
+        "/device/{deviceId}/execute/{command}": {
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -263,34 +276,34 @@
               "type": "string"
             },
             "1": {
-              "name": "componentId",
+              "name": "command",
               "in": "path",
-              "description": "Agile component Id",
+              "description": "Operation name to be performed",
               "required": true,
+              "type": "string"
+            },
+            "2": {
+              "name": "payload",
+              "in": "body",
+              "description": "The content to be sent to the device to perform an actuation\n",
+              "required": false,
               "type": "string"
             }
           },
           "post": {
-            "parameters": {
-              "0": {
-                "name": "operation",
-                "in": "path",
-                "description": "Operation name to be performed",
-                "required": true,
-                "type": "string"
-              }
-            },
-            "body": "object",
             "description": "Perform an action on the device",
             "(reference)": "Device.Execute",
             "responses": {
               "200": {
                 "description": "Action sent"
+              },
+              "204": {
+                "description": "Action sent, no response received"
               }
             }
           }
         },
-        "/{deviceId}/{componentId}/subscribe": {
+        "/device/{deviceId}/subscribe": {
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -298,17 +311,9 @@
               "description": "Agile device Id",
               "required": true,
               "type": "string"
-            },
-            "1": {
-              "name": "componentId",
-              "in": "path",
-              "description": "Agile component Id",
-              "required": true,
-              "type": "string"
             }
           },
           "post": {
-            "body": "object",
             "description": "Enable a subscription to a data stream. Asynchronous data updates will\nbe delivered via websocket.\n",
             "(reference)": "Device.Subscribe",
             "responses": {
@@ -318,17 +323,16 @@
             }
           },
           "delete": {
-            "body": "object",
-            "description": "Disable a subscription to a data stream",
+            "description": "Unsubscribe from a data stream",
             "(reference)": "Device.Unsubscribe",
             "responses": {
               "200": {
-                "description": "Subscription unregistered"
+                "description": "Unsubscribed"
               }
             }
           }
         },
-        "/{deviceId}/{componentId}": {
+        "/device/{deviceId}/{componentId}": {
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -340,48 +344,37 @@
             "1": {
               "name": "componentId",
               "in": "path",
-              "description": "Agile component Id",
+              "description": "Agile component name, like a sensor",
               "required": true,
               "type": "string"
             }
           },
           "get": {
-            "body": "RecordObject",
-            "description": "Get the list of data stored for a stream",
-            "(reference)": "Storage.Get",
+            "description": "Read from a device component",
+            "(reference)": "Device.Read",
             "responses": {
               "200": {
-                "description": "Data loaded"
+                "description": "Read done"
               },
               "204": {
                 "description": "No data available"
               }
             }
           },
-          "delete": {
-            "description": "Delete all data related to a stream",
-            "(reference)": "Storage.Delete",
-            "responses": {
-              "200": {
-                "description": "Data has been deleted"
-              }
-            }
-          },
           "post": {
-            "body": "BaseQuery",
-            "description": "Search for a stream recordset",
-            "(reference)": "Storage.Find",
+            "description": "Write to a device component",
+            "(reference)": "Device.Write",
             "responses": {
               "200": {
-                "description": "Query executed succesfully"
+                "description": "Write sent"
               },
               "204": {
-                "description": "Query executed succesfully but gave no results"
+                "description": "Write sent, no results returned"
               }
             }
           }
         },
-        "/{deviceId}/{componentId}/lastUpdate": {
+        "/device/{deviceId}/lastUpdate": {
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -389,19 +382,11 @@
               "description": "Agile device Id",
               "required": true,
               "type": "string"
-            },
-            "1": {
-              "name": "componentId",
-              "in": "path",
-              "description": "Agile component Id",
-              "required": true,
-              "type": "string"
             }
           },
           "get": {
-            "body": "RecordObject",
-            "description": "Get the last stored record for a stream",
-            "(reference)": "Device.Read",
+            "description": "Get the last record fetched from the device",
+            "(reference)": "Device.Data",
             "responses": {
               "200": {
                 "description": "Record fetched"
@@ -410,7 +395,7 @@
                 "description": "No data available"
               },
               "404": {
-                "description": "Device or stream not available"
+                "description": "Device not available"
               }
             }
           }
@@ -920,6 +905,7 @@
       }
     },
     "iot.agile.ProtocolManager": {
+      "description": "The ProtocolManager list the managed protocols in the gateway. From this\ninterface is possible to add and remove protocols and start/stop multiprotocol discovery\n",
       "group": "Protocol",
       "methods": {
         "StartDiscovery": {
@@ -1469,20 +1455,6 @@
     }
   },
   "types": {
-    "StatusType": {
-      "type": "Enum",
-      "fields": {
-        "0": {
-          "type": "CONNECTED",
-          "required": true
-        },
-        "1": {
-          "type": "DISCONNECTED",
-          "required": true
-        }
-      },
-      "required": true
-    },
     "DeviceOverview": {
       "description": "An overview of a device a protocol knows about",
       "type": "Object",
@@ -1696,6 +1668,20 @@
         "streams": {
           "type": "Array",
           "fields": "DeviceStream",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "StatusType": {
+      "type": "Enum",
+      "fields": {
+        "0": {
+          "type": "CONNECTED",
+          "required": true
+        },
+        "1": {
+          "type": "DISCONNECTED",
           "required": true
         }
       },
