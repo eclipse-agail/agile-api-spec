@@ -141,7 +141,7 @@ iot.agile.Device:
           description: Agile component Id
           required: true
           type: string
-      
+
       get:
         body:
           type: RecordObject
@@ -206,10 +206,12 @@ iot.agile.Device:
          response: Object*
 
   Connect:
+    description: Connect or initialize the underlying Protocol connection implementation if required or available.
     args:
-    return: Object*
+    return: void
 
   Disconnect:
+    description: Disconnect or clean up the underlying Protocol connection implementation if required or available.
     args:
     return: void
 

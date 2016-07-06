@@ -155,11 +155,13 @@
           }
         },
         "Connect": {
+          "description": "Connect or initialize the underlying Protocol connection implementation if required or available.",
           "return": {
-            "type": "Object*"
+            "type": "void"
           }
         },
         "Disconnect": {
+          "description": "Disconnect or clean up the underlying Protocol connection implementation if required or available.",
           "return": {
             "type": "void"
           }

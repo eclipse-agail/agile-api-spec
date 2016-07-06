@@ -22,12 +22,17 @@
       cursor: pointer;
     }
 
-    .details, .overview.open {
-      background: #EEE;
+    .api-class .details,
+    .api-class .overview.open {
+      border-bottom: 1px dotted #EEE;
+      margin: 0.15em 0;
     }
 
-    .overview:hover, .overview:active {
-      background-color: #EEE;
+    .overview
+    {
+    }
+    .overview:hover
+    {
     }
 
     .description, .type {
@@ -50,27 +55,224 @@
       max-height: 480px;
     }
 
+    .top-bar, .top-bar ul {
+      background-color: white;
+    }
+
+    .hidden {
+      display: block;
+    }
+
   </style>
 
 </head>
 
 <body>
-  <div class="row">
-    <div class="columns large-3" id="leftbar" data-sticky-container>
-      <div id="menu-wrapper" data-sticky>
 
-        <div class="text-center">
-          <a href="http://agile-iot.eu/">
-            <img
-              src="http://www.agile-project-iot.eu/wp-content/uploads/2016/03/logo-png-transparent-02_small.png"
-              style="width: 100%; max-width: 100px"
-            />
-          </a>
-          <h5 class="text-center">API spec</h5>
-        </div>
+  <div class="title-bar"
+  data-responsive-toggle="example-menu"
+  data-hide-for="medium"
+  class="sticky"
+  data-sticky
+>
+  <button class="menu-icon" type="button" data-toggle></button>
+  <div class="title-bar-title">Menu</div>
+</div>
 
+<div id="main-menu" class="top-bar" >
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
 
-        <form id="searchbox">
+      <li class="">
+        <a href="https://github.com/Agile-IoT" class="inline">
+          <img
+            src="http://www.agile-project-iot.eu/wp-content/uploads/2016/03/logo-png-transparent-02_small.png"
+            style="max-width: 40px"
+          />
+        </a>
+        <b class="text-small">API spec</b>
+      </li>
+
+      
+        <li>
+          <a href="#">Objects</a>
+          <ul class="menu vertical object">
+            
+              <li>
+                <a href="#iot_agile_Apps" data-for="iot_agile_Apps">
+                  iot.agile.Apps
+                </a>
+              </li>
+              
+              <li>
+                <a href="#iot_agile_Device" data-for="iot_agile_Device">
+                  iot.agile.Device
+                </a>
+              </li>
+              
+              <li>
+                <a href="#iot_agile_DeviceManager" data-for="iot_agile_DeviceManager">
+                  iot.agile.DeviceManager
+                </a>
+              </li>
+              
+              <li>
+                <a href="#iot_agile_Protocol" data-for="iot_agile_Protocol">
+                  iot.agile.Protocol
+                </a>
+              </li>
+              
+              <li>
+                <a href="#iot_agile_ProtocolManager" data-for="iot_agile_ProtocolManager">
+                  iot.agile.ProtocolManager
+                </a>
+              </li>
+              
+              <li>
+                <a href="#iot_agile_Network" data-for="iot_agile_Network">
+                  iot.agile.Network
+                </a>
+              </li>
+              
+              <li>
+                <a href="#iot_agile_Storage_Driver" data-for="iot_agile_Storage_Driver">
+                  iot.agile.Storage.Driver
+                </a>
+              </li>
+              
+              <li>
+                <a href="#iot_agile_Storage_DriverManager" data-for="iot_agile_Storage_DriverManager">
+                  iot.agile.Storage.DriverManager
+                </a>
+              </li>
+              
+              <li>
+                <a href="#iot_agile_Storage" data-for="iot_agile_Storage">
+                  iot.agile.Storage
+                </a>
+              </li>
+              
+          </ul>
+        </li>
+        
+        <li>
+          <a href="#">Types</a>
+          <ul class="menu vertical types">
+            
+              <li>
+                <a href="#StatusType" data-for="StatusType">
+                  StatusType
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ChannelTypeEnum" data-for="ChannelTypeEnum">
+                  ChannelTypeEnum
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DeviceStreamChannel" data-for="DeviceStreamChannel">
+                  DeviceStreamChannel
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DeviceStream" data-for="DeviceStream">
+                  DeviceStream
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DeviceDefinition" data-for="DeviceDefinition">
+                  DeviceDefinition
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DiscoverParam" data-for="DiscoverParam">
+                  DiscoverParam
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolMessage" data-for="ProtocolMessage">
+                  ProtocolMessage
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DeviceOverview" data-for="DeviceOverview">
+                  DeviceOverview
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolDevice" data-for="ProtocolDevice">
+                  ProtocolDevice
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolStatus" data-for="ProtocolStatus">
+                  ProtocolStatus
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolProfile" data-for="ProtocolProfile">
+                  ProtocolProfile
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolOverview" data-for="ProtocolOverview">
+                  ProtocolOverview
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DriverStatus" data-for="DriverStatus">
+                  DriverStatus
+                </a>
+              </li>
+              
+              <li>
+                <a href="#RecordObject" data-for="RecordObject">
+                  RecordObject
+                </a>
+              </li>
+              
+              <li>
+                <a href="#BaseQuery" data-for="BaseQuery">
+                  BaseQuery
+                </a>
+              </li>
+              
+              <li>
+                <a href="#KeyValue" data-for="KeyValue">
+                  KeyValue
+                </a>
+              </li>
+              
+          </ul>
+        </li>
+        
+
+        <li>
+          <a href="#">Restful HTTP API</a>
+          <ul class="menu vertical">
+            <li> <a href="http://petstore.swagger.io/?url=http://agile-iot.github.io/agile-api-spec/docs/swagger/api.swagger.yml"><small>[alpha]</small> REST API docs </a> </li>
+            <li> <a href="../swagger/api.swagger.yml"><small>[alpha]</small>SWAGGER API spec</a> </li>
+            <li> <a href="../raml/api.raml"><small>[alpha]</small>RAML API spec</a> </li>
+          </ul>
+        </li>
+
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li><form id="searchbox">
   <div class="row">
     <div class="medium-12 columns">
       <input type="search" placeholder="search.." id="searchtxt">
@@ -208,191 +410,22 @@
     })
   });
 </script>
-
-
-        <nav class="menu">
-  
-    <h5>Objects</h5>
-    <hr />
-    <ul class="no-bullet side-nav object" data-magellan>
-      
-        <li>
-          <a href="#iot_agile_Apps" data-for="iot_agile_Apps">
-            iot.agile.Apps
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot_agile_Device" data-for="iot_agile_Device">
-            iot.agile.Device
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot_agile_DeviceManager" data-for="iot_agile_DeviceManager">
-            iot.agile.DeviceManager
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot_agile_Protocol" data-for="iot_agile_Protocol">
-            iot.agile.Protocol
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot_agile_ProtocolManager" data-for="iot_agile_ProtocolManager">
-            iot.agile.ProtocolManager
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot_agile_Network" data-for="iot_agile_Network">
-            iot.agile.Network
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot_agile_Storage_Driver" data-for="iot_agile_Storage_Driver">
-            iot.agile.Storage.Driver
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot_agile_Storage_DriverManager" data-for="iot_agile_Storage_DriverManager">
-            iot.agile.Storage.DriverManager
-          </a>
-        </li>
-        
-        <li>
-          <a href="#iot_agile_Storage" data-for="iot_agile_Storage">
-            iot.agile.Storage
-          </a>
-        </li>
-        
+</li>
+      <li>
+        <a href="https://github.com/Agile-IoT/agile-api-spec" title="Go to repository">
+          <img style="width: 40px"
+            src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" />
+        </a>
+      </li>
     </ul>
-    
-    <h5>Types</h5>
-    <hr />
-    <ul class="no-bullet side-nav types" data-magellan>
-      
-        <li>
-          <a href="#StatusType" data-for="StatusType">
-            StatusType
-          </a>
-        </li>
-        
-        <li>
-          <a href="#ChannelTypeEnum" data-for="ChannelTypeEnum">
-            ChannelTypeEnum
-          </a>
-        </li>
-        
-        <li>
-          <a href="#DeviceStreamChannel" data-for="DeviceStreamChannel">
-            DeviceStreamChannel
-          </a>
-        </li>
-        
-        <li>
-          <a href="#DeviceStream" data-for="DeviceStream">
-            DeviceStream
-          </a>
-        </li>
-        
-        <li>
-          <a href="#DeviceDefinition" data-for="DeviceDefinition">
-            DeviceDefinition
-          </a>
-        </li>
-        
-        <li>
-          <a href="#DiscoverParam" data-for="DiscoverParam">
-            DiscoverParam
-          </a>
-        </li>
-        
-        <li>
-          <a href="#ProtocolMessage" data-for="ProtocolMessage">
-            ProtocolMessage
-          </a>
-        </li>
-        
-        <li>
-          <a href="#DeviceOverview" data-for="DeviceOverview">
-            DeviceOverview
-          </a>
-        </li>
-        
-        <li>
-          <a href="#ProtocolDevice" data-for="ProtocolDevice">
-            ProtocolDevice
-          </a>
-        </li>
-        
-        <li>
-          <a href="#ProtocolStatus" data-for="ProtocolStatus">
-            ProtocolStatus
-          </a>
-        </li>
-        
-        <li>
-          <a href="#ProtocolProfile" data-for="ProtocolProfile">
-            ProtocolProfile
-          </a>
-        </li>
-        
-        <li>
-          <a href="#ProtocolOverview" data-for="ProtocolOverview">
-            ProtocolOverview
-          </a>
-        </li>
-        
-        <li>
-          <a href="#DriverStatus" data-for="DriverStatus">
-            DriverStatus
-          </a>
-        </li>
-        
-        <li>
-          <a href="#RecordObject" data-for="RecordObject">
-            RecordObject
-          </a>
-        </li>
-        
-        <li>
-          <a href="#BaseQuery" data-for="BaseQuery">
-            BaseQuery
-          </a>
-        </li>
-        
-        <li>
-          <a href="#KeyValue" data-for="KeyValue">
-            KeyValue
-          </a>
-        </li>
-        
-    </ul>
-    
-</nav>
+  </div>
+</div>
 
-<br />
-<br />
 
-<nav class="http-api-menu">
-
-  <h5>Rest HTTP API</h5>
   <hr />
-  <ul class="no-bullet side-nav api-docs">
-    <li> <a href="http://petstore.swagger.io/?url=http://agile-iot.github.io/agile-api-spec/docs/swagger/api.swagger.yml"><small>[alpha]</small> REST API docs </a> </li>
-    <li> <a href="../swagger/api.swagger.yml"><small>[alpha]</small>SWAGGER API spec</a> </li>
-    <li> <a href="../raml/api.raml"><small>[alpha]</small>RAML API spec</a> </li>
-  </ul>
 
-
-      </div>
-    </div>
-    <div class="columns large-9">
+  <div class="row">
+    <div class="columns large-12 medium-12 small-12">
       <div class="api-class"
   data-type="class"
   data-magellan-target="iot_agile_Apps"
@@ -422,6 +455,10 @@
       Logs
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Apps.Logs">
+
     
       <div class="description">
         System path to Apps log file.
@@ -430,14 +467,6 @@ Contains per-app filterable output.
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Apps.Logs">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -458,16 +487,12 @@ Contains per-app filterable output.
       Settings
     </span>
 
-    
-
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Apps.Settings">
+  <div class="pad-left details hidden" data-for="iot.agile.Apps.Settings">
 
     
-      <div class="access-container">
-        Access type 
-      </div>
+
     
 
     
@@ -548,6 +573,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Application name to start
@@ -577,6 +603,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Application parameters to pass
@@ -614,6 +641,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Return informations regarding the operation results.
@@ -695,6 +723,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Application name to stop
@@ -728,6 +757,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Return the exit code, if available.
@@ -809,6 +839,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Application name to restart
@@ -842,6 +873,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -919,6 +951,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Application name to install
@@ -952,6 +985,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1029,6 +1063,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Application name to uninstall
@@ -1062,6 +1097,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1139,6 +1175,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Application name to uninstall
@@ -1172,6 +1209,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1195,6 +1233,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1220,6 +1259,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1245,6 +1285,7 @@ Contains per-app filterable output.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1300,20 +1341,16 @@ Contains per-app filterable output.
       Id
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Device.Id">
+
     
       <div class="description">
         The unique device id in the gateway
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Device.Id">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -1334,20 +1371,16 @@ Contains per-app filterable output.
       Name
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Device.Name">
+
     
       <div class="description">
         The device name
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Device.Name">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -1368,20 +1401,16 @@ Contains per-app filterable output.
       Status
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Device.Status">
+
     
       <div class="description">
         Indicate the current device status
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Device.Status">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -1402,20 +1431,16 @@ Contains per-app filterable output.
       Configuration
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Device.Configuration">
+
     
       <div class="description">
         User configurations storage
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Device.Configuration">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -1436,20 +1461,16 @@ Contains per-app filterable output.
       Profile
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Device.Profile">
+
     
       <div class="description">
         Contains protocol specific provided information on device in order to handle at Protocol level the specific implementation
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Device.Profile">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -1470,20 +1491,16 @@ Contains per-app filterable output.
       LastUpdate
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Device.LastUpdate">
+
     
       <div class="description">
         A UNIX timestamp to indicate the last data update received by the Device
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Device.LastUpdate">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -1504,20 +1521,16 @@ Contains per-app filterable output.
       Data
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Device.Data">
+
     
       <div class="description">
         Retain the most recent updates of a sensor or data stream, received asynchronously from Subscribe call
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Device.Data">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -1530,7 +1543,7 @@ Contains per-app filterable output.
 
     <span class="type">
       
-        
+        <a href="#iot.agile.Protocol">iot.agile.Protocol</a>
       
     </span>
 
@@ -1538,20 +1551,16 @@ Contains per-app filterable output.
       Protocol
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Device.Protocol">
+
     
       <div class="description">
         Device-specific communication Protocol instance. Available to access protocol specific methods and properties
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Device.Protocol">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -1638,6 +1647,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Operation name or code as string
@@ -1667,6 +1677,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Arguments for the actuation on the device
@@ -1700,6 +1711,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1723,6 +1735,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1748,6 +1761,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1773,6 +1787,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1804,7 +1819,7 @@ underline Protocol specific implementation.
       
         <span class="type">
   
-    Object*
+    void
   
 </span>
 
@@ -1815,6 +1830,10 @@ underline Protocol specific implementation.
       <span class="args"></span>
     <span class="name">)</span>
 
+    
+      <div class="description">
+        Connect or initialize the underlying Protocol connection implementation if required or available.
+      </div>
     
 
   </div>
@@ -1835,7 +1854,7 @@ underline Protocol specific implementation.
   <div class="overview">
     <span class="type">
       
-        Object*
+        void
       
     </span>
 
@@ -1843,6 +1862,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1880,6 +1900,10 @@ underline Protocol specific implementation.
     <span class="name">)</span>
 
     
+      <div class="description">
+        Disconnect or clean up the underlying Protocol connection implementation if required or available.
+      </div>
+    
 
   </div>
 
@@ -1907,6 +1931,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -1984,6 +2009,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2013,6 +2039,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2099,6 +2126,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2124,6 +2152,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2153,6 +2182,7 @@ underline Protocol specific implementation.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2245,6 +2275,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The stream or sensor reference to subscribe for updates
@@ -2274,6 +2305,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Custom parameters set to pass spcific to the device
@@ -2309,6 +2341,7 @@ or sensor, like eg. frequency
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2392,6 +2425,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The stream or sensor reference to unsubscribe from
@@ -2425,6 +2459,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2474,20 +2509,16 @@ the underlying Protocol implementation if supported.
       Devices
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.DeviceManager.Devices">
+
     
       <div class="description">
         Return all registered devices
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.DeviceManager.Devices">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -2572,6 +2603,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2597,6 +2629,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2626,6 +2659,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A list with all matching registered devices results, eventually sorted and sliced
@@ -2711,6 +2745,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2740,6 +2775,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Return the AGILE Device ID, unique to identify the device in the gateway
@@ -2825,6 +2861,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2854,6 +2891,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Return the AGILE Device UUID, unique to identify the device in the gateway
@@ -2948,6 +2986,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -2973,6 +3012,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3002,6 +3042,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3092,6 +3133,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3117,6 +3159,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3146,6 +3189,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3236,6 +3280,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3265,6 +3310,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         An object to be passed to the underlying function call (Create, Update, Delete, Read)
@@ -3298,6 +3344,7 @@ the underlying Protocol implementation if supported.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3349,15 +3396,30 @@ Every Device has one Protocol used to establish and use a communication exchange
       Status
     </span>
 
-    
-
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.Status">
+  <div class="pad-left details hidden" data-for="iot.agile.Protocol.Status">
+
+    
 
     
       <div class="access-container">
-        Access type r,s
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -3379,19 +3441,28 @@ Every Device has one Protocol used to establish and use a communication exchange
       Driver
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Protocol.Driver">
+
     
       <div class="description">
         Driver unique code name
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Protocol.Driver">
-
     
       <div class="access-container">
-        Access type r
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -3417,19 +3488,28 @@ Every Device has one Protocol used to establish and use a communication exchange
       Name
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Protocol.Name">
+
     
       <div class="description">
         Driver name
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Protocol.Name">
-
     
       <div class="access-container">
-        Access type r
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -3451,6 +3531,10 @@ Every Device has one Protocol used to establish and use a communication exchange
       Data
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Protocol.Data">
+
     
       <div class="description">
         Store the last record(s) received by a Read or Subscribe operation.
@@ -3460,13 +3544,24 @@ from different sensor an will need to filter out the correct ones
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Protocol.Data">
-
     
       <div class="access-container">
-        Access type r,s
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -3488,15 +3583,30 @@ from different sensor an will need to filter out the correct ones
       Devices
     </span>
 
-    
-
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.Devices">
+  <div class="pad-left details hidden" data-for="iot.agile.Protocol.Devices">
+
+    
 
     
       <div class="access-container">
-        Access type r,s
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -3574,6 +3684,7 @@ from different sensor an will need to filter out the correct ones
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The protocol internal id rapresenting a device
@@ -3607,6 +3718,7 @@ from different sensor an will need to filter out the correct ones
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3689,6 +3801,7 @@ from different sensor an will need to filter out the correct ones
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The protocol internal id rapresenting a device
@@ -3722,6 +3835,7 @@ from different sensor an will need to filter out the correct ones
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3791,6 +3905,7 @@ from different sensor an will need to filter out the correct ones
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3882,6 +3997,7 @@ from different sensor an will need to filter out the correct ones
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3907,6 +4023,7 @@ from different sensor an will need to filter out the correct ones
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -3936,6 +4053,7 @@ from different sensor an will need to filter out the correct ones
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -4037,6 +4155,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The internal device reference id
@@ -4066,6 +4185,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Component reference of the device, may be a sensor
@@ -4099,6 +4219,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -4128,6 +4249,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -4228,6 +4350,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The internal device reference id
@@ -4257,6 +4380,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Component reference of the device, may be a sensor
@@ -4290,6 +4414,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Additional arguments required to contextualize the subscription request
@@ -4323,6 +4448,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -4372,19 +4498,34 @@ depending on implementation to save resources
       Devices
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.ProtocolManager.Devices">
+
     
       <div class="description">
         Contains the list of devices returned by each Protocol specific discovery, where available
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.ProtocolManager.Devices">
-
     
       <div class="access-container">
-        Access type r,s
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -4406,19 +4547,34 @@ depending on implementation to save resources
       Protocols
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.ProtocolManager.Protocols">
+
     
       <div class="description">
         The list of managed Protocols
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.ProtocolManager.Protocols">
-
     
       <div class="access-container">
-        Access type r,s
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -4495,6 +4651,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -4524,6 +4681,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -4592,6 +4750,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -4627,7 +4786,7 @@ depending on implementation to save resources
     <span class="name">Add(</span>
       <span class="args"><span class="type">
   
-    String
+    <a href="#iot.agile.Protocol">String</a>
   
 </span>
 
@@ -4661,7 +4820,7 @@ depending on implementation to save resources
   <div class="overview">
     <span class="type">
       
-        String
+        <a href="#iot.agile.Protocol">String</a>
       
     </span>
 
@@ -4673,6 +4832,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -4702,6 +4862,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -4737,7 +4898,7 @@ depending on implementation to save resources
     <span class="name">Remove(</span>
       <span class="args"><span class="type">
   
-    String
+    <a href="#iot.agile.Protocol">String</a>
   
 </span>
 
@@ -4771,7 +4932,7 @@ depending on implementation to save resources
   <div class="overview">
     <span class="type">
       
-        String
+        <a href="#iot.agile.Protocol">String</a>
       
     </span>
 
@@ -4783,6 +4944,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -4812,6 +4974,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -4861,20 +5024,16 @@ depending on implementation to save resources
       Status
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Network.Status">
+
     
       <div class="description">
         Indicates if an internet connection is available
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Network.Status">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -4895,19 +5054,34 @@ depending on implementation to save resources
       Connections
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Network.Connections">
+
     
       <div class="description">
         List available internet connections
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Network.Connections">
-
     
       <div class="access-container">
-        Access type r,s
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -4929,20 +5103,16 @@ depending on implementation to save resources
       Devices
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Network.Devices">
+
     
       <div class="description">
         List available network system devices
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Network.Devices">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -5036,6 +5206,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A valid subnet to use to setup the access point
@@ -5069,6 +5240,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The default gateway to use for routing / natting
@@ -5102,6 +5274,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The default access password / key used to login depending on AP setup
@@ -5174,6 +5347,7 @@ depending on implementation to save resources
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -5226,19 +5400,28 @@ It may be a local database or an online services via APIs
       Name
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Storage.Driver.Name">
+
     
       <div class="description">
         The driver friendly name
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Storage.Driver.Name">
-
     
       <div class="access-container">
-        Access type r
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -5252,7 +5435,7 @@ It may be a local database or an online services via APIs
 
     <span class="type">
       
-        
+        false
       
     </span>
 
@@ -5260,16 +5443,12 @@ It may be a local database or an online services via APIs
       Enabled
     </span>
 
-    
-
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Driver.Enabled">
+  <div class="pad-left details hidden" data-for="iot.agile.Storage.Driver.Enabled">
 
     
-      <div class="access-container">
-        Access type 
-      </div>
+
     
 
     
@@ -5290,19 +5469,28 @@ It may be a local database or an online services via APIs
       Status
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Storage.Driver.Status">
+
     
       <div class="description">
         Indicate the overall status of the Driver.
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Storage.Driver.Status">
-
     
       <div class="access-container">
-        Access type r
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -5324,19 +5512,40 @@ It may be a local database or an online services via APIs
       Error
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Storage.Driver.Error">
+
     
       <div class="description">
         Indicates if an error occured. May be reset once notified.
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Storage.Driver.Error">
-
     
       <div class="access-container">
-        Access type r,w,s
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>W</b>rite
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -5358,6 +5567,10 @@ It may be a local database or an online services via APIs
       Params
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Storage.Driver.Params">
+
     
       <div class="description">
         Contains Driver specific configurations
@@ -5365,13 +5578,24 @@ It may be a local database or an online services via APIs
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Storage.Driver.Params">
-
     
       <div class="access-container">
-        Access type r,w
+        Access types:
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>W</b>rite
+              </span>
+            </li>
+          
+        </ul>
       </div>
     
 
@@ -5393,20 +5617,16 @@ It may be a local database or an online services via APIs
       Logs
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Storage.Driver.Logs">
+
     
       <div class="description">
         A system path to read the logs from
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Storage.Driver.Logs">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -5482,6 +5702,7 @@ It may be a local database or an online services via APIs
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -5511,6 +5732,7 @@ It may be a local database or an online services via APIs
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Return the Id of the created record
@@ -5596,6 +5818,7 @@ It may be a local database or an online services via APIs
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -5625,6 +5848,7 @@ It may be a local database or an online services via APIs
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Return the corresponding record
@@ -5719,6 +5943,7 @@ It may be a local database or an online services via APIs
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -5744,6 +5969,7 @@ It may be a local database or an online services via APIs
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -5773,6 +5999,7 @@ It may be a local database or an online services via APIs
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -5854,6 +6081,7 @@ It may be a local database or an online services via APIs
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -5883,6 +6111,7 @@ It may be a local database or an online services via APIs
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -5964,6 +6193,7 @@ It may be a local database or an online services via APIs
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -5993,6 +6223,7 @@ It may be a local database or an online services via APIs
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -6044,20 +6275,16 @@ of different Drivers available in the system.
       Enabled
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Storage.DriverManager.Enabled">
+
     
       <div class="description">
         List of enabled Drivers.
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Storage.DriverManager.Enabled">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -6078,20 +6305,16 @@ of different Drivers available in the system.
       List
     </span>
 
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.Storage.DriverManager.List">
+
     
       <div class="description">
         List of all available Drivers.
       </div>
     
 
-  </div>
-
-  <div class="details hidden" data-for="iot.agile.Storage.DriverManager.List">
-
-    
-      <div class="access-container">
-        Access type 
-      </div>
     
 
     
@@ -6121,7 +6344,7 @@ of different Drivers available in the system.
     <span class="name">Add(</span>
       <span class="args"><span class="type">
   
-    String
+    <a href="#iot.agile.Storage.Driver">String</a>
   
 </span>
 
@@ -6164,7 +6387,7 @@ of different Drivers available in the system.
   <div class="overview">
     <span class="type">
       
-        String
+        <a href="#iot.agile.Storage.Driver">String</a>
       
     </span>
 
@@ -6176,6 +6399,7 @@ of different Drivers available in the system.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The driver instance to be added
@@ -6209,6 +6433,7 @@ of different Drivers available in the system.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Specify if the Driver should be enabled and
@@ -6244,6 +6469,7 @@ immediately available
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -6279,7 +6505,7 @@ immediately available
     <span class="name">Remove(</span>
       <span class="args"><span class="type">
   
-    String
+    <a href="#iot.agile.Storage.Driver">String</a>
   
 </span>
 
@@ -6315,7 +6541,7 @@ instance
   <div class="overview">
     <span class="type">
       
-        String
+        <a href="#iot.agile.Storage.Driver">String</a>
       
     </span>
 
@@ -6327,6 +6553,7 @@ instance
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The driver instance
@@ -6364,6 +6591,7 @@ instance
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -6399,7 +6627,7 @@ instance
     <span class="name">Enable(</span>
       <span class="args"><span class="type">
   
-    String
+    <a href="#iot.agile.Storage.Driver">String</a>
   
 </span>
 
@@ -6433,7 +6661,7 @@ instance
   <div class="overview">
     <span class="type">
       
-        String
+        <a href="#iot.agile.Storage.Driver">String</a>
       
     </span>
 
@@ -6445,6 +6673,7 @@ instance
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The driver instance
@@ -6482,6 +6711,7 @@ instance
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -6517,7 +6747,7 @@ instance
     <span class="name">Disable(</span>
       <span class="args"><span class="type">
   
-    String
+    <a href="#iot.agile.Storage.Driver">String</a>
   
 </span>
 
@@ -6551,7 +6781,7 @@ instance
   <div class="overview">
     <span class="type">
       
-        String
+        <a href="#iot.agile.Storage.Driver">String</a>
       
     </span>
 
@@ -6563,6 +6793,7 @@ instance
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The driver instance
@@ -6600,6 +6831,7 @@ instance
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -6635,7 +6867,7 @@ instance
     <span class="name">Status(</span>
       <span class="args"><span class="type">
   
-    String
+    <a href="#iot.agile.Storage.Driver">String</a>
   
 </span>
 
@@ -6669,7 +6901,7 @@ instance
   <div class="overview">
     <span class="type">
       
-        String
+        <a href="#iot.agile.Storage.Driver">String</a>
       
     </span>
 
@@ -6681,6 +6913,7 @@ instance
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The driver instance
@@ -6718,6 +6951,7 @@ instance
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -6741,6 +6975,7 @@ instance
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -6766,6 +7001,7 @@ instance
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -6791,6 +7027,7 @@ instance
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A system path where to read the Driver logs
@@ -6861,16 +7098,12 @@ the enabled Driver. If none replies the operation fails.
       Connections
     </span>
 
-    
-
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Connections">
+  <div class="pad-left details hidden" data-for="iot.agile.Storage.Connections">
 
     
-      <div class="access-container">
-        Access type 
-      </div>
+
     
 
     
@@ -6946,6 +7179,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -6975,6 +7209,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Return the Id of the created record
@@ -7060,6 +7295,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7089,6 +7325,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Return the corresponding record
@@ -7183,6 +7420,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7208,6 +7446,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7237,6 +7476,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7318,6 +7558,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7347,6 +7588,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7428,6 +7670,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7457,6 +7700,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7502,6 +7746,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7531,6 +7776,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7560,6 +7806,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A channel contains a single measurement value of a sensor
@@ -7587,6 +7834,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7612,6 +7860,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7643,6 +7892,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A stream contains a set of measurement values for a sensor
@@ -7670,6 +7920,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7695,6 +7946,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7726,6 +7978,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A device definition that contains informations describing the current device
@@ -7753,6 +8006,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7778,6 +8032,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7803,6 +8058,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7828,6 +8084,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         DBus specific path to reach the object instance
@@ -7857,6 +8114,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7882,6 +8140,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7913,6 +8172,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7936,6 +8196,7 @@ the enabled Driver. If none replies the operation fails.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The duration in seconds the discovery process will last before
@@ -7973,6 +8234,7 @@ it should be stopped
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -7996,6 +8258,7 @@ it should be stopped
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8021,6 +8284,7 @@ it should be stopped
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8052,6 +8316,7 @@ it should be stopped
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8075,6 +8340,7 @@ it should be stopped
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8100,6 +8366,7 @@ it should be stopped
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8125,6 +8392,7 @@ it should be stopped
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8160,6 +8428,7 @@ it should be stopped
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         List all devices a Protocol knows about.
@@ -8192,6 +8461,7 @@ Devices may also be provisioned programmatically during the initialization phase
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         Identify a status of the Protocol, indicating if operational (AVAILABLE) or
@@ -8227,6 +8497,7 @@ if for some reason further user-side checks are required.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A Protocol set of settings that translate human readable properties
@@ -8262,6 +8533,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8285,6 +8557,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The protocol name
@@ -8318,6 +8591,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         the internal code identifying the protocol
@@ -8351,6 +8625,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The DBus interface reference
@@ -8384,6 +8659,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8415,6 +8691,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8444,6 +8721,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8467,6 +8745,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8492,6 +8771,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8517,6 +8797,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8542,6 +8823,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A UNIX timestamp rapresenting the last update of a record
@@ -8571,6 +8853,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A list of key/value matching those indicated in the DeviceDefinition
@@ -8606,6 +8889,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
 
     
@@ -8629,6 +8913,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A key-value series of field-value to query for.
@@ -8661,6 +8946,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A key-value series of field-value to order the result for.
@@ -8691,6 +8977,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The limit of records founds to return
@@ -8720,6 +9007,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         The position for the first record to take from the list of results
@@ -8755,6 +9043,7 @@ services and characteristics ids) to enable the data reading.
   </div>
 
   <div class="details hidden">
+
     
       <span class="description">
         A list of key/value pairs
@@ -8775,26 +9064,20 @@ services and characteristics ids) to enable the data reading.
     </div>
   </div>
 
-  <!-- Fork me on Github  -->
-  <a href="https://github.com/Agile-IoT/agile-api-spec">
-    <img style="position: absolute; top: 0; right: 0; border: 0;"
-      src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" />
-  </a>
-
   <script>
     jQuery(function($) {
 
       $('body').foundation();
 
-      $(".hidden").hide();
+      $(".api-class .hidden").hide();
 
-      $(".overview").click(function() {
-        $(this).toggleClass("open");
+      $(".api-class .overview").click(function() {
+        // $(this).toggleClass("open");
         $(this).next().toggle();
       })
 
-      $(".details .overview").off("click");
-      $(".details .hidden").show();
+      $(".api-class .details .overview").off("click");
+      $(".api-class .details .hidden").show();
 
     });
   </script>
