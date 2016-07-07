@@ -335,7 +335,7 @@ paths:
         '200':
           description: 'Protocols list provided'
           schema:
-            $ref: '#/definitions/DeviceOverview'
+            $ref: '#/definitions/ProtocolOverview'
           examples:
             application/json:
               -
@@ -350,23 +350,6 @@ paths:
                 status: AVAILABLE
         '204':
           description: 'No protocols registered.'
-    post:
-      tags:
-        - ProtocolManager
-      description: 'Register a new protocol based on an active DBus interface'
-      parameters:
-        -
-          name: protocol
-          in: body
-          schema:
-            $ref: '#/definitions/ProtocolOverview'
-      responses:
-        '200':
-          description: 'Protocol has been added'
-          schema:
-            $ref: '#/definitions/ProtocolOverview'
-        '400':
-          description: 'An error occured processing the request'
   '/protocols/{protocolId}':
     parameters:
       -
@@ -384,12 +367,10 @@ paths:
           description: 'Protocol has been added'
         '400':
           description: 'An error occured processing the request'
-        '404':
-          description: 'Protocol not found'
     delete:
       tags:
         - ProtocolManager
-      description: 'Register a new Dbus object implementing the protocol API'
+      description: 'Unregister a Dbus Protocol object reference'
       responses:
         '200':
           description: 'Protocol unregistered'
@@ -402,9 +383,22 @@ paths:
       description: 'List all discovered devices on all available protocols'
       responses:
         '200':
-          description: "The list of multiprotocol devices\n"
+          description: "The list of devices found via discovery\n"
           schema:
+            type: array
             $ref: '#/definitions/DeviceOverview'
+          examples:
+            application/json:
+              -
+                name: SensorTag
+                id: 'AA:BB:CC:DD'
+                protocol: iot.agile.protocol.BLE
+                status: AVAILABLE
+              -
+                name: LightDimmer
+                id: 'CC:DD:AA:BB'
+                protocol: iot.agile.protocol.Zwave
+                status: AVAILABLE
   /protocols/discovery:
     post:
       tags:
@@ -432,10 +426,13 @@ definitions:
     properties:
       name:
         description: 'Friendly name of the device'
-        type: object
+        type: string
+      protocol:
+        description: 'Protocol reference for this device'
+        type: string
       id:
         description: 'Protocol level id used to identify and access the device'
-        type: object
+        type: string
       status:
         enum:
           - CONNECTED
@@ -446,37 +443,53 @@ definitions:
     type: object
     properties:
       data:
-        type: object
+        type: string
       format:
-        type: object
+        type: string
   ProtocolOverview:
     type: object
     properties:
       name:
         description: 'The protocol name'
-        type: object
+        type: string
       id:
         description: 'the internal code identifying the protocol'
-        type: object
+        type: string
       interface:
         description: 'The DBus interface reference'
-        type: object
+        type: string
       status:
-        type: object
+        $ref: '#/definitions/ProtocolStatus'
+  ProtocolStatus:
+    description: "Identify a status of the Protocol, indicating if operational (AVAILABLE) or\nif for some reason further user-side checks are required.\n"
+    enum:
+      - AVAILABLE
+      - UNAVAILABLE
+      - NOT_CONFIGURED
+      - DISABLED
+      - ENABLED
+      - FAILURE
+  ChannelTypeEnum:
+    enum:
+      - Number
+      - String
+      - Boolean
+      - GeoPoint
+      - Object
   DeviceStreamChannel:
     description: 'A channel contains a single measurement value of a sensor'
     type: object
     properties:
       name:
-        type: object
+        type: string
       type:
-        type: object
+        $ref: '#/definitions/ChannelTypeEnum'
   DeviceStream:
     description: 'A stream contains a set of measurement values for a sensor'
     type: object
     properties:
       name:
-        type: object
+        type: string
       channels:
         type: array
         items:
@@ -486,14 +499,14 @@ definitions:
     type: object
     properties:
       id:
-        type: object
+        type: string
       name:
-        type: object
+        type: string
       description:
-        type: object
+        type: string
       path:
         description: 'DBus specific path to reach the object instance'
-        type: object
+        type: string
       properties:
         type: object
       streams:
@@ -505,17 +518,17 @@ definitions:
     properties:
       DeviceId:
         description: 'The Agile Id for the device'
-        type: object
+        type: string
       ComponentId:
         description: 'The component Id for the device, like the sensor name'
-        type: object
+        type: string
       Value:
         description: 'The value stored'
-        type: object
+        type: string
       Format:
         description: 'A format description to read the data value'
-        type: object
+        type: string
       LastUpdate:
         description: 'A UNIX timestamp rapresenting the last update of a record'
-        type: object
+        type: number
   
