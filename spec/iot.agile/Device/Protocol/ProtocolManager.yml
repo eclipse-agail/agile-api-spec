@@ -11,7 +11,6 @@ iot.agile.ProtocolManager:
 
   http:
     /protocols:
-      tags: [ProtocolManager]
       get:
         description: Get the list of registered protocols
         responses:
@@ -46,7 +45,6 @@ iot.agile.ProtocolManager:
           400:
             description: An error occured processing the request
     /protocols/{protocolId}:
-      tags: [ProtocolManager]
       parameters:
         -
           name: protocolId
@@ -76,10 +74,9 @@ iot.agile.ProtocolManager:
             description: Protocol not found
 
     /protocols/devices:
-      tags: [ProtocolManager]
       get:
         (reference): ProtocolManager.Devices
-        description: Start a device discovery on all available protocols
+        description: List all discovered devices on all available protocols
         responses:
           200:
             description: |
@@ -88,7 +85,6 @@ iot.agile.ProtocolManager:
               $ref: "#/definitions/DeviceOverview"
 
     /protocols/discovery:
-      tags: [ProtocolManager]
       post:
         (reference): ProtocolManager.StartDiscovery
         body:

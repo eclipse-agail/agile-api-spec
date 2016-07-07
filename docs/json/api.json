@@ -267,9 +267,6 @@
       },
       "http": {
         "/device/{deviceId}/execute/{command}": {
-          "tags": {
-            "0": "Device"
-          },
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -308,9 +305,6 @@
           }
         },
         "/device/{deviceId}/subscribe": {
-          "tags": {
-            "0": "Device"
-          },
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -340,9 +334,6 @@
           }
         },
         "/device/{deviceId}/{componentId}": {
-          "tags": {
-            "0": "Device"
-          },
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -385,9 +376,6 @@
           }
         },
         "/device/{deviceId}/lastUpdate": {
-          "tags": {
-            "0": "Device"
-          },
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -528,9 +516,6 @@
       },
       "http": {
         "/devices": {
-          "tags": {
-            "0": "DeviceManager"
-          },
           "get": {
             "description": "List all registered devices",
             "responses": {
@@ -563,9 +548,6 @@
           }
         },
         "/devices/{deviceId}": {
-          "tags": {
-            "0": "DeviceManager"
-          },
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -872,9 +854,6 @@
           }
         },
         "/protocol/{protocolId}/{deviceId}": {
-          "tags": {
-            "0": "Protocol"
-          },
           "parameters": {
             "0": {
               "name": "protocolId",
@@ -998,9 +977,6 @@
       },
       "http": {
         "/protocols": {
-          "tags": {
-            "0": "ProtocolManager"
-          },
           "get": {
             "description": "Get the list of registered protocols",
             "responses": {
@@ -1056,9 +1032,6 @@
           }
         },
         "/protocols/{protocolId}": {
-          "tags": {
-            "0": "ProtocolManager"
-          },
           "parameters": {
             "0": {
               "name": "protocolId",
@@ -1097,12 +1070,9 @@
           }
         },
         "/protocols/devices": {
-          "tags": {
-            "0": "ProtocolManager"
-          },
           "get": {
             "(reference)": "ProtocolManager.Devices",
-            "description": "Start a device discovery on all available protocols",
+            "description": "List all discovered devices on all available protocols",
             "responses": {
               "200": {
                 "description": "The list of multiprotocol devices\n",
@@ -1114,9 +1084,6 @@
           }
         },
         "/protocols/discovery": {
-          "tags": {
-            "0": "ProtocolManager"
-          },
           "post": {
             "(reference)": "ProtocolManager.StartDiscovery",
             "description": "Start a device discovery on all available protocols",

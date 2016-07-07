@@ -58,7 +58,6 @@ iot.agile.Protocol:
             description: Device not found
 
     /protocol/{protocolId}/{deviceId}:
-      tags: [Protocol]
       parameters:
         -
           name: protocolId

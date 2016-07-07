@@ -9,7 +9,6 @@ iot.agile.DeviceManager:
 
   http:
     /devices:
-      tags: [DeviceManager]
       get:
         description: List all registered devices
         responses:
@@ -31,7 +30,6 @@ iot.agile.DeviceManager:
           200:
             description: Device created
     /devices/{deviceId}:
-      tags: [DeviceManager]
       parameters:
         -
           name: deviceId

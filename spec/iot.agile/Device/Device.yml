@@ -8,7 +8,6 @@ iot.agile.Device:
 
   http:
     /device/{deviceId}/execute/{command}:
-      tags: [Device]
       parameters:
         -
           name: deviceId
@@ -38,7 +37,6 @@ iot.agile.Device:
             description: Action sent, no response received
 
     /device/{deviceId}/subscribe:
-      tags: [Device]
       parameters:
         -
           name: deviceId
@@ -64,7 +62,6 @@ iot.agile.Device:
 
     # Data storage ops
     /device/{deviceId}/{componentId}:
-      tags: [Device]
       parameters:
         -
           name: deviceId
@@ -97,7 +94,6 @@ iot.agile.Device:
             description: Write sent, no results returned
 
     /device/{deviceId}/lastUpdate:
-      tags: [Device]
       parameters:
         -
           name: deviceId
