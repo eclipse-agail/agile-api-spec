@@ -21,6 +21,8 @@ iot.agile.Device:
           required: true
           type: string
       post:
+        tags:
+          - Device
         description: Perform an action on the device
         (reference): Device.Execute
         parameters:
@@ -46,6 +48,8 @@ iot.agile.Device:
           type: string
 
       post:
+        tags:
+          - Device
         description: |
           Enable a subscription to a data stream. Asynchronous data updates will
           be delivered via websocket.
@@ -54,6 +58,8 @@ iot.agile.Device:
           200:
             description: Subscription registered
       delete:
+        tags:
+          - Device
         description: Unsubscribe from a data stream
         (reference): Device.Unsubscribe
         responses:
@@ -77,6 +83,8 @@ iot.agile.Device:
           type: string
 
       get:
+        tags:
+          - Device
         description: Read from a device component
         (reference): Device.Read
         responses:
@@ -85,6 +93,8 @@ iot.agile.Device:
           204:
             description: No data available
       post:
+        tags:
+          - Device
         description: Write to a device component
         (reference): Device.Write
         responses:
@@ -103,6 +113,8 @@ iot.agile.Device:
           type: string
 
       get:
+        tags:
+          - Device
         description: Get the last record fetched from the device
         (reference): Device.Data
         responses:

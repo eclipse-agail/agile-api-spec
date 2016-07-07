@@ -10,6 +10,8 @@ iot.agile.DeviceManager:
   http:
     /devices:
       get:
+        tags:
+          - DeviceManager
         description: List all registered devices
         responses:
           200:
@@ -17,6 +19,8 @@ iot.agile.DeviceManager:
           204:
             description: Device list is empty
       post:
+        tags:
+          - DeviceManager
         parameters:
           -
             name: body
@@ -39,6 +43,8 @@ iot.agile.DeviceManager:
           type: string
 
       get:
+        tags:
+          - DeviceManager
         parameters:
           -
             name: body
@@ -54,6 +60,8 @@ iot.agile.DeviceManager:
           404:
             description: Device not found
       put:
+        tags:
+          - DeviceManager
         parameters:
           -
             name: body
@@ -69,6 +77,8 @@ iot.agile.DeviceManager:
           404:
             description: Device not found
       delete:
+        tags:
+          - DeviceManager        
         parameters:
           -
             name: body

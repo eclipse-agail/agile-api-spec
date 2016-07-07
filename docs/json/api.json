@@ -284,6 +284,9 @@
             }
           },
           "post": {
+            "tags": {
+              "0": "Device"
+            },
             "description": "Perform an action on the device",
             "(reference)": "Device.Execute",
             "parameters": {
@@ -315,6 +318,9 @@
             }
           },
           "post": {
+            "tags": {
+              "0": "Device"
+            },
             "description": "Enable a subscription to a data stream. Asynchronous data updates will\nbe delivered via websocket.\n",
             "(reference)": "Device.Subscribe",
             "responses": {
@@ -324,6 +330,9 @@
             }
           },
           "delete": {
+            "tags": {
+              "0": "Device"
+            },
             "description": "Unsubscribe from a data stream",
             "(reference)": "Device.Unsubscribe",
             "responses": {
@@ -351,6 +360,9 @@
             }
           },
           "get": {
+            "tags": {
+              "0": "Device"
+            },
             "description": "Read from a device component",
             "(reference)": "Device.Read",
             "responses": {
@@ -363,6 +375,9 @@
             }
           },
           "post": {
+            "tags": {
+              "0": "Device"
+            },
             "description": "Write to a device component",
             "(reference)": "Device.Write",
             "responses": {
@@ -386,6 +401,9 @@
             }
           },
           "get": {
+            "tags": {
+              "0": "Device"
+            },
             "description": "Get the last record fetched from the device",
             "(reference)": "Device.Data",
             "responses": {
@@ -517,6 +535,9 @@
       "http": {
         "/devices": {
           "get": {
+            "tags": {
+              "0": "DeviceManager"
+            },
             "description": "List all registered devices",
             "responses": {
               "200": {
@@ -528,6 +549,9 @@
             }
           },
           "post": {
+            "tags": {
+              "0": "DeviceManager"
+            },
             "parameters": {
               "0": {
                 "name": "body",
@@ -558,6 +582,9 @@
             }
           },
           "get": {
+            "tags": {
+              "0": "DeviceManager"
+            },
             "parameters": {
               "0": {
                 "name": "body",
@@ -580,6 +607,9 @@
             }
           },
           "put": {
+            "tags": {
+              "0": "DeviceManager"
+            },
             "parameters": {
               "0": {
                 "name": "body",
@@ -602,6 +632,9 @@
             }
           },
           "delete": {
+            "tags": {
+              "0": "DeviceManager"
+            },
             "parameters": {
               "0": {
                 "name": "body",
@@ -795,7 +828,9 @@
             }
           },
           "post": {
-            "operationId": "Connect",
+            "tags": {
+              "0": "Protocol"
+            },
             "description": "Connect to the device",
             "responses": {
               "200": {
@@ -807,7 +842,9 @@
             }
           },
           "delete": {
-            "operationId": "Disconnect",
+            "tags": {
+              "0": "Protocol"
+            },
             "description": "Disconnect from the device",
             "responses": {
               "200": {
@@ -830,7 +867,9 @@
             }
           },
           "post": {
-            "operationId": "StartDiscovery",
+            "tags": {
+              "0": "Protocol"
+            },
             "description": "Start the discovery process",
             "responses": {
               "200": {
@@ -842,6 +881,9 @@
             }
           },
           "delete": {
+            "tags": {
+              "0": "Protocol"
+            },
             "description": "Stop the discovery process",
             "responses": {
               "200": {
@@ -871,6 +913,9 @@
             }
           },
           "post": {
+            "tags": {
+              "0": "Protocol"
+            },
             "description": "Call a write via protocol",
             "parameters": {
               "0": {
@@ -893,6 +938,9 @@
             }
           },
           "get": {
+            "tags": {
+              "0": "Protocol"
+            },
             "description": "Call a read via protocol",
             "responses": {
               "200": {
@@ -978,6 +1026,9 @@
       "http": {
         "/protocols": {
           "get": {
+            "tags": {
+              "0": "ProtocolManager"
+            },
             "description": "Get the list of registered protocols",
             "responses": {
               "200": {
@@ -1008,6 +1059,9 @@
             }
           },
           "post": {
+            "tags": {
+              "0": "ProtocolManager"
+            },
             "description": "Register a new protocol based on an active DBus interface",
             "parameters": {
               "0": {
@@ -1042,6 +1096,9 @@
             }
           },
           "post": {
+            "tags": {
+              "0": "ProtocolManager"
+            },
             "(reference)": "ProtocolManager.Add",
             "description": "Register a new Dbus object implementing the protocol API",
             "responses": {
@@ -1057,6 +1114,9 @@
             }
           },
           "delete": {
+            "tags": {
+              "0": "ProtocolManager"
+            },
             "(reference)": "ProtocolManager.Remove",
             "description": "Register a new Dbus object implementing the protocol API",
             "responses": {
@@ -1071,6 +1131,9 @@
         },
         "/protocols/devices": {
           "get": {
+            "tags": {
+              "0": "ProtocolManager"
+            },
             "(reference)": "ProtocolManager.Devices",
             "description": "List all discovered devices on all available protocols",
             "responses": {
@@ -1085,6 +1148,9 @@
         },
         "/protocols/discovery": {
           "post": {
+            "tags": {
+              "0": "ProtocolManager"
+            },
             "(reference)": "ProtocolManager.StartDiscovery",
             "description": "Start a device discovery on all available protocols",
             "responses": {
@@ -1097,6 +1163,9 @@
             }
           },
           "delete": {
+            "tags": {
+              "0": "ProtocolManager"
+            },
             "(reference)": "ProtocolManager.StopDiscovery",
             "description": "Stop a device discovery if previously initiated",
             "responses": {

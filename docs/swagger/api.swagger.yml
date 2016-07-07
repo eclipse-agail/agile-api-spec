@@ -23,9 +23,21 @@ produces:
 #   - type: oauth2
 #     authorizationUrl: /api/oauth
 #     flow: [implicit, password, application, accessCode]
+
 externalDocs:
   url: http://agile-iot.github.io/agile-api-spec
   description: DBus AGILE API spec
+
+tags:
+  - name: DeviceManager
+    description: Device management API
+  - name: Device
+    description: Device related API
+  - name: ProtocolManager
+    description: Protocol management API
+  - name: Protocol
+    description: Protocol related API
+
 paths:
   '/device/{deviceId}/execute/{command}':
     parameters:
@@ -42,6 +54,8 @@ paths:
         required: true
         type: string
     post:
+      tags:
+        - Device
       description: 'Perform an action on the device'
       parameters:
         -
@@ -64,11 +78,15 @@ paths:
         required: true
         type: string
     post:
+      tags:
+        - Device
       description: "Enable a subscription to a data stream. Asynchronous data updates will\nbe delivered via websocket.\n"
       responses:
         '200':
           description: 'Subscription registered'
     delete:
+      tags:
+        - Device
       description: 'Unsubscribe from a data stream'
       responses:
         '200':
@@ -88,6 +106,8 @@ paths:
         required: true
         type: string
     get:
+      tags:
+        - Device
       description: 'Read from a device component'
       responses:
         '200':
@@ -95,6 +115,8 @@ paths:
         '204':
           description: 'No data available'
     post:
+      tags:
+        - Device
       description: 'Write to a device component'
       responses:
         '200':
@@ -110,6 +132,8 @@ paths:
         required: true
         type: string
     get:
+      tags:
+        - Device
       description: 'Get the last record fetched from the device'
       responses:
         '200':
@@ -120,6 +144,8 @@ paths:
           description: 'Device not available'
   /devices:
     get:
+      tags:
+        - DeviceManager
       description: 'List all registered devices'
       responses:
         '200':
@@ -127,6 +153,8 @@ paths:
         '204':
           description: 'Device list is empty'
     post:
+      tags:
+        - DeviceManager
       parameters:
         -
           name: body
@@ -148,6 +176,8 @@ paths:
         required: true
         type: string
     get:
+      tags:
+        - DeviceManager
       parameters:
         -
           name: body
@@ -163,6 +193,8 @@ paths:
         '404':
           description: 'Device not found'
     put:
+      tags:
+        - DeviceManager
       parameters:
         -
           name: body
@@ -178,6 +210,8 @@ paths:
         '404':
           description: 'Device not found'
     delete:
+      tags:
+        - DeviceManager
       parameters:
         -
           name: body
@@ -207,7 +241,8 @@ paths:
         required: true
         type: string
     post:
-      operationId: Connect
+      tags:
+        - Protocol
       description: 'Connect to the device'
       responses:
         '200':
@@ -215,7 +250,8 @@ paths:
         '404':
           description: 'Device not found'
     delete:
-      operationId: Disconnect
+      tags:
+        - Protocol
       description: 'Disconnect from the device'
       responses:
         '200':
@@ -231,7 +267,8 @@ paths:
         required: true
         type: string
     post:
-      operationId: StartDiscovery
+      tags:
+        - Protocol
       description: 'Start the discovery process'
       responses:
         '200':
@@ -239,6 +276,8 @@ paths:
         '404':
           description: 'Device not found'
     delete:
+      tags:
+        - Protocol
       description: 'Stop the discovery process'
       responses:
         '200':
@@ -260,6 +299,8 @@ paths:
         required: true
         type: string
     post:
+      tags:
+        - Protocol
       description: 'Call a write via protocol'
       parameters:
         -
@@ -275,6 +316,8 @@ paths:
         '404':
           description: 'Device or component not found'
     get:
+      tags:
+        - Protocol
       description: 'Call a read via protocol'
       responses:
         '200':
@@ -285,6 +328,8 @@ paths:
           description: 'Device or component not found'
   /protocols:
     get:
+      tags:
+        - ProtocolManager
       description: 'Get the list of registered protocols'
       responses:
         '200':
@@ -306,6 +351,8 @@ paths:
         '204':
           description: 'No protocols registered.'
     post:
+      tags:
+        - ProtocolManager
       description: 'Register a new protocol based on an active DBus interface'
       parameters:
         -
@@ -329,6 +376,8 @@ paths:
         required: true
         type: string
     post:
+      tags:
+        - ProtocolManager
       description: 'Register a new Dbus object implementing the protocol API'
       responses:
         '202':
@@ -338,6 +387,8 @@ paths:
         '404':
           description: 'Protocol not found'
     delete:
+      tags:
+        - ProtocolManager
       description: 'Register a new Dbus object implementing the protocol API'
       responses:
         '200':
@@ -346,6 +397,8 @@ paths:
           description: 'Protocol not found'
   /protocols/devices:
     get:
+      tags:
+        - ProtocolManager
       description: 'List all discovered devices on all available protocols'
       responses:
         '200':
@@ -354,6 +407,8 @@ paths:
             $ref: '#/definitions/DeviceOverview'
   /protocols/discovery:
     post:
+      tags:
+        - ProtocolManager
       description: 'Start a device discovery on all available protocols'
       responses:
         '204':
@@ -361,6 +416,8 @@ paths:
         '409':
           description: "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
     delete:
+      tags:
+        - ProtocolManager
       description: 'Stop a device discovery if previously initiated'
       responses:
         '204':
