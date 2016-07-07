@@ -1,0 +1,8 @@
+DeviceStreamChannel:
+  description: A channel contains the definition of a component like a sensor
+  type: Object
+  fields:
+    name:
+      type: String
+    type:
+      type: ChannelTypeEnum

@@ -150,6 +150,24 @@ paths:
       responses:
         '200':
           description: 'List the registered device'
+          schema:
+            type: array
+            $ref: '#/definitions/DeviceDefinition'
+          examples:
+            application/json:
+              -
+                id: aaa1-bbb2-ccc3-ddd4
+                name: SensorTag
+                path: iot.agile.device.SensorTag
+                streams:
+                  -
+                    name: temperature
+                    unit: celsius
+                  -
+                    name: light
+                    unit: lumen
+                  -
+                    name: accelerometer
         '204':
           description: 'Device list is empty'
     post:
@@ -476,24 +494,6 @@ definitions:
       - Boolean
       - GeoPoint
       - Object
-  DeviceStreamChannel:
-    description: 'A channel contains a single measurement value of a sensor'
-    type: object
-    properties:
-      name:
-        type: string
-      type:
-        $ref: '#/definitions/ChannelTypeEnum'
-  DeviceStream:
-    description: 'A stream contains a set of measurement values for a sensor'
-    type: object
-    properties:
-      name:
-        type: string
-      channels:
-        type: array
-        items:
-          $ref: '#/definitions/DeviceStreamChannel'
   DeviceDefinition:
     description: 'A device definition that contains informations describing the current device'
     type: object
@@ -508,11 +508,21 @@ definitions:
         description: 'DBus specific path to reach the object instance'
         type: string
       properties:
-        type: object
+        $ref: '#/definitions/KeyValue'
       streams:
         type: array
         items:
           $ref: '#/definitions/DeviceStream'
+  DeviceStream:
+    description: 'A stream containing a set of definitions of device components, like sensors'
+    type: object
+    properties:
+      name:
+        type: string
+      unit:
+        type: string
+      properties:
+        $ref: '#/definitions/KeyValue'
   RecordObject:
     type: object
     properties:
@@ -531,4 +541,7 @@ definitions:
       LastUpdate:
         description: 'A UNIX timestamp rapresenting the last update of a record'
         type: number
+  KeyValue:
+    description: 'A list of key/value pairs'
+    type: object
   

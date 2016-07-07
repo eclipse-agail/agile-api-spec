@@ -217,8 +217,8 @@
               </li>
               
               <li>
-                <a href="#DeviceStreamChannel" data-for="DeviceStreamChannel">
-                  DeviceStreamChannel
+                <a href="#DeviceDefinition" data-for="DeviceDefinition">
+                  DeviceDefinition
                 </a>
               </li>
               
@@ -229,8 +229,8 @@
               </li>
               
               <li>
-                <a href="#DeviceDefinition" data-for="DeviceDefinition">
-                  DeviceDefinition
+                <a href="#DeviceStreamChannel" data-for="DeviceStreamChannel">
+                  DeviceStreamChannel
                 </a>
               </li>
               
@@ -8646,178 +8646,6 @@ if for some reason further user-side checks are required.
   </div>
 
 </li>
-<li class="api-type" data-type="type" id="DeviceStreamChannel">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="name">
-        DeviceStreamChannel
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        A channel contains a single measurement value of a sensor
-      </span>
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li class="api-type" data-type="type" id="name">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        name
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="type">
-
-  <div class="overview">
-    <span class="type">
-      
-        <a href="#ChannelTypeEnum">ChannelTypeEnum</a>
-      
-    </span>
-
-    
-      <span class="name">
-        type
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-
-      </ul>
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="DeviceStream">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="name">
-        DeviceStream
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        A stream contains a set of measurement values for a sensor
-      </span>
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li class="api-type" data-type="type" id="name">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        name
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="channels">
-
-  <div class="overview">
-    <span class="type">
-      
-        Array[DeviceStreamChannel]
-      
-    </span>
-
-    
-      <span class="name">
-        channels
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-
-      </ul>
-    
-  </div>
-
-</li>
 <li class="api-type" data-type="type" id="DeviceDefinition">
 
   <div class="overview">
@@ -8959,7 +8787,7 @@ if for some reason further user-side checks are required.
   <div class="overview">
     <span class="type">
       
-        Object*
+        <a href="#KeyValue">KeyValue</a>
       
     </span>
 
@@ -8992,6 +8820,204 @@ if for some reason further user-side checks are required.
     
       <span class="name">
         streams
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="DeviceStream">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DeviceStream
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A stream containing a set of definitions of device components, like sensors
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="unit">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        unit
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="properties">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#KeyValue">KeyValue</a>
+      
+    </span>
+
+    
+      <span class="name">
+        properties
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="DeviceStreamChannel">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DeviceStreamChannel
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A channel contains the definition of a component like a sensor
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="type">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#ChannelTypeEnum">ChannelTypeEnum</a>
+      
+    </span>
+
+    
+      <span class="name">
+        type
       </span>
     
   </div>

@@ -1,0 +1,8 @@
+ChannelTypeEnum:
+  type: Enum
+  fields:
+    - Number
+    - String
+    - Boolean
+    - GeoPoint
+    - Object

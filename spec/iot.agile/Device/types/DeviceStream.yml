@@ -1,0 +1,15 @@
+DeviceStream:
+  description: A stream containing a set of definitions of device components, like sensors
+  type: Object
+  fields:
+    name:
+      type: String
+    unit:
+      type: String
+      required: false
+    properties:
+      type: KeyValue
+      required: false
+    # channels:
+    #   type: Array
+    #   fields: DeviceStreamChannel

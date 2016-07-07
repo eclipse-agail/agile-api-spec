@@ -541,7 +541,33 @@
             "description": "List all registered devices",
             "responses": {
               "200": {
-                "description": "List the registered device"
+                "description": "List the registered device",
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/definitions/DeviceDefinition"
+                },
+                "examples": {
+                  "application/json": {
+                    "0": {
+                      "id": "aaa1-bbb2-ccc3-ddd4",
+                      "name": "SensorTag",
+                      "path": "iot.agile.device.SensorTag",
+                      "streams": {
+                        "0": {
+                          "name": "temperature",
+                          "unit": "celsius"
+                        },
+                        "1": {
+                          "name": "light",
+                          "unit": "lumen"
+                        },
+                        "2": {
+                          "name": "accelerometer"
+                        }
+                      }
+                    }
+                  }
+                }
               },
               "204": {
                 "description": "Device list is empty"
@@ -1678,37 +1704,6 @@
       },
       "required": true
     },
-    "DeviceStreamChannel": {
-      "description": "A channel contains a single measurement value of a sensor",
-      "type": "Object",
-      "fields": {
-        "name": {
-          "type": "String",
-          "required": true
-        },
-        "type": {
-          "type": "ChannelTypeEnum",
-          "required": true
-        }
-      },
-      "required": true
-    },
-    "DeviceStream": {
-      "description": "A stream contains a set of measurement values for a sensor",
-      "type": "Object",
-      "fields": {
-        "name": {
-          "type": "String",
-          "required": true
-        },
-        "channels": {
-          "type": "Array",
-          "fields": "DeviceStreamChannel",
-          "required": true
-        }
-      },
-      "required": true
-    },
     "DeviceDefinition": {
       "description": "A device definition that contains informations describing the current device",
       "type": "Object",
@@ -1731,12 +1726,46 @@
           "required": true
         },
         "properties": {
-          "type": "Object*",
+          "type": "KeyValue",
           "required": true
         },
         "streams": {
           "type": "Array",
           "fields": "DeviceStream",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "DeviceStream": {
+      "description": "A stream containing a set of definitions of device components, like sensors",
+      "type": "Object",
+      "fields": {
+        "name": {
+          "type": "String",
+          "required": true
+        },
+        "unit": {
+          "type": "String",
+          "required": false
+        },
+        "properties": {
+          "type": "KeyValue",
+          "required": false
+        }
+      },
+      "required": true
+    },
+    "DeviceStreamChannel": {
+      "description": "A channel contains the definition of a component like a sensor",
+      "type": "Object",
+      "fields": {
+        "name": {
+          "type": "String",
+          "required": true
+        },
+        "type": {
+          "type": "ChannelTypeEnum",
           "required": true
         }
       },
