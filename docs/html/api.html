@@ -11,6 +11,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.7.1/lunr.min.js"></script>
 
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
   <meta name="Description" content="AGILE API specification documentation">
 
@@ -22,8 +23,8 @@
       cursor: pointer;
     }
 
-    .api-class .details,
-    .api-class .overview.open {
+    h5
+    {
       border-bottom: 1px dotted #EEE;
       margin: 0.15em 0;
     }
@@ -61,6 +62,20 @@
 
     .hidden {
       display: block;
+    }
+
+    .color-black {
+      color: black !important;
+    }
+    .color-grey {
+      color: #BBB !important;
+    }
+
+    .text-bigger, .text-bigger:before {
+      font-size: 140%;
+    }
+    .text-smaller, .text-smaller:before {
+      font-size: 70%;
     }
 
   </style>
@@ -290,14 +305,22 @@
 
     var doSearch = function() {
 
+
+      var log = function() {
+        if(localStorage.DEBUG)
+          console.log.apply(console, arguments);
+      }
+
       var hideAll = function() {
+        log("hideAll")
         $('.api-class, .api-type').hide();
-        $('.menu .types li, .menu .object li').hide();
+        // $('.menu .types li, .menu .object li').hide();
       };
 
       var showAll = function() {
+        log("showAll")
         $('.api-class, .api-type').show();
-        $('.menu .types li, .menu .object li').show();
+        // $('.menu .types li, .menu .object li').show();
       };
 
       var text = $('#searchtxt').val();
@@ -306,33 +329,34 @@
         return showAll();
       }
 
+      log("search for %s", text)
       var results = index.search(text);
 
       if(!results.length) {
+        log("No results")
         return hideAll();
       }
 
       hideAll();
 
+      log("Show results", results);
       results.forEach(function(result) {
 
         var res = result.ref.split('|');
         var type = res.pop();
 
+        log("Record %s", type, res);
+
         if(type === 'class' || type === 'property' || type === 'method') {
           var classNameId = res[0].replace(/\./g, '_');
+          log("Show %s", classNameId);
           $('#' + classNameId).show();
-          // console.log('.menu .object li[data-for="'+ classNameId +'"]')
-          $('.menu .object a[data-for="'+ classNameId +'"]').parent().show();
         }
         else {
           var typeName = res[0];
+          log("Show type %s", typeName);
           $('#' + typeName).show();
-          $('.menu .types a[data-for="'+ typeName +'"]').parent().show();
         }
-
-        // console.warn(type, res);
-
       });
 
     }
@@ -407,8 +431,12 @@
 </li>
       <li>
         <a href="https://github.com/Agile-IoT/agile-api-spec" title="Go to repository">
-          <img style="width: 40px"
-            src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" />
+          <i class="fa fa-github text-bigger color-black" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/agile_iot" title="Get in touch on Twitter">
+          <i class="fa fa-twitter text-bigger color-black" aria-hidden="true"></i>
         </a>
       </li>
     </ul>
@@ -423,17 +451,28 @@
       <div class="api-class"
   data-type="class"
   data-magellan-target="iot_agile_Apps"
-  id="iot_agile_Apps"
+  id="iot_agile_Apps"  
   >
 
   <h3>
+    <a
+      href="#iot_agile_Apps"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
     iot.agile.Apps
   </h3>
   <div class="description">Apps API enable the management of AGILE apps and components
 </div>
   <hr />
 
-  <h4>Properties</h4>
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
   <ul class="api-class-properties" data-type="properties">
     <li class="api-class-property" data-type="property" data-id="iot.agile.Apps.Logs">
 
@@ -496,7 +535,10 @@ Contains per-app filterable output.
 
   </ul>
 
-  <h4>Methods</h4>
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
   <ul class="api-class-methods" data-type="methods">
     <li class="api-class-method" data-type="method" data-id="iot.agile.Apps.Start">
 
@@ -539,16 +581,16 @@ Contains per-app filterable output.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Apps.Start">
+  <div class="details hidden pad-left" data-for="iot.agile.Apps.Start">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="app">
 
@@ -618,9 +660,9 @@ Contains per-app filterable output.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -689,16 +731,16 @@ Contains per-app filterable output.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Apps.Stop">
+  <div class="details hidden pad-left" data-for="iot.agile.Apps.Stop">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="app">
 
@@ -734,9 +776,9 @@ Contains per-app filterable output.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -805,16 +847,16 @@ Contains per-app filterable output.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Apps.Restart">
+  <div class="details hidden pad-left" data-for="iot.agile.Apps.Restart">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="app">
 
@@ -850,9 +892,9 @@ Contains per-app filterable output.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -917,16 +959,16 @@ Contains per-app filterable output.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Apps.Install">
+  <div class="details hidden pad-left" data-for="iot.agile.Apps.Install">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="app">
 
@@ -962,9 +1004,9 @@ Contains per-app filterable output.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -1029,16 +1071,16 @@ Contains per-app filterable output.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Apps.Uninstall">
+  <div class="details hidden pad-left" data-for="iot.agile.Apps.Uninstall">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="app">
 
@@ -1074,9 +1116,9 @@ Contains per-app filterable output.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -1141,16 +1183,16 @@ Contains per-app filterable output.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Apps.Status">
+  <div class="details hidden pad-left" data-for="iot.agile.Apps.Status">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="app">
 
@@ -1186,9 +1228,9 @@ Contains per-app filterable output.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -1310,10 +1352,18 @@ Contains per-app filterable output.
 <div class="api-class"
   data-type="class"
   data-magellan-target="iot_agile_Device"
-  id="iot_agile_Device"
+  id="iot_agile_Device"  
   >
 
   <h3>
+    <a
+      href="#iot_agile_Device"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
     iot.agile.Device
   </h3>
   <div class="description">The Device API abstracts operations over the real device.
@@ -1321,7 +1371,10 @@ It send commands to a Protocol API instance to which is binded.
 </div>
   <hr />
 
-  <h4>Properties</h4>
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
   <ul class="api-class-properties" data-type="properties">
     <li class="api-class-property" data-type="property" data-id="iot.agile.Device.Id">
 
@@ -1566,7 +1619,10 @@ It send commands to a Protocol API instance to which is binded.
 
   </ul>
 
-  <h4>Methods</h4>
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
   <ul class="api-class-methods" data-type="methods">
     <li class="api-class-method" data-type="method" data-id="iot.agile.Device.Execute">
 
@@ -1615,16 +1671,16 @@ underline Protocol specific implementation.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Device.Execute">
+  <div class="details hidden pad-left" data-for="iot.agile.Device.Execute">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="op">
 
@@ -1690,9 +1746,9 @@ underline Protocol specific implementation.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -1834,16 +1890,16 @@ underline Protocol specific implementation.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Device.Connect">
+  <div class="details hidden pad-left" data-for="iot.agile.Device.Connect">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -1903,16 +1959,16 @@ underline Protocol specific implementation.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Device.Disconnect">
+  <div class="details hidden pad-left" data-for="iot.agile.Device.Disconnect">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -1977,16 +2033,16 @@ underline Protocol specific implementation.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Device.Read">
+  <div class="details hidden pad-left" data-for="iot.agile.Device.Read">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="component">
 
@@ -2018,9 +2074,9 @@ underline Protocol specific implementation.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -2094,16 +2150,16 @@ underline Protocol specific implementation.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Device.Write">
+  <div class="details hidden pad-left" data-for="iot.agile.Device.Write">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="component">
 
@@ -2225,9 +2281,9 @@ underline Protocol specific implementation.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -2307,16 +2363,16 @@ the underlying Protocol implementation if supported.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Device.Subscribe">
+  <div class="details hidden pad-left" data-for="iot.agile.Device.Subscribe">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="component">
 
@@ -2384,9 +2440,9 @@ or sensor, like eg. frequency
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -2457,16 +2513,16 @@ the underlying Protocol implementation if supported.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Device.Unsubscribe">
+  <div class="details hidden pad-left" data-for="iot.agile.Device.Unsubscribe">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="component">
 
@@ -2502,9 +2558,9 @@ the underlying Protocol implementation if supported.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -2544,16 +2600,30 @@ the underlying Protocol implementation if supported.
 <div class="api-class"
   data-type="class"
   data-magellan-target="iot_agile_DeviceManager"
-  id="iot_agile_DeviceManager"
+  id="iot_agile_DeviceManager"  
   >
 
   <h3>
+    <a
+      href="#iot_agile_DeviceManager"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
     iot.agile.DeviceManager
   </h3>
-  <div class="description"></div>
+  <div class="description">The DeviceManager list the registered devices available from the gateway available protocols.
+This API is responsible to instantiate the reference DBus object for every device
+and offer management and integration points.
+</div>
   <hr />
 
-  <h4>Properties</h4>
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
   <ul class="api-class-properties" data-type="properties">
     <li class="api-class-property" data-type="property" data-id="iot.agile.DeviceManager.Devices">
 
@@ -2588,7 +2658,10 @@ the underlying Protocol implementation if supported.
 
   </ul>
 
-  <h4>Methods</h4>
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
   <ul class="api-class-methods" data-type="methods">
     <li class="api-class-method" data-type="method" data-id="iot.agile.DeviceManager.Find">
 
@@ -2626,16 +2699,16 @@ the underlying Protocol implementation if supported.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.DeviceManager.Find">
+  <div class="details hidden pad-left" data-for="iot.agile.DeviceManager.Find">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="query">
 
@@ -2671,9 +2744,9 @@ the underlying Protocol implementation if supported.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -2746,16 +2819,16 @@ the underlying Protocol implementation if supported.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.DeviceManager.Create">
+  <div class="details hidden pad-left" data-for="iot.agile.DeviceManager.Create">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="device">
 
@@ -2787,9 +2860,9 @@ the underlying Protocol implementation if supported.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -2862,16 +2935,16 @@ the underlying Protocol implementation if supported.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.DeviceManager.Read">
+  <div class="details hidden pad-left" data-for="iot.agile.DeviceManager.Read">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="Id">
 
@@ -2903,9 +2976,9 @@ the underlying Protocol implementation if supported.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -2987,16 +3060,16 @@ the underlying Protocol implementation if supported.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.DeviceManager.Update">
+  <div class="details hidden pad-left" data-for="iot.agile.DeviceManager.Update">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="Id">
 
@@ -3054,9 +3127,9 @@ the underlying Protocol implementation if supported.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -3134,16 +3207,16 @@ the underlying Protocol implementation if supported.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.DeviceManager.Delete">
+  <div class="details hidden pad-left" data-for="iot.agile.DeviceManager.Delete">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="Id">
 
@@ -3201,9 +3274,9 @@ the underlying Protocol implementation if supported.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -3281,16 +3354,16 @@ the underlying Protocol implementation if supported.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.DeviceManager.Batch">
+  <div class="details hidden pad-left" data-for="iot.agile.DeviceManager.Batch">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="operation">
 
@@ -3356,9 +3429,9 @@ the underlying Protocol implementation if supported.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -3398,10 +3471,18 @@ the underlying Protocol implementation if supported.
 <div class="api-class"
   data-type="class"
   data-magellan-target="iot_agile_Protocol"
-  id="iot_agile_Protocol"
+  id="iot_agile_Protocol"  
   >
 
   <h3>
+    <a
+      href="#iot_agile_Protocol"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
     iot.agile.Protocol
   </h3>
   <div class="description">A Protocol object abstract operations over a specific protocol implementation.
@@ -3409,7 +3490,10 @@ Every Device has one Protocol used to establish and use a communication exchange
 </div>
   <hr />
 
-  <h4>Properties</h4>
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
   <ul class="api-class-properties" data-type="properties">
     <li class="api-class-property" data-type="property" data-id="iot.agile.Protocol.Status">
 
@@ -3437,7 +3521,7 @@ Every Device has one Protocol used to establish and use a communication exchange
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -3480,7 +3564,7 @@ Every Device has one Protocol used to establish and use a communication exchange
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -3495,7 +3579,8 @@ Every Device has one Protocol used to establish and use a communication exchange
 
     
       <div class="example-container">
-        Example <pre class="example">ble</pre>
+        <h5>Example:</h5>
+        <pre class="example">ble</pre>
       </div>
     
 
@@ -3527,7 +3612,7 @@ Every Device has one Protocol used to establish and use a communication exchange
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -3542,7 +3627,8 @@ Every Device has one Protocol used to establish and use a communication exchange
 
     
       <div class="example-container">
-        Example <pre class="example">Bluetooth LE</pre>
+        <h5>Example:</h5>
+        <pre class="example">Bluetooth LE</pre>
       </div>
     
 
@@ -3577,7 +3663,7 @@ from different sensor an will need to filter out the correct ones
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -3626,7 +3712,7 @@ from different sensor an will need to filter out the correct ones
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -3652,7 +3738,10 @@ from different sensor an will need to filter out the correct ones
 
   </ul>
 
-  <h4>Methods</h4>
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
   <ul class="api-class-methods" data-type="methods">
     <li class="api-class-method" data-type="method" data-id="iot.agile.Protocol.Connect">
 
@@ -3691,16 +3780,16 @@ from different sensor an will need to filter out the correct ones
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.Connect">
+  <div class="details hidden pad-left" data-for="iot.agile.Protocol.Connect">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="deviceId">
 
@@ -3736,9 +3825,9 @@ from different sensor an will need to filter out the correct ones
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -3808,16 +3897,16 @@ from different sensor an will need to filter out the correct ones
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.Disconnect">
+  <div class="details hidden pad-left" data-for="iot.agile.Protocol.Disconnect">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="deviceId">
 
@@ -3853,9 +3942,9 @@ from different sensor an will need to filter out the correct ones
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -3916,16 +4005,16 @@ from different sensor an will need to filter out the correct ones
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.StartDiscovery">
+  <div class="details hidden pad-left" data-for="iot.agile.Protocol.StartDiscovery">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -3986,16 +4075,16 @@ from different sensor an will need to filter out the correct ones
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.StopDiscovery">
+  <div class="details hidden pad-left" data-for="iot.agile.Protocol.StopDiscovery">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -4074,16 +4163,16 @@ from different sensor an will need to filter out the correct ones
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.Write">
+  <div class="details hidden pad-left" data-for="iot.agile.Protocol.Write">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="deviceId">
 
@@ -4149,9 +4238,9 @@ from different sensor an will need to filter out the correct ones
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -4231,16 +4320,16 @@ depending on implementation to save resources
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.Read">
+  <div class="details hidden pad-left" data-for="iot.agile.Protocol.Read">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="deviceId">
 
@@ -4306,9 +4395,9 @@ depending on implementation to save resources
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -4387,16 +4476,16 @@ depending on implementation to save resources
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.Subscribe">
+  <div class="details hidden pad-left" data-for="iot.agile.Protocol.Subscribe">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="deviceId">
 
@@ -4462,9 +4551,9 @@ depending on implementation to save resources
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -4543,16 +4632,16 @@ depending on implementation to save resources
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Protocol.Unsubscribe">
+  <div class="details hidden pad-left" data-for="iot.agile.Protocol.Unsubscribe">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="deviceId">
 
@@ -4618,9 +4707,9 @@ depending on implementation to save resources
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -4660,18 +4749,32 @@ depending on implementation to save resources
 <div class="api-class"
   data-type="class"
   data-magellan-target="iot_agile_ProtocolManager"
-  id="iot_agile_ProtocolManager"
+  id="iot_agile_ProtocolManager"  
   >
 
   <h3>
+    <a
+      href="#iot_agile_ProtocolManager"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
     iot.agile.ProtocolManager
   </h3>
   <div class="description">The ProtocolManager list the managed protocols in the gateway. From this
-interface is possible to add and remove protocols and start/stop multiprotocol discovery
+interface is possible to add and remove protocols and start/stop multiprotocol discovery.
+The discovery process will list all found devices under the `Devices` property.
+Those discovered devices may be added to the [DeviceManager](#iot.agile.DeviceManager) to be
+configured and made operational.
 </div>
   <hr />
 
-  <h4>Properties</h4>
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
   <ul class="api-class-properties" data-type="properties">
     <li class="api-class-property" data-type="property" data-id="iot.agile.ProtocolManager.Devices">
 
@@ -4699,7 +4802,7 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -4748,7 +4851,7 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -4774,7 +4877,10 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 
   </ul>
 
-  <h4>Methods</h4>
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
   <ul class="api-class-methods" data-type="methods">
     <li class="api-class-method" data-type="method" data-id="iot.agile.ProtocolManager.StartDiscovery">
 
@@ -4812,16 +4918,16 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.ProtocolManager.StartDiscovery">
+  <div class="details hidden pad-left" data-for="iot.agile.ProtocolManager.StartDiscovery">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="params">
 
@@ -4853,9 +4959,9 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -4915,16 +5021,16 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.ProtocolManager.StopDiscovery">
+  <div class="details hidden pad-left" data-for="iot.agile.ProtocolManager.StopDiscovery">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -4993,16 +5099,16 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.ProtocolManager.Add">
+  <div class="details hidden pad-left" data-for="iot.agile.ProtocolManager.Add">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="protocol">
 
@@ -5038,9 +5144,9 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -5109,16 +5215,16 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.ProtocolManager.Remove">
+  <div class="details hidden pad-left" data-for="iot.agile.ProtocolManager.Remove">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="protocol">
 
@@ -5154,9 +5260,9 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -5196,16 +5302,27 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 <div class="api-class"
   data-type="class"
   data-magellan-target="iot_agile_Network"
-  id="iot_agile_Network"
+  id="iot_agile_Network"  
   >
 
   <h3>
+    <a
+      href="#iot_agile_Network"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
     iot.agile.Network
   </h3>
   <div class="description"></div>
   <hr />
 
-  <h4>Properties</h4>
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
   <ul class="api-class-properties" data-type="properties">
     <li class="api-class-property" data-type="property" data-id="iot.agile.Network.Status">
 
@@ -5263,7 +5380,7 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -5319,7 +5436,10 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 
   </ul>
 
-  <h4>Methods</h4>
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
   <ul class="api-class-methods" data-type="methods">
     <li class="api-class-method" data-type="method" data-id="iot.agile.Network.CreateAP">
 
@@ -5375,16 +5495,16 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Network.CreateAP">
+  <div class="details hidden pad-left" data-for="iot.agile.Network.CreateAP">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="subnet">
 
@@ -5520,16 +5640,16 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Network.ScanWiFi">
+  <div class="details hidden pad-left" data-for="iot.agile.Network.ScanWiFi">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -5569,10 +5689,18 @@ interface is possible to add and remove protocols and start/stop multiprotocol d
 <div class="api-class"
   data-type="class"
   data-magellan-target="iot_agile_Storage_Driver"
-  id="iot_agile_Storage_Driver"
+  id="iot_agile_Storage_Driver"  
   >
 
   <h3>
+    <a
+      href="#iot_agile_Storage_Driver"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
     iot.agile.Storage.Driver
   </h3>
   <div class="description">A Driver component is in charge of data storage and
@@ -5581,7 +5709,10 @@ It may be a local database or an online services via APIs
 </div>
   <hr />
 
-  <h4>Properties</h4>
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
   <ul class="api-class-properties" data-type="properties">
     <li class="api-class-property" data-type="property" data-id="iot.agile.Storage.Driver.Name">
 
@@ -5609,7 +5740,7 @@ It may be a local database or an online services via APIs
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -5632,7 +5763,7 @@ It may be a local database or an online services via APIs
 
     <span class="type">
       
-        false
+        Boolean
       
     </span>
 
@@ -5678,7 +5809,7 @@ It may be a local database or an online services via APIs
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -5721,7 +5852,7 @@ It may be a local database or an online services via APIs
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -5777,7 +5908,7 @@ It may be a local database or an online services via APIs
 
     
       <div class="access-container">
-        Access types:
+        <h5>Access types:</h5>
         <ul>
           
             <li>
@@ -5833,7 +5964,10 @@ It may be a local database or an online services via APIs
 
   </ul>
 
-  <h4>Methods</h4>
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
   <ul class="api-class-methods" data-type="methods">
     <li class="api-class-method" data-type="method" data-id="iot.agile.Storage.Driver.Create">
 
@@ -5871,16 +6005,16 @@ It may be a local database or an online services via APIs
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Driver.Create">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.Driver.Create">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="record">
 
@@ -5912,9 +6046,9 @@ It may be a local database or an online services via APIs
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -5987,16 +6121,16 @@ It may be a local database or an online services via APIs
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Driver.Read">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.Driver.Read">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="id">
 
@@ -6028,9 +6162,9 @@ It may be a local database or an online services via APIs
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -6112,16 +6246,16 @@ It may be a local database or an online services via APIs
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Driver.Update">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.Driver.Update">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="id">
 
@@ -6179,9 +6313,9 @@ It may be a local database or an online services via APIs
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -6250,16 +6384,16 @@ It may be a local database or an online services via APIs
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Driver.Delete">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.Driver.Delete">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="id">
 
@@ -6291,9 +6425,9 @@ It may be a local database or an online services via APIs
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -6362,16 +6496,16 @@ It may be a local database or an online services via APIs
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Driver.Find">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.Driver.Find">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="query">
 
@@ -6403,9 +6537,9 @@ It may be a local database or an online services via APIs
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -6445,10 +6579,18 @@ It may be a local database or an online services via APIs
 <div class="api-class"
   data-type="class"
   data-magellan-target="iot_agile_Storage_DriverManager"
-  id="iot_agile_Storage_DriverManager"
+  id="iot_agile_Storage_DriverManager"  
   >
 
   <h3>
+    <a
+      href="#iot_agile_Storage_DriverManager"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
     iot.agile.Storage.DriverManager
   </h3>
   <div class="description">The DriverManager component is in charge for handling the status
@@ -6456,7 +6598,10 @@ of different Drivers available in the system.
 </div>
   <hr />
 
-  <h4>Properties</h4>
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
   <ul class="api-class-properties" data-type="properties">
     <li class="api-class-property" data-type="property" data-id="iot.agile.Storage.DriverManager.Enabled">
 
@@ -6521,7 +6666,10 @@ of different Drivers available in the system.
 
   </ul>
 
-  <h4>Methods</h4>
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
   <ul class="api-class-methods" data-type="methods">
     <li class="api-class-method" data-type="method" data-id="iot.agile.Storage.DriverManager.Add">
 
@@ -6568,16 +6716,16 @@ of different Drivers available in the system.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.DriverManager.Add">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.DriverManager.Add">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="driver">
 
@@ -6649,9 +6797,9 @@ immediately available
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -6722,16 +6870,16 @@ instance
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.DriverManager.Remove">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.DriverManager.Remove">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="driver">
 
@@ -6771,9 +6919,9 @@ instance
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -6842,16 +6990,16 @@ instance
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.DriverManager.Enable">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.DriverManager.Enable">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="driver">
 
@@ -6891,9 +7039,9 @@ instance
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -6962,16 +7110,16 @@ instance
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.DriverManager.Disable">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.DriverManager.Disable">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="driver">
 
@@ -7011,9 +7159,9 @@ instance
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -7082,16 +7230,16 @@ instance
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.DriverManager.Status">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.DriverManager.Status">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="driver">
 
@@ -7131,9 +7279,9 @@ instance
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -7263,10 +7411,18 @@ instance
 <div class="api-class"
   data-type="class"
   data-magellan-target="iot_agile_Storage"
-  id="iot_agile_Storage"
+  id="iot_agile_Storage"  
   >
 
   <h3>
+    <a
+      href="#iot_agile_Storage"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
     iot.agile.Storage
   </h3>
   <div class="description">The Storage component offer an abstraction for Devices to store and fetch data
@@ -7279,7 +7435,10 @@ the enabled Driver. If none replies the operation fails.
 </div>
   <hr />
 
-  <h4>Properties</h4>
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
   <ul class="api-class-properties" data-type="properties">
     <li class="api-class-property" data-type="property" data-id="iot.agile.Storage.Connections">
 
@@ -7310,7 +7469,10 @@ the enabled Driver. If none replies the operation fails.
 
   </ul>
 
-  <h4>Methods</h4>
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
   <ul class="api-class-methods" data-type="methods">
     <li class="api-class-method" data-type="method" data-id="iot.agile.Storage.Create">
 
@@ -7348,16 +7510,16 @@ the enabled Driver. If none replies the operation fails.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Create">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.Create">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="record">
 
@@ -7389,9 +7551,9 @@ the enabled Driver. If none replies the operation fails.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -7464,16 +7626,16 @@ the enabled Driver. If none replies the operation fails.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Read">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.Read">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="Id">
 
@@ -7505,9 +7667,9 @@ the enabled Driver. If none replies the operation fails.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -7589,16 +7751,16 @@ the enabled Driver. If none replies the operation fails.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Update">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.Update">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="Id">
 
@@ -7656,9 +7818,9 @@ the enabled Driver. If none replies the operation fails.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -7727,16 +7889,16 @@ the enabled Driver. If none replies the operation fails.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Delete">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.Delete">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="Id">
 
@@ -7768,9 +7930,9 @@ the enabled Driver. If none replies the operation fails.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 
@@ -7839,16 +8001,16 @@ the enabled Driver. If none replies the operation fails.
 
   </div>
 
-  <div class="details hidden" data-for="iot.agile.Storage.Find">
+  <div class="details hidden pad-left" data-for="iot.agile.Storage.Find">
 
     
 
     
       <div class="method-overview">
         <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Arguments
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="query">
 
@@ -7880,9 +8042,9 @@ the enabled Driver. If none replies the operation fails.
   </ul>
 </div>
 <div class="wrapper">
-  <div class="title">
+  <h5 class="title">
     Return type
-  </div>
+  </h5>
   <ul class="content">
     <li class="api-type" data-type="type" id="">
 

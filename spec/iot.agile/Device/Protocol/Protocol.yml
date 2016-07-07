@@ -17,6 +17,7 @@ iot.agile.Protocol:
           type: string
 
       post:
+        operationId: Connect
         description: Connect to the device
         responses:
           200:
@@ -24,6 +25,7 @@ iot.agile.Protocol:
           404:
             description: Device not found
       delete:
+        operationId: Disconnect
         description: Disconnect from the device
         responses:
           200:
@@ -40,6 +42,7 @@ iot.agile.Protocol:
           required: true
           type: string
       post:
+        operationId: StartDiscovery
         description: Start the discovery process
         responses:
           200:
@@ -55,6 +58,7 @@ iot.agile.Protocol:
             description: Device not found
 
     /protocol/{protocolId}/{deviceId}:
+      tags: [Protocol]
       parameters:
         -
           name: protocolId

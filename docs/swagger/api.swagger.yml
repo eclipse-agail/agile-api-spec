@@ -7,10 +7,10 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 # the domain of the service
-host: gw.agile.local
+host: localhost:8080
 # array of all schemes that your API supports
 schemes:
-  - https
+  - http
 # will be prefixed to all paths
 basePath: /api
 consumes:
@@ -24,10 +24,12 @@ produces:
 #     authorizationUrl: /api/oauth
 #     flow: [implicit, password, application, accessCode]
 externalDocs:
-  url: http://agile-iot.github.io/agile-api-spec/build/html/api.html
+  url: http://agile-iot.github.io/agile-api-spec
   description: DBus AGILE API spec
 paths:
   '/device/{deviceId}/execute/{command}':
+    tags:
+      - Device
     parameters:
       -
         name: deviceId
@@ -41,20 +43,23 @@ paths:
         description: 'Operation name to be performed'
         required: true
         type: string
-      -
-        name: payload
-        in: body
-        description: "The content to be sent to the device to perform an actuation\n"
-        required: false
-        type: string
     post:
       description: 'Perform an action on the device'
+      parameters:
+        -
+          name: payload
+          in: body
+          description: "The content to be sent to the device to perform an actuation\n"
+          schema:
+            type: string
       responses:
         '200':
           description: 'Action sent'
         '204':
           description: 'Action sent, no response received'
   '/device/{deviceId}/subscribe':
+    tags:
+      - Device
     parameters:
       -
         name: deviceId
@@ -73,6 +78,8 @@ paths:
         '200':
           description: Unsubscribed
   '/device/{deviceId}/{componentId}':
+    tags:
+      - Device
     parameters:
       -
         name: deviceId
@@ -101,6 +108,8 @@ paths:
         '204':
           description: 'Write sent, no results returned'
   '/device/{deviceId}/lastUpdate':
+    tags:
+      - Device
     parameters:
       -
         name: deviceId
@@ -118,6 +127,8 @@ paths:
         '404':
           description: 'Device not available'
   /devices:
+    tags:
+      - DeviceManager
     get:
       description: 'List all registered devices'
       responses:
@@ -139,6 +150,8 @@ paths:
         '200':
           description: 'Device created'
   '/devices/{deviceId}':
+    tags:
+      - DeviceManager
     parameters:
       -
         name: deviceId
@@ -206,6 +219,7 @@ paths:
         required: true
         type: string
     post:
+      operationId: Connect
       description: 'Connect to the device'
       responses:
         '200':
@@ -213,6 +227,7 @@ paths:
         '404':
           description: 'Device not found'
     delete:
+      operationId: Disconnect
       description: 'Disconnect from the device'
       responses:
         '200':
@@ -228,6 +243,7 @@ paths:
         required: true
         type: string
     post:
+      operationId: StartDiscovery
       description: 'Start the discovery process'
       responses:
         '200':
@@ -242,6 +258,8 @@ paths:
         '404':
           description: 'Device not found'
   '/protocol/{protocolId}/{deviceId}':
+    tags:
+      - Protocol
     parameters:
       -
         name: protocolId
@@ -280,6 +298,8 @@ paths:
         '404':
           description: 'Device or component not found'
   /protocols:
+    tags:
+      - ProtocolManager
     get:
       description: 'Get the list of registered protocols'
       responses:
@@ -317,6 +337,8 @@ paths:
         '400':
           description: 'An error occured processing the request'
   '/protocols/{protocolId}':
+    tags:
+      - ProtocolManager
     parameters:
       -
         name: protocolId
@@ -341,6 +363,8 @@ paths:
         '404':
           description: 'Protocol not found'
   /protocols/devices:
+    tags:
+      - ProtocolManager
     get:
       description: 'Start a device discovery on all available protocols'
       responses:
@@ -349,6 +373,8 @@ paths:
           schema:
             $ref: '#/definitions/DeviceOverview'
   /protocols/discovery:
+    tags:
+      - ProtocolManager
     post:
       description: 'Start a device discovery on all available protocols'
       responses:

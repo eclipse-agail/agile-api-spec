@@ -267,6 +267,9 @@
       },
       "http": {
         "/device/{deviceId}/execute/{command}": {
+          "tags": {
+            "0": "Device"
+          },
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -281,18 +284,19 @@
               "description": "Operation name to be performed",
               "required": true,
               "type": "string"
-            },
-            "2": {
-              "name": "payload",
-              "in": "body",
-              "description": "The content to be sent to the device to perform an actuation\n",
-              "required": false,
-              "type": "string"
             }
           },
           "post": {
             "description": "Perform an action on the device",
             "(reference)": "Device.Execute",
+            "parameters": {
+              "0": {
+                "name": "payload",
+                "in": "body",
+                "description": "The content to be sent to the device to perform an actuation\n",
+                "schema": "string"
+              }
+            },
             "responses": {
               "200": {
                 "description": "Action sent"
@@ -304,6 +308,9 @@
           }
         },
         "/device/{deviceId}/subscribe": {
+          "tags": {
+            "0": "Device"
+          },
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -333,6 +340,9 @@
           }
         },
         "/device/{deviceId}/{componentId}": {
+          "tags": {
+            "0": "Device"
+          },
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -375,6 +385,9 @@
           }
         },
         "/device/{deviceId}/lastUpdate": {
+          "tags": {
+            "0": "Device"
+          },
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -403,6 +416,7 @@
       }
     },
     "iot.agile.DeviceManager": {
+      "description": "The DeviceManager list the registered devices available from the gateway available protocols.\nThis API is responsible to instantiate the reference DBus object for every device\nand offer management and integration points.\n",
       "group": "Device",
       "methods": {
         "Find": {
@@ -514,6 +528,9 @@
       },
       "http": {
         "/devices": {
+          "tags": {
+            "0": "DeviceManager"
+          },
           "get": {
             "description": "List all registered devices",
             "responses": {
@@ -546,6 +563,9 @@
           }
         },
         "/devices/{deviceId}": {
+          "tags": {
+            "0": "DeviceManager"
+          },
           "parameters": {
             "0": {
               "name": "deviceId",
@@ -793,6 +813,7 @@
             }
           },
           "post": {
+            "operationId": "Connect",
             "description": "Connect to the device",
             "responses": {
               "200": {
@@ -804,6 +825,7 @@
             }
           },
           "delete": {
+            "operationId": "Disconnect",
             "description": "Disconnect from the device",
             "responses": {
               "200": {
@@ -826,6 +848,7 @@
             }
           },
           "post": {
+            "operationId": "StartDiscovery",
             "description": "Start the discovery process",
             "responses": {
               "200": {
@@ -849,6 +872,9 @@
           }
         },
         "/protocol/{protocolId}/{deviceId}": {
+          "tags": {
+            "0": "Protocol"
+          },
           "parameters": {
             "0": {
               "name": "protocolId",
@@ -905,7 +931,7 @@
       }
     },
     "iot.agile.ProtocolManager": {
-      "description": "The ProtocolManager list the managed protocols in the gateway. From this\ninterface is possible to add and remove protocols and start/stop multiprotocol discovery\n",
+      "description": "The ProtocolManager list the managed protocols in the gateway. From this\ninterface is possible to add and remove protocols and start/stop multiprotocol discovery.\nThe discovery process will list all found devices under the `Devices` property.\nThose discovered devices may be added to the [DeviceManager](#iot.agile.DeviceManager) to be\nconfigured and made operational.\n",
       "group": "Protocol",
       "methods": {
         "StartDiscovery": {
@@ -972,6 +998,9 @@
       },
       "http": {
         "/protocols": {
+          "tags": {
+            "0": "ProtocolManager"
+          },
           "get": {
             "description": "Get the list of registered protocols",
             "responses": {
@@ -1027,6 +1056,9 @@
           }
         },
         "/protocols/{protocolId}": {
+          "tags": {
+            "0": "ProtocolManager"
+          },
           "parameters": {
             "0": {
               "name": "protocolId",
@@ -1065,6 +1097,9 @@
           }
         },
         "/protocols/devices": {
+          "tags": {
+            "0": "ProtocolManager"
+          },
           "get": {
             "(reference)": "ProtocolManager.Devices",
             "description": "Start a device discovery on all available protocols",
@@ -1079,6 +1114,9 @@
           }
         },
         "/protocols/discovery": {
+          "tags": {
+            "0": "ProtocolManager"
+          },
           "post": {
             "(reference)": "ProtocolManager.StartDiscovery",
             "description": "Start a device discovery on all available protocols",
@@ -1229,7 +1267,9 @@
           },
           "type": "String"
         },
-        "Enabled": {},
+        "Enabled": {
+          "type": "Boolean"
+        },
         "Status": {
           "description": "Indicate the overall status of the Driver.",
           "access": {

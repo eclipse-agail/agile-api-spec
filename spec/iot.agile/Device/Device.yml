@@ -8,6 +8,7 @@ iot.agile.Device:
 
   http:
     /device/{deviceId}/execute/{command}:
+      tags: [Device]
       parameters:
         -
           name: deviceId
@@ -20,15 +21,16 @@ iot.agile.Device:
           description: Operation name to be performed
           required: true
           type: string
-        - name: payload
-          in: body
-          description: |
-            The content to be sent to the device to perform an actuation
-          required: false
-          type: string
       post:
         description: Perform an action on the device
         (reference): Device.Execute
+        parameters:
+          - name: payload
+            in: body
+            description: |
+              The content to be sent to the device to perform an actuation
+            schema:
+              type: string
         responses:
           200:
             description: Action sent
@@ -36,6 +38,7 @@ iot.agile.Device:
             description: Action sent, no response received
 
     /device/{deviceId}/subscribe:
+      tags: [Device]
       parameters:
         -
           name: deviceId
@@ -61,6 +64,7 @@ iot.agile.Device:
 
     # Data storage ops
     /device/{deviceId}/{componentId}:
+      tags: [Device]
       parameters:
         -
           name: deviceId
@@ -93,6 +97,7 @@ iot.agile.Device:
             description: Write sent, no results returned
 
     /device/{deviceId}/lastUpdate:
+      tags: [Device]
       parameters:
         -
           name: deviceId

@@ -21,7 +21,8 @@ iot.agile.Storage.Driver:
     type: String
     access: [r]
 
-  Enabled: Boolean
+  Enabled:
+    type: Boolean
 
   Status:
     access: [r]

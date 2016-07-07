@@ -1,9 +1,15 @@
 iot.agile.DeviceManager:
 
+  description: |
+    The DeviceManager list the registered devices available from the gateway available protocols.
+    This API is responsible to instantiate the reference DBus object for every device
+    and offer management and integration points.
+
   group: Device
 
   http:
     /devices:
+      tags: [DeviceManager]
       get:
         description: List all registered devices
         responses:
@@ -25,7 +31,7 @@ iot.agile.DeviceManager:
           200:
             description: Device created
     /devices/{deviceId}:
-
+      tags: [DeviceManager]
       parameters:
         -
           name: deviceId
