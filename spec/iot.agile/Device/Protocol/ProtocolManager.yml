@@ -19,7 +19,7 @@ iot.agile.ProtocolManager:
           200:
             description: Protocols list provided
             schema:
-              $ref: "#/definitions/DeviceOverview"
+              $ref: "#/definitions/ProtocolOverview"
             examples:
               application/json:
                 - id: BLE
@@ -32,22 +32,22 @@ iot.agile.ProtocolManager:
                   status: AVAILABLE
           204:
             description: No protocols registered.
-      post:
-        tags:
-          - ProtocolManager
-        description: Register a new protocol based on an active DBus interface
-        parameters:
-          - name: protocol
-            in: body
-            schema:
-              $ref: "#/definitions/ProtocolOverview"
-        responses:
-          200:
-            description: Protocol has been added
-            schema:
-              $ref: "#/definitions/ProtocolOverview"
-          400:
-            description: An error occured processing the request
+      # post:
+      #   tags:
+      #     - ProtocolManager
+      #   description: Register a new protocol based on an active DBus interface
+      #   parameters:
+      #     - name: protocol
+      #       in: body
+      #       schema:
+      #         $ref: "#/definitions/ProtocolOverview"
+      #   responses:
+      #     200:
+      #       description: Protocol has been added
+      #       schema:
+      #         $ref: "#/definitions/ProtocolOverview"
+      #     400:
+      #       description: An error occured processing the request
     /protocols/{protocolId}:
       parameters:
         -
@@ -67,14 +67,12 @@ iot.agile.ProtocolManager:
             description: Protocol has been added
           400:
             description: An error occured processing the request
-          404:
-            description: Protocol not found
 
       delete:
         tags:
           - ProtocolManager
         (reference): ProtocolManager.Remove
-        description: Register a new Dbus object implementing the protocol API
+        description: Unregister a Dbus Protocol object reference
         responses:
           200:
             description: Protocol unregistered
@@ -90,9 +88,20 @@ iot.agile.ProtocolManager:
         responses:
           200:
             description: |
-              The list of multiprotocol devices
+              The list of devices found via discovery
             schema:
+              type: array
               $ref: "#/definitions/DeviceOverview"
+            examples:
+              application/json:
+                - name: SensorTag
+                  id: AA:BB:CC:DD
+                  protocol: iot.agile.protocol.BLE
+                  status: AVAILABLE
+                - name: LightDimmer
+                  id: CC:DD:AA:BB
+                  protocol: iot.agile.protocol.Zwave
+                  status: AVAILABLE
 
     /protocols/discovery:
       post:

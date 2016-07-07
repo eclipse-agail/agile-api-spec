@@ -5,6 +5,9 @@ DeviceOverview:
     name:
       description: Friendly name of the device
       type: String
+    protocol:
+      description: Protocol reference for this device
+      type: String
     id:
       description: Protocol level id used to identify and access the device
       type: String

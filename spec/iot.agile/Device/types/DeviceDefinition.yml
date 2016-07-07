@@ -12,7 +12,8 @@ DeviceStreamChannel:
   description: A channel contains a single measurement value of a sensor
   type: Object
   fields:
-    name: String
+    name:
+      type: String
     type:
       type: ChannelTypeEnum
 
