@@ -366,7 +366,7 @@ paths:
     tags:
       - ProtocolManager
     get:
-      description: 'Start a device discovery on all available protocols'
+      description: 'List all discovered devices on all available protocols'
       responses:
         '200':
           description: "The list of multiprotocol devices\n"
