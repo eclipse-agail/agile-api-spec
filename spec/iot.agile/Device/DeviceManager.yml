@@ -59,14 +59,6 @@ iot.agile.DeviceManager:
       get:
         tags:
           - DeviceManager
-        parameters:
-          -
-            name: body
-            in: body
-            description: The request body describing a device
-            required: true
-            schema:
-              $ref: "#/definitions/DeviceDefinition"
         description: Get a device definition
         responses:
           200:
