@@ -71,6 +71,16 @@ iot.agile.DeviceManager:
         responses:
           200:
             description: Device loaded
+            examples:
+              application/json:
+            examples:
+              application/json:
+                id: aaa1-bbb2-ccc3-ddd4
+                name: SensorTag
+                path: iot.agile.device.SensorTag
+                streams:
+                  - name: temperature
+                  - name: accelerometer
           404:
             description: Device not found
       put:

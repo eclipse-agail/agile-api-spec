@@ -10,6 +10,3 @@ DeviceStream:
     properties:
       type: KeyValue
       required: false
-    # channels:
-    #   type: Array
-    #   fields: DeviceStreamChannel

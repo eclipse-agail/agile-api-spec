@@ -125,8 +125,6 @@ iot.agile.Device:
           404:
             description: Device not available
 
-
-
   Id:
     description: The unique device id in the gateway
     type: String
