@@ -625,7 +625,8 @@
             "description": "Get a device definition",
             "responses": {
               "200": {
-                "description": "Device loaded"
+                "description": "Device loaded",
+                "examples": {}
               },
               "404": {
                 "description": "Device not found"
@@ -1039,6 +1040,15 @@
           "type": "Array",
           "reference": "DeviceOverview"
         },
+        "DiscoveryStatus": {
+          "description": "List the status of protocols discovery, inidicating if it is running or not",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
+          "type": "Array",
+          "reference": "DiscoveryStatus"
+        },
         "Protocols": {
           "description": "The list of managed Protocols",
           "access": {
@@ -1161,6 +1171,37 @@
           }
         },
         "/protocols/discovery": {
+          "get": {
+            "tags": {
+              "0": "ProtocolManager"
+            },
+            "(reference)": "ProtocolManager.DiscoveryStatus",
+            "description": "Return the status of discovery on the available protocols",
+            "responses": {
+              "200": {
+                "description": "Return the list of protocol discovery status\n",
+                "schema": {
+                  "$ref": "#/definitions/DiscoveryStatus"
+                },
+                "examples": {
+                  "application/json": {
+                    "0": {
+                      "name": "BLE",
+                      "status": "RUNNING"
+                    },
+                    "1": {
+                      "name": "ZigBee",
+                      "status": "NONE"
+                    },
+                    "2": {
+                      "name": "ZWave",
+                      "status": "FAILURE"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "post": {
             "tags": {
               "0": "ProtocolManager"
@@ -1596,6 +1637,35 @@
           "description": "The duration in seconds the discovery process will last before\nit should be stopped\n",
           "type": "Number",
           "required": false
+        }
+      },
+      "required": true
+    },
+    "DiscoveryStatus": {
+      "type": "Object",
+      "fields": {
+        "name": {
+          "description": "Name of the protocol",
+          "type": "String",
+          "required": true
+        },
+        "status": {
+          "type": "Enum",
+          "fields": {
+            "0": {
+              "type": "NONE",
+              "required": true
+            },
+            "1": {
+              "type": "RUNNING",
+              "required": true
+            },
+            "2": {
+              "type": "FAILURE",
+              "required": true
+            }
+          },
+          "required": true
         }
       },
       "required": true

@@ -187,6 +187,12 @@
               </li>
               
               <li>
+                <a href="#DiscoveryStatus" data-for="DiscoveryStatus">
+                  DiscoveryStatus
+                </a>
+              </li>
+              
+              <li>
                 <a href="#ProtocolMessage" data-for="ProtocolMessage">
                   ProtocolMessage
                 </a>
@@ -4825,6 +4831,55 @@ configured and made operational.
 
   </div>
 </li>
+<li class="api-class-property" data-type="property" data-id="iot.agile.ProtocolManager.DiscoveryStatus">
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#DiscoveryStatus">Array[DiscoveryStatus]</a>
+      
+    </span>
+
+    <span class="name" id="DiscoveryStatus">
+      DiscoveryStatus
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="iot.agile.ProtocolManager.DiscoveryStatus">
+
+    
+      <div class="description">
+        List the status of protocols discovery, inidicating if it is running or not
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
 <li class="api-class-property" data-type="property" data-id="iot.agile.ProtocolManager.Protocols">
 
   <div class="overview">
@@ -8294,6 +8349,96 @@ it should be stopped
 
     
 
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="DiscoveryStatus">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DiscoveryStatus
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Name of the protocol
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="status">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        status
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>NONE</li><li>RUNNING</li><li>FAILURE</li>
+      </ul>
     
   </div>
 

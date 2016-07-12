@@ -208,6 +208,8 @@ paths:
       responses:
         '200':
           description: 'Device loaded'
+          examples:
+            application/json: null
         '404':
           description: 'Device not found'
     put:
@@ -418,6 +420,26 @@ paths:
                 protocol: iot.agile.protocol.Zwave
                 status: AVAILABLE
   /protocols/discovery:
+    get:
+      tags:
+        - ProtocolManager
+      description: 'Return the status of discovery on the available protocols'
+      responses:
+        '200':
+          description: "Return the list of protocol discovery status\n"
+          schema:
+            $ref: '#/definitions/DiscoveryStatus'
+          examples:
+            application/json:
+              -
+                name: BLE
+                status: RUNNING
+              -
+                name: ZigBee
+                status: NONE
+              -
+                name: ZWave
+                status: FAILURE
     post:
       tags:
         - ProtocolManager
@@ -457,6 +479,17 @@ definitions:
           - DISCONNECTED
           - AVAILABLE
           - UNAVAILABLE
+  DiscoveryStatus:
+    type: object
+    properties:
+      name:
+        description: 'Name of the protocol'
+        type: string
+      status:
+        enum:
+          - NONE
+          - RUNNING
+          - FAILURE
   ProtocolMessage:
     type: object
     properties:
