@@ -104,6 +104,26 @@ iot.agile.ProtocolManager:
                   status: AVAILABLE
 
     /protocols/discovery:
+      get:
+        tags:
+          - ProtocolManager
+        (reference): ProtocolManager.DiscoveryStatus
+        body:
+        description: Return the status of discovery on the available protocols
+        responses:
+          200:
+            description: |
+              Return the list of protocol discovery status
+            schema:
+              $ref: "#/definitions/DiscoveryStatus"
+            examples:
+              application/json:
+                - name: BLE
+                  status: RUNNING
+                - name: ZigBee
+                  status: NONE
+                - name: ZWave
+                  status: FAILURE
       post:
         tags:
           - ProtocolManager
@@ -143,6 +163,12 @@ iot.agile.ProtocolManager:
     access: [r, s]
     type: Array
     reference: DeviceOverview
+
+  DiscoveryStatus:
+    description: List the status of protocols discovery, inidicating if it is running or not
+    access: [r, s]
+    type: Array
+    reference: DiscoveryStatus
 
   Protocols:
     description: The list of managed Protocols

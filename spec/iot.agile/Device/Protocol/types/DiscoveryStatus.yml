@@ -1,0 +1,13 @@
+
+DiscoveryStatus:
+  type: Object
+  fields:
+    name:
+      description: Name of the protocol
+      type: String
+    status:
+      type: Enum
+      fields:
+        - NONE
+        - RUNNING
+        - FAILURE
