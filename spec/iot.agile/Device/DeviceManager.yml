@@ -65,8 +65,6 @@ iot.agile.DeviceManager:
             description: Device loaded
             examples:
               application/json:
-            examples:
-              application/json:
                 id: aaa1-bbb2-ccc3-ddd4
                 name: SensorTag
                 path: iot.agile.device.SensorTag

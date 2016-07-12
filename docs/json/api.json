@@ -625,22 +625,25 @@
             "tags": {
               "0": "DeviceManager"
             },
-            "parameters": {
-              "0": {
-                "name": "body",
-                "in": "body",
-                "description": "The request body describing a device",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/DeviceDefinition"
-                }
-              }
-            },
             "description": "Get a device definition",
             "responses": {
               "200": {
                 "description": "Device loaded",
-                "examples": {}
+                "examples": {
+                  "application/json": {
+                    "id": "aaa1-bbb2-ccc3-ddd4",
+                    "name": "SensorTag",
+                    "path": "iot.agile.device.SensorTag",
+                    "streams": {
+                      "0": {
+                        "name": "temperature"
+                      },
+                      "1": {
+                        "name": "accelerometer"
+                      }
+                    }
+                  }
+                }
               },
               "404": {
                 "description": "Device not found"
