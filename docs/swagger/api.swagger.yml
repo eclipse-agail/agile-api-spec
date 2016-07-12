@@ -69,12 +69,18 @@ paths:
           description: 'Action sent'
         '204':
           description: 'Action sent, no response received'
-  '/device/{deviceId}/subscribe':
+  '/device/{deviceId}/{componentId}/subscribe':
     parameters:
       -
         name: deviceId
         in: path
         description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: componentId
+        in: path
+        description: 'Agile component name, like a sensor'
         required: true
         type: string
     post:
@@ -123,12 +129,18 @@ paths:
           description: 'Write sent'
         '204':
           description: 'Write sent, no results returned'
-  '/device/{deviceId}/lastUpdate':
+  '/device/{deviceId}/{componentId}/lastUpdate':
     parameters:
       -
         name: deviceId
         in: path
         description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: componentId
+        in: path
+        description: 'Agile component name, like a sensor'
         required: true
         type: string
     get:

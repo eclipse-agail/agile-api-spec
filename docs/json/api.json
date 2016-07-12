@@ -307,12 +307,19 @@
             }
           }
         },
-        "/device/{deviceId}/subscribe": {
+        "/device/{deviceId}/{componentId}/subscribe": {
           "parameters": {
             "0": {
               "name": "deviceId",
               "in": "path",
               "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "componentId",
+              "in": "path",
+              "description": "Agile component name, like a sensor",
               "required": true,
               "type": "string"
             }
@@ -390,12 +397,19 @@
             }
           }
         },
-        "/device/{deviceId}/lastUpdate": {
+        "/device/{deviceId}/{componentId}/lastUpdate": {
           "parameters": {
             "0": {
               "name": "deviceId",
               "in": "path",
               "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "componentId",
+              "in": "path",
+              "description": "Agile component name, like a sensor",
               "required": true,
               "type": "string"
             }
