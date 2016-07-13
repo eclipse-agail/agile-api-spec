@@ -173,13 +173,13 @@ paths:
                 path: iot.agile.device.SensorTag
                 streams:
                   -
-                    name: temperature
+                    id: temperature
                     unit: celsius
                   -
-                    name: light
+                    id: light
                     unit: lumen
                   -
-                    name: accelerometer
+                    id: accelerometer
         '204':
           description: 'Device list is empty'
     post:
@@ -221,9 +221,9 @@ paths:
               path: iot.agile.device.SensorTag
               streams:
                 -
-                  name: temperature
+                  id: temperature
                 -
-                  name: accelerometer
+                  id: accelerometer
         '404':
           description: 'Device not found'
     put:

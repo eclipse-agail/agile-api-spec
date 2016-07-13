@@ -582,15 +582,15 @@
                       "path": "iot.agile.device.SensorTag",
                       "streams": {
                         "0": {
-                          "name": "temperature",
+                          "id": "temperature",
                           "unit": "celsius"
                         },
                         "1": {
-                          "name": "light",
+                          "id": "light",
                           "unit": "lumen"
                         },
                         "2": {
-                          "name": "accelerometer"
+                          "id": "accelerometer"
                         }
                       }
                     }
@@ -653,10 +653,10 @@
                     "path": "iot.agile.device.SensorTag",
                     "streams": {
                       "0": {
-                        "name": "temperature"
+                        "id": "temperature"
                       },
                       "1": {
-                        "name": "accelerometer"
+                        "id": "accelerometer"
                       }
                     }
                   }
