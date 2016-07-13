@@ -63,6 +63,8 @@ iot.agile.DeviceManager:
         responses:
           200:
             description: Device loaded
+            schema:
+              $ref: "#/definitions/DeviceDefinition"
             examples:
               application/json:
                 id: aaa1-bbb2-ccc3-ddd4
@@ -112,6 +114,9 @@ iot.agile.DeviceManager:
     description: Return all registered devices
     type: Array
     reference: iot.agile.Device
+    access: [r, s]
+    events:
+      - DevicesChanged
 
   Find:
     description: Search for devices by specific criteria

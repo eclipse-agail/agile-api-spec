@@ -5,6 +5,8 @@ iot.agile.Device:
     It send commands to a Protocol API instance to which is binded.
 
   group: Device
+  dbus:
+    name: /iot/agile/Device/Example
 
   http:
     /device/{deviceId}/execute/{command}:
@@ -162,6 +164,7 @@ iot.agile.Device:
   Data:
     description: Retain the most recent updates from a sensor or data stream, received asynchronously from Subscribe call
     type: Object*
+    access: [r, s]
 
   Protocol:
     description: Device-specific communication Protocol instance. Available to access protocol specific methods and properties
@@ -181,9 +184,12 @@ iot.agile.Device:
     return:
        type: Object
        fields:
-         result: Boolean,
-         resultCode: Number
-         response: Object*
+         result:
+           type: Boolean
+         resultCode:
+           type: Number
+         response:
+           type: Object*
 
   Connect:
     description: Connect or initialize the underlying Protocol connection implementation if required or available.
@@ -234,7 +240,7 @@ iot.agile.Device:
 
     return: Boolean
     reference:
-      - DataReceived
+      - DataChanged
       - Data
 
   Unsubscribe:

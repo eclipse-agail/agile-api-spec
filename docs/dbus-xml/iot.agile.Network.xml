@@ -1,6 +1,6 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-<node name="/iot/agile.Network">
+<node name="/iot/agile/Network">
 
   <interface name="iot.agile.Network">
     <method name="CreateAP">
@@ -18,19 +18,24 @@
 <property
   name="Status"
   type="b"
-  access="readwrite"
+  access="read"
   />
 
 <property
   name="Connections"
   type="(s)"
-  access="write"
+  access="read"
   />
+<signal name="ConnectionsChanged">
+
+  <arg name="Connections" type="(s)" />
+
+</signal>
 
 <property
   name="Devices"
   type="(s)"
-  access="readwrite"
+  access="read"
   />
 
   </interface>

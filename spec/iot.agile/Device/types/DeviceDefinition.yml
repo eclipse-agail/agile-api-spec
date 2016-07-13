@@ -15,5 +15,6 @@ DeviceDefinition:
     properties:
       type: KeyValue
     streams:
+      description: A list of components from which get data streams
       type: Array
-      fields: DeviceStream
+      fields: DeviceComponent

@@ -1,6 +1,6 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-<node name="/iot/agile.Storage.DriverManager">
+<node name="/iot/agile/Storage/DriverManager">
 
   <interface name="iot.agile.Storage.DriverManager">
     <method name="Add">
@@ -37,13 +37,13 @@
 <property
   name="Enabled"
   type="o"
-  access="readwrite"
+  access="read"
   />
 
 <property
   name="List"
   type="o"
-  access="readwrite"
+  access="read"
   />
 
   </interface>

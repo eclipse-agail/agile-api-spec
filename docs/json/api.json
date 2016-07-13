@@ -141,7 +141,7 @@
             "type": "Object",
             "fields": {
               "result": {
-                "type": "Boolean,",
+                "type": "Boolean",
                 "required": true
               },
               "resultCode": {
@@ -258,6 +258,10 @@
         },
         "Data": {
           "description": "Retain the most recent updates from a sensor or data stream, received asynchronously from Subscribe call",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
           "type": "Object*"
         },
         "Protocol": {
@@ -433,6 +437,9 @@
             }
           }
         }
+      },
+      "dbus": {
+        "name": "/iot/agile/Device/Example"
       }
     },
     "iot.agile.DeviceManager": {
@@ -542,8 +549,15 @@
       "properties": {
         "Devices": {
           "description": "Return all registered devices",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
           "type": "Array",
-          "reference": "iot.agile.Device"
+          "reference": "iot.agile.Device",
+          "events": {
+            "0": "DevicesChanged"
+          }
         }
       },
       "http": {
@@ -629,6 +643,9 @@
             "responses": {
               "200": {
                 "description": "Device loaded",
+                "schema": {
+                  "$ref": "#/definitions/DeviceDefinition"
+                },
                 "examples": {
                   "application/json": {
                     "id": "aaa1-bbb2-ccc3-ddd4",
@@ -1791,6 +1808,25 @@
       },
       "required": true
     },
+    "DeviceComponent": {
+      "description": "A device component from which get a data stream, like a sensor",
+      "type": "Object",
+      "fields": {
+        "id": {
+          "type": "String",
+          "required": true
+        },
+        "unit": {
+          "type": "String",
+          "required": false
+        },
+        "properties": {
+          "type": "KeyValue",
+          "required": false
+        }
+      },
+      "required": true
+    },
     "DeviceDefinition": {
       "description": "A device definition that contains informations describing the current device",
       "type": "Object",
@@ -1817,28 +1853,10 @@
           "required": true
         },
         "streams": {
+          "description": "A list of components from which get data streams",
           "type": "Array",
-          "fields": "DeviceStream",
+          "fields": "DeviceComponent",
           "required": true
-        }
-      },
-      "required": true
-    },
-    "DeviceStream": {
-      "description": "A stream containing a set of definitions of device components, like sensors",
-      "type": "Object",
-      "fields": {
-        "name": {
-          "type": "String",
-          "required": true
-        },
-        "unit": {
-          "type": "String",
-          "required": false
-        },
-        "properties": {
-          "type": "KeyValue",
-          "required": false
         }
       },
       "required": true

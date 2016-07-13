@@ -1,6 +1,6 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-<node name="/iot/agile.Storage.Driver">
+<node name="/iot/agile/Storage/Driver">
 
   <interface name="iot.agile.Storage.Driver">
     <method name="Create">
@@ -39,37 +39,42 @@
 <property
   name="Name"
   type="s"
-  access="write"
+  access="read"
   />
 
 <property
   name="Enabled"
   type="b"
-  access="readwrite"
+  access="read"
   />
 
 <property
   name="Status"
   type="(i)"
-  access="write"
+  access="read"
   />
 
 <property
   name="Error"
   type="b"
-  access="write"
+  access="readwrite"
   />
+<signal name="ErrorChanged">
+
+  <arg name="Error" type="b" />
+
+</signal>
 
 <property
   name="Params"
   type="{sv}"
-  access="write"
+  access="readwrite"
   />
 
 <property
   name="Logs"
   type="s"
-  access="readwrite"
+  access="read"
   />
 
   </interface>

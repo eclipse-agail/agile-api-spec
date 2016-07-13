@@ -1,6 +1,6 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-<node name="/iot/agile.Protocol">
+<node name="/iot/agile/Protocol">
 
   <interface name="iot.agile.Protocol">
     <method name="Connect">
@@ -58,32 +58,42 @@
 <property
   name="Status"
   type="(i)"
-  access="write"
+  access="read"
   />
 
 <property
   name="Driver"
   type="s"
-  access="write"
+  access="read"
   />
 
 <property
   name="Name"
   type="s"
-  access="write"
+  access="read"
   />
 
 <property
   name="Data"
   type="{ssssd}"
-  access="write"
+  access="read"
   />
+<signal name="DataChanged">
+
+  <arg name="Data" type="{ssssd}" />
+
+</signal>
 
 <property
   name="Devices"
   type="{sss(i)}"
-  access="write"
+  access="read"
   />
+<signal name="DevicesChanged">
+
+  <arg name="Devices" type="{sss(i)}" />
+
+</signal>
 
   </interface>
 

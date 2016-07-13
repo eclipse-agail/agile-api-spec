@@ -212,6 +212,8 @@ paths:
       responses:
         '200':
           description: 'Device loaded'
+          schema:
+            $ref: '#/definitions/DeviceDefinition'
           examples:
             application/json:
               id: aaa1-bbb2-ccc3-ddd4
@@ -539,6 +541,16 @@ definitions:
       - Boolean
       - GeoPoint
       - Object
+  DeviceComponent:
+    description: 'A device component from which get a data stream, like a sensor'
+    type: object
+    properties:
+      id:
+        type: string
+      unit:
+        type: string
+      properties:
+        $ref: '#/definitions/KeyValue'
   DeviceDefinition:
     description: 'A device definition that contains informations describing the current device'
     type: object
@@ -555,19 +567,10 @@ definitions:
       properties:
         $ref: '#/definitions/KeyValue'
       streams:
+        description: 'A list of components from which get data streams'
         type: array
         items:
-          $ref: '#/definitions/DeviceStream'
-  DeviceStream:
-    description: 'A stream containing a set of definitions of device components, like sensors'
-    type: object
-    properties:
-      name:
-        type: string
-      unit:
-        type: string
-      properties:
-        $ref: '#/definitions/KeyValue'
+          $ref: '#/definitions/DeviceComponent'
   RecordObject:
     type: object
     properties:

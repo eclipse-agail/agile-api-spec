@@ -1,8 +1,8 @@
-DeviceStream:
-  description: A stream containing a set of definitions of device components, like sensors
+DeviceComponent:
+  description: A device component from which get a data stream, like a sensor
   type: Object
   fields:
-    name:
+    id:
       type: String
     unit:
       type: String

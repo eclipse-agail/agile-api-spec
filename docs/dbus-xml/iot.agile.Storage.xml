@@ -1,6 +1,6 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-<node name="/iot/agile.Storage">
+<node name="/iot/agile/Storage">
 
   <interface name="iot.agile.Storage">
     <method name="Create">
@@ -39,7 +39,7 @@
 <property
   name="Connections"
   type="o"
-  access="readwrite"
+  access="read"
   />
 
   </interface>

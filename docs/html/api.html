@@ -223,14 +223,14 @@
               </li>
               
               <li>
-                <a href="#DeviceDefinition" data-for="DeviceDefinition">
-                  DeviceDefinition
+                <a href="#DeviceComponent" data-for="DeviceComponent">
+                  DeviceComponent
                 </a>
               </li>
               
               <li>
-                <a href="#DeviceStream" data-for="DeviceStream">
-                  DeviceStream
+                <a href="#DeviceDefinition" data-for="DeviceDefinition">
+                  DeviceDefinition
                 </a>
               </li>
               
@@ -1593,6 +1593,25 @@ It send commands to a Protocol API instance to which is binded.
     
 
     
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
 
     
 
@@ -1787,7 +1806,7 @@ underline Protocol specific implementation.
   <div class="overview">
     <span class="type">
       
-        Boolean,
+        Boolean
       
     </span>
 
@@ -2661,6 +2680,25 @@ and offer management and integration points.
       </div>
     
 
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
     
 
     
@@ -8799,6 +8837,118 @@ if for some reason further user-side checks are required.
   </div>
 
 </li>
+<li class="api-type" data-type="type" id="DeviceComponent">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DeviceComponent
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A device component from which get a data stream, like a sensor
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="unit">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        unit
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="properties">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#KeyValue">KeyValue</a>
+      
+    </span>
+
+    
+      <span class="name">
+        properties
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
 <li class="api-type" data-type="type" id="DeviceDefinition">
 
   <div class="overview">
@@ -8966,7 +9116,7 @@ if for some reason further user-side checks are required.
   <div class="overview">
     <span class="type">
       
-        Array[DeviceStream]
+        Array[DeviceComponent]
       
     </span>
 
@@ -8980,117 +9130,9 @@ if for some reason further user-side checks are required.
   <div class="details hidden">
 
     
-
-    
-
-    
-  </div>
-
-</li>
-
-      </ul>
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="DeviceStream">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="name">
-        DeviceStream
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
       <span class="description">
-        A stream containing a set of definitions of device components, like sensors
+        A list of components from which get data streams
       </span>
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li class="api-type" data-type="type" id="name">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        name
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="unit">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        unit
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="properties">
-
-  <div class="overview">
-    <span class="type">
-      
-        <a href="#KeyValue">KeyValue</a>
-      
-    </span>
-
-    
-      <span class="name">
-        properties
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
     
 
     
