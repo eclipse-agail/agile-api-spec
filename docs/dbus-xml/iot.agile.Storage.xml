@@ -1,0 +1,47 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/iot/agile.Storage">
+
+  <interface name="iot.agile.Storage">
+    <method name="Create">
+  
+      <arg name="record" type="{ssssd}" direction="in"/>
+      <arg name="return" type="s" direction="out"/>
+  
+  </method>
+
+  <method name="Read">
+  
+      <arg name="Id" type="s" direction="in"/>
+      <arg name="return" type="{ssssd}" direction="out"/>
+  
+  </method>
+
+  <method name="Update">
+  
+      <arg name="Id" type="s" direction="in"/>
+      <arg name="Record" type="{ssssd}" direction="in"/>
+  
+  </method>
+
+  <method name="Delete">
+  
+      <arg name="Id" type="s" direction="in"/>
+  
+  </method>
+
+  <method name="Find">
+  
+      <arg name="query" type="{vvdd}" direction="in"/>
+      <arg name="return" type="({ssssd})" direction="out"/>
+  
+  </method>
+<property
+  name="Connections"
+  type="o"
+  access="readwrite"
+  />
+
+  </interface>
+
+</node>

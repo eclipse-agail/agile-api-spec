@@ -850,7 +850,7 @@
             "1": "s"
           },
           "type": "Array",
-          "reference": "ProtocolDevice"
+          "reference": "DeviceOverview"
         }
       },
       "http": {
@@ -1049,7 +1049,7 @@
       },
       "properties": {
         "Devices": {
-          "description": "Contains the list of devices returned by each Protocol specific discovery, where available",
+          "description": "All devices a Protocol knows about. This list may be updated by the StartDiscovery method.\nDevices may also be provisioned programmatically during the initialization phase.\n",
           "access": {
             "0": "r",
             "1": "s"

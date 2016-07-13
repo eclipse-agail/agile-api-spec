@@ -1,0 +1,38 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/iot/agile.Network">
+
+  <interface name="iot.agile.Network">
+    <method name="CreateAP">
+  
+      <arg name="subnet" type="s" direction="in"/>
+      <arg name="gateway" type="s" direction="in"/>
+      <arg name="password" type="s" direction="in"/>
+  
+  </method>
+
+  <method name="ScanWiFi">
+  
+  
+  </method>
+<property
+  name="Status"
+  type="b"
+  access="readwrite"
+  />
+
+<property
+  name="Connections"
+  type="(s)"
+  access="write"
+  />
+
+<property
+  name="Devices"
+  type="(s)"
+  access="readwrite"
+  />
+
+  </interface>
+
+</node>

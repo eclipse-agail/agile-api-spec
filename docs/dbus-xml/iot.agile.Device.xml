@@ -1,0 +1,103 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/iot/agile.Device">
+
+  <interface name="iot.agile.Device">
+    <method name="Execute">
+  
+      <arg name="op" type="s" direction="in"/>
+      <arg name="payload" type="v" direction="in"/>
+      <arg name="return" type="{boolean,dv}" direction="out"/>
+  
+  </method>
+
+  <method name="Connect">
+  
+  
+  </method>
+
+  <method name="Disconnect">
+  
+  
+  </method>
+
+  <method name="Read">
+  
+      <arg name="component" type="s" direction="in"/>
+      <arg name="return" type="v" direction="out"/>
+  
+  </method>
+
+  <method name="Write">
+  
+      <arg name="component" type="s" direction="in"/>
+      <arg name="data" type="{ss}" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <method name="Subscribe">
+  
+      <arg name="component" type="s" direction="in"/>
+      <arg name="params" type="v" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <method name="Unsubscribe">
+  
+      <arg name="component" type="s" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+<property
+  name="Id"
+  type="s"
+  access="readwrite"
+  />
+
+<property
+  name="Name"
+  type="s"
+  access="readwrite"
+  />
+
+<property
+  name="Status"
+  type="(i)"
+  access="readwrite"
+  />
+
+<property
+  name="Configuration"
+  type="v"
+  access="readwrite"
+  />
+
+<property
+  name="Profile"
+  type="v"
+  access="readwrite"
+  />
+
+<property
+  name="LastUpdate"
+  type="d"
+  access="readwrite"
+  />
+
+<property
+  name="Data"
+  type="v"
+  access="readwrite"
+  />
+
+<property
+  name="Protocol"
+  type="o"
+  access="readwrite"
+  />
+
+  </interface>
+
+</node>

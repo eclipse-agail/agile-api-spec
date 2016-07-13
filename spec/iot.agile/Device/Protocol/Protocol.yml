@@ -140,7 +140,7 @@ iot.agile.Protocol:
 
   Devices:
     type: Array
-    reference: ProtocolDevice
+    reference: DeviceOverview
     description: A list of devices found or available via this protocol.
     access: [r, s]
 

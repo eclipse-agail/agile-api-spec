@@ -1,0 +1,48 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/iot/agile.ProtocolManager">
+
+  <interface name="iot.agile.ProtocolManager">
+    <method name="StartDiscovery">
+  
+      <arg name="params" type="{d}" direction="in"/>
+  
+  </method>
+
+  <method name="StopDiscovery">
+  
+  
+  </method>
+
+  <method name="Add">
+  
+      <arg name="protocol" type="o" direction="in"/>
+  
+  </method>
+
+  <method name="Remove">
+  
+      <arg name="protocol" type="o" direction="in"/>
+  
+  </method>
+<property
+  name="Devices"
+  type="{sss(i)}"
+  access="write"
+  />
+
+<property
+  name="DiscoveryStatus"
+  type="{s(i)}"
+  access="write"
+  />
+
+<property
+  name="Protocols"
+  type="{sss(i)}"
+  access="write"
+  />
+
+  </interface>
+
+</node>

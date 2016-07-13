@@ -1,0 +1,62 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/iot/agile.Apps">
+
+  <interface name="iot.agile.Apps">
+    <method name="Start">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="params" type="(s)" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <method name="Stop">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="return" type="d" direction="out"/>
+  
+  </method>
+
+  <method name="Restart">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <method name="Install">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <method name="Uninstall">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <method name="Status">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="return" type="{bsd}" direction="out"/>
+  
+  </method>
+<property
+  name="Logs"
+  type="s"
+  access="readwrite"
+  />
+
+<property
+  name="Settings"
+  type="v"
+  access="readwrite"
+  />
+
+  </interface>
+
+</node>

@@ -1,0 +1,51 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/iot/agile.Storage.DriverManager">
+
+  <interface name="iot.agile.Storage.DriverManager">
+    <method name="Add">
+  
+      <arg name="driver" type="o" direction="in"/>
+      <arg name="enable" type="b" direction="in"/>
+  
+  </method>
+
+  <method name="Remove">
+  
+      <arg name="driver" type="o" direction="in"/>
+  
+  </method>
+
+  <method name="Enable">
+  
+      <arg name="driver" type="o" direction="in"/>
+  
+  </method>
+
+  <method name="Disable">
+  
+      <arg name="driver" type="o" direction="in"/>
+  
+  </method>
+
+  <method name="Status">
+  
+      <arg name="driver" type="o" direction="in"/>
+      <arg name="return" type="{b(i)s}" direction="out"/>
+  
+  </method>
+<property
+  name="Enabled"
+  type="o"
+  access="readwrite"
+  />
+
+<property
+  name="List"
+  type="o"
+  access="readwrite"
+  />
+
+  </interface>
+
+</node>

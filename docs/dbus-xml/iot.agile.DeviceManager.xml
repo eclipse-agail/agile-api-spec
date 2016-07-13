@@ -1,0 +1,58 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/iot/agile.DeviceManager">
+
+  <interface name="iot.agile.DeviceManager">
+    <method name="Find">
+  
+      <arg name="query" type="{vvdd}" direction="in"/>
+      <arg name="return" type="o" direction="out"/>
+  
+  </method>
+
+  <method name="Create">
+  
+      <arg name="device" type="{ssssv({ssv})}" direction="in"/>
+      <arg name="return" type="s" direction="out"/>
+  
+  </method>
+
+  <method name="Read">
+  
+      <arg name="Id" type="s" direction="in"/>
+      <arg name="return" type="{ssssv({ssv})}" direction="out"/>
+  
+  </method>
+
+  <method name="Update">
+  
+      <arg name="Id" type="s" direction="in"/>
+      <arg name="Definition" type="{ssssv({ssv})}" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <method name="Delete">
+  
+      <arg name="Id" type="s" direction="in"/>
+      <arg name="Definition" type="{ssssv({ssv})}" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <method name="Batch">
+  
+      <arg name="operation" type="(i)" direction="in"/>
+      <arg name="arguments" type="v" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+<property
+  name="Devices"
+  type="o"
+  access="readwrite"
+  />
+
+  </interface>
+
+</node>

@@ -3698,7 +3698,7 @@ from different sensor an will need to filter out the correct ones
 
     <span class="type">
       
-        <a href="#ProtocolDevice">Array[ProtocolDevice]</a>
+        <a href="#DeviceOverview">Array[DeviceOverview]</a>
       
     </span>
 
@@ -4802,7 +4802,9 @@ configured and made operational.
 
     
       <div class="description">
-        Contains the list of devices returned by each Protocol specific discovery, where available
+        All devices a Protocol knows about. This list may be updated by the StartDiscovery method.
+Devices may also be provisioned programmatically during the initialization phase.
+
       </div>
     
 
