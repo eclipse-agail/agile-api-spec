@@ -3,55 +3,83 @@
 <node name="/iot/agile/ProtocolManager">
 
   <interface name="iot.agile.ProtocolManager">
-    <method name="StartDiscovery">
+    <!--
+    @see iot.agile.ProtocolManager.StartDiscovery
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_StartDiscovery
+  -->
+  <method name="StartDiscovery">
   
       <arg name="params" type="{d}" direction="in"/>
   
   </method>
 
+  <!--
+    @see iot.agile.ProtocolManager.StopDiscovery
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_StopDiscovery
+  -->
   <method name="StopDiscovery">
   
   
   </method>
 
+  <!--
+    @see iot.agile.ProtocolManager.Add
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Add
+  -->
   <method name="Add">
   
       <arg name="protocol" type="o" direction="in"/>
   
   </method>
 
+  <!--
+    @see iot.agile.ProtocolManager.Remove
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Remove
+  -->
   <method name="Remove">
   
       <arg name="protocol" type="o" direction="in"/>
   
   </method>
-<property
-  name="Devices"
-  type="{sss(i)}"
-  access="read"
-  />
+  <!--
+    @see iot.agile.ProtocolManager.Devices
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Devices
+  -->
+  <property
+    name="Devices"
+    type="{sss(i)}"
+    access="read"
+    />
 <signal name="DevicesChanged">
 
   <arg name="Devices" type="{sss(i)}" />
 
 </signal>
 
-<property
-  name="DiscoveryStatus"
-  type="{s(i)}"
-  access="read"
-  />
+  <!--
+    @see iot.agile.ProtocolManager.DiscoveryStatus
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_DiscoveryStatus
+  -->
+  <property
+    name="DiscoveryStatus"
+    type="{s(i)}"
+    access="read"
+    />
 <signal name="DiscoveryStatusChanged">
 
   <arg name="DiscoveryStatus" type="{s(i)}" />
 
 </signal>
 
-<property
-  name="Protocols"
-  type="{sss(i)}"
-  access="read"
-  />
+  <!--
+    @see iot.agile.ProtocolManager.Protocols
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Protocols
+  -->
+  <property
+    name="Protocols"
+    type="{sss(i)}"
+    access="read"
+    />
 <signal name="ProtocolsChanged">
 
   <arg name="Protocols" type="{sss(i)}" />

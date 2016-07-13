@@ -3,28 +3,48 @@
 <node name="/iot/agile/Protocol">
 
   <interface name="iot.agile.Protocol">
-    <method name="Connect">
+    <!--
+    @see iot.agile.Protocol.Connect
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_Connect
+  -->
+  <method name="Connect">
   
       <arg name="deviceId" type="s" direction="in"/>
   
   </method>
 
+  <!--
+    @see iot.agile.Protocol.Disconnect
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_Disconnect
+  -->
   <method name="Disconnect">
   
       <arg name="deviceId" type="s" direction="in"/>
   
   </method>
 
+  <!--
+    @see iot.agile.Protocol.StartDiscovery
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_StartDiscovery
+  -->
   <method name="StartDiscovery">
   
   
   </method>
 
+  <!--
+    @see iot.agile.Protocol.StopDiscovery
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_StopDiscovery
+  -->
   <method name="StopDiscovery">
   
   
   </method>
 
+  <!--
+    @see iot.agile.Protocol.Write
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_Write
+  -->
   <method name="Write">
   
       <arg name="deviceId" type="s" direction="in"/>
@@ -33,6 +53,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Protocol.Read
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_Read
+  -->
   <method name="Read">
   
       <arg name="deviceId" type="s" direction="in"/>
@@ -41,6 +65,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Protocol.Subscribe
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_Subscribe
+  -->
   <method name="Subscribe">
   
       <arg name="deviceId" type="s" direction="in"/>
@@ -48,6 +76,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Protocol.Unsubscribe
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_Unsubscribe
+  -->
   <method name="Unsubscribe">
   
       <arg name="deviceId" type="s" direction="in"/>
@@ -55,40 +87,60 @@
       <arg name="return" type="{ssssd}" direction="out"/>
   
   </method>
-<property
-  name="Status"
-  type="(i)"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Protocol.Status
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_Status
+  -->
+  <property
+    name="Status"
+    type="(i)"
+    access="read"
+    />
 
-<property
-  name="Driver"
-  type="s"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Protocol.Driver
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_Driver
+  -->
+  <property
+    name="Driver"
+    type="s"
+    access="read"
+    />
 
-<property
-  name="Name"
-  type="s"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Protocol.Name
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_Name
+  -->
+  <property
+    name="Name"
+    type="s"
+    access="read"
+    />
 
-<property
-  name="Data"
-  type="{ssssd}"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Protocol.Data
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_Data
+  -->
+  <property
+    name="Data"
+    type="{ssssd}"
+    access="read"
+    />
 <signal name="DataChanged">
 
   <arg name="Data" type="{ssssd}" />
 
 </signal>
 
-<property
-  name="Devices"
-  type="{sss(i)}"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Protocol.Devices
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Protocol_Devices
+  -->
+  <property
+    name="Devices"
+    type="{sss(i)}"
+    access="read"
+    />
 <signal name="DevicesChanged">
 
   <arg name="Devices" type="{sss(i)}" />

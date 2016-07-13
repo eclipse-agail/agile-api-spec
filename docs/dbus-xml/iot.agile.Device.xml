@@ -3,7 +3,11 @@
 <node name="/iot/agile/Device/Example">
 
   <interface name="iot.agile.Device">
-    <method name="Execute">
+    <!--
+    @see iot.agile.Device.Execute
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Execute
+  -->
+  <method name="Execute">
   
       <arg name="op" type="s" direction="in"/>
       <arg name="payload" type="v" direction="in"/>
@@ -11,16 +15,28 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Device.Connect
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Connect
+  -->
   <method name="Connect">
   
   
   </method>
 
+  <!--
+    @see iot.agile.Device.Disconnect
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Disconnect
+  -->
   <method name="Disconnect">
   
   
   </method>
 
+  <!--
+    @see iot.agile.Device.Read
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Read
+  -->
   <method name="Read">
   
       <arg name="component" type="s" direction="in"/>
@@ -28,6 +44,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Device.Write
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Write
+  -->
   <method name="Write">
   
       <arg name="component" type="s" direction="in"/>
@@ -36,6 +56,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Device.Subscribe
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Subscribe
+  -->
   <method name="Subscribe">
   
       <arg name="component" type="s" direction="in"/>
@@ -44,64 +68,100 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Device.Unsubscribe
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Unsubscribe
+  -->
   <method name="Unsubscribe">
   
       <arg name="component" type="s" direction="in"/>
       <arg name="return" type="b" direction="out"/>
   
   </method>
-<property
-  name="Id"
-  type="s"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Device.Id
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Id
+  -->
+  <property
+    name="Id"
+    type="s"
+    access="read"
+    />
 
-<property
-  name="Name"
-  type="s"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Device.Name
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Name
+  -->
+  <property
+    name="Name"
+    type="s"
+    access="read"
+    />
 
-<property
-  name="Status"
-  type="(i)"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Device.Status
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Status
+  -->
+  <property
+    name="Status"
+    type="(i)"
+    access="read"
+    />
 
-<property
-  name="Configuration"
-  type="v"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Device.Configuration
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Configuration
+  -->
+  <property
+    name="Configuration"
+    type="v"
+    access="read"
+    />
 
-<property
-  name="Profile"
-  type="v"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Device.Profile
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Profile
+  -->
+  <property
+    name="Profile"
+    type="v"
+    access="read"
+    />
 
-<property
-  name="LastUpdate"
-  type="d"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Device.LastUpdate
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_LastUpdate
+  -->
+  <property
+    name="LastUpdate"
+    type="d"
+    access="read"
+    />
 
-<property
-  name="Data"
-  type="v"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Device.Data
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Data
+  -->
+  <property
+    name="Data"
+    type="v"
+    access="read"
+    />
 <signal name="DataChanged">
 
   <arg name="Data" type="v" />
 
 </signal>
 
-<property
-  name="Protocol"
-  type="o"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Device.Protocol
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Protocol
+  -->
+  <property
+    name="Protocol"
+    type="o"
+    access="read"
+    />
 
   </interface>
 

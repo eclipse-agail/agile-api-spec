@@ -3,7 +3,11 @@
 <node name="/iot/agile/Apps">
 
   <interface name="iot.agile.Apps">
-    <method name="Start">
+    <!--
+    @see iot.agile.Apps.Start
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Apps_Start
+  -->
+  <method name="Start">
   
       <arg name="app" type="s" direction="in"/>
       <arg name="params" type="(s)" direction="in"/>
@@ -11,6 +15,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Apps.Stop
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Apps_Stop
+  -->
   <method name="Stop">
   
       <arg name="app" type="s" direction="in"/>
@@ -18,6 +26,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Apps.Restart
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Apps_Restart
+  -->
   <method name="Restart">
   
       <arg name="app" type="s" direction="in"/>
@@ -25,6 +37,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Apps.Install
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Apps_Install
+  -->
   <method name="Install">
   
       <arg name="app" type="s" direction="in"/>
@@ -32,6 +48,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Apps.Uninstall
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Apps_Uninstall
+  -->
   <method name="Uninstall">
   
       <arg name="app" type="s" direction="in"/>
@@ -39,23 +59,35 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Apps.Status
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Apps_Status
+  -->
   <method name="Status">
   
       <arg name="app" type="s" direction="in"/>
       <arg name="return" type="{bsd}" direction="out"/>
   
   </method>
-<property
-  name="Logs"
-  type="s"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Apps.Logs
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Apps_Logs
+  -->
+  <property
+    name="Logs"
+    type="s"
+    access="read"
+    />
 
-<property
-  name="Settings"
-  type="v"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Apps.Settings
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Apps_Settings
+  -->
+  <property
+    name="Settings"
+    type="v"
+    access="read"
+    />
 
   </interface>
 

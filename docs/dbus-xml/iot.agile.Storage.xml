@@ -3,13 +3,21 @@
 <node name="/iot/agile/Storage">
 
   <interface name="iot.agile.Storage">
-    <method name="Create">
+    <!--
+    @see iot.agile.Storage.Create
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Create
+  -->
+  <method name="Create">
   
       <arg name="record" type="{ssssd}" direction="in"/>
       <arg name="return" type="s" direction="out"/>
   
   </method>
 
+  <!--
+    @see iot.agile.Storage.Read
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Read
+  -->
   <method name="Read">
   
       <arg name="Id" type="s" direction="in"/>
@@ -17,6 +25,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Storage.Update
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Update
+  -->
   <method name="Update">
   
       <arg name="Id" type="s" direction="in"/>
@@ -24,23 +36,35 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Storage.Delete
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Delete
+  -->
   <method name="Delete">
   
       <arg name="Id" type="s" direction="in"/>
   
   </method>
 
+  <!--
+    @see iot.agile.Storage.Find
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Find
+  -->
   <method name="Find">
   
       <arg name="query" type="{vvdd}" direction="in"/>
       <arg name="return" type="({ssssd})" direction="out"/>
   
   </method>
-<property
-  name="Connections"
-  type="o"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Storage.Connections
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Connections
+  -->
+  <property
+    name="Connections"
+    type="o"
+    access="read"
+    />
 
   </interface>
 

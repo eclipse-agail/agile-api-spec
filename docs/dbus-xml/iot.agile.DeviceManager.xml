@@ -3,13 +3,21 @@
 <node name="/iot/agile/DeviceManager">
 
   <interface name="iot.agile.DeviceManager">
-    <method name="Find">
+    <!--
+    @see iot.agile.DeviceManager.Find
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Find
+  -->
+  <method name="Find">
   
       <arg name="query" type="{vvdd}" direction="in"/>
       <arg name="return" type="o" direction="out"/>
   
   </method>
 
+  <!--
+    @see iot.agile.DeviceManager.Create
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Create
+  -->
   <method name="Create">
   
       <arg name="device" type="{ssssv({ssv})}" direction="in"/>
@@ -17,6 +25,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.DeviceManager.Read
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Read
+  -->
   <method name="Read">
   
       <arg name="Id" type="s" direction="in"/>
@@ -24,6 +36,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.DeviceManager.Update
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Update
+  -->
   <method name="Update">
   
       <arg name="Id" type="s" direction="in"/>
@@ -32,6 +48,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.DeviceManager.Delete
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Delete
+  -->
   <method name="Delete">
   
       <arg name="Id" type="s" direction="in"/>
@@ -40,6 +60,10 @@
   
   </method>
 
+  <!--
+    @see iot.agile.DeviceManager.Batch
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Batch
+  -->
   <method name="Batch">
   
       <arg name="operation" type="(i)" direction="in"/>
@@ -47,11 +71,15 @@
       <arg name="return" type="b" direction="out"/>
   
   </method>
-<property
-  name="Devices"
-  type="o"
-  access="read"
-  />
+  <!--
+    @see iot.agile.DeviceManager.Devices
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Devices
+  -->
+  <property
+    name="Devices"
+    type="o"
+    access="read"
+    />
 <signal name="DevicesChanged">
 
   <arg name="Devices" type="o" />

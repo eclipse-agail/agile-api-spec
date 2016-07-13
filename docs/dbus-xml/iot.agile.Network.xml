@@ -3,7 +3,11 @@
 <node name="/iot/agile/Network">
 
   <interface name="iot.agile.Network">
-    <method name="CreateAP">
+    <!--
+    @see iot.agile.Network.CreateAP
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Network_CreateAP
+  -->
+  <method name="CreateAP">
   
       <arg name="subnet" type="s" direction="in"/>
       <arg name="gateway" type="s" direction="in"/>
@@ -11,32 +15,48 @@
   
   </method>
 
+  <!--
+    @see iot.agile.Network.ScanWiFi
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Network_ScanWiFi
+  -->
   <method name="ScanWiFi">
   
   
   </method>
-<property
-  name="Status"
-  type="b"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Network.Status
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Network_Status
+  -->
+  <property
+    name="Status"
+    type="b"
+    access="read"
+    />
 
-<property
-  name="Connections"
-  type="(s)"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Network.Connections
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Network_Connections
+  -->
+  <property
+    name="Connections"
+    type="(s)"
+    access="read"
+    />
 <signal name="ConnectionsChanged">
 
   <arg name="Connections" type="(s)" />
 
 </signal>
 
-<property
-  name="Devices"
-  type="(s)"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Network.Devices
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Network_Devices
+  -->
+  <property
+    name="Devices"
+    type="(s)"
+    access="read"
+    />
 
   </interface>
 

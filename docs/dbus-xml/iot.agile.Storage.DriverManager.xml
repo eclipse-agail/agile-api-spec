@@ -3,48 +3,76 @@
 <node name="/iot/agile/Storage/DriverManager">
 
   <interface name="iot.agile.Storage.DriverManager">
-    <method name="Add">
+    <!--
+    @see iot.agile.Storage.DriverManager.Add
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Add
+  -->
+  <method name="Add">
   
       <arg name="driver" type="o" direction="in"/>
       <arg name="enable" type="b" direction="in"/>
   
   </method>
 
+  <!--
+    @see iot.agile.Storage.DriverManager.Remove
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Remove
+  -->
   <method name="Remove">
   
       <arg name="driver" type="o" direction="in"/>
   
   </method>
 
+  <!--
+    @see iot.agile.Storage.DriverManager.Enable
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Enable
+  -->
   <method name="Enable">
   
       <arg name="driver" type="o" direction="in"/>
   
   </method>
 
+  <!--
+    @see iot.agile.Storage.DriverManager.Disable
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Disable
+  -->
   <method name="Disable">
   
       <arg name="driver" type="o" direction="in"/>
   
   </method>
 
+  <!--
+    @see iot.agile.Storage.DriverManager.Status
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Status
+  -->
   <method name="Status">
   
       <arg name="driver" type="o" direction="in"/>
       <arg name="return" type="{b(i)s}" direction="out"/>
   
   </method>
-<property
-  name="Enabled"
-  type="o"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Storage.DriverManager.Enabled
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Enabled
+  -->
+  <property
+    name="Enabled"
+    type="o"
+    access="read"
+    />
 
-<property
-  name="List"
-  type="o"
-  access="read"
-  />
+  <!--
+    @see iot.agile.Storage.DriverManager.List
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_List
+  -->
+  <property
+    name="List"
+    type="o"
+    access="read"
+    />
 
   </interface>
 
