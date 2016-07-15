@@ -193,20 +193,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeviceDefinition'
-          examples:
-            application/json:
-              -
-                id: aaa1-bbb2-ccc3-ddd4
-                name: SensorTag
-                streams:
-                  -
-                    id: temperature
-                    unit: celsius
-                  -
-                    id: light
-                    unit: lumen
-                  -
-                    id: accelerometer
       description: 'Creates a new device definition'
       responses:
         '200':

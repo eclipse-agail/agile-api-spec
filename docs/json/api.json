@@ -614,27 +614,6 @@
                 "required": true,
                 "schema": {
                   "$ref": "#/definitions/DeviceDefinition"
-                },
-                "examples": {
-                  "application/json": {
-                    "0": {
-                      "id": "aaa1-bbb2-ccc3-ddd4",
-                      "name": "SensorTag",
-                      "streams": {
-                        "0": {
-                          "id": "temperature",
-                          "unit": "celsius"
-                        },
-                        "1": {
-                          "id": "light",
-                          "unit": "lumen"
-                        },
-                        "2": {
-                          "id": "accelerometer"
-                        }
-                      }
-                    }
-                  }
                 }
               }
             },
