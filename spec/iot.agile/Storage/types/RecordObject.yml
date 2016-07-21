@@ -2,6 +2,7 @@
 RecordObject:
   group: Data storage
   type: Object
+  description: Contains the measurment from a sensor and the metadata regarding its source
   fields:
     DeviceId:
       description: The Agile Id that generated the value
