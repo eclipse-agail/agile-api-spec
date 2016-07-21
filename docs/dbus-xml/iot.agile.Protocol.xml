@@ -61,7 +61,7 @@
   
       <arg name="deviceId" type="s" direction="in"/>
       <arg name="arguments" type="v" direction="in"/>
-      <arg name="return" type="{ssssd}" direction="out"/>
+      <arg name="return" type="{sssssd}" direction="out"/>
   
   </method>
 
@@ -84,7 +84,7 @@
   
       <arg name="deviceId" type="s" direction="in"/>
       <arg name="arguments" type="v" direction="in"/>
-      <arg name="return" type="{ssssd}" direction="out"/>
+      <arg name="return" type="{sssssd}" direction="out"/>
   
   </method>
   <!--
@@ -123,12 +123,12 @@
   -->
   <property
     name="Data"
-    type="{ssssd}"
+    type="{sssssd}"
     access="read"
     />
 <signal name="DataChanged">
 
-  <arg name="Data" type="{ssssd}" />
+  <arg name="Data" type="{sssssd}" />
 
 </signal>
 

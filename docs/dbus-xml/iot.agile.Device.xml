@@ -40,7 +40,7 @@
   <method name="Read">
   
       <arg name="component" type="s" direction="in"/>
-      <arg name="return" type="{sssss}" direction="out"/>
+      <arg name="return" type="{sssssd}" direction="out"/>
   
   </method>
 
@@ -51,7 +51,7 @@
   <method name="Write">
   
       <arg name="component" type="s" direction="in"/>
-      <arg name="data" type="{sssss}" direction="in"/>
+      <arg name="data" type="{sssssd}" direction="in"/>
       <arg name="return" type="b" direction="out"/>
   
   </method>
@@ -144,12 +144,12 @@
   -->
   <property
     name="Data"
-    type="{sssss}"
+    type="{sssssd}"
     access="read"
     />
 <signal name="DataChanged">
 
-  <arg name="Data" type="{sssss}" />
+  <arg name="Data" type="{sssssd}" />
 
 </signal>
 

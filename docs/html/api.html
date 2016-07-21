@@ -229,12 +229,6 @@
               </li>
               
               <li>
-                <a href="#DeviceData" data-for="DeviceData">
-                  DeviceData
-                </a>
-              </li>
-              
-              <li>
                 <a href="#DeviceDefinition" data-for="DeviceDefinition">
                   DeviceDefinition
                 </a>
@@ -1655,7 +1649,7 @@ It send commands to a Protocol API instance to which is binded.
 
     <span class="type">
       
-        <a href="#DeviceData">DeviceData</a>
+        <a href="#RecordObject">RecordObject</a>
       
     </span>
 
@@ -2144,9 +2138,9 @@ underline Protocol specific implementation.
 
     <span class="returnType type secondary">
       
-        <a href="#DeviceData"><span class="type">
+        <a href="#RecordObject"><span class="type">
   
-    <a href="#DeviceData">DeviceData</a>
+    <a href="#RecordObject">RecordObject</a>
   
 </span>
 </a>
@@ -2220,7 +2214,7 @@ underline Protocol specific implementation.
   <div class="overview">
     <span class="type">
       
-        <a href="#DeviceData">DeviceData</a>
+        <a href="#RecordObject">RecordObject</a>
       
     </span>
 
@@ -2278,7 +2272,7 @@ underline Protocol specific implementation.
 </span>
 <span class="args-glue">, </span><span class="type">
   
-    <a href="#DeviceData">DeviceData</a>
+    <a href="#RecordObject">RecordObject</a>
   
 </span>
 
@@ -2334,7 +2328,7 @@ underline Protocol specific implementation.
   <div class="overview">
     <span class="type">
       
-        <a href="#DeviceData">DeviceData</a>
+        <a href="#RecordObject">RecordObject</a>
       
     </span>
 
@@ -9286,186 +9280,6 @@ if for some reason further user-side checks are required.
   </div>
 
 </li>
-<li class="api-type" data-type="type" id="DeviceData">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object
-      
-    </span>
-
-    
-      <span class="name">
-        DeviceData
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-      <ul class="fields pad-left no-bullet">
-        <li class="api-type" data-type="type" id="value">
-
-  <div class="overview">
-    <span class="type">
-      
-        string
-      
-    </span>
-
-    
-      <span class="name">
-        value
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        the value of the record in string format
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="format">
-
-  <div class="overview">
-    <span class="type">
-      
-        string
-      
-    </span>
-
-    
-      <span class="name">
-        format
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        the format of the record, used to cast the value
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="unit">
-
-  <div class="overview">
-    <span class="type">
-      
-        string
-      
-    </span>
-
-    
-      <span class="name">
-        unit
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        the measurment unit of the value
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="componentId">
-
-  <div class="overview">
-    <span class="type">
-      
-        string
-      
-    </span>
-
-    
-      <span class="name">
-        componentId
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        device component reference
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="deviceId">
-
-  <div class="overview">
-    <span class="type">
-      
-        string
-      
-    </span>
-
-    
-      <span class="name">
-        deviceId
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        device id reference
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
-
-      </ul>
-    
-  </div>
-
-</li>
 <li class="api-type" data-type="type" id="DeviceDefinition">
 
   <div class="overview">
@@ -9854,7 +9668,7 @@ if for some reason further user-side checks are required.
 
     
       <span class="description">
-        The Agile Id for the device
+        The Agile Id that generated the value
       </span>
     
 
@@ -9884,7 +9698,7 @@ if for some reason further user-side checks are required.
 
     
       <span class="description">
-        The component Id for the device, like the sensor name
+        The component Id or sensor from where the value comes from
       </span>
     
 
@@ -9918,7 +9732,37 @@ if for some reason further user-side checks are required.
 
     
       <span class="description">
-        The value stored
+        The value, stored as string
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="Unit">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        Unit
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The measurment unit for the value
       </span>
     
 

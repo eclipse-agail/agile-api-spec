@@ -575,13 +575,16 @@ definitions:
     type: object
     properties:
       DeviceId:
-        description: 'The Agile Id for the device'
+        description: 'The Agile Id that generated the value'
         type: string
       ComponentId:
-        description: 'The component Id for the device, like the sensor name'
+        description: 'The component Id or sensor from where the value comes from'
         type: string
       Value:
-        description: 'The value stored'
+        description: 'The value, stored as string'
+        type: string
+      Unit:
+        description: 'The measurment unit for the value'
         type: string
       Format:
         description: 'A format description to read the data value'

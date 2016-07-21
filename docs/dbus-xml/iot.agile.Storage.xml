@@ -9,7 +9,7 @@
   -->
   <method name="Create">
   
-      <arg name="record" type="{ssssd}" direction="in"/>
+      <arg name="record" type="{sssssd}" direction="in"/>
       <arg name="return" type="s" direction="out"/>
   
   </method>
@@ -21,7 +21,7 @@
   <method name="Read">
   
       <arg name="Id" type="s" direction="in"/>
-      <arg name="return" type="{ssssd}" direction="out"/>
+      <arg name="return" type="{sssssd}" direction="out"/>
   
   </method>
 
@@ -32,7 +32,7 @@
   <method name="Update">
   
       <arg name="Id" type="s" direction="in"/>
-      <arg name="Record" type="{ssssd}" direction="in"/>
+      <arg name="Record" type="{sssssd}" direction="in"/>
   
   </method>
 
@@ -53,7 +53,7 @@
   <method name="Find">
   
       <arg name="query" type="{vvdd}" direction="in"/>
-      <arg name="return" type="({ssssd})" direction="out"/>
+      <arg name="return" type="({sssssd})" direction="out"/>
   
   </method>
   <!--

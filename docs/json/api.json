@@ -174,7 +174,7 @@
             }
           },
           "return": {
-            "type": "DeviceData"
+            "type": "RecordObject"
           }
         },
         "Write": {
@@ -183,7 +183,7 @@
               "type": "String"
             },
             "data": {
-              "type": "DeviceData"
+              "type": "RecordObject"
             }
           },
           "return": {
@@ -250,7 +250,7 @@
             "0": "r",
             "1": "s"
           },
-          "type": "DeviceData"
+          "type": "RecordObject"
         },
         "Protocol": {
           "description": "Device-specific communication Protocol instance. Available to access protocol specific methods and properties",
@@ -1815,37 +1815,6 @@
       },
       "required": true
     },
-    "DeviceData": {
-      "type": "Object",
-      "fields": {
-        "value": {
-          "description": "the value of the record in string format",
-          "type": "string",
-          "required": true
-        },
-        "format": {
-          "description": "the format of the record, used to cast the value",
-          "type": "string",
-          "required": true
-        },
-        "unit": {
-          "description": "the measurment unit of the value",
-          "type": "string",
-          "required": true
-        },
-        "componentId": {
-          "description": "device component reference",
-          "type": "string",
-          "required": true
-        },
-        "deviceId": {
-          "description": "device id reference",
-          "type": "string",
-          "required": true
-        }
-      },
-      "required": true
-    },
     "DeviceDefinition": {
       "description": "A device definition that contains informations describing the current device",
       "type": "Object",
@@ -1935,18 +1904,23 @@
       "type": "Object",
       "fields": {
         "DeviceId": {
-          "description": "The Agile Id for the device",
+          "description": "The Agile Id that generated the value",
           "type": "String",
           "required": true
         },
         "ComponentId": {
-          "description": "The component Id for the device, like the sensor name",
+          "description": "The component Id or sensor from where the value comes from",
           "example": "temperature",
           "type": "String",
           "required": true
         },
         "Value": {
-          "description": "The value stored",
+          "description": "The value, stored as string",
+          "type": "String",
+          "required": true
+        },
+        "Unit": {
+          "description": "The measurment unit for the value",
           "type": "String",
           "required": true
         },
