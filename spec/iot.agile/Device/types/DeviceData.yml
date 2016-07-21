@@ -1,0 +1,18 @@
+DeviceData:
+  type: Object
+  fields:
+    value:
+      type: string
+      description: the value of the record in string format
+    format:
+      type: string
+      description: the format of the record, used to cast the value
+    unit:
+      type: string
+      description: the measurment unit of the value
+    componentId:
+      type: string
+      description: device component reference
+    deviceId:
+      type: string
+      description: device id reference      
