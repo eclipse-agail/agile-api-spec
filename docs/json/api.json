@@ -174,7 +174,7 @@
             }
           },
           "return": {
-            "type": "Object*"
+            "type": "DeviceData"
           }
         },
         "Write": {
@@ -183,19 +183,7 @@
               "type": "String"
             },
             "data": {
-              "type": "Object",
-              "fields": {
-                "data": {
-                  "description": "The data to write as plain text",
-                  "type": "String",
-                  "required": true
-                },
-                "format": {
-                  "description": "The format of the data for later conversion",
-                  "type": "String",
-                  "required": true
-                }
-              }
+              "type": "DeviceData"
             }
           },
           "return": {
@@ -262,7 +250,7 @@
             "0": "r",
             "1": "s"
           },
-          "type": "Object*"
+          "type": "DeviceData"
         },
         "Protocol": {
           "description": "Device-specific communication Protocol instance. Available to access protocol specific methods and properties",
@@ -1823,6 +1811,37 @@
         "properties": {
           "type": "KeyValue",
           "required": false
+        }
+      },
+      "required": true
+    },
+    "DeviceData": {
+      "type": "Object",
+      "fields": {
+        "value": {
+          "description": "the value of the record in string format",
+          "type": "string",
+          "required": true
+        },
+        "format": {
+          "description": "the format of the record, used to cast the value",
+          "type": "string",
+          "required": true
+        },
+        "unit": {
+          "description": "the measurment unit of the value",
+          "type": "string",
+          "required": true
+        },
+        "componentId": {
+          "description": "device component reference",
+          "type": "string",
+          "required": true
+        },
+        "deviceId": {
+          "description": "device id reference",
+          "type": "string",
+          "required": true
         }
       },
       "required": true
