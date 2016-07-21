@@ -572,6 +572,7 @@ definitions:
         items:
           $ref: '#/definitions/DeviceComponent'
   RecordObject:
+    description: 'Contains the measurment from a sensor and the metadata regarding its source'
     type: object
     properties:
       DeviceId:
