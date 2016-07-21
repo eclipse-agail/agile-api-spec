@@ -4,23 +4,21 @@ RecordObject:
   type: Object
   fields:
     DeviceId:
-      description: The Agile Id for the device
+      description: The Agile Id that generated the value
       type: String
     ComponentId:
-      description: The component Id for the device, like the sensor name
+      description: The component Id or sensor from where the value comes from
       type: String
       example: temperature
-    # ChannelId:
-    #   type: String
     Value:
       type: String
-      description: The value stored
+      description: The value, stored as string
+    Unit:
+      type: String
+      description: The measurment unit for the value
     Format:
       type: String
       description: A format description to read the data value
     LastUpdate:
       description: A UNIX timestamp rapresenting the last update of a record
       type: Number
-    # Channels:
-    #   description: A list of key/value matching those indicated in the DeviceDefinition
-    #   type: KeyValue
