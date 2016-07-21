@@ -163,7 +163,7 @@ iot.agile.Device:
 
   Data:
     description: Retain the most recent updates from a sensor or data stream, received asynchronously from Subscribe call
-    type: DeviceData
+    type: RecordObject
     access: [r, s]
 
   Protocol:
@@ -205,14 +205,14 @@ iot.agile.Device:
     args:
       component:
         type: String
-    return: DeviceData
+    return: RecordObject
 
   Write:
     args:
       component:
         type: String
       data:
-        type: DeviceData
+        type: RecordObject
 
     return: Boolean
 
