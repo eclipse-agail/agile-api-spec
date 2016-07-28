@@ -318,10 +318,10 @@
             }
           },
           "post": {
+            "operationId": "Subscribe",
             "tags": {
               "0": "Device"
             },
-            "operationId": "Subscribe",
             "description": "Enable a subscription to a data stream. Asynchronous data updates will\nbe delivered via websocket.\n",
             "(reference)": "Device.Subscribe",
             "responses": {
@@ -362,11 +362,11 @@
             }
           },
           "get": {
+            "operationId": "Read",
             "tags": {
               "0": "Device"
             },
             "description": "Read from a device component",
-            "(reference)": "Device.Read",
             "responses": {
               "200": {
                 "description": "Read done"
@@ -377,6 +377,7 @@
             }
           },
           "post": {
+            "operationId": "Write",
             "tags": {
               "0": "Device"
             },
@@ -410,11 +411,11 @@
             }
           },
           "get": {
+            "operationId": "Data",
             "tags": {
               "0": "Device"
             },
             "description": "Get the last record fetched from the device",
-            "(reference)": "Device.Data",
             "responses": {
               "200": {
                 "description": "Record fetched"

@@ -85,9 +85,9 @@ paths:
         required: true
         type: string
     post:
+      operationId: Subscribe
       tags:
         - Device
-      operationId: Subscribe
       description: "Enable a subscription to a data stream. Asynchronous data updates will\nbe delivered via websocket.\n"
       responses:
         '200':
@@ -115,6 +115,7 @@ paths:
         required: true
         type: string
     get:
+      operationId: Read
       tags:
         - Device
       description: 'Read from a device component'
@@ -124,6 +125,7 @@ paths:
         '204':
           description: 'No data available'
     post:
+      operationId: Write
       tags:
         - Device
       description: 'Write to a device component'
@@ -147,6 +149,7 @@ paths:
         required: true
         type: string
     get:
+      operationId: Data
       tags:
         - Device
       description: 'Get the last record fetched from the device'

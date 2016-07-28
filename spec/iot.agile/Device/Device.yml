@@ -56,9 +56,9 @@ iot.agile.Device:
           required: true
           type: string
       post:
+        operationId: Subscribe
         tags:
           - Device
-        operationId: Subscribe
         description: |
           Enable a subscription to a data stream. Asynchronous data updates will
           be delivered via websocket.
@@ -93,16 +93,17 @@ iot.agile.Device:
           type: string
 
       get:
+        operationId: Read
         tags:
           - Device
         description: Read from a device component
-        (reference): Device.Read
         responses:
           200:
             description: Read done
           204:
             description: No data available
       post:
+        operationId: Write
         tags:
           - Device
         description: Write to a device component
@@ -128,10 +129,10 @@ iot.agile.Device:
           required: true
           type: string
       get:
+        operationId: Data
         tags:
           - Device
         description: Get the last record fetched from the device
-        (reference): Device.Data
         responses:
           200:
             description: Record fetched
