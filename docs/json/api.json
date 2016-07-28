@@ -1176,7 +1176,7 @@
         },
         "/protocols/devices": {
           "get": {
-            "operationId": "Devives",
+            "operationId": "Devices",
             "tags": {
               "0": "ProtocolManager"
             },

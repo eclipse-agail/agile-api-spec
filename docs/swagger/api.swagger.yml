@@ -429,7 +429,7 @@ paths:
           description: 'Protocol not found'
   /protocols/devices:
     get:
-      operationId: Devives
+      operationId: Devices
       tags:
         - ProtocolManager
       description: 'List all discovered devices on all available protocols'
