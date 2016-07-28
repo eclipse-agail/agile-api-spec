@@ -83,7 +83,7 @@ iot.agile.ProtocolManager:
 
     /protocols/devices:
       get:
-        operationId: Devives
+        operationId: Devices
         tags:
           - ProtocolManager
         (reference): ProtocolManager.Devices
