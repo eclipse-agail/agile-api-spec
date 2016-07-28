@@ -23,6 +23,7 @@ iot.agile.Device:
           required: true
           type: string
       post:
+        operationId: Execute
         tags:
           - Device
         description: Perform an action on the device
@@ -57,6 +58,7 @@ iot.agile.Device:
       post:
         tags:
           - Device
+        operationId: Subscribe
         description: |
           Enable a subscription to a data stream. Asynchronous data updates will
           be delivered via websocket.
@@ -65,6 +67,7 @@ iot.agile.Device:
           200:
             description: Subscription registered
       delete:
+        operationId: Unsubscribe
         tags:
           - Device
         description: Unsubscribe from a data stream

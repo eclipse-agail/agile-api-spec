@@ -10,6 +10,7 @@ iot.agile.DeviceManager:
   http:
     /devices:
       get:
+        operationId: Devices
         tags:
           - DeviceManager
         description: List all registered devices
@@ -33,6 +34,8 @@ iot.agile.DeviceManager:
           204:
             description: Device list is empty
       post:
+        operationId: Create
+        description: Creates a new device
         tags:
           - DeviceManager
         parameters:
@@ -58,9 +61,10 @@ iot.agile.DeviceManager:
           type: string
 
       get:
+        operationId: Read
+        description: Get a device definition
         tags:
           - DeviceManager
-        description: Get a device definition
         responses:
           200:
             description: Device loaded
@@ -70,13 +74,14 @@ iot.agile.DeviceManager:
               application/json:
                 id: aaa1-bbb2-ccc3-ddd4
                 name: SensorTag
-                path: iot.agile.device.SensorTag
+                path: iot/agile/device/SensorTag
                 streams:
                   - id: temperature
                   - id: accelerometer
           404:
             description: Device not found
       put:
+        operationId: Update
         tags:
           - DeviceManager
         parameters:
@@ -94,6 +99,7 @@ iot.agile.DeviceManager:
           404:
             description: Device not found
       delete:
+        operationId: Delete
         tags:
           - DeviceManager
         parameters:

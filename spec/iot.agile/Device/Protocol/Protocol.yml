@@ -17,6 +17,7 @@ iot.agile.Protocol:
           type: string
 
       post:
+        operationId: Connect
         tags:
           - Protocol
         description: Connect to the device
@@ -26,6 +27,7 @@ iot.agile.Protocol:
           404:
             description: Device not found
       delete:
+        operationId: Disconnect
         tags:
           - Protocol
         description: Disconnect from the device
@@ -44,6 +46,7 @@ iot.agile.Protocol:
           required: true
           type: string
       post:
+        operationId: StartDiscovery
         tags:
           - Protocol
         description: Start the discovery process
@@ -53,6 +56,7 @@ iot.agile.Protocol:
           404:
             description: Device not found
       delete:
+        operationId: StopDiscovery
         tags:
           - Protocol
         description: Stop the discovery process
@@ -77,6 +81,7 @@ iot.agile.Protocol:
           required: true
           type: string
       post:
+        operationId: Write
         tags:
           - Protocol
         description: Call a write via protocol
@@ -95,6 +100,7 @@ iot.agile.Protocol:
           404:
             description: Device or component not found
       get:
+        operationId: Read
         tags:
           - Protocol
         description: Call a read via protocol

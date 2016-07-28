@@ -12,6 +12,7 @@ iot.agile.ProtocolManager:
   http:
     /protocols:
       get:
+        operationId: Protocols
         tags:
           - ProtocolManager
         description: Get the list of registered protocols
@@ -58,9 +59,9 @@ iot.agile.ProtocolManager:
           type: string
 
       post:
+        operationId: Add
         tags:
           - ProtocolManager
-        (reference): ProtocolManager.Add
         description: Register a new Dbus object implementing the protocol API
         responses:
           202:
@@ -69,6 +70,7 @@ iot.agile.ProtocolManager:
             description: An error occured processing the request
 
       delete:
+        operationId: Remove
         tags:
           - ProtocolManager
         (reference): ProtocolManager.Remove
@@ -81,6 +83,7 @@ iot.agile.ProtocolManager:
 
     /protocols/devices:
       get:
+        operationId: Devives
         tags:
           - ProtocolManager
         (reference): ProtocolManager.Devices
@@ -105,9 +108,9 @@ iot.agile.ProtocolManager:
 
     /protocols/discovery:
       get:
+        operationId: DiscoveryStatus
         tags:
           - ProtocolManager
-        (reference): ProtocolManager.DiscoveryStatus
         body:
         description: Return the status of discovery on the available protocols
         responses:
@@ -125,9 +128,9 @@ iot.agile.ProtocolManager:
                 - name: ZWave
                   status: FAILURE
       post:
+        operationId: StartDiscovery
         tags:
           - ProtocolManager
-        (reference): ProtocolManager.StartDiscovery
         body:
         description: Start a device discovery on all available protocols
         responses:
@@ -140,9 +143,9 @@ iot.agile.ProtocolManager:
               Indicates that discovery has been requested to the underlying
               protocols but one or more reported a failure
       delete:
+        operationId: StopDiscovery
         tags:
           - ProtocolManager
-        (reference): ProtocolManager.StopDiscovery
         body:
         description: Stop a device discovery if previously initiated
         responses:
