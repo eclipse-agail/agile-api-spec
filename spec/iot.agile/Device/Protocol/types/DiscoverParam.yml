@@ -4,6 +4,7 @@ DiscoverParam:
     duration:
       type: Number
       required: false
+      default: 15
       description: |
         The duration in seconds the discovery process will last before
         it should be stopped
