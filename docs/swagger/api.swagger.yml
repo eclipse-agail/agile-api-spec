@@ -54,6 +54,7 @@ paths:
         required: true
         type: string
     post:
+      operationId: Execute
       tags:
         - Device
       description: 'Perform an action on the device'
@@ -86,11 +87,13 @@ paths:
     post:
       tags:
         - Device
+      operationId: Subscribe
       description: "Enable a subscription to a data stream. Asynchronous data updates will\nbe delivered via websocket.\n"
       responses:
         '200':
           description: 'Subscription registered'
     delete:
+      operationId: Unsubscribe
       tags:
         - Device
       description: 'Unsubscribe from a data stream'
@@ -156,6 +159,7 @@ paths:
           description: 'Device not available'
   /devices:
     get:
+      operationId: Devices
       tags:
         - DeviceManager
       description: 'List all registered devices'
@@ -183,6 +187,8 @@ paths:
         '204':
           description: 'Device list is empty'
     post:
+      operationId: Create
+      description: 'Creates a new device'
       tags:
         - DeviceManager
       parameters:
@@ -193,7 +199,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeviceDefinition'
-      description: 'Creates a new device definition'
       responses:
         '200':
           description: 'Device created'
@@ -206,9 +211,10 @@ paths:
         required: true
         type: string
     get:
+      operationId: Read
+      description: 'Get a device definition'
       tags:
         - DeviceManager
-      description: 'Get a device definition'
       responses:
         '200':
           description: 'Device loaded'
@@ -218,7 +224,7 @@ paths:
             application/json:
               id: aaa1-bbb2-ccc3-ddd4
               name: SensorTag
-              path: iot.agile.device.SensorTag
+              path: iot/agile/device/SensorTag
               streams:
                 -
                   id: temperature
@@ -227,6 +233,7 @@ paths:
         '404':
           description: 'Device not found'
     put:
+      operationId: Update
       tags:
         - DeviceManager
       parameters:
@@ -244,6 +251,7 @@ paths:
         '404':
           description: 'Device not found'
     delete:
+      operationId: Delete
       tags:
         - DeviceManager
       parameters:
@@ -275,6 +283,7 @@ paths:
         required: true
         type: string
     post:
+      operationId: Connect
       tags:
         - Protocol
       description: 'Connect to the device'
@@ -284,6 +293,7 @@ paths:
         '404':
           description: 'Device not found'
     delete:
+      operationId: Disconnect
       tags:
         - Protocol
       description: 'Disconnect from the device'
@@ -301,6 +311,7 @@ paths:
         required: true
         type: string
     post:
+      operationId: StartDiscovery
       tags:
         - Protocol
       description: 'Start the discovery process'
@@ -310,6 +321,7 @@ paths:
         '404':
           description: 'Device not found'
     delete:
+      operationId: StopDiscovery
       tags:
         - Protocol
       description: 'Stop the discovery process'
@@ -333,6 +345,7 @@ paths:
         required: true
         type: string
     post:
+      operationId: Write
       tags:
         - Protocol
       description: 'Call a write via protocol'
@@ -350,6 +363,7 @@ paths:
         '404':
           description: 'Device or component not found'
     get:
+      operationId: Read
       tags:
         - Protocol
       description: 'Call a read via protocol'
@@ -362,6 +376,7 @@ paths:
           description: 'Device or component not found'
   /protocols:
     get:
+      operationId: Protocols
       tags:
         - ProtocolManager
       description: 'Get the list of registered protocols'
@@ -393,6 +408,7 @@ paths:
         required: true
         type: string
     post:
+      operationId: Add
       tags:
         - ProtocolManager
       description: 'Register a new Dbus object implementing the protocol API'
@@ -402,6 +418,7 @@ paths:
         '400':
           description: 'An error occured processing the request'
     delete:
+      operationId: Remove
       tags:
         - ProtocolManager
       description: 'Unregister a Dbus Protocol object reference'
@@ -412,6 +429,7 @@ paths:
           description: 'Protocol not found'
   /protocols/devices:
     get:
+      operationId: Devives
       tags:
         - ProtocolManager
       description: 'List all discovered devices on all available protocols'
@@ -435,6 +453,7 @@ paths:
                 status: AVAILABLE
   /protocols/discovery:
     get:
+      operationId: DiscoveryStatus
       tags:
         - ProtocolManager
       description: 'Return the status of discovery on the available protocols'
@@ -455,6 +474,7 @@ paths:
                 name: ZWave
                 status: FAILURE
     post:
+      operationId: StartDiscovery
       tags:
         - ProtocolManager
       description: 'Start a device discovery on all available protocols'
@@ -464,6 +484,7 @@ paths:
         '409':
           description: "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
     delete:
+      operationId: StopDiscovery
       tags:
         - ProtocolManager
       description: 'Stop a device discovery if previously initiated'
