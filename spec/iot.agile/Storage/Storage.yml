@@ -11,9 +11,11 @@ iot.agile.Storage:
 
   group: Data storage
 
-  Connections:
+  Drivers:
+    description: List the enabled drivers in use
     type: Array
     reference: iot.agile.Storage.Driver
+    access: [r, s]
 
 
   # Those methods should stay in sync with the one in Driver

@@ -57,14 +57,19 @@
   
   </method>
   <!--
-    @see iot.agile.Storage.Connections
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Connections
+    @see iot.agile.Storage.Drivers
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Drivers
   -->
   <property
-    name="Connections"
+    name="Drivers"
     type="o"
     access="read"
     />
+<signal name="DriversChanged">
+
+  <arg name="Drivers" type="o" />
+
+</signal>
 
   </interface>
 

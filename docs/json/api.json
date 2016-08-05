@@ -1453,8 +1453,7 @@
             "driver": {
               "description": "The driver instance to be added",
               "example": "iot/agile/Storage/Driver/Influx0",
-              "type": "String",
-              "reference": "iot.agile.Storage.Driver"
+              "type": "iot.agile.Storage.Driver"
             },
             "enable": {
               "description": "Specify if the Driver should be enabled and\nimmediately available\n",
@@ -1471,8 +1470,7 @@
             "driver": {
               "description": "The driver instance",
               "example": "iot/agile/Storage/Driver/Sqlite0",
-              "type": "String",
-              "reference": "iot.agile.Storage.Driver"
+              "type": "iot.agile.Storage.Driver"
             }
           },
           "return": {
@@ -1485,8 +1483,7 @@
             "driver": {
               "description": "The driver instance",
               "example": "iot/agile/Storage/Driver/Sqlite0",
-              "type": "String",
-              "reference": "iot.agile.Storage.Driver"
+              "type": "iot.agile.Storage.Driver"
             }
           },
           "return": {
@@ -1499,8 +1496,7 @@
             "driver": {
               "description": "The driver instance",
               "example": "iot/agile/Storage/Driver/Sqlite0",
-              "type": "String",
-              "reference": "iot.agile.Storage.Driver"
+              "type": "iot.agile.Storage.Driver"
             }
           },
           "return": {
@@ -1513,8 +1509,7 @@
             "driver": {
               "description": "The driver instance",
               "example": "iot/agile/Storage/Driver/Sqlite0",
-              "type": "String",
-              "reference": "iot.agile.Storage.Driver"
+              "type": "iot.agile.Storage.Driver"
             }
           },
           "return": {
@@ -1618,7 +1613,12 @@
         }
       },
       "properties": {
-        "Connections": {
+        "Drivers": {
+          "description": "List the enabled drivers in use",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
           "type": "Array",
           "reference": "iot.agile.Storage.Driver"
         }

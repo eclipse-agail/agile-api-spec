@@ -5,14 +5,13 @@ iot.agile.Storage.DriverManager:
     of different Drivers available in the system.
 
   group: Data storage
-  
+
   Add:
     description: Add a driver reference instance
     args:
       driver:
         description: The driver instance to be added
-        type: String
-        reference: iot.agile.Storage.Driver
+        type: iot.agile.Storage.Driver
         example: iot/agile/Storage/Driver/Influx0
       enable:
         description: |
@@ -28,8 +27,7 @@ iot.agile.Storage.DriverManager:
     args:
       driver:
         description: The driver instance
-        type: String
-        reference: iot.agile.Storage.Driver
+        type: iot.agile.Storage.Driver
         example: iot/agile/Storage/Driver/Sqlite0
     return: void
   Enable:
@@ -37,8 +35,7 @@ iot.agile.Storage.DriverManager:
     args:
       driver:
         description: The driver instance
-        type: String
-        reference: iot.agile.Storage.Driver
+        type: iot.agile.Storage.Driver
         example: iot/agile/Storage/Driver/Sqlite0
     return: void
   Disable:
@@ -46,8 +43,7 @@ iot.agile.Storage.DriverManager:
     args:
       driver:
         description: The driver instance
-        type: String
-        reference: iot.agile.Storage.Driver
+        type: iot.agile.Storage.Driver
         example: iot/agile/Storage/Driver/Sqlite0
     return: void
   Status:
@@ -55,8 +51,7 @@ iot.agile.Storage.DriverManager:
     args:
       driver:
         description: The driver instance
-        type: String
-        reference: iot.agile.Storage.Driver
+        type: iot.agile.Storage.Driver
         example: iot/agile/Storage/Driver/Sqlite0
     return:
       type: Object
