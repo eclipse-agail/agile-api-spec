@@ -1837,7 +1837,13 @@
       "description": "A device definition that contains informations describing the current device",
       "type": "Object",
       "fields": {
-        "id": {
+        "deviceId": {
+          "description": "The device agile specific ID",
+          "type": "String",
+          "required": true
+        },
+        "address": {
+          "description": "The device protocol specific address",
           "type": "String",
           "required": true
         },
@@ -1846,6 +1852,10 @@
           "required": true
         },
         "description": {
+          "type": "String",
+          "required": true
+        },
+        "protocol": {
           "type": "String",
           "required": true
         },

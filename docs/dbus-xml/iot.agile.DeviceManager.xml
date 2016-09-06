@@ -20,7 +20,7 @@
   -->
   <method name="Create">
   
-      <arg name="device" type="{ssssv({ssv})}" direction="in"/>
+      <arg name="device" type="{ssssssv({ssv})}" direction="in"/>
       <arg name="return" type="s" direction="out"/>
   
   </method>
@@ -32,7 +32,7 @@
   <method name="Read">
   
       <arg name="Id" type="s" direction="in"/>
-      <arg name="return" type="{ssssv({ssv})}" direction="out"/>
+      <arg name="return" type="{ssssssv({ssv})}" direction="out"/>
   
   </method>
 
@@ -43,7 +43,7 @@
   <method name="Update">
   
       <arg name="Id" type="s" direction="in"/>
-      <arg name="Definition" type="{ssssv({ssv})}" direction="in"/>
+      <arg name="Definition" type="{ssssssv({ssv})}" direction="in"/>
       <arg name="return" type="b" direction="out"/>
   
   </method>
@@ -55,7 +55,7 @@
   <method name="Delete">
   
       <arg name="Id" type="s" direction="in"/>
-      <arg name="Definition" type="{ssssv({ssv})}" direction="in"/>
+      <arg name="Definition" type="{ssssssv({ssv})}" direction="in"/>
       <arg name="return" type="b" direction="out"/>
   
   </method>

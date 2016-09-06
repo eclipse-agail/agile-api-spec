@@ -579,11 +579,17 @@ definitions:
     description: 'A device definition that contains informations describing the current device'
     type: object
     properties:
-      id:
+      deviceId:
+        description: 'The device agile specific ID'
+        type: string
+      address:
+        description: 'The device protocol specific address'
         type: string
       name:
         type: string
       description:
+        type: string
+      protocol:
         type: string
       path:
         description: 'DBus specific path to reach the object instance'
