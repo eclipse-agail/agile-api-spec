@@ -460,24 +460,24 @@
             }
           },
           "return": {
-            "description": "Return the AGILE Device ID, unique to identify the device in the gateway",
-            "type": "String"
+            "description": "Return the DeviceDefinition of the device with Agile specific device id field to identify assigned.",
+            "type": "DeviceDefinition"
           }
         },
         "Read": {
-          "description": "Load a device definition by its ID",
+          "description": "Load a device definition by its agile ID",
           "args": {
             "Id": {
               "type": "String"
             }
           },
           "return": {
-            "description": "Return the AGILE Device UUID, unique to identify the device in the gateway",
+            "description": "Return the DeviceDefinition of the device",
             "type": "DeviceDefinition"
           }
         },
         "Update": {
-          "description": "Updates a device definition by its ID",
+          "description": "Updates a device definition by its agile ID",
           "args": {
             "Id": {
               "type": "String"
@@ -487,7 +487,7 @@
             }
           },
           "return": {
-            "type": "Boolean"
+            "type": "void"
           }
         },
         "Delete": {
@@ -495,17 +495,14 @@
           "args": {
             "Id": {
               "type": "String"
-            },
-            "Definition": {
-              "type": "DeviceDefinition"
             }
           },
           "return": {
-            "type": "Boolean"
+            "type": "void"
           }
         },
         "Batch": {
-          "description": "Performa a batch operation over a set of devices.",
+          "description": "Perform a batch operation over a set of devices.",
           "args": {
             "operation": {
               "type": "Enum",

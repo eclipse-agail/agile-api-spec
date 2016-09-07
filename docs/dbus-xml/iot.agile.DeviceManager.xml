@@ -21,7 +21,7 @@
   <method name="Create">
   
       <arg name="device" type="{ssssss({ssv})}" direction="in"/>
-      <arg name="return" type="s" direction="out"/>
+      <arg name="return" type="{ssssss({ssv})}" direction="out"/>
   
   </method>
 
