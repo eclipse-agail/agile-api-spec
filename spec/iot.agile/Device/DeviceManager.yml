@@ -63,11 +63,26 @@ iot.agile.DeviceManager:
             required: true
             schema:
               $ref: "#/definitions/DeviceDefinition"
-
+            examples:
+              application/json:
+                  deviceId: ""
+                  address: "A1:B2:C3:D4:E5:F6"
+                  name: "MyFirstSensorTag"
+                  description: ""
+                  protocol : "iot.agile.protocol.ble"
+                  path: ""
+                  streams:
+                    - id: temperature
+                      unit: celsius
+                    - id: light
+                      unit: lumen
+                    - id: pressure
+                      unit: hPa
         description: Creates a new device definition
         responses:
           200:
             description: Device created
+
     /devices/{deviceId}:
       parameters:
         -
@@ -89,12 +104,19 @@ iot.agile.DeviceManager:
               $ref: "#/definitions/DeviceDefinition"
             examples:
               application/json:
-                id: aaa1-bbb2-ccc3-ddd4
-                name: SensorTag
-                path: iot/agile/device/SensorTag
-                streams:
-                  - id: temperature
-                  - id: accelerometer
+                  deviceId: "bleA1B2C3D4E5F6"
+                  address: "A1:B2:C3:D4:E5:F6"
+                  name: "SensorTag"
+                  description: ""
+                  protocol : "iot.agile.protocol.ble"
+                  path: "/iot/agile/Device/bleA1B2C3D4E5F6"
+                  streams:
+                    - id: temperature
+                      unit: celsius
+                    - id: light
+                      unit: lumen
+                    - id: pressure
+                      unit: hPa
           404:
             description: Device not found
       put:
@@ -109,6 +131,23 @@ iot.agile.DeviceManager:
             required: true
             schema:
               $ref: "#/definitions/DeviceDefinition"
+            examples:
+              application/json:
+                  deviceId: "bleA1B2C3D4E5F6"
+                  address: "A1:B2:C3:D4:E5:F6"
+                  name: "SensorTag"
+                  description: ""
+                  protocol : "iot.agile.protocol.ble"
+                  path: "/iot/agile/Device/bleA1B2C3D4E5F6"
+                  streams:
+                    - id: temperature
+                      unit: celsius
+                    - id: light
+                      unit: lumen
+                    - id: pressure
+                      unit: hPa
+                    - id: optical
+                      unit: unit
         description: Update a device definition
         responses:
           200:
@@ -119,14 +158,6 @@ iot.agile.DeviceManager:
         operationId: Delete
         tags:
           - DeviceManager
-        parameters:
-          -
-            name: body
-            in: body
-            description: The request body describing a device
-            required: true
-            schema:
-              $ref: "#/definitions/DeviceDefinition"
         description: Delete a device definition and unregister it
         responses:
           200:
@@ -159,38 +190,36 @@ iot.agile.DeviceManager:
       device:
         type: DeviceDefinition
     return:
-      description: Return the AGILE Device ID, unique to identify the device in the gateway
-      type: String
+      description: Return the DeviceDefinition of the device with Agile specific device id field to identify assigned.
+      type: DeviceDefinition
 
   Read:
-    description: Load a device definition by its ID
+    description: Load a device definition by its agile ID
     args:
       Id:
         type: String
     return:
-      description: Return the AGILE Device UUID, unique to identify the device in the gateway
+      description: Return the DeviceDefinition of the device
       type: DeviceDefinition
 
   Update:
-    description: Updates a device definition by its ID
+    description: Updates a device definition by its agile ID
     args:
       Id:
         type: String
       Definition:
         type: DeviceDefinition
-    return: Boolean
+    return: void
 
   Delete:
     description: Delete a device definition by its ID. This will deactivate the Device DBus object
     args:
       Id:
         type: String
-      Definition:
-        type: DeviceDefinition
-    return: Boolean
+    return: void
 
   Batch:
-    description: Performa a batch operation over a set of devices.
+    description: Perform a batch operation over a set of devices.
     args:
       operation:
         type: Enum
@@ -202,4 +231,4 @@ iot.agile.DeviceManager:
       arguments:
         description: An object to be passed to the underlying function call (Create, Update, Delete, Read)
         type: Object*
-    return: Boolean
+    return: void

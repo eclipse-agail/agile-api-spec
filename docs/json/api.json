@@ -531,7 +531,7 @@
             }
           },
           "return": {
-            "type": "Boolean"
+            "type": "void"
           }
         }
       },
@@ -566,24 +566,48 @@
                 },
                 "examples": {
                   "application/json": {
-                    "deviceId": "",
-                    "address": "A1:B2:C3:D4:E5:F6",
-                    "name": "SensorTag",
-                    "description": "",
-                    "protocol": "BLE",
-                    "path": "",
-                    "streams": {
-                      "0": {
-                        "id": "temperature",
-                        "unit": "celsius"
-                      },
-                      "1": {
-                        "id": "light",
-                        "unit": "lumen"
-                      },
-                      "2": {
-                        "id": "pressure",
-                        "unit": "hPa"
+                    "0": {
+                      "deviceId": "bleA1B2C3D4E5F6",
+                      "address": "A1:B2:C3:D4:E5:F6",
+                      "name": "MyFirstSensorTag",
+                      "description": "",
+                      "protocol": "iot.agile.protocol.ble",
+                      "path": "/iot/agile/Device/bleA1B2C3D4E5F6",
+                      "streams": {
+                        "0": {
+                          "id": "temperature",
+                          "unit": "celsius"
+                        },
+                        "1": {
+                          "id": "light",
+                          "unit": "lumen"
+                        },
+                        "2": {
+                          "id": "pressure",
+                          "unit": "hPa"
+                        }
+                      }
+                    },
+                    "1": {
+                      "deviceId": "bleA6B5C4D3E2F1",
+                      "address": "A6:B5:C4:D3:E2:F1",
+                      "name": "MySecondSensorTag",
+                      "description": "",
+                      "protocol": "iot.agile.protocol.ble",
+                      "path": "/iot/agile/Device/bleA6B5C4D3E2F1",
+                      "streams": {
+                        "0": {
+                          "id": "temperature",
+                          "unit": "celsius"
+                        },
+                        "1": {
+                          "id": "light",
+                          "unit": "lumen"
+                        },
+                        "2": {
+                          "id": "pressure",
+                          "unit": "hPa"
+                        }
                       }
                     }
                   }
@@ -608,6 +632,30 @@
                 "required": true,
                 "schema": {
                   "$ref": "#/definitions/DeviceDefinition"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceId": "",
+                    "address": "A1:B2:C3:D4:E5:F6",
+                    "name": "MyFirstSensorTag",
+                    "description": "",
+                    "protocol": "iot.agile.protocol.ble",
+                    "path": "",
+                    "streams": {
+                      "0": {
+                        "id": "temperature",
+                        "unit": "celsius"
+                      },
+                      "1": {
+                        "id": "light",
+                        "unit": "lumen"
+                      },
+                      "2": {
+                        "id": "pressure",
+                        "unit": "hPa"
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -642,15 +690,24 @@
                 },
                 "examples": {
                   "application/json": {
-                    "id": "aaa1-bbb2-ccc3-ddd4",
+                    "deviceId": "bleA1B2C3D4E5F6",
+                    "address": "A1:B2:C3:D4:E5:F6",
                     "name": "SensorTag",
-                    "path": "iot/agile/device/SensorTag",
+                    "description": "",
+                    "protocol": "iot.agile.protocol.ble",
+                    "path": "/iot/agile/Device/bleA1B2C3D4E5F6",
                     "streams": {
                       "0": {
-                        "id": "temperature"
+                        "id": "temperature",
+                        "unit": "celsius"
                       },
                       "1": {
-                        "id": "accelerometer"
+                        "id": "light",
+                        "unit": "lumen"
+                      },
+                      "2": {
+                        "id": "pressure",
+                        "unit": "hPa"
                       }
                     }
                   }
@@ -674,6 +731,34 @@
                 "required": true,
                 "schema": {
                   "$ref": "#/definitions/DeviceDefinition"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceId": "bleA1B2C3D4E5F6",
+                    "address": "A1:B2:C3:D4:E5:F6",
+                    "name": "SensorTag",
+                    "description": "",
+                    "protocol": "iot.agile.protocol.ble",
+                    "path": "/iot/agile/Device/bleA1B2C3D4E5F6",
+                    "streams": {
+                      "0": {
+                        "id": "temperature",
+                        "unit": "celsius"
+                      },
+                      "1": {
+                        "id": "light",
+                        "unit": "lumen"
+                      },
+                      "2": {
+                        "id": "pressure",
+                        "unit": "hPa"
+                      },
+                      "3": {
+                        "id": "optical",
+                        "unit": "unit"
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -691,17 +776,6 @@
             "operationId": "Delete",
             "tags": {
               "0": "DeviceManager"
-            },
-            "parameters": {
-              "0": {
-                "name": "body",
-                "in": "body",
-                "description": "The request body describing a device",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/DeviceDefinition"
-                }
-              }
             },
             "description": "Delete a device definition and unregister it",
             "responses": {
