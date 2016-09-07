@@ -162,6 +162,8 @@ paths:
           description: 'Device not available'
   /devices:
     get:
+      '204':
+        description: 'Device list is empty'
       operationId: Devices
       tags:
         - DeviceManager
@@ -208,8 +210,6 @@ paths:
                   -
                     id: pressure
                     unit: hPa
-        '204':
-          description: 'Device list is empty'
     post:
       operationId: Create
       description: 'Creates a new device'
@@ -223,7 +223,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeviceDefinition'
-          examples:
+          example:
             application/json:
               deviceId: ""
               address: 'A1:B2:C3:D4:E5:F6'

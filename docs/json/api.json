@@ -552,6 +552,9 @@
       "http": {
         "/devices": {
           "get": {
+            "204": {
+              "description": "Device list is empty"
+            },
             "operationId": "Devices",
             "tags": {
               "0": "DeviceManager"
@@ -612,9 +615,6 @@
                     }
                   }
                 }
-              },
-              "204": {
-                "description": "Device list is empty"
               }
             }
           },
@@ -633,7 +633,7 @@
                 "schema": {
                   "$ref": "#/definitions/DeviceDefinition"
                 },
-                "examples": {
+                "example": {
                   "application/json": {
                     "deviceId": "",
                     "address": "A1:B2:C3:D4:E5:F6",
