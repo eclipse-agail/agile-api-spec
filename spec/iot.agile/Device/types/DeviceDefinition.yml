@@ -4,23 +4,23 @@ DeviceDefinition:
   type: Object
   fields:
     deviceId:
-      description: The device agile specific ID
+      description: Agile specific device ID
       type: String
     address:
-      description: The device protocol specific address
+      description: Protocol specific device address
       type: String
+      required: true
     name:
       type: String
     description:
       type: String
     protocol:
       type: String
+      required: true
     path:
       type: String
       description: DBus specific path to reach the object instance
-    properties:
-      type: KeyValue
     streams:
-      description: A list of components from which get data streams
+      description: A list of components from which get the data streams
       type: Array
       fields: DeviceComponent
