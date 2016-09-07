@@ -174,19 +174,22 @@ paths:
             $ref: '#/definitions/DeviceDefinition'
           examples:
             application/json:
-              -
-                id: aaa1-bbb2-ccc3-ddd4
-                name: SensorTag
-                path: iot.agile.device.SensorTag
-                streams:
-                  -
-                    id: temperature
-                    unit: celsius
-                  -
-                    id: light
-                    unit: lumen
-                  -
-                    id: accelerometer
+              deviceId: bleA1B2C3D4E5F6
+              address: 'A1:B2:C3:D4:E5:F6'
+              name: SensorTag
+              description: ""
+              protocol: iot.agile.ble
+              path: /iot/agile/Device/bleA1B2C3D4E5F6
+              streams:
+                -
+                  id: temperature
+                  unit: celsius
+                -
+                  id: light
+                  unit: lumen
+                -
+                  id: pressure
+                  unit: hPa
         '204':
           description: 'Device list is empty'
     post:
@@ -580,10 +583,10 @@ definitions:
     type: object
     properties:
       deviceId:
-        description: 'The device agile specific ID'
+        description: 'Agile specific device ID'
         type: string
       address:
-        description: 'The device protocol specific address'
+        description: 'Protocol specific device address'
         type: string
       name:
         type: string
@@ -594,10 +597,8 @@ definitions:
       path:
         description: 'DBus specific path to reach the object instance'
         type: string
-      properties:
-        $ref: '#/definitions/KeyValue'
       streams:
-        description: 'A list of components from which get data streams'
+        description: 'A list of components from which get the data streams'
         type: array
         items:
           $ref: '#/definitions/DeviceComponent'
