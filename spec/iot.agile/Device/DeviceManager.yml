@@ -22,15 +22,19 @@ iot.agile.DeviceManager:
               $ref: "#/definitions/DeviceDefinition"
             examples:
               application/json:
-                - id: aaa1-bbb2-ccc3-ddd4
+                  deviceId: ""
+                - address: "A1:B2:C3:D4:E5:F6"
                   name: SensorTag
-                  path: iot.agile.device.SensorTag
+                  description: ""
+                  protocol : ""
+                  path: ""
                   streams:
                     - id: temperature
                       unit: celsius
                     - id: light
                       unit: lumen
-                    - id: accelerometer
+                    - id: pressure
+                      unit: hPa
           204:
             description: Device list is empty
       post:
