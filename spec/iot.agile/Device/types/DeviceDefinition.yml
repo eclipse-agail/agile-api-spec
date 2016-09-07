@@ -12,15 +12,14 @@ DeviceDefinition:
       required: true
     name:
       type: String
-     description:
+    description:
       type: String
     protocol:
       type: String
-      required: true
     path:
       type: String
       description: DBus specific path to reach the object instance
     streams:
-      description: A list of components from which get the data streams
+      description: A list of components from which get data streams
       type: Array
       fields: DeviceComponent
