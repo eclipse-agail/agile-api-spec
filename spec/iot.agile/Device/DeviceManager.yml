@@ -82,6 +82,38 @@ iot.agile.DeviceManager:
           200:
             description: Device created
 
+    /devices/register:
+      post:
+        operationId: Register
+        description: Register a new device based on information from ProtocolManager and device type
+        tags:
+          - DeviceManager
+        parameters:
+          -
+            name: overview
+            in: body
+            description: The request body describing a device
+            required: true
+            schema:
+              $ref: "#/definitions/DeviceOverview"
+          -
+            name: type
+            in: body
+            description: The request body describing a device
+            required: true
+            type: string
+        responses:
+          200:
+            description: Device created
+        example:
+          application/json:
+            overview:
+              id: "A0:E6:F8:B6:F2:00"
+              name: "CC2650 SensorTag"
+              protocol: "iot.agile.protocol.BLE"
+              status: "AVAILABLE"
+            type: "TI SensorTag"
+
     /devices/{deviceId}:
       parameters:
         -
