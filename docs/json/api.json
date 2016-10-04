@@ -666,6 +666,49 @@
             }
           }
         },
+        "/devices/register": {
+          "post": {
+            "operationId": "Register",
+            "description": "Register a new device based on information from ProtocolManager and device type",
+            "tags": {
+              "0": "DeviceManager"
+            },
+            "parameters": {
+              "0": {
+                "name": "overview",
+                "in": "body",
+                "description": "The request body describing a device",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/DeviceOverview"
+                }
+              },
+              "1": {
+                "name": "type",
+                "in": "body",
+                "description": "The request body describing a device",
+                "required": true,
+                "type": "string"
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Device created"
+              }
+            },
+            "example": {
+              "application/json": {
+                "overview": {
+                  "id": "A0:E6:F8:B6:F2:00",
+                  "name": "CC2650 SensorTag",
+                  "protocol": "iot.agile.protocol.BLE",
+                  "status": "AVAILABLE"
+                },
+                "type": "TI SensorTag"
+              }
+            }
+          }
+        },
         "/devices/{deviceId}": {
           "parameters": {
             "0": {
