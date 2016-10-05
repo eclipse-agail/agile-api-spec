@@ -248,10 +248,6 @@ iot.agile.Device:
     description: Contains protocol specific provided information on device in order to handle at Protocol level the specific implementation
     type: Object*
 
-  LastUpdate:
-    description: A UNIX timestamp to indicate the last data update received by the Device
-    type: Number
-
   Data:
     description: Retain the most recent updates from a sensor or data stream, received asynchronously from Subscribe call
     type: RecordObject
@@ -322,12 +318,6 @@ iot.agile.Device:
     args:
     return: void
 
-  Read:
-    args:
-      component:
-        type: String
-    return: RecordObject
-
   Write:
     args:
       component:
@@ -335,7 +325,6 @@ iot.agile.Device:
       data:
         type: RecordObject
     return: void
-
 
   Subscribe:
     description: |

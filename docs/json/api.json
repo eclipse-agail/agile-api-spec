@@ -125,6 +125,44 @@
       "description": "The Device API abstracts operations over the real device.\nIt send commands to a Protocol API instance to which is binded.\n",
       "group": "Device",
       "methods": {
+        "Read_": {
+          "description": "Read from all components of the device",
+          "return": {
+            "type": "array",
+            "fields": "RecordObject",
+            "reference": "iot.agile.RecordObject"
+          }
+        },
+        "Read": {
+          "description": "Read data from the component",
+          "args": {
+            "component": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "RecordObject"
+          }
+        },
+        "LastUpdate": {
+          "description": "Last update from the component",
+          "args": {
+            "component": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "RecordObject"
+          }
+        },
+        "LastUpdate_": {
+          "description": "Last update of all components of the device",
+          "return": {
+            "type": "array",
+            "fields": "RecordObject",
+            "reference": "iot.agile.RecordObject"
+          }
+        },
         "Execute": {
           "description": "Perform an action on the device or sensor side triggering the\nunderline Protocol specific implementation.\n",
           "args": {
@@ -167,16 +205,6 @@
             "type": "void"
           }
         },
-        "Read": {
-          "args": {
-            "component": {
-              "type": "String"
-            }
-          },
-          "return": {
-            "type": "RecordObject"
-          }
-        },
         "Write": {
           "args": {
             "component": {
@@ -187,7 +215,7 @@
             }
           },
           "return": {
-            "type": "Boolean"
+            "type": "void"
           }
         },
         "Subscribe": {
@@ -196,14 +224,10 @@
             "component": {
               "description": "The stream or sensor reference to subscribe for updates",
               "type": "String"
-            },
-            "params": {
-              "description": "Custom parameters set to pass spcific to the device\nor sensor, like eg. frequency\n",
-              "type": "Object*"
             }
           },
           "return": {
-            "type": "Boolean"
+            "type": "void"
           }
         },
         "Unsubscribe": {
@@ -215,7 +239,7 @@
             }
           },
           "return": {
-            "type": "Boolean"
+            "type": "void"
           }
         }
       },
@@ -240,10 +264,6 @@
           "description": "Contains protocol specific provided information on device in order to handle at Protocol level the specific implementation",
           "type": "Object*"
         },
-        "LastUpdate": {
-          "description": "A UNIX timestamp to indicate the last data update received by the Device",
-          "type": "Number"
-        },
         "Data": {
           "description": "Retain the most recent updates from a sensor or data stream, received asynchronously from Subscribe call",
           "access": {
@@ -258,6 +278,95 @@
         }
       },
       "http": {
+        "/device/{deviceId}/status": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "get": {
+            "operationId": "Status",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Indicate the current device status",
+            "responses": {
+              "200": {
+                "description": "Status read done"
+              },
+              "204": {
+                "description": "No data available"
+              }
+            }
+          }
+        },
+        "/device/{deviceId}": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "get": {
+            "operationId": "Read",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Read values of all components from the device",
+            "responses": {
+              "200": {
+                "description": "Read done"
+              },
+              "204": {
+                "description": "No data available"
+              }
+            }
+          }
+        },
+        "/device/{deviceId}/connection": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "operationId": "Connect",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Connect the device at protocol level",
+            "(reference)": "Device.Connect",
+            "responses": {
+              "200": {
+                "description": "Device connected"
+              }
+            }
+          },
+          "delete": {
+            "operationId": "Disconnect",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Disconnect device at protocol level",
+            "(reference)": "Device.Disconnect",
+            "responses": {
+              "200": {
+                "description": "Device disconnected"
+              }
+            }
+          }
+        },
         "/device/{deviceId}/execute/{command}": {
           "parameters": {
             "0": {
@@ -406,6 +515,35 @@
               "name": "componentId",
               "in": "path",
               "description": "Agile component name, like a sensor",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "get": {
+            "operationId": "Data",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Get the last record fetched from the component",
+            "responses": {
+              "200": {
+                "description": "Record fetched"
+              },
+              "204": {
+                "description": "No data available"
+              },
+              "404": {
+                "description": "Device not available"
+              }
+            }
+          }
+        },
+        "/device/{deviceId}/lastUpdate": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
               "required": true,
               "type": "string"
             }

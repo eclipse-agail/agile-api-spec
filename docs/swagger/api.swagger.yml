@@ -39,6 +39,66 @@ tags:
     description: Protocol related API
 
 paths:
+  '/device/{deviceId}/status':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+    get:
+      operationId: Status
+      tags:
+        - Device
+      description: 'Indicate the current device status'
+      responses:
+        '200':
+          description: 'Status read done'
+        '204':
+          description: 'No data available'
+  '/device/{deviceId}':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+    get:
+      operationId: Read
+      tags:
+        - Device
+      description: 'Read values of all components from the device'
+      responses:
+        '200':
+          description: 'Read done'
+        '204':
+          description: 'No data available'
+  '/device/{deviceId}/connection':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+    post:
+      operationId: Connect
+      tags:
+        - Device
+      description: 'Connect the device at protocol level'
+      responses:
+        '200':
+          description: 'Device connected'
+    delete:
+      operationId: Disconnect
+      tags:
+        - Device
+      description: 'Disconnect device at protocol level'
+      responses:
+        '200':
+          description: 'Device disconnected'
   '/device/{deviceId}/execute/{command}':
     parameters:
       -
@@ -146,6 +206,26 @@ paths:
         name: componentId
         in: path
         description: 'Agile component name, like a sensor'
+        required: true
+        type: string
+    get:
+      operationId: Data
+      tags:
+        - Device
+      description: 'Get the last record fetched from the component'
+      responses:
+        '200':
+          description: 'Record fetched'
+        '204':
+          description: 'No data available'
+        '404':
+          description: 'Device not available'
+  '/device/{deviceId}/lastUpdate':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
         required: true
         type: string
     get:
