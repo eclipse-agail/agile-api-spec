@@ -334,8 +334,8 @@ iot.agile.Device:
         type: String
       data:
         type: RecordObject
+    return: void
 
-    return: Boolean
 
   Subscribe:
     description: |
@@ -345,17 +345,10 @@ iot.agile.Device:
       component:
         type: String
         description: The stream or sensor reference to subscribe for updates
-      params:
-        required: false
-        type: Object*
-        description: |
-          Custom parameters set to pass spcific to the device
-          or sensor, like eg. frequency
-
-    return: Boolean
+    return: void
     reference:
-      - DataChanged
-      - Data
+        - DataChanged
+        - Data
 
   Unsubscribe:
     description: |
@@ -365,7 +358,7 @@ iot.agile.Device:
       component:
         type: String
         description: The stream or sensor reference to unsubscribe from
-    return: Boolean
+    return: void
     reference:
       - DataReceived
       - Data
