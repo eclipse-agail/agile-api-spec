@@ -27,6 +27,34 @@ iot.agile.Device:
             description: Status read done
           204:
             description: No data available
+    /device/{deviceId}/connection:
+      parameters:
+        -
+          name: deviceId
+          in: path
+          description: Agile device Id
+          required: true
+          type: string
+
+      post:
+        operationId: Connect
+        tags:
+          - Device
+        description: Connect the device at protocol level
+        (reference): Device.Connect
+        responses:
+          200:
+            description: Device connected
+      delete:
+        operationId: Disconnect
+        tags:
+          - Device
+        description: Disconnect device at protocol level
+        (reference): Device.Disconnect
+        responses:
+          200:
+            description: Device disconnected
+
     /device/{deviceId}/execute/{command}:
       parameters:
         -
