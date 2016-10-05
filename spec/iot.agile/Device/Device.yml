@@ -27,6 +27,26 @@ iot.agile.Device:
             description: Status read done
           204:
             description: No data available
+
+    /device/{deviceId}:
+      parameters:
+        -
+          name: deviceId
+          in: path
+          description: Agile device Id
+          required: true
+          type: string
+      get:
+        operationId: Read
+        tags:
+          - Device
+        description: Read values of all components from the device
+        responses:
+          200:
+            description: Read done
+          204:
+            description: No data available
+
     /device/{deviceId}/connection:
       parameters:
         -
