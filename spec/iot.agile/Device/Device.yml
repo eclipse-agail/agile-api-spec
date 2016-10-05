@@ -241,26 +241,56 @@ iot.agile.Device:
     description: Device-specific communication Protocol instance. Available to access protocol specific methods and properties
     reference: iot.agile.Protocol
 
-  Execute:
-    description: |
-      Perform an action on the device or sensor side triggering the
-      underline Protocol specific implementation.
+  Read_:
+    description: Read from all components of the device
     args:
-      op:
-        description: Operation name or code as string
-        type: String
-      payload:
-        description: Arguments for the actuation on the device
-        type: Object*
     return:
-       type: Object
-       fields:
-         result:
-           type: Boolean
-         resultCode:
-           type: Number
-         response:
-           type: Object*
+      type: array
+      fields: RecordObject
+      reference: iot.agile.RecordObject
+
+  Read:
+    description: Read data from the component
+    args:
+      component:
+        type: String
+    return: RecordObject
+
+  LastUpdate:
+    description: Last update from the component
+    args:
+      component:
+        type: String
+    return: RecordObject
+
+  LastUpdate_:
+    description: Last update of all components of the device
+    args:
+    return:
+      type: array
+      fields: RecordObject
+      reference: iot.agile.RecordObject
+
+  Execute:
+      description: |
+        Perform an action on the device or sensor side triggering the
+        underline Protocol specific implementation.
+      args:
+        op:
+          description: Operation name or code as string
+          type: String
+        payload:
+          description: Arguments for the actuation on the device
+          type: Object*
+      return:
+         type: Object
+         fields:
+           result:
+             type: Boolean
+           resultCode:
+             type: Number
+           response:
+             type: Object*
 
   Connect:
     description: Connect or initialize the underlying Protocol connection implementation if required or available.
