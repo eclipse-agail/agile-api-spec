@@ -9,6 +9,24 @@ iot.agile.Device:
     name: /iot/agile/Device/Example
 
   http:
+    /device/{deviceId}/status:
+      parameters:
+        -
+          name: deviceId
+          in: path
+          description: Agile device Id
+          required: true
+          type: string
+      get:
+        operationId: Status
+        tags:
+          - Device
+        description: Indicate the current device status
+        responses:
+          200:
+            description: Status read done
+          204:
+            description: No data available
     /device/{deviceId}/execute/{command}:
       parameters:
         -
