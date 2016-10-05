@@ -178,6 +178,27 @@ iot.agile.Device:
         operationId: Data
         tags:
           - Device
+        description: Get the last record fetched from the component
+        responses:
+          200:
+            description: Record fetched
+          204:
+            description: No data available
+          404:
+            description: Device not available
+
+    /device/{deviceId}/lastUpdate:
+      parameters:
+        -
+          name: deviceId
+          in: path
+          description: Agile device Id
+          required: true
+          type: string
+      get:
+        operationId: Data
+        tags:
+          - Device
         description: Get the last record fetched from the device
         responses:
           200:
