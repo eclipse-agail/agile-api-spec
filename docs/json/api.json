@@ -681,7 +681,7 @@
             "1": "s"
           },
           "type": "Array",
-          "reference": "iot.agile.Device",
+          "reference": "DeviceDefinition",
           "events": {
             "0": "DevicesChanged"
           }
@@ -2125,7 +2125,9 @@
           "required": true
         }
       },
-      "required": true
+      "required": {
+        "0": "deviceId"
+      }
     },
     "DeviceStreamChannel": {
       "description": "A channel contains the definition of a component like a sensor",

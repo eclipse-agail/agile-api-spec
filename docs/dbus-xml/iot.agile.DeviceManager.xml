@@ -73,12 +73,12 @@
   -->
   <property
     name="Devices"
-    type="o"
+    type="{ssssss({ssv})}"
     access="read"
     />
 <signal name="DevicesChanged">
 
-  <arg name="Devices" type="o" />
+  <arg name="Devices" type="{ssssss({ssv})}" />
 
 </signal>
 

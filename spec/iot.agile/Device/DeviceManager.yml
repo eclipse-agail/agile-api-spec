@@ -196,10 +196,12 @@ iot.agile.DeviceManager:
           404:
             description: Device not found
 
+
+## DBus
   Devices:
     description: Return all registered devices
     type: Array
-    reference: iot.agile.Device
+    reference: DeviceDefinition
     access: [r, s]
     events:
       - DevicesChanged
