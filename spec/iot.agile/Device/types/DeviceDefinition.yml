@@ -2,6 +2,8 @@
 DeviceDefinition:
   description: A device definition that contains informations describing the current device
   type: Object
+  required:
+      - deviceId
   fields:
     deviceId:
       description: Agile specific device ID
