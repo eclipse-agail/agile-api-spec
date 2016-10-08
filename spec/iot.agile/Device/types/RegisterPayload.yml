@@ -1,0 +1,8 @@
+RegisterPayload:
+  description: Payload
+  type: Object
+  fields:
+    overview:
+      type: String
+    type:
+      type: String

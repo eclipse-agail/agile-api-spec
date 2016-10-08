@@ -813,20 +813,13 @@
             },
             "parameters": {
               "0": {
-                "name": "overview",
+                "name": "payload",
                 "in": "body",
-                "description": "The request body describing a device",
+                "description": "The request body describing a device and the intended type",
                 "required": true,
                 "schema": {
-                  "$ref": "#/definitions/DeviceOverview"
+                  "$ref": "#/definitions/RegisterPayload"
                 }
-              },
-              "1": {
-                "name": "type",
-                "in": "body",
-                "description": "The request body describing a device",
-                "required": true,
-                "type": "string"
               }
             },
             "responses": {
@@ -2179,6 +2172,21 @@
         },
         "type": {
           "type": "ChannelTypeEnum",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "RegisterPayload": {
+      "description": "Payload",
+      "type": "Object",
+      "fields": {
+        "overview": {
+          "type": "String",
+          "required": true
+        },
+        "type": {
+          "type": "String",
           "required": true
         }
       },

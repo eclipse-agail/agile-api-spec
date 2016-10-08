@@ -332,18 +332,12 @@ paths:
         - DeviceManager
       parameters:
         -
-          name: overview
+          name: payload
           in: body
-          description: 'The request body describing a device'
+          description: 'The request body describing a device and the intended type'
           required: true
           schema:
-            $ref: '#/definitions/DeviceOverview'
-        -
-          name: type
-          in: body
-          description: 'The request body describing a device'
-          required: true
-          type: string
+            $ref: '#/definitions/RegisterPayload'
       responses:
         '200':
           description: 'Device created'
@@ -799,6 +793,14 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/DeviceComponent'
+  RegisterPayload:
+    description: Payload
+    type: object
+    properties:
+      overview:
+        type: string
+      type:
+        type: string
   RecordObject:
     description: 'Contains the measurment from a sensor and the metadata regarding its source'
     type: object

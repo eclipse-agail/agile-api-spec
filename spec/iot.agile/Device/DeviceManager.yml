@@ -90,18 +90,12 @@ iot.agile.DeviceManager:
           - DeviceManager
         parameters:
           -
-            name: overview
+            name: payload
             in: body
-            description: The request body describing a device
+            description: The request body describing a device and the intended type
             required: true
             schema:
-              $ref: "#/definitions/DeviceOverview"
-          -
-            name: type
-            in: body
-            description: The request body describing a device
-            required: true
-            type: string
+              $ref: "#/definitions/RegisterPayload"
         responses:
           200:
             description: Device created
