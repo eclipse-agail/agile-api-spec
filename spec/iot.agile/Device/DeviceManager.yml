@@ -114,6 +114,36 @@ iot.agile.DeviceManager:
               status: "AVAILABLE"
             type: "TI SensorTag"
 
+    /devices/typeof:
+      post:
+        operationId: TypeOf
+        description: Get matching types for a device overview
+        tags:
+          - DeviceManager
+        parameters:
+          -
+            name: overview
+            in: body
+            description: The request body describing a device
+            required: true
+            schema:
+              $ref: "#/definitions/DeviceOverview"
+        example:
+          application/json:
+            overview:
+              id: "A0:E6:F8:B6:F2:00"
+              name: "CC2650 SensorTag"
+              protocol: "iot.agile.protocol.BLE"
+              status: "AVAILABLE"
+            type: "TI SensorTag"
+        responses:
+          200:
+            description: list of possible device types
+            schema:
+              type: array
+              items:
+                type: string
+
     /devices/{deviceId}:
       parameters:
         -
