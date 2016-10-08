@@ -798,7 +798,7 @@ definitions:
     type: object
     properties:
       overview:
-        type: string
+        $ref: '#/definitions/DeviceOverview'
       type:
         type: string
   RecordObject:

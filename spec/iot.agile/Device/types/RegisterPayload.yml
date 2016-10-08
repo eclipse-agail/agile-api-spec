@@ -3,6 +3,6 @@ RegisterPayload:
   type: Object
   fields:
     overview:
-      type: String
+      type: DeviceOverview
     type:
       type: String

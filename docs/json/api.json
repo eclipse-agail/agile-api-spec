@@ -2182,7 +2182,7 @@
       "type": "Object",
       "fields": {
         "overview": {
-          "type": "String",
+          "type": "DeviceOverview",
           "required": true
         },
         "type": {
