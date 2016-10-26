@@ -125,14 +125,6 @@
       "description": "The Device API abstracts operations over the real device.\nIt send commands to a Protocol API instance to which is binded.\n",
       "group": "Device",
       "methods": {
-        "Read_": {
-          "description": "Read from all components of the device",
-          "return": {
-            "type": "array",
-            "fields": "RecordObject",
-            "reference": "iot.agile.RecordObject"
-          }
-        },
         "Read": {
           "description": "Read data from the component",
           "args": {
@@ -142,6 +134,14 @@
           },
           "return": {
             "type": "RecordObject"
+          }
+        },
+        "ReadAll": {
+          "description": "Read from all components of the device",
+          "return": {
+            "type": "Array",
+            "fields": "RecordObject",
+            "reference": "iot.agile.RecordObject"
           }
         },
         "LastUpdate": {
@@ -155,7 +155,7 @@
             "type": "RecordObject"
           }
         },
-        "LastUpdate_": {
+        "LastUpdateAll": {
           "description": "Last update of all components of the device",
           "return": {
             "type": "array",
