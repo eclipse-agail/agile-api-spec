@@ -55,6 +55,11 @@ paths:
       responses:
         '200':
           description: 'Status read done'
+          schema:
+            $ref: '#/definitions/StatusType'
+          example:
+            application/json:
+              status: CONNECTED
         '204':
           description: 'No data available'
   '/device/{deviceId}':
@@ -73,6 +78,25 @@ paths:
       responses:
         '200':
           description: 'Read done'
+          schema:
+            type: array
+            $ref: '#/definitions/RecordObject'
+          examples:
+            application/json:
+              -
+                deviceID: bleA0E6F8B62304
+                componentID: Temperature
+                value: '23.46875'
+                unit: 'Degree celsius'
+                format: ""
+                lastUpdate: '1477491668082'
+              -
+                deviceID: bleA0E6F8B62304
+                componentID: Humidity
+                value: '58.929443'
+                unit: 'Relative humidity'
+                format: ""
+                lastUpdate: '1477491668082'
         '204':
           description: 'No data available'
   '/device/{deviceId}/connection':
@@ -171,7 +195,7 @@ paths:
       -
         name: componentId
         in: path
-        description: 'Agile component name, like a sensor'
+        description: 'Device component name, like a Temperature'
         required: true
         type: string
     get:
@@ -182,6 +206,16 @@ paths:
       responses:
         '200':
           description: 'Read done'
+          schema:
+            $ref: '#/definitions/RecordObject'
+          examples:
+            application/json:
+              deviceID: bleA0E6F8B62304
+              componentID: Temperature
+              value: '23.46875'
+              unit: 'Degree celsius'
+              format: ""
+              lastUpdate: '1477491668082'
         '204':
           description: 'No data available'
     post:
@@ -212,10 +246,20 @@ paths:
       operationId: Data
       tags:
         - Device
-      description: 'Get the last record fetched from the component'
+      description: 'Get the last record fetched from the device'
       responses:
         '200':
           description: 'Record fetched'
+          schema:
+            $ref: '#/definitions/RecordObject'
+          examples:
+            application/json:
+              deviceID: bleA0E6F8B62304
+              componentID: Temperature
+              value: '23.46875'
+              unit: 'Degree celsius'
+              format: ""
+              lastUpdate: '1477491668082'
         '204':
           description: 'No data available'
         '404':
@@ -236,14 +280,31 @@ paths:
       responses:
         '200':
           description: 'Record fetched'
+          schema:
+            type: array
+            $ref: '#/definitions/RecordObject'
+          examples:
+            application/json:
+              -
+                deviceID: bleA0E6F8B62304
+                componentID: Temperature
+                value: '23.46875'
+                unit: 'Degree celsius'
+                format: ""
+                lastUpdate: '1477491668082'
+              -
+                deviceID: bleA0E6F8B62304
+                componentID: Humidity
+                value: '58.929443'
+                unit: 'Relative humidity'
+                format: ""
+                lastUpdate: '1477491668082'
         '204':
           description: 'No data available'
         '404':
           description: 'Device not available'
   /devices:
     get:
-      '204':
-        description: 'Device list is empty'
       operationId: Devices
       tags:
         - DeviceManager
@@ -290,6 +351,8 @@ paths:
                   -
                     id: pressure
                     unit: hPa
+        '204':
+          description: 'Device list is empty'
     post:
       operationId: Create
       description: 'Creates a new device'
@@ -303,24 +366,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeviceDefinition'
-          example:
-            application/json:
-              deviceId: ""
-              address: 'A1:B2:C3:D4:E5:F6'
-              name: MyFirstSensorTag
-              description: ""
-              protocol: iot.agile.protocol.ble
-              path: ""
-              streams:
-                -
-                  id: temperature
-                  unit: celsius
-                -
-                  id: light
-                  unit: lumen
-                -
-                  id: pressure
-                  unit: hPa
       responses:
         '200':
           description: 'Device created'
@@ -347,14 +392,6 @@ paths:
       responses:
         '200':
           description: 'Device created'
-      example:
-        application/json:
-          overview:
-            id: 'A0:E6:F8:B6:F2:00'
-            name: 'CC2650 SensorTag'
-            protocol: iot.agile.protocol.BLE
-            status: AVAILABLE
-          type: 'TI SensorTag'
   '/devices/{deviceId}':
     parameters:
       -
@@ -770,6 +807,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/DeviceComponent'
+  StatusType:
+    enum:
+      - CONNECTED
+      - DISCONNECTED
   RecordObject:
     description: 'Contains the measurment from a sensor and the metadata regarding its source'
     type: object

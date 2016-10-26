@@ -3,7 +3,6 @@ iot.agile.Device:
   description: |
     The Device API abstracts operations over the real device.
     It send commands to a Protocol API instance to which is binded.
-
   group: Device
   dbus:
     name: /iot/agile/Device/Example
@@ -25,6 +24,11 @@ iot.agile.Device:
         responses:
           200:
             description: Status read done
+            schema:
+              $ref: "#/definitions/StatusType"
+            example:
+              application/json:
+                status: "CONNECTED"
           204:
             description: No data available
 
@@ -44,6 +48,23 @@ iot.agile.Device:
         responses:
           200:
             description: Read done
+            schema:
+              type: array
+              $ref: "#/definitions/RecordObject"
+            examples:
+              application/json:
+                - deviceID: "bleA0E6F8B62304"
+                  componentID: "Temperature"
+                  value: "23.46875"
+                  unit: "Degree celsius"
+                  format: ""
+                  lastUpdate: "1477491668082"
+                - deviceID: "bleA0E6F8B62304"
+                  componentID: "Humidity"
+                  value: "58.929443"
+                  unit: "Relative humidity"
+                  format: ""
+                  lastUpdate: "1477491668082"
           204:
             description: No data available
 
@@ -154,7 +175,7 @@ iot.agile.Device:
         -
           name: componentId
           in: path
-          description: Agile component name, like a sensor
+          description: Device component name, like a Temperature
           required: true
           type: string
 
@@ -166,6 +187,16 @@ iot.agile.Device:
         responses:
           200:
             description: Read done
+            schema:
+              $ref: "#/definitions/RecordObject"
+            examples:
+              application/json:
+                deviceID: "bleA0E6F8B62304"
+                componentID: "Temperature"
+                value: "23.46875"
+                unit: "Degree celsius"
+                format: ""
+                lastUpdate: "1477491668082"
           204:
             description: No data available
       post:
@@ -198,10 +229,20 @@ iot.agile.Device:
         operationId: Data
         tags:
           - Device
-        description: Get the last record fetched from the component
+        description: Get the last record fetched from the device
         responses:
           200:
             description: Record fetched
+            schema:
+              $ref: "#/definitions/RecordObject"
+            examples:
+              application/json:
+                deviceID: "bleA0E6F8B62304"
+                componentID: "Temperature"
+                value: "23.46875"
+                unit: "Degree celsius"
+                format: ""
+                lastUpdate: "1477491668082"
           204:
             description: No data available
           404:
@@ -223,6 +264,23 @@ iot.agile.Device:
         responses:
           200:
             description: Record fetched
+            schema:
+              type: array
+              $ref: "#/definitions/RecordObject"
+            examples:
+              application/json:
+                - deviceID: "bleA0E6F8B62304"
+                  componentID: "Temperature"
+                  value: "23.46875"
+                  unit: "Degree celsius"
+                  format: ""
+                  lastUpdate: "1477491668082"
+                - deviceID: "bleA0E6F8B62304"
+                  componentID: "Humidity"
+                  value: "58.929443"
+                  unit: "Relative humidity"
+                  format: ""
+                  lastUpdate: "1477491668082"
           204:
             description: No data available
           404:
@@ -272,7 +330,6 @@ iot.agile.Device:
       fields: RecordObject
       reference: iot.agile.RecordObject
 
-
   LastUpdate:
     description: Last update from the component
     args:
@@ -284,30 +341,22 @@ iot.agile.Device:
     description: Last update of all components of the device
     args:
     return:
-      type: array
+      type: Array
       fields: RecordObject
       reference: iot.agile.RecordObject
 
   Execute:
-      description: |
-        Perform an action on the device or sensor side triggering the
-        underline Protocol specific implementation.
-      args:
-        op:
-          description: Operation name or code as string
-          type: String
-        payload:
-          description: Arguments for the actuation on the device
-          type: Object*
-      return:
-         type: Object
-         fields:
-           result:
-             type: Boolean
-           resultCode:
-             type: Number
-           response:
-             type: Object*
+    description: |
+      Perform an action on the device or sensor side triggering the
+      underline Protocol specific implementation.
+    args:
+      op:
+        description: Operation name or code as string
+        type: String
+      payload:
+        description: Arguments for the actuation on the device
+        type: Object*
+    return: void
 
   Connect:
     description: Connect or initialize the underlying Protocol connection implementation if required or available.

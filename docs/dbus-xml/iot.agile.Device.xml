@@ -53,7 +53,6 @@
   
       <arg name="op" type="s" direction="in"/>
       <arg name="payload" type="v" direction="in"/>
-      <arg name="return" type="{bdv}" direction="out"/>
   
   </method>
 
