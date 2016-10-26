@@ -282,7 +282,15 @@
             "description": "Indicate the current device status",
             "responses": {
               "200": {
-                "description": "Status read done"
+                "description": "Status read done",
+                "schema": {
+                  "$ref": "#/definitions/StatusType"
+                },
+                "example": {
+                  "application/json": {
+                    "status": "CONNECTED"
+                  }
+                }
               },
               "204": {
                 "description": "No data available"
@@ -308,7 +316,31 @@
             "description": "Read values of all components from the device",
             "responses": {
               "200": {
-                "description": "Read done"
+                "description": "Read done",
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "0": {
+                      "deviceID": "bleA0E6F8B62304",
+                      "componentID": "Temperature",
+                      "value": "23.46875",
+                      "unit": "Degree celsius",
+                      "format": "",
+                      "lastUpdate": "1477491668082"
+                    },
+                    "1": {
+                      "deviceID": "bleA0E6F8B62304",
+                      "componentID": "Humidity",
+                      "value": "58.929443",
+                      "unit": "Relative humidity",
+                      "format": "",
+                      "lastUpdate": "1477491668082"
+                    }
+                  }
+                }
               },
               "204": {
                 "description": "No data available"
@@ -451,7 +483,7 @@
             "1": {
               "name": "componentId",
               "in": "path",
-              "description": "Agile component name, like a sensor",
+              "description": "Device component name, like a Temperature",
               "required": true,
               "type": "string"
             }
@@ -464,7 +496,20 @@
             "description": "Read from a device component",
             "responses": {
               "200": {
-                "description": "Read done"
+                "description": "Read done",
+                "schema": {
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceID": "bleA0E6F8B62304",
+                    "componentID": "Temperature",
+                    "value": "23.46875",
+                    "unit": "Degree celsius",
+                    "format": "",
+                    "lastUpdate": "1477491668082"
+                  }
+                }
               },
               "204": {
                 "description": "No data available"
@@ -513,7 +558,20 @@
             "description": "Get the last record fetched from the device",
             "responses": {
               "200": {
-                "description": "Record fetched"
+                "description": "Record fetched",
+                "schema": {
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceID": "bleA0E6F8B62304",
+                    "componentID": "Temperature",
+                    "value": "23.46875",
+                    "unit": "Degree celsius",
+                    "format": "",
+                    "lastUpdate": "1477491668082"
+                  }
+                }
               },
               "204": {
                 "description": "No data available"
@@ -542,7 +600,31 @@
             "description": "Get the last record fetched from the device",
             "responses": {
               "200": {
-                "description": "Record fetched"
+                "description": "Record fetched",
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "0": {
+                      "deviceID": "bleA0E6F8B62304",
+                      "componentID": "Temperature",
+                      "value": "23.46875",
+                      "unit": "Degree celsius",
+                      "format": "",
+                      "lastUpdate": "1477491668082"
+                    },
+                    "1": {
+                      "deviceID": "bleA0E6F8B62304",
+                      "componentID": "Humidity",
+                      "value": "58.929443",
+                      "unit": "Relative humidity",
+                      "format": "",
+                      "lastUpdate": "1477491668082"
+                    }
+                  }
+                }
               },
               "204": {
                 "description": "No data available"
