@@ -257,6 +257,36 @@ iot.agile.Device:
     description: Device-specific communication Protocol instance. Available to access protocol specific methods and properties
     reference: iot.agile.Protocol
 
+  Read:
+    description: Read data from the component
+    args:
+      component:
+        type: String
+    return: RecordObject
+
+  ReadAll:
+    description: Read from all components of the device
+    args:
+    return:
+      type: Array
+      fields: RecordObject
+      reference: iot.agile.RecordObject
+
+  LastUpdate:
+    description: Last update from the component
+    args:
+      component:
+        type: String
+    return: RecordObject
+
+  LastUpdateAll:
+    description: Last update of all components of the device
+    args:
+    return:
+      type: array
+      fields: RecordObject
+      reference: iot.agile.RecordObject
+
   Execute:
     description: |
       Perform an action on the device or sensor side triggering the
