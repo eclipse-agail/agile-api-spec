@@ -25,6 +25,11 @@ iot.agile.Device:
         responses:
           200:
             description: Status read done
+            schema:
+              $ref: "#/definitions/StatusType"
+            example:
+              application/json:
+                status: "CONNECTED"
           204:
             description: No data available
 
