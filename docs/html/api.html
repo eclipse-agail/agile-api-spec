@@ -1606,41 +1606,6 @@ It send commands to a Protocol API instance to which is binded.
 <li
   class="api-class-property"
   data-type="property"
-  data-id="iot.agile.Device.LastUpdate"
-  id="iot.agile.Device_LastUpdate"
->
-
-  <div class="overview">
-
-    <span class="type">
-      
-        Number
-      
-    </span>
-
-    <span class="name" id="LastUpdate">
-      LastUpdate
-    </span>
-
-  </div>
-
-  <div class="pad-left details hidden" data-for="iot.agile.Device.LastUpdate">
-
-    
-      <div class="description">
-        A UNIX timestamp to indicate the last data update received by the Device
-      </div>
-    
-
-    
-
-    
-
-  </div>
-</li>
-<li
-  class="api-class-property"
-  data-type="property"
   data-id="iot.agile.Device.Data"
   id="iot.agile.Device_Data"
 >
@@ -1738,6 +1703,388 @@ It send commands to a Protocol API instance to which is binded.
     <li
   class="api-class-method"
   data-type="method"
+  data-id="iot.agile.Device.Read"
+  id="iot.agile.Device_Read"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#RecordObject"><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">Read(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  component
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Read data from the component
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="iot.agile.Device.Read">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="component">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        component
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="iot.agile.Device.ReadAll"
+  id="iot.agile.Device_ReadAll"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#iot.agile.RecordObject"><span class="type">
+  
+    <a href="#iot.agile.RecordObject">Array</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">ReadAll(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Read from all components of the device
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="iot.agile.Device.ReadAll">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#iot.agile.RecordObject">Array[RecordObject]</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="iot.agile.Device.LastUpdate"
+  id="iot.agile.Device_LastUpdate"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#RecordObject"><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">LastUpdate(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  component
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Last update from the component
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="iot.agile.Device.LastUpdate">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="component">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        component
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="iot.agile.Device.LastUpdateAll"
+  id="iot.agile.Device_LastUpdateAll"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#iot.agile.RecordObject"><span class="type">
+  
+    <a href="#iot.agile.RecordObject">Array</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">LastUpdateAll(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Last update of all components of the device
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="iot.agile.Device.LastUpdateAll">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#iot.agile.RecordObject">Array[RecordObject]</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
   data-id="iot.agile.Device.Execute"
   id="iot.agile.Device_Execute"
 >
@@ -1748,7 +2095,7 @@ It send commands to a Protocol API instance to which is binded.
       
         <span class="type">
   
-    Object
+    void
   
 </span>
 
@@ -1871,7 +2218,7 @@ underline Protocol specific implementation.
   <div class="overview">
     <span class="type">
       
-        Object
+        void
       
     </span>
 
@@ -1884,88 +2231,6 @@ underline Protocol specific implementation.
 
     
 
-    
-      <ul class="fields pad-left no-bullet">
-        <li class="api-type" data-type="type" id="result">
-
-  <div class="overview">
-    <span class="type">
-      
-        Boolean
-      
-    </span>
-
-    
-      <span class="name">
-        result
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="resultCode">
-
-  <div class="overview">
-    <span class="type">
-      
-        Number
-      
-    </span>
-
-    
-      <span class="name">
-        resultCode
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-<li class="api-type" data-type="type" id="response">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object*
-      
-    </span>
-
-    
-      <span class="name">
-        response
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-
-      </ul>
     
   </div>
 
@@ -2130,119 +2395,6 @@ underline Protocol specific implementation.
 <li
   class="api-class-method"
   data-type="method"
-  data-id="iot.agile.Device.Read"
-  id="iot.agile.Device_Read"
->
-
-  <div class="overview">
-
-    <span class="returnType type secondary">
-      
-        <a href="#RecordObject"><span class="type">
-  
-    <a href="#RecordObject">RecordObject</a>
-  
-</span>
-</a>
-      
-    </span>
-
-    <span class="name">Read(</span>
-      <span class="args"><span class="type">
-  
-    String
-  
-</span>
-
-<span class="name">
-  component
-</span>
-</span>
-    <span class="name">)</span>
-
-    
-
-  </div>
-
-  <div class="details hidden pad-left" data-for="iot.agile.Device.Read">
-
-    
-
-    
-      <div class="method-overview">
-        <div class="wrapper">
-  <h5 class="title">
-    Arguments
-  </h5>
-  <ul class="content">
-    <li class="api-type" data-type="type" id="component">
-
-  <div class="overview">
-    <span class="type">
-      
-        String
-      
-    </span>
-
-    
-      <span class="name">
-        component
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-
-  </ul>
-</div>
-<div class="wrapper">
-  <h5 class="title">
-    Return type
-  </h5>
-  <ul class="content">
-    <li class="api-type" data-type="type" id="">
-
-  <div class="overview">
-    <span class="type">
-      
-        <a href="#RecordObject">RecordObject</a>
-      
-    </span>
-
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-
-    
-
-    
-  </div>
-
-</li>
-
-  </ul>
-</div>
-
-      </div>
-    
-  </div>
-
-</li>
-<li
-  class="api-class-method"
-  data-type="method"
   data-id="iot.agile.Device.Write"
   id="iot.agile.Device_Write"
 >
@@ -2253,7 +2405,7 @@ underline Protocol specific implementation.
       
         <span class="type">
   
-    Boolean
+    void
   
 </span>
 
@@ -2362,7 +2514,7 @@ underline Protocol specific implementation.
   <div class="overview">
     <span class="type">
       
-        Boolean
+        void
       
     </span>
 
@@ -2401,7 +2553,7 @@ underline Protocol specific implementation.
       
         <span class="type">
   
-    Boolean
+    void
   
 </span>
 
@@ -2417,15 +2569,6 @@ underline Protocol specific implementation.
 
 <span class="name">
   component
-</span>
-<span class="args-glue">, </span><span class="type">
-  
-    Object*
-  
-</span>
-
-<span class="name">
-  params
 </span>
 </span>
     <span class="name">)</span>
@@ -2481,38 +2624,6 @@ the underlying Protocol implementation if supported.
   </div>
 
 </li>
-<li class="api-type" data-type="type" id="params">
-
-  <div class="overview">
-    <span class="type">
-      
-        Object*
-      
-    </span>
-
-    
-      <span class="name">
-        params
-      </span>
-    
-  </div>
-
-  <div class="details hidden">
-
-    
-      <span class="description">
-        Custom parameters set to pass spcific to the device
-or sensor, like eg. frequency
-
-      </span>
-    
-
-    
-
-    
-  </div>
-
-</li>
 
   </ul>
 </div>
@@ -2526,7 +2637,7 @@ or sensor, like eg. frequency
   <div class="overview">
     <span class="type">
       
-        Boolean
+        void
       
     </span>
 
@@ -2565,7 +2676,7 @@ or sensor, like eg. frequency
       
         <span class="type">
   
-    Boolean
+    void
   
 </span>
 
@@ -2649,7 +2760,7 @@ the underlying Protocol implementation if supported.
   <div class="overview">
     <span class="type">
       
-        Boolean
+        void
       
     </span>
 
