@@ -176,7 +176,7 @@ iot.agile.Device:
         -
           name: componentId
           in: path
-          description: Agile component name, like a sensor
+          description: Device component name, like a Temperature
           required: true
           type: string
 
