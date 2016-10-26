@@ -758,9 +758,6 @@
       "http": {
         "/devices": {
           "get": {
-            "204": {
-              "description": "Device list is empty"
-            },
             "operationId": "Devices",
             "tags": {
               "0": "DeviceManager"
@@ -821,6 +818,9 @@
                     }
                   }
                 }
+              },
+              "204": {
+                "description": "Device list is empty"
               }
             }
           },
@@ -838,30 +838,6 @@
                 "required": true,
                 "schema": {
                   "$ref": "#/definitions/DeviceDefinition"
-                },
-                "example": {
-                  "application/json": {
-                    "deviceId": "",
-                    "address": "A1:B2:C3:D4:E5:F6",
-                    "name": "MyFirstSensorTag",
-                    "description": "",
-                    "protocol": "iot.agile.protocol.ble",
-                    "path": "",
-                    "streams": {
-                      "0": {
-                        "id": "temperature",
-                        "unit": "celsius"
-                      },
-                      "1": {
-                        "id": "light",
-                        "unit": "lumen"
-                      },
-                      "2": {
-                        "id": "pressure",
-                        "unit": "hPa"
-                      }
-                    }
-                  }
                 }
               }
             },
@@ -900,17 +876,6 @@
             "responses": {
               "200": {
                 "description": "Device created"
-              }
-            },
-            "example": {
-              "application/json": {
-                "overview": {
-                  "id": "A0:E6:F8:B6:F2:00",
-                  "name": "CC2650 SensorTag",
-                  "protocol": "iot.agile.protocol.BLE",
-                  "status": "AVAILABLE"
-                },
-                "type": "TI SensorTag"
               }
             }
           }
