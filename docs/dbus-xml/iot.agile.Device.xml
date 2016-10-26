@@ -4,6 +4,48 @@
 
   <interface name="iot.agile.Device">
     <!--
+    @see iot.agile.Device.Read
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Read
+  -->
+  <method name="Read">
+  
+      <arg name="component" type="s" direction="in"/>
+      <arg name="return" type="{sssssd}" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see iot.agile.Device.ReadAll
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_ReadAll
+  -->
+  <method name="ReadAll">
+  
+      <arg name="return" type="({sssssd})" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see iot.agile.Device.LastUpdate
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_LastUpdate
+  -->
+  <method name="LastUpdate">
+  
+      <arg name="component" type="s" direction="in"/>
+      <arg name="return" type="{sssssd}" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see iot.agile.Device.LastUpdateAll
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_LastUpdateAll
+  -->
+  <method name="LastUpdateAll">
+  
+      <arg name="return" type="({sssssd})" direction="out"/>
+  
+  </method>
+
+  <!--
     @see iot.agile.Device.Execute
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Execute
   -->
@@ -11,7 +53,6 @@
   
       <arg name="op" type="s" direction="in"/>
       <arg name="payload" type="v" direction="in"/>
-      <arg name="return" type="{bdv}" direction="out"/>
   
   </method>
 
@@ -34,17 +75,6 @@
   </method>
 
   <!--
-    @see iot.agile.Device.Read
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Read
-  -->
-  <method name="Read">
-  
-      <arg name="component" type="s" direction="in"/>
-      <arg name="return" type="{sssssd}" direction="out"/>
-  
-  </method>
-
-  <!--
     @see iot.agile.Device.Write
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Write
   -->
@@ -52,7 +82,6 @@
   
       <arg name="component" type="s" direction="in"/>
       <arg name="data" type="{sssssd}" direction="in"/>
-      <arg name="return" type="b" direction="out"/>
   
   </method>
 
@@ -63,8 +92,6 @@
   <method name="Subscribe">
   
       <arg name="component" type="s" direction="in"/>
-      <arg name="params" type="v" direction="in"/>
-      <arg name="return" type="b" direction="out"/>
   
   </method>
 
@@ -75,7 +102,6 @@
   <method name="Unsubscribe">
   
       <arg name="component" type="s" direction="in"/>
-      <arg name="return" type="b" direction="out"/>
   
   </method>
   <!--
@@ -125,16 +151,6 @@
   <property
     name="Profile"
     type="v"
-    access="read"
-    />
-
-  <!--
-    @see iot.agile.Device.LastUpdate
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_LastUpdate
-  -->
-  <property
-    name="LastUpdate"
-    type="d"
     access="read"
     />
 
