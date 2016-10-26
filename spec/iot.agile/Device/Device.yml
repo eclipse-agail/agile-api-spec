@@ -188,6 +188,16 @@ iot.agile.Device:
         responses:
           200:
             description: Read done
+            schema:
+              $ref: "#/definitions/RecordObject"
+            examples:
+              application/json:
+                deviceID: "bleA0E6F8B62304"
+                componentID: "Temperature"
+                value: "23.46875"
+                unit: "Degree celsius"
+                format: ""
+                lastUpdate: "1477491668082"
           204:
             description: No data available
       post:
