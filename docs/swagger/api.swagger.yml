@@ -345,23 +345,6 @@ paths:
         '204':
           description: 'Device list is empty'
     post:
-      operationId: Create
-      description: 'Creates a new device'
-      tags:
-        - DeviceManager
-      parameters:
-        -
-          name: body
-          in: body
-          description: 'The request body describing a device'
-          required: true
-          schema:
-            $ref: '#/definitions/DeviceDefinition'
-      responses:
-        '200':
-          description: 'Device created'
-  /devices/register:
-    post:
       operationId: Register
       description: 'Register a new device based on information from ProtocolManager and device type'
       tags:
@@ -374,17 +357,37 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RegisterPayload'
+          examples:
+            application/json:
+              overview:
+                id: 'A0:E6:F8:B6:F2:00'
+                name: 'CC2650 SensorTag'
+                protocol: iot.agile.protocol.BLE
+                status: AVAILABLE
+              type: 'TI SensorTag'
       responses:
         '200':
           description: 'Device created'
-      example:
-        application/json:
-          overview:
-            id: 'A0:E6:F8:B6:F2:00'
-            name: 'CC2650 SensorTag'
-            protocol: iot.agile.protocol.BLE
-            status: AVAILABLE
-          type: 'TI SensorTag'
+          schema:
+            $ref: '#/definitions/DeviceDefinition'
+          examples:
+            application/json:
+              deviceId: bleA1B2C3D4E5F6
+              address: 'A1:B2:C3:D4:E5:F6'
+              name: MyFirstSensorTag
+              description: ""
+              protocol: iot.agile.protocol.ble
+              path: /iot/agile/Device/bleA1B2C3D4E5F6
+              streams:
+                -
+                  id: temperature
+                  unit: celsius
+                -
+                  id: light
+                  unit: lumen
+                -
+                  id: pressure
+                  unit: hPa
   /devices/typeof:
     post:
       operationId: TypeOf
@@ -399,7 +402,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeviceOverview'
-          example:
+          examples:
             application/json:
               id: 'A0:E6:F8:B6:F2:00'
               name: 'CC2650 SensorTag'
