@@ -48,8 +48,8 @@ iot.agile.DeviceManager:
                       unit: lumen
                     - id: pressure
                       unit: hPa
-        204:
-          description: Device list is empty
+          204:
+            description: Device list is empty
       post:
         operationId: Create
         description: Creates a new device
@@ -63,21 +63,21 @@ iot.agile.DeviceManager:
             required: true
             schema:
               $ref: "#/definitions/DeviceDefinition"
-            example:
-              application/json:
-                deviceId: ""
-                address: "A1:B2:C3:D4:E5:F6"
-                name: "MyFirstSensorTag"
-                description: ""
-                protocol : "iot.agile.protocol.ble"
-                path: ""
-                streams:
-                  - id: temperature
-                    unit: celsius
-                  - id: light
-                    unit: lumen
-                  - id: pressure
-                    unit: hPa
+  #            example:/devices/typeof
+  #              application/json:
+  #                deviceId: ""
+  #                address: "A1:B2:C3:D4:E5:F6"
+  #                name: "MyFirstSensorTag"
+  #                description: ""
+  #                protocol : "iot.agile.protocol.ble"
+  #                path: ""
+  #                streams:
+  #                  - id: temperature
+  #                    unit: celsius
+  #                  - id: light
+  #                    unit: lumen
+  #                  - id: pressure
+  #                    unit: hPa
         responses:
           200:
             description: Device created
@@ -122,14 +122,12 @@ iot.agile.DeviceManager:
             required: true
             schema:
               $ref: "#/definitions/DeviceOverview"
-        example:
-          application/json:
-            overview:
-              id: "A0:E6:F8:B6:F2:00"
-              name: "CC2650 SensorTag"
-              protocol: "iot.agile.protocol.BLE"
-              status: "AVAILABLE"
-            type: "TI SensorTag"
+            example:
+              application/json:
+                id: "A0:E6:F8:B6:F2:00"
+                name: "CC2650 SensorTag"
+                protocol: "iot.agile.protocol.BLE"
+                status: "AVAILABLE"
         responses:
           200:
             description: list of possible device types

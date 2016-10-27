@@ -125,14 +125,6 @@
       "description": "The Device API abstracts operations over the real device.\nIt send commands to a Protocol API instance to which is binded.\n",
       "group": "Device",
       "methods": {
-        "Read_": {
-          "description": "Read from all components of the device",
-          "return": {
-            "type": "array",
-            "fields": "RecordObject",
-            "reference": "iot.agile.RecordObject"
-          }
-        },
         "Read": {
           "description": "Read data from the component",
           "args": {
@@ -142,6 +134,14 @@
           },
           "return": {
             "type": "RecordObject"
+          }
+        },
+        "ReadAll": {
+          "description": "Read from all components of the device",
+          "return": {
+            "type": "Array",
+            "fields": "RecordObject",
+            "reference": "iot.agile.RecordObject"
           }
         },
         "LastUpdate": {
@@ -155,10 +155,10 @@
             "type": "RecordObject"
           }
         },
-        "LastUpdate_": {
+        "LastUpdateAll": {
           "description": "Last update of all components of the device",
           "return": {
-            "type": "array",
+            "type": "Array",
             "fields": "RecordObject",
             "reference": "iot.agile.RecordObject"
           }
@@ -176,21 +176,7 @@
             }
           },
           "return": {
-            "type": "Object",
-            "fields": {
-              "result": {
-                "type": "Boolean",
-                "required": true
-              },
-              "resultCode": {
-                "type": "Number",
-                "required": true
-              },
-              "response": {
-                "type": "Object*",
-                "required": true
-              }
-            }
+            "type": "void"
           }
         },
         "Connect": {
@@ -296,7 +282,15 @@
             "description": "Indicate the current device status",
             "responses": {
               "200": {
-                "description": "Status read done"
+                "description": "Status read done",
+                "schema": {
+                  "$ref": "#/definitions/StatusType"
+                },
+                "examples": {
+                  "application/json": {
+                    "status": "CONNECTED"
+                  }
+                }
               },
               "204": {
                 "description": "No data available"
@@ -322,7 +316,31 @@
             "description": "Read values of all components from the device",
             "responses": {
               "200": {
-                "description": "Read done"
+                "description": "Read done",
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "0": {
+                      "deviceID": "bleA0E6F8B62304",
+                      "componentID": "Temperature",
+                      "value": "23.46875",
+                      "unit": "Degree celsius",
+                      "format": "",
+                      "lastUpdate": "1477491668082"
+                    },
+                    "1": {
+                      "deviceID": "bleA0E6F8B62304",
+                      "componentID": "Humidity",
+                      "value": "58.929443",
+                      "unit": "Relative humidity",
+                      "format": "",
+                      "lastUpdate": "1477491668082"
+                    }
+                  }
+                }
               },
               "204": {
                 "description": "No data available"
@@ -465,7 +483,7 @@
             "1": {
               "name": "componentId",
               "in": "path",
-              "description": "Agile component name, like a sensor",
+              "description": "Device component name, like a Temperature",
               "required": true,
               "type": "string"
             }
@@ -478,7 +496,20 @@
             "description": "Read from a device component",
             "responses": {
               "200": {
-                "description": "Read done"
+                "description": "Read done",
+                "schema": {
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceID": "bleA0E6F8B62304",
+                    "componentID": "Temperature",
+                    "value": "23.46875",
+                    "unit": "Degree celsius",
+                    "format": "",
+                    "lastUpdate": "1477491668082"
+                  }
+                }
               },
               "204": {
                 "description": "No data available"
@@ -527,7 +558,20 @@
             "description": "Get the last record fetched from the component",
             "responses": {
               "200": {
-                "description": "Record fetched"
+                "description": "Record fetched",
+                "schema": {
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceID": "bleA0E6F8B62304",
+                    "componentID": "Temperature",
+                    "value": "23.46875",
+                    "unit": "Degree celsius",
+                    "format": "",
+                    "lastUpdate": "1477491668082"
+                  }
+                }
               },
               "204": {
                 "description": "No data available"
@@ -556,7 +600,20 @@
             "description": "Get the last record fetched from the device",
             "responses": {
               "200": {
-                "description": "Record fetched"
+                "description": "Record fetched",
+                "schema": {
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceID": "bleA0E6F8B62304",
+                    "componentID": "Temperature",
+                    "value": "23.46875",
+                    "unit": "Degree celsius",
+                    "format": "",
+                    "lastUpdate": "1477491668082"
+                  }
+                }
               },
               "204": {
                 "description": "No data available"
@@ -690,9 +747,6 @@
       "http": {
         "/devices": {
           "get": {
-            "204": {
-              "description": "Device list is empty"
-            },
             "operationId": "Devices",
             "tags": {
               "0": "DeviceManager"
@@ -753,6 +807,9 @@
                     }
                   }
                 }
+              },
+              "204": {
+                "description": "Device list is empty"
               }
             }
           },
@@ -770,30 +827,6 @@
                 "required": true,
                 "schema": {
                   "$ref": "#/definitions/DeviceDefinition"
-                },
-                "example": {
-                  "application/json": {
-                    "deviceId": "",
-                    "address": "A1:B2:C3:D4:E5:F6",
-                    "name": "MyFirstSensorTag",
-                    "description": "",
-                    "protocol": "iot.agile.protocol.ble",
-                    "path": "",
-                    "streams": {
-                      "0": {
-                        "id": "temperature",
-                        "unit": "celsius"
-                      },
-                      "1": {
-                        "id": "light",
-                        "unit": "lumen"
-                      },
-                      "2": {
-                        "id": "pressure",
-                        "unit": "hPa"
-                      }
-                    }
-                  }
                 }
               }
             },
@@ -855,18 +888,15 @@
                 "required": true,
                 "schema": {
                   "$ref": "#/definitions/DeviceOverview"
-                }
-              }
-            },
-            "example": {
-              "application/json": {
-                "overview": {
-                  "id": "A0:E6:F8:B6:F2:00",
-                  "name": "CC2650 SensorTag",
-                  "protocol": "iot.agile.protocol.BLE",
-                  "status": "AVAILABLE"
                 },
-                "type": "TI SensorTag"
+                "example": {
+                  "application/json": {
+                    "id": "A0:E6:F8:B6:F2:00",
+                    "name": "CC2650 SensorTag",
+                    "protocol": "iot.agile.protocol.BLE",
+                    "status": "AVAILABLE"
+                  }
+                }
               }
             },
             "responses": {
