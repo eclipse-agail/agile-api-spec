@@ -857,25 +857,69 @@
             },
             "parameters": {
               "0": {
+                "name": "payload",
+                "in": "body",
+                "description": "The request body describing a device and the intended type",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/RegisterPayload"
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Device created"
+              }
+            },
+            "example": {
+              "application/json": {
+                "overview": {
+                  "id": "A0:E6:F8:B6:F2:00",
+                  "name": "CC2650 SensorTag",
+                  "protocol": "iot.agile.protocol.BLE",
+                  "status": "AVAILABLE"
+                },
+                "type": "TI SensorTag"
+              }
+            }
+          }
+        },
+        "/devices/typeof": {
+          "post": {
+            "operationId": "TypeOf",
+            "description": "Get matching types for a device overview",
+            "tags": {
+              "0": "DeviceManager"
+            },
+            "parameters": {
+              "0": {
                 "name": "overview",
                 "in": "body",
                 "description": "The request body describing a device",
                 "required": true,
                 "schema": {
                   "$ref": "#/definitions/DeviceOverview"
+                },
+                "example": {
+                  "application/json": {
+                    "overview": {
+                      "id": "A0:E6:F8:B6:F2:00",
+                      "name": "CC2650 SensorTag",
+                      "protocol": "iot.agile.protocol.BLE",
+                      "status": "AVAILABLE",
+                      "type": "TI SensorTag"
+                    }
+                  }
                 }
-              },
-              "1": {
-                "name": "type",
-                "in": "body",
-                "description": "The request body describing a device",
-                "required": true,
-                "type": "string"
               }
             },
             "responses": {
               "200": {
-                "description": "Device created"
+                "description": "list of possible device types",
+                "schema": {
+                  "type": "array",
+                  "items": "string"
+                }
               }
             }
           }
@@ -2172,6 +2216,21 @@
         },
         "type": {
           "type": "ChannelTypeEnum",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "RegisterPayload": {
+      "description": "Payload",
+      "type": "Object",
+      "fields": {
+        "overview": {
+          "type": "DeviceOverview",
+          "required": true
+        },
+        "type": {
+          "type": "String",
           "required": true
         }
       },
