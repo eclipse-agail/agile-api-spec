@@ -409,14 +409,6 @@
             },
             "description": "Perform an action on the device",
             "(reference)": "Device.Execute",
-            "parameters": {
-              "0": {
-                "name": "payload",
-                "in": "body",
-                "description": "The content to be sent to the device to perform an actuation\n",
-                "schema": "string"
-              }
-            },
             "responses": {
               "200": {
                 "description": "Action sent"

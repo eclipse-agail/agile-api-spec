@@ -116,13 +116,6 @@ iot.agile.Device:
           - Device
         description: Perform an action on the device
         (reference): Device.Execute
-        parameters:
-          - name: payload
-            in: body
-            description: |
-              The content to be sent to the device to perform an actuation
-            schema:
-              type: string
         responses:
           200:
             description: Action sent

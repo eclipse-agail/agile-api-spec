@@ -142,13 +142,6 @@ paths:
       tags:
         - Device
       description: 'Perform an action on the device'
-      parameters:
-        -
-          name: payload
-          in: body
-          description: "The content to be sent to the device to perform an actuation\n"
-          schema:
-            type: string
       responses:
         '200':
           description: 'Action sent'
