@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+<modelVersion>4.0.0</modelVersion>
+<groupId>iot.agile</groupId>
+<artifactId>agile-interfaces</artifactId>
+<version>1.0</version>
+<name>Agile DBUS Interfaces</name>
+<packaging>jar</packaging>
+
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <slf4j.version>1.7.21</slf4j.version>
+      <logback.version>1.1.7</logback.version>
+	    <reposrc>file://${basedir}/deps</reposrc>
+			<maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+   </properties>
+
+	<repositories>
+		<repository>
+			<id>local-dbus</id>
+			<url>file://${basedir}/deps</url>
+		</repository>
+	</repositories>
+
+
+<dependencies>
+ <dependency>
+      <groupId>org.freedesktop.dbus</groupId>
+      <artifactId>libdbus-java</artifactId>
+      <version>2.9</version>
+    </dependency>
+    <dependency>
+      <groupId>cx.ath.matthew</groupId>
+      <artifactId>unix</artifactId>
+      <version>0.5</version>
+    </dependency>
+    <dependency>
+      <groupId>cx.ath.matthew</groupId>
+      <artifactId>cgi</artifactId>
+      <version>0.6</version>
+    </dependency>
+    <dependency>
+      <groupId>cx.ath.matthew</groupId>
+      <artifactId>hexdump</artifactId>
+      <version>0.2</version>
+    </dependency>
+
+  <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+
+    <dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+	<version>2.8.1</version>
+     </dependency>
+</dependencies>
+</project>
