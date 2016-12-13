@@ -4,6 +4,6 @@ public enum DeviceStatusType {
  	 CONNECTED,
 	 DISCONNECTED,
 	 ON,
-	 0FF,
-	 ERROR
+	 OFF,
+	 ERROR,
 }
