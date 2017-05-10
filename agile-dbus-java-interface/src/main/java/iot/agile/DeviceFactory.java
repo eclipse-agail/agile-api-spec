@@ -6,6 +6,7 @@
 package iot.agile;
 
 import iot.agile.object.DeviceOverview;
+import java.util.List;
 import org.freedesktop.dbus.DBusInterface;
 
 /**
@@ -20,5 +21,11 @@ public interface DeviceFactory extends DBusInterface {
     */
     @org.freedesktop.DBus.Description("Returns an instance of Device of specified type")
     public Device getDevice(String deviceType, DeviceOverview deviceOverview) throws Exception;
+    
+    /*
+    *Returns a list of matching device types based on the input device overview
+    */
+    @org.freedesktop.DBus.Description("Returns a list of matching device types from Device Factory")
+    public List<String> MatchingDeviceTypes(DeviceOverview deviceOverview);
     
 }
