@@ -222,6 +222,17 @@ iot.agile.DeviceManager:
     events:
       - DevicesChanged
 
+  TypeOf:
+    description: Get matching types for a device overview
+    args:
+      overview:
+        description: The request body describing a device
+        type: DeviceOverview
+    return:
+      description: list of possible device types
+      type: Array
+      fields: String
+
   Find:
     description: Search for devices by specific criteria
     args:
