@@ -202,7 +202,7 @@ paths:
         required: true
         type: string
     get:
-      operationId: ReadData
+      operationId: Read
       tags:
         - Device
       description: 'Read from a device component'
