@@ -202,7 +202,7 @@ paths:
         required: true
         type: string
     get:
-      operationId: ReadData
+      operationId: Read
       tags:
         - Device
       description: 'Read from a device component'
@@ -393,7 +393,7 @@ paths:
                   unit: hPa
   /devices/typeof:
     post:
-      operationId: TypeOf
+      operationId: MatchingDeviceTypes
       description: 'Get matching types for a device overview'
       tags:
         - DeviceManager
@@ -730,7 +730,7 @@ paths:
           description: "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
         '409':
           description: "Indicates that discovery has been requested to stop on the underlying\nprotocols but one or more reported a failure\n"
-
+  
 definitions:
   DeviceOverview:
     description: 'An overview of a device a protocol knows about'
@@ -870,3 +870,4 @@ definitions:
   KeyValue:
     description: 'A list of key/value pairs'
     type: object
+  

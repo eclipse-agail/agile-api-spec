@@ -625,6 +625,20 @@
       "description": "The DeviceManager list the registered devices available from the gateway available protocols.\nThis API is responsible to instantiate the reference DBus object for every device\nand offer management and integration points.\n",
       "group": "Device",
       "methods": {
+        "MatchingDeviceTypes": {
+          "description": "Get matching types for a device overview",
+          "args": {
+            "overview": {
+              "description": "The request body describing a device",
+              "type": "DeviceOverview"
+            }
+          },
+          "return": {
+            "description": "list of possible device types",
+            "type": "Array",
+            "fields": "String"
+          }
+        },
         "Find": {
           "description": "Search for devices by specific criteria",
           "args": {
@@ -869,7 +883,7 @@
         },
         "/devices/typeof": {
           "post": {
-            "operationId": "TypeOf",
+            "operationId": "MatchingDeviceTypes",
             "description": "Get matching types for a device overview",
             "tags": {
               "0": "DeviceManager"
