@@ -104,7 +104,7 @@ iot.agile.DeviceManager:
 
     /devices/typeof:
       post:
-        operationId: TypeOf
+        operationId: MatchingDeviceTypes
         description: Get matching types for a device overview
         tags:
           - DeviceManager
@@ -222,7 +222,7 @@ iot.agile.DeviceManager:
     events:
       - DevicesChanged
 
-  TypeOf:
+  MatchingDeviceTypes:
     description: Get matching types for a device overview
     args:
       overview:
