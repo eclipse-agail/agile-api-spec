@@ -9,3 +9,4 @@ deps
 */*.log
 *.log
 /bluez-5.39/
+/.DS_Store
