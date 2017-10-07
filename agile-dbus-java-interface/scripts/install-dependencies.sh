@@ -17,7 +17,7 @@ cd $CURRDIR
 
 mkdir -p $BUILD
 
-DBUSJAVA=2.9 #note: this is not an official release, that stopped at 2.7
+DBUSJAVA=2.10 #note: this is not an official release, that stopped at 2.7
 LMLIB=0.8
 
 #Install libmatthew-java first
