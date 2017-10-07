@@ -40,7 +40,7 @@ cp ./libunix-java.so $DEPS/unix-java.so
 
 #Install dbus-java
 
-git clone https://github.com/jeanparpaillon/dbus-java.git dbus-java-$DBUSJAVA
+git clone https://github.com/Agile-IoT/dbus-java.git dbus-java-$DBUSJAVA
 ( cd dbus-java-$DBUSJAVA && git checkout $DBUSJAVA )
 
 mv dbus-java-$DBUSJAVA $BUILD
