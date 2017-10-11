@@ -188,6 +188,14 @@ public interface Device extends DBusInterface {
    */
   @org.freedesktop.DBus.Description("disable subscription")
   public void Unsubscribe(String component) throws DBusException;
+  
+  /**
+   * Get list of all commands
+     * @return 
+     * @throws org.freedesktop.dbus.exceptions.DBusException
+   */
+  @org.freedesktop.DBus.Description("Get list of all commands")
+  public List<String> Commands() throws DBusException;
 
   /**
    * Stop device gracefully
