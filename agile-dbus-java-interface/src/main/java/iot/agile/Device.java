@@ -155,7 +155,7 @@ public interface Device extends DBusInterface {
    * Execute an operation on the device
    */
   @org.freedesktop.DBus.Description("Execute an operation on the device")
-  public void Execute(String command, Map<String, Variant> args) throws DBusException;
+  public void Execute(String commandId) throws DBusException;
 
   /**
    * Read data from all components
