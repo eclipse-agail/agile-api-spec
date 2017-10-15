@@ -17,7 +17,7 @@ cd $CURRDIR
 
 mkdir -p $BUILD
 
-DBUSJAVA=2.9 #note: this is not an official release, that stopped at 2.7
+DBUSJAVA=2.10 #note: this is not an official release, that stopped at 2.7
 LMLIB=0.8
 
 #Install libmatthew-java first
@@ -31,7 +31,7 @@ mv libmatthew-java-$LMLIB $BUILD
 cd $BUILD/libmatthew-java-$LMLIB
 
 make >> /dev/null
-PREFIX=$BUILD make install >> /dev/null
+PREFIX=$BUILD make install
 
 cp ./*.jar $DEPS
 cp ./*.so $DEPS
@@ -40,14 +40,14 @@ cp ./libunix-java.so $DEPS/unix-java.so
 
 #Install dbus-java
 
-git clone https://github.com/jeanparpaillon/dbus-java.git dbus-java-$DBUSJAVA
+git clone https://github.com/Agile-IoT/dbus-java.git dbus-java-$DBUSJAVA
 ( cd dbus-java-$DBUSJAVA && git checkout $DBUSJAVA )
 
 mv dbus-java-$DBUSJAVA $BUILD
 
 cd $BUILD/dbus-java-$DBUSJAVA
 
-PREFIX=$BUILD JAVAUNIXLIBDIR=$BUILD/lib/jni JAVAUNIXJARDIR=$BUILD/share/java make bin >> /dev/null
+PREFIX=$BUILD JAVAUNIXLIBDIR=$BUILD/lib/jni JAVAUNIXJARDIR=$BUILD/share/java make bin
 
 cp ./*.jar $DEPS
 
