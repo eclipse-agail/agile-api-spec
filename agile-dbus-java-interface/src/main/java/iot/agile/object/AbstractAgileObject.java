@@ -26,9 +26,11 @@ import org.freedesktop.dbus.exceptions.DBusException;
 abstract public class AbstractAgileObject implements AgileObjectInterface {
 
   protected DBusConnection connection;
+  protected String busPath;
 
   @Override
   public void dbusConnect(final String busName, final String busPath, DBusInterface iface) throws DBusException {
+    this.busPath = busPath;
 
     connection = DBusConnection.getConnection(AgileObjectInterface.DEFAULT_DBUS_CONNECTION);
 
@@ -50,6 +52,7 @@ abstract public class AbstractAgileObject implements AgileObjectInterface {
 
   @Override
   public void dbusDisconnect() {
+    connection.unExportObject(busPath);
     connection.disconnect();
   }
 
