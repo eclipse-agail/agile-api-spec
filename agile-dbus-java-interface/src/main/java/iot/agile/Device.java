@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Create-Net / FBK - initial API and implementation
  ******************************************************************************/
@@ -45,9 +45,9 @@ import iot.agile.object.StatusType;
  *
  */
 public interface Device extends DBusInterface {
-  
+
   static String AGILE_INTERFACE = "iot.agile.Device";
-  
+
   /**
    *
    * @return The unique device id on the gateway
@@ -155,7 +155,7 @@ public interface Device extends DBusInterface {
    * Execute an operation on the device
    */
   @org.freedesktop.DBus.Description("Execute an operation on the device")
-  public void Execute(String command, Map<String, Variant> args) throws DBusException;
+  public void Execute(String commandId) throws DBusException;
 
   /**
    * Read data from all components
@@ -171,16 +171,18 @@ public interface Device extends DBusInterface {
 
   /**
    * Write data on the device
+     * @param componentName
+     * @param payload
    */
   @org.freedesktop.DBus.Description("Write data on the device")
-  public void Write() throws DBusException;
+  public void Write(String componentName, String payload) throws DBusException;
 
   /**
    * Enable subscription
    */
   @org.freedesktop.DBus.Description("Enable subscription")
   public void Subscribe(String component) throws DBusException;
-  
+
    /**
    * disable subscription
    */
@@ -188,13 +190,21 @@ public interface Device extends DBusInterface {
   public void Unsubscribe(String component) throws DBusException;
   
   /**
+   * Get list of all commands
+     * @return 
+     * @throws org.freedesktop.dbus.exceptions.DBusException
+   */
+  @org.freedesktop.DBus.Description("Get list of all commands")
+  public List<String> Commands() throws DBusException;
+
+  /**
    * Stop device gracefully
    */
  @org.freedesktop.DBus.Description("Stop device")
  public void Stop() throws DBusException;
 	/**
 	 * New data reading signal for subscribe methods
-	 * 
+	 *
 	 * @author dagi
 	 *
 	 */
