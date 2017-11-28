@@ -17,7 +17,7 @@ DriverStatus:
     - ERROR
     - FAILURE
 
-iot.agile.Storage.Driver:
+org.eclipse.agail.Storage.Driver:
 
   description: |
     A Driver component is in charge of data storage and

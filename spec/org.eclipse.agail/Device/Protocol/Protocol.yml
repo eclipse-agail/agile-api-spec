@@ -8,7 +8,7 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-iot.agile.Protocol:
+org.eclipse.agail.Protocol:
   http:
     /protocol/{protocolId}/connection/{deviceId}:
       parameters:

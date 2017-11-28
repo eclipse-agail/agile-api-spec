@@ -23,7 +23,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package iot.agile;
+package org.eclipse.agail;
 
 import java.util.List;
 import java.util.Map;
@@ -32,8 +32,8 @@ import org.freedesktop.dbus.DBusInterface;
 import org.freedesktop.dbus.DBusSignal;
 import org.freedesktop.dbus.exceptions.DBusException;
 
-import iot.agile.object.DeviceOverview;
-import iot.agile.object.StatusType;
+import org.eclipse.agail.object.DeviceOverview;
+import org.eclipse.agail.object.StatusType;
 
 /**
  * Agile BLE Protocol interface
@@ -43,7 +43,7 @@ import iot.agile.object.StatusType;
  */
 public interface Protocol extends DBusInterface {
 
-	public static String AGILE_INTERFACE = "iot.agile.protocol";
+	public static String AGILE_INTERFACE = "org.eclipse.agail.protocol";
 
 	/**
 	 * TODO: Return device status

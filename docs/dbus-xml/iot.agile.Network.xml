@@ -10,11 +10,11 @@
 -->
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-<node name="/iot/agile/Network">
+<node name="/org/eclipse/agail/Network">
 
-  <interface name="iot.agile.Network">
+  <interface name="org.eclipse.agail.Network">
     <!--
-    @see iot.agile.Network.CreateAP
+    @see org.eclipse.agail.Network.CreateAP
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Network_CreateAP
   -->
   <method name="CreateAP">
@@ -26,7 +26,7 @@
   </method>
 
   <!--
-    @see iot.agile.Network.ScanWiFi
+    @see org.eclipse.agail.Network.ScanWiFi
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Network_ScanWiFi
   -->
   <method name="ScanWiFi">
@@ -34,7 +34,7 @@
   
   </method>
   <!--
-    @see iot.agile.Network.Status
+    @see org.eclipse.agail.Network.Status
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Network_Status
   -->
   <property
@@ -44,7 +44,7 @@
     />
 
   <!--
-    @see iot.agile.Network.Connections
+    @see org.eclipse.agail.Network.Connections
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Network_Connections
   -->
   <property
@@ -59,7 +59,7 @@
 </signal>
 
   <!--
-    @see iot.agile.Network.Devices
+    @see org.eclipse.agail.Network.Devices
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Network_Devices
   -->
   <property

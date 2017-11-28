@@ -44,7 +44,7 @@ Contributors shall follow those guidelines in order to get their contribution ac
 
 ```yaml
 
-iot.agile.ObjectName:
+org.eclipse.agail.ObjectName:
 
   MethodName:
     description: <method description>
@@ -61,7 +61,7 @@ iot.agile.ObjectName:
 
   ReferenceProperties:
     description: <method description>
-    reference: [iot.agile.AnotherObject]
+    reference: [org.eclipse.agail.AnotherObject]
 
 ```
 
@@ -117,7 +117,7 @@ ArrayField:
 
 ```yaml
 
-iot.agile.Device:
+org.eclipse.agail.Device:
   Name:
     description: The device name
     type: String
@@ -129,7 +129,7 @@ iot.agile.Device:
     type: Object*
   Protocol:
     description: Protocol instance
-    reference: iot.agile.Protocol
+    reference: org.eclipse.agail.Protocol
   Read:
     args:
       sensorName: String

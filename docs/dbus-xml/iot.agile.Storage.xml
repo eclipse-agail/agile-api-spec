@@ -10,11 +10,11 @@
 -->
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-<node name="/iot/agile/Storage">
+<node name="/org/eclipse/agail/Storage">
 
-  <interface name="iot.agile.Storage">
+  <interface name="org.eclipse.agail.Storage">
     <!--
-    @see iot.agile.Storage.Create
+    @see org.eclipse.agail.Storage.Create
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Create
   -->
   <method name="Create">
@@ -25,7 +25,7 @@
   </method>
 
   <!--
-    @see iot.agile.Storage.Read
+    @see org.eclipse.agail.Storage.Read
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Read
   -->
   <method name="Read">
@@ -36,7 +36,7 @@
   </method>
 
   <!--
-    @see iot.agile.Storage.Update
+    @see org.eclipse.agail.Storage.Update
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Update
   -->
   <method name="Update">
@@ -47,7 +47,7 @@
   </method>
 
   <!--
-    @see iot.agile.Storage.Delete
+    @see org.eclipse.agail.Storage.Delete
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Delete
   -->
   <method name="Delete">
@@ -57,7 +57,7 @@
   </method>
 
   <!--
-    @see iot.agile.Storage.Find
+    @see org.eclipse.agail.Storage.Find
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Find
   -->
   <method name="Find">
@@ -67,7 +67,7 @@
   
   </method>
   <!--
-    @see iot.agile.Storage.Drivers
+    @see org.eclipse.agail.Storage.Drivers
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Drivers
   -->
   <property

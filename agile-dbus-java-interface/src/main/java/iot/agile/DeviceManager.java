@@ -23,14 +23,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package iot.agile;
+package org.eclipse.agail;
 
 import java.util.List;
 
 import org.freedesktop.dbus.DBusInterface;
 
-import iot.agile.object.DeviceDefinition;
-import iot.agile.object.DeviceOverview;
+import org.eclipse.agail.object.DeviceDefinition;
+import org.eclipse.agail.object.DeviceOverview;
 
  /**
  * AGILE Device Manager Interface
@@ -42,7 +42,7 @@ import iot.agile.object.DeviceOverview;
  */
 public interface DeviceManager extends DBusInterface {
   
-  static String AGILE_INTERFACE = "iot.agile.DeviceManager";
+  static String AGILE_INTERFACE = "org.eclipse.agail.DeviceManager";
   
   /**
    * Return all registered devices

@@ -8,7 +8,7 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-iot.agile.Apps:
+org.eclipse.agail.Apps:
   group: Apps
   description: |
     Apps API enable the management of AGILE apps and components

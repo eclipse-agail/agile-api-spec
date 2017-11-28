@@ -8,7 +8,7 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-iot.agile.Device:
+org.eclipse.agail.Device:
 
   description: |
     The Device API abstracts operations over the real device.
@@ -16,7 +16,7 @@ iot.agile.Device:
 
   group: Device
   dbus:
-    name: /iot/agile/Device/Example
+    name: /org/eclipse/agail/Device/Example
 
   http:
     /device/{deviceId}/status:
@@ -348,7 +348,7 @@ iot.agile.Device:
 
   Protocol:
     description: Device-specific communication Protocol instance. Available to access protocol specific methods and properties
-    reference: iot.agile.Protocol
+    reference: org.eclipse.agail.Protocol
 
   Read:
     description: Read data from the component
@@ -363,7 +363,7 @@ iot.agile.Device:
     return:
       type: Array
       fields: RecordObject
-      reference: iot.agile.RecordObject
+      reference: org.eclipse.agail.RecordObject
 
   LastUpdate:
     description: Last update from the component
@@ -378,7 +378,7 @@ iot.agile.Device:
     return:
       type: Array
       fields: RecordObject
-      reference: iot.agile.RecordObject
+      reference: org.eclipse.agail.RecordObject
 
   Execute:
     description: |

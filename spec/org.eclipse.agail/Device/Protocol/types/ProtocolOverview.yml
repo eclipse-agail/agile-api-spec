@@ -25,7 +25,7 @@ ProtocolOverview:
       type: String
       required: false
       description: The DBus interface reference
-      example: iot.agile.protocol.BLE
+      example: org.eclipse.agail.protocol.BLE
     status:
       type: ProtocolStatus
       required: false

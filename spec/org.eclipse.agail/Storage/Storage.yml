@@ -8,7 +8,7 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-iot.agile.Storage:
+org.eclipse.agail.Storage:
   description: |
     The Storage component offer an abstraction for Devices to store and fetch data
     in a generic way.
@@ -23,7 +23,7 @@ iot.agile.Storage:
   Drivers:
     description: List the enabled drivers in use
     type: Array
-    reference: iot.agile.Storage.Driver
+    reference: org.eclipse.agail.Storage.Driver
     access: [r, s]
 
 
@@ -69,4 +69,4 @@ iot.agile.Storage:
       fields: RecordObject
 
   #Batch(str op, ..args)
-  #Connections array[iot.agile.Storage.Driver]
+  #Connections array[org.eclipse.agail.Storage.Driver]

@@ -10,11 +10,11 @@
 -->
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-<node name="/iot/agile/ProtocolManager">
+<node name="/org/eclipse/agail/ProtocolManager">
 
-  <interface name="iot.agile.ProtocolManager">
+  <interface name="org.eclipse.agail.ProtocolManager">
     <!--
-    @see iot.agile.ProtocolManager.StartDiscovery
+    @see org.eclipse.agail.ProtocolManager.StartDiscovery
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_StartDiscovery
   -->
   <method name="StartDiscovery">
@@ -24,7 +24,7 @@
   </method>
 
   <!--
-    @see iot.agile.ProtocolManager.StopDiscovery
+    @see org.eclipse.agail.ProtocolManager.StopDiscovery
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_StopDiscovery
   -->
   <method name="StopDiscovery">
@@ -33,7 +33,7 @@
   </method>
 
   <!--
-    @see iot.agile.ProtocolManager.Add
+    @see org.eclipse.agail.ProtocolManager.Add
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Add
   -->
   <method name="Add">
@@ -43,7 +43,7 @@
   </method>
 
   <!--
-    @see iot.agile.ProtocolManager.Remove
+    @see org.eclipse.agail.ProtocolManager.Remove
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Remove
   -->
   <method name="Remove">
@@ -52,7 +52,7 @@
   
   </method>
   <!--
-    @see iot.agile.ProtocolManager.Devices
+    @see org.eclipse.agail.ProtocolManager.Devices
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Devices
   -->
   <property
@@ -67,7 +67,7 @@
 </signal>
 
   <!--
-    @see iot.agile.ProtocolManager.DiscoveryStatus
+    @see org.eclipse.agail.ProtocolManager.DiscoveryStatus
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_DiscoveryStatus
   -->
   <property
@@ -82,7 +82,7 @@
 </signal>
 
   <!--
-    @see iot.agile.ProtocolManager.Protocols
+    @see org.eclipse.agail.ProtocolManager.Protocols
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Protocols
   -->
   <property

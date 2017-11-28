@@ -8,7 +8,7 @@
  * Contributors:
  *     Create-Net / FBK - initial API and implementation
  ******************************************************************************/
-package iot.agile.object;
+package org.eclipse.agail.object;
 
 import java.util.List;
 

@@ -10,11 +10,11 @@
 -->
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-<node name="/iot/agile/Device/Example">
+<node name="/org/eclipse/agail/Device/Example">
 
-  <interface name="iot.agile.Device">
+  <interface name="org.eclipse.agail.Device">
     <!--
-    @see iot.agile.Device.Read
+    @see org.eclipse.agail.Device.Read
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Read
   -->
   <method name="Read">
@@ -25,7 +25,7 @@
   </method>
 
   <!--
-    @see iot.agile.Device.ReadAll
+    @see org.eclipse.agail.Device.ReadAll
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_ReadAll
   -->
   <method name="ReadAll">
@@ -35,7 +35,7 @@
   </method>
 
   <!--
-    @see iot.agile.Device.LastUpdate
+    @see org.eclipse.agail.Device.LastUpdate
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_LastUpdate
   -->
   <method name="LastUpdate">
@@ -46,7 +46,7 @@
   </method>
 
   <!--
-    @see iot.agile.Device.LastUpdateAll
+    @see org.eclipse.agail.Device.LastUpdateAll
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_LastUpdateAll
   -->
   <method name="LastUpdateAll">
@@ -56,7 +56,7 @@
   </method>
 
   <!--
-    @see iot.agile.Device.Execute
+    @see org.eclipse.agail.Device.Execute
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Execute
   -->
   <method name="Execute">
@@ -67,7 +67,7 @@
   </method>
 
   <!--
-    @see iot.agile.Device.Connect
+    @see org.eclipse.agail.Device.Connect
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Connect
   -->
   <method name="Connect">
@@ -76,7 +76,7 @@
   </method>
 
   <!--
-    @see iot.agile.Device.Disconnect
+    @see org.eclipse.agail.Device.Disconnect
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Disconnect
   -->
   <method name="Disconnect">
@@ -85,7 +85,7 @@
   </method>
 
   <!--
-    @see iot.agile.Device.Write
+    @see org.eclipse.agail.Device.Write
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Write
   -->
   <method name="Write">
@@ -96,7 +96,7 @@
   </method>
 
   <!--
-    @see iot.agile.Device.Subscribe
+    @see org.eclipse.agail.Device.Subscribe
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Subscribe
   -->
   <method name="Subscribe">
@@ -106,7 +106,7 @@
   </method>
 
   <!--
-    @see iot.agile.Device.Unsubscribe
+    @see org.eclipse.agail.Device.Unsubscribe
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Unsubscribe
   -->
   <method name="Unsubscribe">
@@ -115,7 +115,7 @@
   
   </method>
   <!--
-    @see iot.agile.Device.Id
+    @see org.eclipse.agail.Device.Id
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Id
   -->
   <property
@@ -125,7 +125,7 @@
     />
 
   <!--
-    @see iot.agile.Device.Name
+    @see org.eclipse.agail.Device.Name
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Name
   -->
   <property
@@ -135,7 +135,7 @@
     />
 
   <!--
-    @see iot.agile.Device.Status
+    @see org.eclipse.agail.Device.Status
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Status
   -->
   <property
@@ -145,7 +145,7 @@
     />
 
   <!--
-    @see iot.agile.Device.Configuration
+    @see org.eclipse.agail.Device.Configuration
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Configuration
   -->
   <property
@@ -155,7 +155,7 @@
     />
 
   <!--
-    @see iot.agile.Device.Profile
+    @see org.eclipse.agail.Device.Profile
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Profile
   -->
   <property
@@ -165,7 +165,7 @@
     />
 
   <!--
-    @see iot.agile.Device.Data
+    @see org.eclipse.agail.Device.Data
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Data
   -->
   <property
@@ -180,7 +180,7 @@
 </signal>
 
   <!--
-    @see iot.agile.Device.Protocol
+    @see org.eclipse.agail.Device.Protocol
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Device_Protocol
   -->
   <property

@@ -8,7 +8,7 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-iot.agile.Network:
+org.eclipse.agail.Network:
 
   Status:
     type: Boolean

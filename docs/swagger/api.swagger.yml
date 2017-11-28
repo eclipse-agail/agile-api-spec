@@ -316,8 +316,8 @@ paths:
                 address: 'A1:B2:C3:D4:E5:F6'
                 name: MyFirstSensorTag
                 description: ""
-                protocol: iot.agile.protocol.ble
-                path: /iot/agile/Device/bleA1B2C3D4E5F6
+                protocol: org.eclipse.agail.protocol.ble
+                path: /org/eclipse/agail/Device/bleA1B2C3D4E5F6
                 streams:
                   -
                     id: temperature
@@ -333,8 +333,8 @@ paths:
                 address: 'A6:B5:C4:D3:E2:F1'
                 name: MySecondSensorTag
                 description: ""
-                protocol: iot.agile.protocol.ble
-                path: /iot/agile/Device/bleA6B5C4D3E2F1
+                protocol: org.eclipse.agail.protocol.ble
+                path: /org/eclipse/agail/Device/bleA6B5C4D3E2F1
                 streams:
                   -
                     id: temperature
@@ -365,7 +365,7 @@ paths:
               overview:
                 id: 'A0:E6:F8:B6:F2:00'
                 name: 'CC2650 SensorTag'
-                protocol: iot.agile.protocol.BLE
+                protocol: org.eclipse.agail.protocol.BLE
                 status: AVAILABLE
               type: 'TI SensorTag'
       responses:
@@ -379,8 +379,8 @@ paths:
               address: 'A1:B2:C3:D4:E5:F6'
               name: MyFirstSensorTag
               description: ""
-              protocol: iot.agile.protocol.ble
-              path: /iot/agile/Device/bleA1B2C3D4E5F6
+              protocol: org.eclipse.agail.protocol.ble
+              path: /org/eclipse/agail/Device/bleA1B2C3D4E5F6
               streams:
                 -
                   id: temperature
@@ -409,7 +409,7 @@ paths:
             application/json:
               id: 'A0:E6:F8:B6:F2:00'
               name: 'CC2650 SensorTag'
-              protocol: iot.agile.protocol.BLE
+              protocol: org.eclipse.agail.protocol.BLE
               status: AVAILABLE
       responses:
         '200':
@@ -442,8 +442,8 @@ paths:
               address: 'A1:B2:C3:D4:E5:F6'
               name: SensorTag
               description: ""
-              protocol: iot.agile.protocol.ble
-              path: /iot/agile/Device/bleA1B2C3D4E5F6
+              protocol: org.eclipse.agail.protocol.ble
+              path: /org/eclipse/agail/Device/bleA1B2C3D4E5F6
               streams:
                 -
                   id: temperature
@@ -474,8 +474,8 @@ paths:
               address: 'A1:B2:C3:D4:E5:F6'
               name: SensorTag
               description: ""
-              protocol: iot.agile.protocol.ble
-              path: /iot/agile/Device/bleA1B2C3D4E5F6
+              protocol: org.eclipse.agail.protocol.ble
+              path: /org/eclipse/agail/Device/bleA1B2C3D4E5F6
               streams:
                 -
                   id: temperature
@@ -627,12 +627,12 @@ paths:
               -
                 id: BLE
                 name: 'Bluetooth LE'
-                interface: iot.agile.protocol.BLE
+                interface: org.eclipse.agail.protocol.BLE
                 status: AVAILABLE
               -
                 id: ZigBee
                 name: 'ZigBee communication protocol'
-                interface: iot.agile.protocol.ZigBee
+                interface: org.eclipse.agail.protocol.ZigBee
                 status: AVAILABLE
         '204':
           description: 'No protocols registered.'
@@ -681,12 +681,12 @@ paths:
               -
                 name: SensorTag
                 id: 'AA:BB:CC:DD'
-                protocol: iot.agile.protocol.BLE
+                protocol: org.eclipse.agail.protocol.BLE
                 status: AVAILABLE
               -
                 name: LightDimmer
                 id: 'CC:DD:AA:BB'
-                protocol: iot.agile.protocol.Zwave
+                protocol: org.eclipse.agail.protocol.Zwave
                 status: AVAILABLE
   /protocols/discovery:
     get:

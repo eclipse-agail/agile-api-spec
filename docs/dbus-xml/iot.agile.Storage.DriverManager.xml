@@ -10,11 +10,11 @@
 -->
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-<node name="/iot/agile/Storage/DriverManager">
+<node name="/org/eclipse/agail/Storage/DriverManager">
 
-  <interface name="iot.agile.Storage.DriverManager">
+  <interface name="org.eclipse.agail.Storage.DriverManager">
     <!--
-    @see iot.agile.Storage.DriverManager.Add
+    @see org.eclipse.agail.Storage.DriverManager.Add
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Add
   -->
   <method name="Add">
@@ -25,7 +25,7 @@
   </method>
 
   <!--
-    @see iot.agile.Storage.DriverManager.Remove
+    @see org.eclipse.agail.Storage.DriverManager.Remove
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Remove
   -->
   <method name="Remove">
@@ -35,7 +35,7 @@
   </method>
 
   <!--
-    @see iot.agile.Storage.DriverManager.Enable
+    @see org.eclipse.agail.Storage.DriverManager.Enable
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Enable
   -->
   <method name="Enable">
@@ -45,7 +45,7 @@
   </method>
 
   <!--
-    @see iot.agile.Storage.DriverManager.Disable
+    @see org.eclipse.agail.Storage.DriverManager.Disable
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Disable
   -->
   <method name="Disable">
@@ -55,7 +55,7 @@
   </method>
 
   <!--
-    @see iot.agile.Storage.DriverManager.Status
+    @see org.eclipse.agail.Storage.DriverManager.Status
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Status
   -->
   <method name="Status">
@@ -65,7 +65,7 @@
   
   </method>
   <!--
-    @see iot.agile.Storage.DriverManager.Enabled
+    @see org.eclipse.agail.Storage.DriverManager.Enabled
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_Enabled
   -->
   <property
@@ -75,7 +75,7 @@
     />
 
   <!--
-    @see iot.agile.Storage.DriverManager.List
+    @see org.eclipse.agail.Storage.DriverManager.List
     @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_DriverManager_List
   -->
   <property

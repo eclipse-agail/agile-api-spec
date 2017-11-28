@@ -23,7 +23,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package iot.agile;
+package org.eclipse.agail;
 
 import java.util.List;
 
@@ -31,16 +31,16 @@ import org.freedesktop.dbus.DBusInterface;
 import org.freedesktop.dbus.DBusSignal;
 import org.freedesktop.dbus.exceptions.DBusException;
 
-import iot.agile.object.DeviceOverview;
-import iot.agile.object.DiscoveryStatus;
-import iot.agile.object.ProtocolOverview;
+import org.eclipse.agail.object.DeviceOverview;
+import org.eclipse.agail.object.DiscoveryStatus;
+import org.eclipse.agail.object.ProtocolOverview;
 
 /**
  * @author dagi AGILE Protocol Manager Interface
  */
 public interface ProtocolManager extends DBusInterface {
 
-  public static String AGILE_INTERFACE = "iot.agile.ProtocolManager";
+  public static String AGILE_INTERFACE = "org.eclipse.agail.ProtocolManager";
 
   /**
    *

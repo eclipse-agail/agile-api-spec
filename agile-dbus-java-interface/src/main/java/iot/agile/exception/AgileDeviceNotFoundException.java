@@ -8,7 +8,7 @@
  * Contributors:
  *     Create-Net / FBK - initial API and implementation
  ******************************************************************************/
-package iot.agile.exception;
+package org.eclipse.agail.exception;
 
 import org.freedesktop.dbus.exceptions.DBusExecutionException;
 /**

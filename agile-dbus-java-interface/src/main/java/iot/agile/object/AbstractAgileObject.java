@@ -13,7 +13,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package iot.agile.object;
+package org.eclipse.agail.object;
 
 import org.freedesktop.dbus.DBusConnection;
 import org.freedesktop.dbus.DBusInterface;

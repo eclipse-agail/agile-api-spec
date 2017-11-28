@@ -8,13 +8,13 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-iot.agile.ProtocolManager:
+org.eclipse.agail.ProtocolManager:
 
   description: |
     The ProtocolManager list the managed protocols in the gateway. From this
     interface is possible to add and remove protocols and start/stop multiprotocol discovery.
     The discovery process will list all found devices under the `Devices` property.
-    Those discovered devices may be added to the [DeviceManager](#iot.agile.DeviceManager) to be
+    Those discovered devices may be added to the [DeviceManager](#org.eclipse.agail.DeviceManager) to be
     configured and made operational.
   group: Protocol
 
@@ -34,11 +34,11 @@ iot.agile.ProtocolManager:
               application/json:
                 - id: BLE
                   name: Bluetooth LE
-                  interface: iot.agile.protocol.BLE
+                  interface: org.eclipse.agail.protocol.BLE
                   status: AVAILABLE
                 - id: ZigBee
                   name: ZigBee communication protocol
-                  interface: iot.agile.protocol.ZigBee
+                  interface: org.eclipse.agail.protocol.ZigBee
                   status: AVAILABLE
           204:
             description: No protocols registered.
@@ -108,11 +108,11 @@ iot.agile.ProtocolManager:
               application/json:
                 - name: SensorTag
                   id: AA:BB:CC:DD
-                  protocol: iot.agile.protocol.BLE
+                  protocol: org.eclipse.agail.protocol.BLE
                   status: AVAILABLE
                 - name: LightDimmer
                   id: CC:DD:AA:BB
-                  protocol: iot.agile.protocol.Zwave
+                  protocol: org.eclipse.agail.protocol.Zwave
                   status: AVAILABLE
 
     /protocols/discovery:
@@ -205,7 +205,7 @@ iot.agile.ProtocolManager:
     args:
       protocol:
         description: The DBus object interface reference of the Protocol
-        type: iot.agile.Protocol
+        type: org.eclipse.agail.Protocol
     return: void
 
   Remove:
@@ -213,5 +213,5 @@ iot.agile.ProtocolManager:
     args:
       protocol:
         description: The DBus object interface reference of the Protocol
-        type: iot.agile.Protocol
+        type: org.eclipse.agail.Protocol
     return: void

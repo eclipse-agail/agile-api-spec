@@ -8,7 +8,7 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-iot.agile.DeviceManager:
+org.eclipse.agail.DeviceManager:
 
   description: |
     The DeviceManager list the registered devices available from the gateway available protocols.
@@ -36,8 +36,8 @@ iot.agile.DeviceManager:
                   address: "A1:B2:C3:D4:E5:F6"
                   name: "MyFirstSensorTag"
                   description: ""
-                  protocol : "iot.agile.protocol.ble"
-                  path: "/iot/agile/Device/bleA1B2C3D4E5F6"
+                  protocol : "org.eclipse.agail.protocol.ble"
+                  path: "/org/eclipse/agail/Device/bleA1B2C3D4E5F6"
                   streams:
                     - id: temperature
                       unit: celsius
@@ -49,8 +49,8 @@ iot.agile.DeviceManager:
                   address: "A6:B5:C4:D3:E2:F1"
                   name: "MySecondSensorTag"
                   description: ""
-                  protocol : "iot.agile.protocol.ble"
-                  path: "/iot/agile/Device/bleA6B5C4D3E2F1"
+                  protocol : "org.eclipse.agail.protocol.ble"
+                  path: "/org/eclipse/agail/Device/bleA6B5C4D3E2F1"
                   streams:
                     - id: temperature
                       unit: celsius
@@ -78,7 +78,7 @@ iot.agile.DeviceManager:
                   overview:
                     id: "A0:E6:F8:B6:F2:00"
                     name: "CC2650 SensorTag"
-                    protocol: "iot.agile.protocol.BLE"
+                    protocol: "org.eclipse.agail.protocol.BLE"
                     status: "AVAILABLE"
                   type: "TI SensorTag"
         responses:
@@ -92,8 +92,8 @@ iot.agile.DeviceManager:
                 address: "A1:B2:C3:D4:E5:F6"
                 name: "MyFirstSensorTag"
                 description: ""
-                protocol : "iot.agile.protocol.ble"
-                path: "/iot/agile/Device/bleA1B2C3D4E5F6"
+                protocol : "org.eclipse.agail.protocol.ble"
+                path: "/org/eclipse/agail/Device/bleA1B2C3D4E5F6"
                 streams:
                   - id: temperature
                     unit: celsius
@@ -120,7 +120,7 @@ iot.agile.DeviceManager:
               application/json:
                 id: "A0:E6:F8:B6:F2:00"
                 name: "CC2650 SensorTag"
-                protocol: "iot.agile.protocol.BLE"
+                protocol: "org.eclipse.agail.protocol.BLE"
                 status: "AVAILABLE"
         responses:
           200:
@@ -155,8 +155,8 @@ iot.agile.DeviceManager:
                   address: "A1:B2:C3:D4:E5:F6"
                   name: "SensorTag"
                   description: ""
-                  protocol : "iot.agile.protocol.ble"
-                  path: "/iot/agile/Device/bleA1B2C3D4E5F6"
+                  protocol : "org.eclipse.agail.protocol.ble"
+                  path: "/org/eclipse/agail/Device/bleA1B2C3D4E5F6"
                   streams:
                     - id: temperature
                       unit: celsius
@@ -184,8 +184,8 @@ iot.agile.DeviceManager:
                   address: "A1:B2:C3:D4:E5:F6"
                   name: "SensorTag"
                   description: ""
-                  protocol : "iot.agile.protocol.ble"
-                  path: "/iot/agile/Device/bleA1B2C3D4E5F6"
+                  protocol : "org.eclipse.agail.protocol.ble"
+                  path: "/org/eclipse/agail/Device/bleA1B2C3D4E5F6"
                   streams:
                     - id: temperature
                       unit: celsius
@@ -242,7 +242,7 @@ iot.agile.DeviceManager:
     return:
       description: A list with all matching registered devices results, eventually sorted and sliced
       type: Array
-      reference: iot.agile.Device
+      reference: org.eclipse.agail.Device
 
   Create:
     description: Create (register) a new device in the manager

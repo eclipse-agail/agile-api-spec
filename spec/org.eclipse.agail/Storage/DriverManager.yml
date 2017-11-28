@@ -8,7 +8,7 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-iot.agile.Storage.DriverManager:
+org.eclipse.agail.Storage.DriverManager:
 
   description: |
     The DriverManager component is in charge for handling the status
@@ -21,8 +21,8 @@ iot.agile.Storage.DriverManager:
     args:
       driver:
         description: The driver instance to be added
-        type: iot.agile.Storage.Driver
-        example: iot/agile/Storage/Driver/Influx0
+        type: org.eclipse.agail.Storage.Driver
+        example: org/eclipse/agail/Storage/Driver/Influx0
       enable:
         description: |
           Specify if the Driver should be enabled and
@@ -37,32 +37,32 @@ iot.agile.Storage.DriverManager:
     args:
       driver:
         description: The driver instance
-        type: iot.agile.Storage.Driver
-        example: iot/agile/Storage/Driver/Sqlite0
+        type: org.eclipse.agail.Storage.Driver
+        example: org/eclipse/agail/Storage/Driver/Sqlite0
     return: void
   Enable:
     description: Enable a driver reference instance
     args:
       driver:
         description: The driver instance
-        type: iot.agile.Storage.Driver
-        example: iot/agile/Storage/Driver/Sqlite0
+        type: org.eclipse.agail.Storage.Driver
+        example: org/eclipse/agail/Storage/Driver/Sqlite0
     return: void
   Disable:
     description: Disable a driver reference instance
     args:
       driver:
         description: The driver instance
-        type: iot.agile.Storage.Driver
-        example: iot/agile/Storage/Driver/Sqlite0
+        type: org.eclipse.agail.Storage.Driver
+        example: org/eclipse/agail/Storage/Driver/Sqlite0
     return: void
   Status:
     description: Query a Driver to report the current status.
     args:
       driver:
         description: The driver instance
-        type: iot.agile.Storage.Driver
-        example: iot/agile/Storage/Driver/Sqlite0
+        type: org.eclipse.agail.Storage.Driver
+        example: org/eclipse/agail/Storage/Driver/Sqlite0
     return:
       type: Object
       fields:
@@ -75,8 +75,8 @@ iot.agile.Storage.DriverManager:
   Enabled:
     description: List of enabled Drivers.
     type: Array
-    reference: iot.agile.Storage.Driver
+    reference: org.eclipse.agail.Storage.Driver
   List:
     description: List of all available Drivers.
     type: Array
-    reference: iot.agile.Storage.Driver
+    reference: org.eclipse.agail.Storage.Driver

@@ -23,7 +23,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package iot.agile;
+package org.eclipse.agail;
 
 import java.util.List;
 import java.util.Map;
@@ -33,10 +33,10 @@ import org.freedesktop.dbus.DBusSignal;
 import org.freedesktop.dbus.Variant;
 import org.freedesktop.dbus.exceptions.DBusException;
 
-import iot.agile.object.DeviceDefinition;
-import iot.agile.object.DeviceComponent;
-import iot.agile.object.RecordObject;
-import iot.agile.object.StatusType;
+import org.eclipse.agail.object.DeviceDefinition;
+import org.eclipse.agail.object.DeviceComponent;
+import org.eclipse.agail.object.RecordObject;
+import org.eclipse.agail.object.StatusType;
 
 /**
  * @author dagi
@@ -46,7 +46,7 @@ import iot.agile.object.StatusType;
  */
 public interface Device extends DBusInterface {
 
-  static String AGILE_INTERFACE = "iot.agile.Device";
+  static String AGILE_INTERFACE = "org.eclipse.agail.Device";
 
   /**
    *

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package iot.agile;
+package org.eclipse.agail;
 
-import iot.agile.object.DeviceOverview;
+import org.eclipse.agail.object.DeviceOverview;
 import java.util.List;
 import org.freedesktop.dbus.DBusInterface;
 
@@ -15,7 +15,7 @@ import org.freedesktop.dbus.DBusInterface;
  */
 public interface DeviceFactory extends DBusInterface {
     
-    static String AGILE_INTERFACE = "iot.agile.DeviceFactory";
+    static String AGILE_INTERFACE = "org.eclipse.agail.DeviceFactory";
     /*
     *get a particular device based on the type of device provided as input
     */
