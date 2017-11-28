@@ -5,7 +5,7 @@
   <interface name="org.eclipse.agail.DeviceManager">
     <!--
     @see org.eclipse.agail.DeviceManager.MatchingDeviceTypes
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_MatchingDeviceTypes
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_MatchingDeviceTypes
   -->
   <method name="MatchingDeviceTypes">
   
@@ -16,7 +16,7 @@
 
   <!--
     @see org.eclipse.agail.DeviceManager.Find
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Find
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Find
   -->
   <method name="Find">
   
@@ -27,7 +27,7 @@
 
   <!--
     @see org.eclipse.agail.DeviceManager.Create
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Create
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Create
   -->
   <method name="Create">
   
@@ -38,7 +38,7 @@
 
   <!--
     @see org.eclipse.agail.DeviceManager.Read
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Read
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Read
   -->
   <method name="Read">
   
@@ -49,7 +49,7 @@
 
   <!--
     @see org.eclipse.agail.DeviceManager.Update
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Update
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Update
   -->
   <method name="Update">
   
@@ -60,7 +60,7 @@
 
   <!--
     @see org.eclipse.agail.DeviceManager.Delete
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Delete
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Delete
   -->
   <method name="Delete">
   
@@ -70,7 +70,7 @@
 
   <!--
     @see org.eclipse.agail.DeviceManager.Batch
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Batch
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Batch
   -->
   <method name="Batch">
   
@@ -80,7 +80,7 @@
   </method>
   <!--
     @see org.eclipse.agail.DeviceManager.Devices
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_DeviceManager_Devices
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Devices
   -->
   <property
     name="Devices"

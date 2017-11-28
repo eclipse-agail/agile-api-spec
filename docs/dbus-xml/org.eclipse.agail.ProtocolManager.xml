@@ -1,13 +1,3 @@
-<!--
-  Copyright (C) 2017 Create-Net / FBK.
-  All rights reserved. This program and the accompanying materials
-  are made available under the terms of the Eclipse Public License 2.0
-  which accompanies this distribution, and is available at
-  https://www.eclipse.org/legal/epl-2.0/
-  
-  Contributors:
-      Create-Net / FBK - initial API and implementation
--->
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node name="/org/eclipse/agail/ProtocolManager">
@@ -15,7 +5,7 @@
   <interface name="org.eclipse.agail.ProtocolManager">
     <!--
     @see org.eclipse.agail.ProtocolManager.StartDiscovery
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_StartDiscovery
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_StartDiscovery
   -->
   <method name="StartDiscovery">
   
@@ -25,7 +15,7 @@
 
   <!--
     @see org.eclipse.agail.ProtocolManager.StopDiscovery
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_StopDiscovery
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_StopDiscovery
   -->
   <method name="StopDiscovery">
   
@@ -34,7 +24,7 @@
 
   <!--
     @see org.eclipse.agail.ProtocolManager.Add
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Add
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_Add
   -->
   <method name="Add">
   
@@ -44,7 +34,7 @@
 
   <!--
     @see org.eclipse.agail.ProtocolManager.Remove
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Remove
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_Remove
   -->
   <method name="Remove">
   
@@ -53,7 +43,7 @@
   </method>
   <!--
     @see org.eclipse.agail.ProtocolManager.Devices
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Devices
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_Devices
   -->
   <property
     name="Devices"
@@ -68,7 +58,7 @@
 
   <!--
     @see org.eclipse.agail.ProtocolManager.DiscoveryStatus
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_DiscoveryStatus
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_DiscoveryStatus
   -->
   <property
     name="DiscoveryStatus"
@@ -83,7 +73,7 @@
 
   <!--
     @see org.eclipse.agail.ProtocolManager.Protocols
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_ProtocolManager_Protocols
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_Protocols
   -->
   <property
     name="Protocols"

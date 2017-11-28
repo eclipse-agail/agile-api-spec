@@ -1,13 +1,3 @@
-<!--
-  Copyright (C) 2017 Create-Net / FBK.
-  All rights reserved. This program and the accompanying materials
-  are made available under the terms of the Eclipse Public License 2.0
-  which accompanies this distribution, and is available at
-  https://www.eclipse.org/legal/epl-2.0/
-  
-  Contributors:
-      Create-Net / FBK - initial API and implementation
--->
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node name="/org/eclipse/agail/Storage/Driver">
@@ -15,7 +5,7 @@
   <interface name="org.eclipse.agail.Storage.Driver">
     <!--
     @see org.eclipse.agail.Storage.Driver.Create
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Driver_Create
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Create
   -->
   <method name="Create">
   
@@ -26,7 +16,7 @@
 
   <!--
     @see org.eclipse.agail.Storage.Driver.Read
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Driver_Read
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Read
   -->
   <method name="Read">
   
@@ -37,7 +27,7 @@
 
   <!--
     @see org.eclipse.agail.Storage.Driver.Update
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Driver_Update
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Update
   -->
   <method name="Update">
   
@@ -48,7 +38,7 @@
 
   <!--
     @see org.eclipse.agail.Storage.Driver.Delete
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Driver_Delete
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Delete
   -->
   <method name="Delete">
   
@@ -58,7 +48,7 @@
 
   <!--
     @see org.eclipse.agail.Storage.Driver.Find
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Driver_Find
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Find
   -->
   <method name="Find">
   
@@ -68,7 +58,7 @@
   </method>
   <!--
     @see org.eclipse.agail.Storage.Driver.Name
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Driver_Name
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Name
   -->
   <property
     name="Name"
@@ -78,7 +68,7 @@
 
   <!--
     @see org.eclipse.agail.Storage.Driver.Enabled
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Driver_Enabled
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Enabled
   -->
   <property
     name="Enabled"
@@ -88,7 +78,7 @@
 
   <!--
     @see org.eclipse.agail.Storage.Driver.Status
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Driver_Status
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Status
   -->
   <property
     name="Status"
@@ -98,7 +88,7 @@
 
   <!--
     @see org.eclipse.agail.Storage.Driver.Error
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Driver_Error
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Error
   -->
   <property
     name="Error"
@@ -113,7 +103,7 @@
 
   <!--
     @see org.eclipse.agail.Storage.Driver.Params
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Driver_Params
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Params
   -->
   <property
     name="Params"
@@ -123,7 +113,7 @@
 
   <!--
     @see org.eclipse.agail.Storage.Driver.Logs
-    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#iot_agile_Storage_Driver_Logs
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Logs
   -->
   <property
     name="Logs"
