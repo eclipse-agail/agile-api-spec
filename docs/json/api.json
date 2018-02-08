@@ -309,7 +309,7 @@
             }
           },
           "get": {
-            "operationId": "Read",
+            "operationId": "ReadAll",
             "tags": {
               "0": "Device"
             },
@@ -543,7 +543,7 @@
             }
           },
           "get": {
-            "operationId": "Data",
+            "operationId": "LastUpdate",
             "tags": {
               "0": "Device"
             },
@@ -585,7 +585,7 @@
             }
           },
           "get": {
-            "operationId": "Data",
+            "operationId": "LastUpdateAll",
             "tags": {
               "0": "Device"
             },

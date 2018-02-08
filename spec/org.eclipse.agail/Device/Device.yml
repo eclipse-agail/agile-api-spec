@@ -52,7 +52,7 @@ org.eclipse.agail.Device:
           required: true
           type: string
       get:
-        operationId: Read
+        operationId: ReadAll
         tags:
           - Device
         description: Read values of all components from the device
@@ -230,7 +230,7 @@ org.eclipse.agail.Device:
           required: true
           type: string
       get:
-        operationId: Data
+        operationId: LastUpdate
         tags:
           - Device
         description: Get the last record fetched from the component
@@ -261,7 +261,7 @@ org.eclipse.agail.Device:
           required: true
           type: string
       get:
-        operationId: Data
+        operationId: LastUpdateAll
         tags:
           - Device
         description: Get the last record fetched from the device

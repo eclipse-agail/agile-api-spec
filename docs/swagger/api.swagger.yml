@@ -81,7 +81,7 @@ paths:
         required: true
         type: string
     get:
-      operationId: Read
+      operationId: ReadAll
       tags:
         - Device
       description: 'Read values of all components from the device'
@@ -246,7 +246,7 @@ paths:
         required: true
         type: string
     get:
-      operationId: Data
+      operationId: LastUpdate
       tags:
         - Device
       description: 'Get the last record fetched from the component'
@@ -276,7 +276,7 @@ paths:
         required: true
         type: string
     get:
-      operationId: Data
+      operationId: LastUpdateAll
       tags:
         - Device
       description: 'Get the last record fetched from the device'
