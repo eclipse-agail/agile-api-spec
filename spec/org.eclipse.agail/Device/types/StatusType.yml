@@ -8,6 +8,9 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-KeyValue:
-  description: A list of key/value pairs
-  type: Object*
+StatusType:
+  group: Device
+  type: Enum
+  fields:
+    - CONNECTED
+    - DISCONNECTED

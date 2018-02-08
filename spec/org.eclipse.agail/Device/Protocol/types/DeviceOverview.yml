@@ -8,6 +8,23 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-KeyValue:
-  description: A list of key/value pairs
-  type: Object*
+DeviceOverview:
+  description: An overview of a device a protocol knows about
+  type: Object
+  fields:
+    name:
+      description: Friendly name of the device
+      type: String
+    protocol:
+      description: Protocol reference for this device
+      type: String
+    id:
+      description: Protocol level id used to identify and access the device
+      type: String
+    status:
+      type: Enum
+      fields:
+        - CONNECTED
+        - DISCONNECTED
+        - AVAILABLE
+        - UNAVAILABLE

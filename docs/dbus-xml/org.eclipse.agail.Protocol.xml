@@ -1,0 +1,152 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/org/eclipse/agail/Protocol">
+
+  <interface name="org.eclipse.agail.Protocol">
+    <!--
+    @see org.eclipse.agail.Protocol.Connect
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_Connect
+  -->
+  <method name="Connect">
+  
+      <arg name="deviceId" type="s" direction="in"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Protocol.Disconnect
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_Disconnect
+  -->
+  <method name="Disconnect">
+  
+      <arg name="deviceId" type="s" direction="in"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Protocol.StartDiscovery
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_StartDiscovery
+  -->
+  <method name="StartDiscovery">
+  
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Protocol.StopDiscovery
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_StopDiscovery
+  -->
+  <method name="StopDiscovery">
+  
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Protocol.Write
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_Write
+  -->
+  <method name="Write">
+  
+      <arg name="deviceId" type="s" direction="in"/>
+      <arg name="arguments" type="v" direction="in"/>
+      <arg name="return" type="{ss}" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Protocol.Read
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_Read
+  -->
+  <method name="Read">
+  
+      <arg name="deviceId" type="s" direction="in"/>
+      <arg name="arguments" type="v" direction="in"/>
+      <arg name="return" type="{sssssd}" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Protocol.Subscribe
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_Subscribe
+  -->
+  <method name="Subscribe">
+  
+      <arg name="deviceId" type="s" direction="in"/>
+      <arg name="arguments" type="v" direction="in"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Protocol.Unsubscribe
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_Unsubscribe
+  -->
+  <method name="Unsubscribe">
+  
+      <arg name="deviceId" type="s" direction="in"/>
+      <arg name="arguments" type="v" direction="in"/>
+      <arg name="return" type="{sssssd}" direction="out"/>
+  
+  </method>
+  <!--
+    @see org.eclipse.agail.Protocol.Status
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_Status
+  -->
+  <property
+    name="Status"
+    type="(i)"
+    access="read"
+    />
+
+  <!--
+    @see org.eclipse.agail.Protocol.Driver
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_Driver
+  -->
+  <property
+    name="Driver"
+    type="s"
+    access="read"
+    />
+
+  <!--
+    @see org.eclipse.agail.Protocol.Name
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_Name
+  -->
+  <property
+    name="Name"
+    type="s"
+    access="read"
+    />
+
+  <!--
+    @see org.eclipse.agail.Protocol.Data
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_Data
+  -->
+  <property
+    name="Data"
+    type="{sssssd}"
+    access="read"
+    />
+<signal name="DataChanged">
+
+  <arg name="Data" type="{sssssd}" />
+
+</signal>
+
+  <!--
+    @see org.eclipse.agail.Protocol.Devices
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Protocol_Devices
+  -->
+  <property
+    name="Devices"
+    type="{sss(i)}"
+    access="read"
+    />
+<signal name="DevicesChanged">
+
+  <arg name="Devices" type="{sss(i)}" />
+
+</signal>
+
+  </interface>
+
+</node>

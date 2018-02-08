@@ -1,0 +1,98 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/org/eclipse/agail/DeviceManager">
+
+  <interface name="org.eclipse.agail.DeviceManager">
+    <!--
+    @see org.eclipse.agail.DeviceManager.MatchingDeviceTypes
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_MatchingDeviceTypes
+  -->
+  <method name="MatchingDeviceTypes">
+  
+      <arg name="overview" type="{sss(i)}" direction="in"/>
+      <arg name="return" type="(s)" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.DeviceManager.Find
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Find
+  -->
+  <method name="Find">
+  
+      <arg name="query" type="{vvdd}" direction="in"/>
+      <arg name="return" type="o" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.DeviceManager.Create
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Create
+  -->
+  <method name="Create">
+  
+      <arg name="device" type="{ssssss({ssv})}" direction="in"/>
+      <arg name="return" type="{ssssss({ssv})}" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.DeviceManager.Read
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Read
+  -->
+  <method name="Read">
+  
+      <arg name="Id" type="s" direction="in"/>
+      <arg name="return" type="{ssssss({ssv})}" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.DeviceManager.Update
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Update
+  -->
+  <method name="Update">
+  
+      <arg name="Id" type="s" direction="in"/>
+      <arg name="Definition" type="{ssssss({ssv})}" direction="in"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.DeviceManager.Delete
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Delete
+  -->
+  <method name="Delete">
+  
+      <arg name="Id" type="s" direction="in"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.DeviceManager.Batch
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Batch
+  -->
+  <method name="Batch">
+  
+      <arg name="operation" type="(i)" direction="in"/>
+      <arg name="arguments" type="v" direction="in"/>
+  
+  </method>
+  <!--
+    @see org.eclipse.agail.DeviceManager.Devices
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_DeviceManager_Devices
+  -->
+  <property
+    name="Devices"
+    type="{ssssss({ssv})}"
+    access="read"
+    />
+<signal name="DevicesChanged">
+
+  <arg name="Devices" type="{ssssss({ssv})}" />
+
+</signal>
+
+  </interface>
+
+</node>

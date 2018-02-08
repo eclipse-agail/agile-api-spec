@@ -8,6 +8,24 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-KeyValue:
-  description: A list of key/value pairs
-  type: Object*
+ProtocolOverview:
+  type: Object
+  fields:
+    name:
+      required: false
+      type: String
+      description: The protocol name
+      example: Bluetooth LE
+    id:
+      type: String
+      required: true
+      description: the internal code identifying the protocol
+      example: BLE
+    interface:
+      type: String
+      required: false
+      description: The DBus interface reference
+      example: org.eclipse.agail.protocol.BLE
+    status:
+      type: ProtocolStatus
+      required: false

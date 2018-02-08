@@ -8,6 +8,10 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-KeyValue:
-  description: A list of key/value pairs
-  type: Object*
+ProtocolMessage:
+  type: Object
+  fields:
+    data:
+      type: String
+    format:
+      type: String

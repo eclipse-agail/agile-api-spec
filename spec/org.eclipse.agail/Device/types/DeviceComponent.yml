@@ -8,6 +8,15 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-KeyValue:
-  description: A list of key/value pairs
-  type: Object*
+DeviceComponent:
+  description: A device component from which get a data stream, like a sensor
+  type: Object
+  fields:
+    id:
+      type: String
+    unit:
+      type: String
+      required: false
+    properties:
+      type: KeyValue
+      required: false

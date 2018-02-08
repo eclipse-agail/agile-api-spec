@@ -1,0 +1,82 @@
+#-------------------------------------------------------------------------------
+# Copyright (C) 2017 Create-Net / FBK.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License 2.0
+# which accompanies this distribution, and is available at
+# https://www.eclipse.org/legal/epl-2.0/
+# 
+# Contributors:
+#     Create-Net / FBK - initial API and implementation
+#-------------------------------------------------------------------------------
+org.eclipse.agail.Storage.DriverManager:
+
+  description: |
+    The DriverManager component is in charge for handling the status
+    of different Drivers available in the system.
+
+  group: Data storage
+
+  Add:
+    description: Add a driver reference instance
+    args:
+      driver:
+        description: The driver instance to be added
+        type: org.eclipse.agail.Storage.Driver
+        example: org/eclipse/agail/Storage/Driver/Influx0
+      enable:
+        description: |
+          Specify if the Driver should be enabled and
+          immediately available
+        type: Boolean
+        default: true
+    return: void
+  Remove:
+    description: |
+      Remove (and implicitly disable) a driver reference
+      instance
+    args:
+      driver:
+        description: The driver instance
+        type: org.eclipse.agail.Storage.Driver
+        example: org/eclipse/agail/Storage/Driver/Sqlite0
+    return: void
+  Enable:
+    description: Enable a driver reference instance
+    args:
+      driver:
+        description: The driver instance
+        type: org.eclipse.agail.Storage.Driver
+        example: org/eclipse/agail/Storage/Driver/Sqlite0
+    return: void
+  Disable:
+    description: Disable a driver reference instance
+    args:
+      driver:
+        description: The driver instance
+        type: org.eclipse.agail.Storage.Driver
+        example: org/eclipse/agail/Storage/Driver/Sqlite0
+    return: void
+  Status:
+    description: Query a Driver to report the current status.
+    args:
+      driver:
+        description: The driver instance
+        type: org.eclipse.agail.Storage.Driver
+        example: org/eclipse/agail/Storage/Driver/Sqlite0
+    return:
+      type: Object
+      fields:
+        enabled: Boolean
+        status: DriverStatus
+        logs:
+          description: A system path where to read the Driver logs
+          type: String
+          example: /var/log/agile-driver/storage.log
+  Enabled:
+    description: List of enabled Drivers.
+    type: Array
+    reference: org.eclipse.agail.Storage.Driver
+  List:
+    description: List of all available Drivers.
+    type: Array
+    reference: org.eclipse.agail.Storage.Driver

@@ -8,6 +8,13 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-KeyValue:
-  description: A list of key/value pairs
-  type: Object*
+DiscoverParam:
+  type: Object
+  fields:
+    duration:
+      type: Number
+      required: false
+      default: 15
+      description: |
+        The duration in seconds the discovery process will last before
+        it should be stopped

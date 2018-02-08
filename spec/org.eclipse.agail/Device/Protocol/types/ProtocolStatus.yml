@@ -8,6 +8,15 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-KeyValue:
-  description: A list of key/value pairs
-  type: Object*
+ProtocolStatus:
+  description: |
+    Identify a status of the Protocol, indicating if operational (AVAILABLE) or
+    if for some reason further user-side checks are required.
+  type: Enum
+  fields:
+    - AVAILABLE
+    - UNAVAILABLE
+    - NOT_CONFIGURED
+    - DISABLED
+    - ENABLED
+    - FAILURE
