@@ -221,6 +221,26 @@ paths:
               lastUpdate: '1477491668082'
         '204':
           description: 'No data available'
+  '/device/{deviceId}/{componentId}/{payload}':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: componentId
+        in: path
+        description: 'Device component name, like a Temperature'
+        required: true
+        type: string
+      -
+        name: payload
+        in: path
+        description: 'Data needs to send to the component'
+        required: true
+        type: string
     post:
       operationId: Write
       tags:
@@ -230,7 +250,7 @@ paths:
         '200':
           description: 'Write sent'
         '204':
-          description: 'Write sent, no results returned'
+          description: 'Write sent, no response received'
   '/device/{deviceId}/{componentId}/lastUpdate':
     parameters:
       -
