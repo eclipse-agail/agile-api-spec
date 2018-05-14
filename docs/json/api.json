@@ -525,6 +525,46 @@
             }
           }
         },
+        "/device/{deviceId}/{componentId}/{payload}": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "componentId",
+              "in": "path",
+              "description": "Device component name, like a Temperature",
+              "required": true,
+              "type": "string"
+            },
+            "2": {
+              "name": "payload",
+              "in": "path",
+              "description": "Data needs to send to the component",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "operationId": "Write",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Write to a device component",
+            "responses": {
+              "200": {
+                "description": "Write sent"
+              },
+              "204": {
+                "description": "Write sent, no response received"
+              }
+            }
+          }
+        },
         "/device/{deviceId}/{componentId}/lastUpdate": {
           "parameters": {
             "0": {

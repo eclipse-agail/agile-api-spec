@@ -215,6 +215,37 @@ iot.agile.Device:
           204:
             description: Write sent, no results returned
 
+    /device/{deviceId}/{componentId}/{payload}:
+      parameters:
+        -
+          name: deviceId
+          in: path
+          description: 'Agile device Id'
+          required: true
+          type: string
+        -
+          name: componentId
+          in: path
+          description: 'Device component name, like a Temperature'
+          required: true
+          type: string
+        -
+          name: payload
+          in: path
+          description: 'Data needs to send to the component'
+          required: true
+          type: string
+      post:
+        operationId: Write
+        tags:
+          - Device
+        description: 'Write to a device component'
+        responses:
+          '200':
+            description: 'Write sent'
+          '204':
+            description: 'Write sent, no response received'
+    
     /device/{deviceId}/{componentId}/lastUpdate:
       parameters:
         -
