@@ -10,22 +10,24 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-BaseQuery:
+ProtocolOverview:
   type: Object
   fields:
-    Criteria:
-      description: |
-        A key-value series of field-value to query for.
-        - Use `*` to indicate a fuzzy search
-        - Use an Array to indicate an IN like query
-      type: Object*
-    OrderBy:
-      description: |
-        A key-value series of field-value to order the result for.
-      type: Object*
-    Limit:
-      description: The limit of records founds to return
-      type: Number
-    Offset:
-      description: The position for the first record to take from the list of results
-      type: Number
+    name:
+      required: false
+      type: String
+      description: The protocol name
+      example: Bluetooth LE
+    id:
+      type: String
+      required: true
+      description: the internal code identifying the protocol
+      example: BLE
+    interface:
+      type: String
+      required: false
+      description: The DBus interface reference
+      example: org.eclipse.agail.protocol.BLE
+    status:
+      type: ProtocolStatus
+      required: false

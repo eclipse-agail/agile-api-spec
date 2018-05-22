@@ -1,0 +1,276 @@
+#-------------------------------------------------------------------------------
+# Copyright (C) 2017 Create-Net / FBK.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License 2.0
+# which accompanies this distribution, and is available at
+# https://www.eclipse.org/legal/epl-2.0/
+#
+# SPDX-License-Identifier: EPL-2.0
+# 
+# Contributors:
+#     Create-Net / FBK - initial API and implementation
+#-------------------------------------------------------------------------------
+org.eclipse.agail.Protocol:
+  http:
+    /protocol/{protocolId}/connection/{deviceId}:
+      parameters:
+        -
+          name: protocolId
+          in: path
+          description: Agile Id of the protocol
+          required: true
+          type: string
+        -
+          name: deviceId
+          in: path
+          description: Agile internal Id of the protocol
+          required: true
+          type: string
+
+      post:
+        operationId: Connect
+        tags:
+          - Protocol
+        description: Connect to the device
+        responses:
+          200:
+            description: Connection initialized
+          404:
+            description: Device not found
+      delete:
+        operationId: Disconnect
+        tags:
+          - Protocol
+        description: Disconnect from the device
+        responses:
+          200:
+            description: Disconnection completed
+          404:
+            description: Device not found
+
+    /protocol/{protocolId}/discovery:
+      parameters:
+        -
+          name: protocolId
+          in: path
+          description: Agile Id of the protocol
+          required: true
+          type: string
+      post:
+        operationId: StartDiscovery
+        tags:
+          - Protocol
+        description: Start the discovery process
+        responses:
+          200:
+            description: Discovery started
+          404:
+            description: Device not found
+      delete:
+        operationId: StopDiscovery
+        tags:
+          - Protocol
+        description: Stop the discovery process
+        responses:
+          200:
+            description: Discovery process stopped
+          404:
+            description: Device not found
+
+    /protocol/{protocolId}/{deviceId}:
+      parameters:
+        -
+          name: protocolId
+          in: path
+          description: Agile internal Id of the protocol
+          required: true
+          type: string
+        -
+          name: deviceId
+          in: path
+          description: Agile protocol Id of the device
+          required: true
+          type: string
+      post:
+        operationId: Write
+        tags:
+          - Protocol
+        description: Call a write via protocol
+        parameters:
+          -
+            name: data
+            in: body
+            description: An object containing the content to write
+            required: true
+            schema:
+              $ref: "#/definitions/ProtocolMessage"
+
+        responses:
+          200:
+            description: Write suceeded
+          404:
+            description: Device or component not found
+      get:
+        operationId: Read
+        tags:
+          - Protocol
+        description: Call a read via protocol
+        responses:
+          200:
+            description: Read suceeded
+            schema:
+              $ref: "#/definitions/RecordObject"
+          404:
+            description: Device or component not found
+
+  group: Device
+  description: |
+    A Protocol object abstract operations over a specific protocol implementation.
+    Every Device has one Protocol used to establish and use a communication exchange.
+
+  Status:
+    type: ProtocolStatus
+    description: Return the status for the protocol
+    access: [r]
+
+  Driver:
+    description: Driver unique code name
+    type: String
+    access: [r]
+    example: ble
+
+  Name:
+    description: Driver name
+    example: Bluetooth LE
+    type: String
+    access: [r]
+
+  Data:
+    description: |
+      Store the last record(s) received by a Read or Subscribe operation.
+      Is up to the Protocol implementation decide how. Devices will receive data
+      from different sensor an will need to filter out the correct ones
+    type: RecordObject
+    tags:
+      - Data Storage
+    access: [r, s]
+
+  Devices:
+    type: Array
+    reference: DeviceOverview
+    description: A list of devices found or available via this protocol.
+    access: [r, s]
+
+  Connect:
+    description: |
+      Abstract a connection, setup or initialization for a protocol managed device
+    args:
+      deviceId:
+        description: The protocol internal reference of a device
+        type: String
+        required: true
+      # profile:
+        # type: ProtocolProfile
+    return: void
+
+  Disconnect:
+    description: |
+      Abstract disconnect, tear down or uninitailization process for a managed device
+    args:
+      deviceId:
+        description: The protocol internal reference of a device
+        type: String
+        required: true
+    return: void
+
+  StartDiscovery:
+    description: |
+      Initiate a discovery operation
+    args:
+    return:
+      type: void
+      reference: Devices
+
+  StopDiscovery:
+    description: |
+      Stop a discovery operation
+    args:
+    return:
+      type: void
+
+  # Execute:
+  #   description: |
+  #     Execute, in a RPC-like style, a command over the Protocol to be executed by the connected device.
+  #   args:
+  #     operation: String
+  #     arguments: Object*
+  #   return:
+  #     type: Object*
+
+  Write:
+    description: |
+      Send data over the protocol
+    args:
+      deviceId:
+        type: String
+        description: The internal device reference identifier
+        required: true
+      arguments:
+        type: KeyValue
+        description: A list of specific parameters to pass to the protocol
+    return:
+      type: ProtocolMessage
+
+  Read:
+    description: |
+      Read data over the Protocol, may be cached in the Data property
+      depending on implementation to save resources
+    args:
+      deviceId:
+        type: String
+        description: The internal device reference identifier
+        required: true
+      arguments:
+        type: KeyValue
+        description: A list of specific parameters to pass to the protocol
+    return:
+      type: RecordObject
+      tags:
+        - Data Storage
+
+  Subscribe:
+    description: |
+      Subscribe to data updates over the Protocol
+    args:
+      deviceId:
+        type: String
+        description: The internal device reference identifier
+        required: true
+      arguments:
+        type: KeyValue
+        description: Additional arguments required to contextualize the subscription request
+        required: false
+    return:
+      type: void
+      # type: RecordObject
+      reference: Data
+      tags:
+        - Data Storage
+
+  Unsubscribe:
+    description: |
+      Unsubscribe to data updates over the Protocol
+    args:
+      deviceId:
+        type: String
+        description: The internal device reference identifier
+        required: true
+      arguments:
+        type: KeyValue
+        description: Additional arguments required to contextualize the subscription request
+        required: false
+    return:
+      type: RecordObject
+      reference: Data
+      tags:
+        - Data Storage

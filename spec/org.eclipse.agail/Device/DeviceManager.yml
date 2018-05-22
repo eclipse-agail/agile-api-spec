@@ -1,0 +1,296 @@
+#-------------------------------------------------------------------------------
+# Copyright (C) 2017 Create-Net / FBK.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License 2.0
+# which accompanies this distribution, and is available at
+# https://www.eclipse.org/legal/epl-2.0/
+#
+# SPDX-License-Identifier: EPL-2.0
+# 
+# Contributors:
+#     Create-Net / FBK - initial API and implementation
+#-------------------------------------------------------------------------------
+org.eclipse.agail.DeviceManager:
+
+  description: |
+    The DeviceManager list the registered devices available from the gateway available protocols.
+    This API is responsible to instantiate the reference DBus object for every device
+    and offer management and integration points.
+
+  group: Device
+
+  http:
+    /devices:
+      get:
+        operationId: Devices
+        tags:
+          - DeviceManager
+        description: List all registered devices
+        responses:
+          200:
+            description: List the registered device
+            schema:
+              type: array
+              $ref: "#/definitions/DeviceDefinition"
+            examples:
+              application/json:
+                - deviceId: "bleA1B2C3D4E5F6"
+                  address: "A1:B2:C3:D4:E5:F6"
+                  name: "MyFirstSensorTag"
+                  description: ""
+                  protocol : "org.eclipse.agail.protocol.ble"
+                  path: "/org/eclipse/agail/Device/bleA1B2C3D4E5F6"
+                  streams:
+                    - id: temperature
+                      unit: celsius
+                    - id: light
+                      unit: lumen
+                    - id: pressure
+                      unit: hPa
+                - deviceId: "bleA6B5C4D3E2F1"
+                  address: "A6:B5:C4:D3:E2:F1"
+                  name: "MySecondSensorTag"
+                  description: ""
+                  protocol : "org.eclipse.agail.protocol.ble"
+                  path: "/org/eclipse/agail/Device/bleA6B5C4D3E2F1"
+                  streams:
+                    - id: temperature
+                      unit: celsius
+                    - id: light
+                      unit: lumen
+                    - id: pressure
+                      unit: hPa
+          204:
+            description: Device list is empty
+      post:
+        operationId: Register
+        description: Register a new device based on information from ProtocolManager and device type
+        tags:
+          - DeviceManager
+        parameters:
+          -
+            name: payload
+            in: body
+            description: The request body describing a device and the intended type
+            required: true
+            schema:
+              $ref: "#/definitions/RegisterPayload"
+            examples:
+              application/json:
+                  overview:
+                    id: "A0:E6:F8:B6:F2:00"
+                    name: "CC2650 SensorTag"
+                    protocol: "org.eclipse.agail.protocol.BLE"
+                    status: "AVAILABLE"
+                  type: "TI SensorTag"
+        responses:
+          200:
+            description: Device created
+            schema:
+              $ref: "#/definitions/DeviceDefinition"
+            examples:
+              application/json:
+                deviceId: "bleA1B2C3D4E5F6"
+                address: "A1:B2:C3:D4:E5:F6"
+                name: "MyFirstSensorTag"
+                description: ""
+                protocol : "org.eclipse.agail.protocol.ble"
+                path: "/org/eclipse/agail/Device/bleA1B2C3D4E5F6"
+                streams:
+                  - id: temperature
+                    unit: celsius
+                  - id: light
+                    unit: lumen
+                  - id: pressure
+                    unit: hPa
+
+    /devices/typeof:
+      post:
+        operationId: MatchingDeviceTypes
+        description: Get matching types for a device overview
+        tags:
+          - DeviceManager
+        parameters:
+          -
+            name: overview
+            in: body
+            description: The request body describing a device
+            required: true
+            schema:
+              $ref: "#/definitions/DeviceOverview"
+            examples:
+              application/json:
+                id: "A0:E6:F8:B6:F2:00"
+                name: "CC2650 SensorTag"
+                protocol: "org.eclipse.agail.protocol.BLE"
+                status: "AVAILABLE"
+        responses:
+          200:
+            description: list of possible device types
+            schema:
+              type: array
+              items:
+                type: string
+
+    /devices/{deviceId}:
+      parameters:
+        -
+          name: deviceId
+          in: path
+          description: Agile device Id
+          required: true
+          type: string
+
+      get:
+        operationId: Read
+        description: Get a device definition
+        tags:
+          - DeviceManager
+        responses:
+          200:
+            description: Device loaded
+            schema:
+              $ref: "#/definitions/DeviceDefinition"
+            examples:
+              application/json:
+                  deviceId: "bleA1B2C3D4E5F6"
+                  address: "A1:B2:C3:D4:E5:F6"
+                  name: "SensorTag"
+                  description: ""
+                  protocol : "org.eclipse.agail.protocol.ble"
+                  path: "/org/eclipse/agail/Device/bleA1B2C3D4E5F6"
+                  streams:
+                    - id: temperature
+                      unit: celsius
+                    - id: light
+                      unit: lumen
+                    - id: pressure
+                      unit: hPa
+          404:
+            description: Device not found
+      put:
+        operationId: Update
+        tags:
+          - DeviceManager
+        parameters:
+          -
+            name: body
+            in: body
+            description: The request body describing a device
+            required: true
+            schema:
+              $ref: "#/definitions/DeviceDefinition"
+            examples:
+              application/json:
+                  deviceId: "bleA1B2C3D4E5F6"
+                  address: "A1:B2:C3:D4:E5:F6"
+                  name: "SensorTag"
+                  description: ""
+                  protocol : "org.eclipse.agail.protocol.ble"
+                  path: "/org/eclipse/agail/Device/bleA1B2C3D4E5F6"
+                  streams:
+                    - id: temperature
+                      unit: celsius
+                    - id: light
+                      unit: lumen
+                    - id: pressure
+                      unit: hPa
+                    - id: optical
+                      unit: unit
+        description: Update a device definition
+        responses:
+          200:
+            description: Device updated
+          404:
+            description: Device not found
+      delete:
+        operationId: Delete
+        tags:
+          - DeviceManager
+        description: Delete a device definition and unregister it
+        responses:
+          200:
+            description: Device removed
+          404:
+            description: Device not found
+
+
+## DBus
+  Devices:
+    description: Return all registered devices
+    type: Array
+    reference: DeviceDefinition
+    access: [r, s]
+    events:
+      - DevicesChanged
+
+  MatchingDeviceTypes:
+    description: Get matching types for a device overview
+    args:
+      overview:
+        description: The request body describing a device
+        type: DeviceOverview
+    return:
+      description: list of possible device types
+      type: Array
+      fields: String
+
+  Find:
+    description: Search for devices by specific criteria
+    args:
+      query:
+        description: An query object to search for a device
+        type: BaseQuery
+    return:
+      description: A list with all matching registered devices results, eventually sorted and sliced
+      type: Array
+      reference: org.eclipse.agail.Device
+
+  Create:
+    description: Create (register) a new device in the manager
+    args:
+      device:
+        type: DeviceDefinition
+    return:
+      description: Return the DeviceDefinition of the device with Agile specific device id field to identify assigned.
+      type: DeviceDefinition
+
+  Read:
+    description: Load a device definition by its agile ID
+    args:
+      Id:
+        type: String
+    return:
+      description: Return the DeviceDefinition of the device
+      type: DeviceDefinition
+
+  Update:
+    description: Updates a device definition by its agile ID
+    args:
+      Id:
+        type: String
+      Definition:
+        type: DeviceDefinition
+    return: void
+
+  Delete:
+    description: Delete a device definition by its ID. This will deactivate the Device DBus object
+    args:
+      Id:
+        type: String
+    return: void
+
+  Batch:
+    description: Perform a batch operation over a set of devices.
+    args:
+      operation:
+        type: Enum
+        fields:
+          - Create
+          - Update
+          - Delete
+          - Read
+      arguments:
+        description: An object to be passed to the underlying function call (Create, Update, Delete, Read)
+        type: Object*
+    return: void
