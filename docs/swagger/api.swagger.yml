@@ -16,8 +16,8 @@ info:
   description: The Agile HTTP API to interact with local DBus objects
   version: 1.0.0
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    name: EPL-2.0
+    url: https://www.eclipse.org/legal/epl-2.0/
 # the domain of the service
 host: localhost:8080
 # array of all schemes that your API supports
