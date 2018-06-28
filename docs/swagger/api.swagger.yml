@@ -1,0 +1,905 @@
+#-------------------------------------------------------------------------------
+# Copyright (C) 2017 Create-Net / FBK.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License 2.0
+# which accompanies this distribution, and is available at
+# https://www.eclipse.org/legal/epl-2.0/
+#
+# SPDX-License-Identifier: EPL-2.0
+# 
+# Contributors:
+#     Create-Net / FBK - initial API and implementation
+#-------------------------------------------------------------------------------
+swagger: '2.0'
+info:
+  title: Agile HTTP API
+  description: The Agile HTTP API to interact with local DBus objects
+  version: 1.0.0
+  license:
+    name: EPL-2.0
+    url: https://www.eclipse.org/legal/epl-2.0/
+# the domain of the service
+host: localhost:8080
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /api
+consumes:
+  - application/json
+produces:
+  - application/json
+# security:
+#   - type: basic
+#     in: header
+#   - type: oauth2
+#     authorizationUrl: /api/oauth
+#     flow: [implicit, password, application, accessCode]
+
+externalDocs:
+  url: http://agile-iot.github.io/agile-api-spec
+  description: DBus AGILE API spec
+
+tags:
+  - name: DeviceManager
+    description: Device management API
+  - name: Device
+    description: Device related API
+  - name: ProtocolManager
+    description: Protocol management API
+  - name: Protocol
+    description: Protocol related API
+
+paths:
+  '/device/{deviceId}/status':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+    get:
+      operationId: Status
+      tags:
+        - Device
+      description: 'Indicate the current device status'
+      responses:
+        '200':
+          description: 'Status read done'
+          schema:
+            $ref: '#/definitions/StatusType'
+          examples:
+            application/json:
+              status: CONNECTED
+        '204':
+          description: 'No data available'
+  '/device/{deviceId}':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+    get:
+      operationId: ReadAll
+      tags:
+        - Device
+      description: 'Read values of all components from the device'
+      responses:
+        '200':
+          description: 'Read done'
+          schema:
+            type: array
+            $ref: '#/definitions/RecordObject'
+          examples:
+            application/json:
+              -
+                deviceID: bleA0E6F8B62304
+                componentID: Temperature
+                value: '23.46875'
+                unit: 'Degree celsius'
+                format: ""
+                lastUpdate: '1477491668082'
+              -
+                deviceID: bleA0E6F8B62304
+                componentID: Humidity
+                value: '58.929443'
+                unit: 'Relative humidity'
+                format: ""
+                lastUpdate: '1477491668082'
+        '204':
+          description: 'No data available'
+  '/device/{deviceId}/connection':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+    post:
+      operationId: Connect
+      tags:
+        - Device
+      description: 'Connect the device at protocol level'
+      responses:
+        '200':
+          description: 'Device connected'
+    delete:
+      operationId: Disconnect
+      tags:
+        - Device
+      description: 'Disconnect device at protocol level'
+      responses:
+        '200':
+          description: 'Device disconnected'
+  '/device/{deviceId}/execute/{command}':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: command
+        in: path
+        description: 'Operation name to be performed'
+        required: true
+        type: string
+    post:
+      operationId: Execute
+      tags:
+        - Device
+      description: 'Perform an action on the device'
+      responses:
+        '200':
+          description: 'Action sent'
+        '204':
+          description: 'Action sent, no response received'
+  '/device/{deviceId}/{componentId}/subscribe':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: componentId
+        in: path
+        description: 'Agile component name, like a sensor'
+        required: true
+        type: string
+    post:
+      operationId: Subscribe
+      tags:
+        - Device
+      description: "Enable a subscription to a data stream. Asynchronous data updates will\nbe delivered via websocket.\n"
+      responses:
+        '200':
+          description: 'Subscription registered'
+    delete:
+      operationId: Unsubscribe
+      tags:
+        - Device
+      description: 'Unsubscribe from a data stream'
+      responses:
+        '200':
+          description: Unsubscribed
+  '/device/{deviceId}/{componentId}':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: componentId
+        in: path
+        description: 'Device component name, like a Temperature'
+        required: true
+        type: string
+    get:
+      operationId: Read
+      tags:
+        - Device
+      description: 'Read from a device component'
+      responses:
+        '200':
+          description: 'Read done'
+          schema:
+            $ref: '#/definitions/RecordObject'
+          examples:
+            application/json:
+              deviceID: bleA0E6F8B62304
+              componentID: Temperature
+              value: '23.46875'
+              unit: 'Degree celsius'
+              format: ""
+              lastUpdate: '1477491668082'
+        '204':
+          description: 'No data available'
+    post:
+      operationId: Write
+      tags:
+        - Device
+      description: 'Write to a device component'
+      responses:
+        '200':
+          description: 'Write sent'
+        '204':
+          description: 'Write sent, no results returned'
+  '/device/{deviceId}/{componentId}/{payload}':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: componentId
+        in: path
+        description: 'Device component name, like a Temperature'
+        required: true
+        type: string
+      -
+        name: payload
+        in: path
+        description: 'Data needs to send to the component'
+        required: true
+        type: string
+    post:
+      operationId: Write
+      tags:
+        - Device
+      description: 'Write to a device component'
+      responses:
+        '200':
+          description: 'Write sent'
+        '204':
+          description: 'Write sent, no response received'
+  '/device/{deviceId}/{componentId}/lastUpdate':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+      -
+        name: componentId
+        in: path
+        description: 'Agile component name, like a sensor'
+        required: true
+        type: string
+    get:
+      operationId: LastUpdate
+      tags:
+        - Device
+      description: 'Get the last record fetched from the component'
+      responses:
+        '200':
+          description: 'Record fetched'
+          schema:
+            $ref: '#/definitions/RecordObject'
+          examples:
+            application/json:
+              deviceID: bleA0E6F8B62304
+              componentID: Temperature
+              value: '23.46875'
+              unit: 'Degree celsius'
+              format: ""
+              lastUpdate: '1477491668082'
+        '204':
+          description: 'No data available'
+        '404':
+          description: 'Device not available'
+  '/device/{deviceId}/lastUpdate':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+    get:
+      operationId: LastUpdateAll
+      tags:
+        - Device
+      description: 'Get the last record fetched from the device'
+      responses:
+        '200':
+          description: 'Record fetched'
+          schema:
+            $ref: '#/definitions/RecordObject'
+          examples:
+            application/json:
+              deviceID: bleA0E6F8B62304
+              componentID: Temperature
+              value: '23.46875'
+              unit: 'Degree celsius'
+              format: ""
+              lastUpdate: '1477491668082'
+        '204':
+          description: 'No data available'
+        '404':
+          description: 'Device not available'
+  /devices:
+    get:
+      operationId: Devices
+      tags:
+        - DeviceManager
+      description: 'List all registered devices'
+      responses:
+        '200':
+          description: 'List the registered device'
+          schema:
+            type: array
+            $ref: '#/definitions/DeviceDefinition'
+          examples:
+            application/json:
+              -
+                deviceId: bleA1B2C3D4E5F6
+                address: 'A1:B2:C3:D4:E5:F6'
+                name: MyFirstSensorTag
+                description: ""
+                protocol: org.eclipse.agail.protocol.ble
+                path: /org/eclipse/agail/Device/bleA1B2C3D4E5F6
+                streams:
+                  -
+                    id: temperature
+                    unit: celsius
+                  -
+                    id: light
+                    unit: lumen
+                  -
+                    id: pressure
+                    unit: hPa
+              -
+                deviceId: bleA6B5C4D3E2F1
+                address: 'A6:B5:C4:D3:E2:F1'
+                name: MySecondSensorTag
+                description: ""
+                protocol: org.eclipse.agail.protocol.ble
+                path: /org/eclipse/agail/Device/bleA6B5C4D3E2F1
+                streams:
+                  -
+                    id: temperature
+                    unit: celsius
+                  -
+                    id: light
+                    unit: lumen
+                  -
+                    id: pressure
+                    unit: hPa
+        '204':
+          description: 'Device list is empty'
+    post:
+      operationId: Register
+      description: 'Register a new device based on information from ProtocolManager and device type'
+      tags:
+        - DeviceManager
+      parameters:
+        -
+          name: payload
+          in: body
+          description: 'The request body describing a device and the intended type'
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterPayload'
+          examples:
+            application/json:
+              overview:
+                id: 'A0:E6:F8:B6:F2:00'
+                name: 'CC2650 SensorTag'
+                protocol: org.eclipse.agail.protocol.BLE
+                status: AVAILABLE
+              type: 'TI SensorTag'
+      responses:
+        '200':
+          description: 'Device created'
+          schema:
+            $ref: '#/definitions/DeviceDefinition'
+          examples:
+            application/json:
+              deviceId: bleA1B2C3D4E5F6
+              address: 'A1:B2:C3:D4:E5:F6'
+              name: MyFirstSensorTag
+              description: ""
+              protocol: org.eclipse.agail.protocol.ble
+              path: /org/eclipse/agail/Device/bleA1B2C3D4E5F6
+              streams:
+                -
+                  id: temperature
+                  unit: celsius
+                -
+                  id: light
+                  unit: lumen
+                -
+                  id: pressure
+                  unit: hPa
+  /devices/typeof:
+    post:
+      operationId: MatchingDeviceTypes
+      description: 'Get matching types for a device overview'
+      tags:
+        - DeviceManager
+      parameters:
+        -
+          name: overview
+          in: body
+          description: 'The request body describing a device'
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceOverview'
+          examples:
+            application/json:
+              id: 'A0:E6:F8:B6:F2:00'
+              name: 'CC2650 SensorTag'
+              protocol: org.eclipse.agail.protocol.BLE
+              status: AVAILABLE
+      responses:
+        '200':
+          description: 'list of possible device types'
+          schema:
+            type: array
+            items:
+              type: string
+  '/devices/{deviceId}':
+    parameters:
+      -
+        name: deviceId
+        in: path
+        description: 'Agile device Id'
+        required: true
+        type: string
+    get:
+      operationId: Read
+      description: 'Get a device definition'
+      tags:
+        - DeviceManager
+      responses:
+        '200':
+          description: 'Device loaded'
+          schema:
+            $ref: '#/definitions/DeviceDefinition'
+          examples:
+            application/json:
+              deviceId: bleA1B2C3D4E5F6
+              address: 'A1:B2:C3:D4:E5:F6'
+              name: SensorTag
+              description: ""
+              protocol: org.eclipse.agail.protocol.ble
+              path: /org/eclipse/agail/Device/bleA1B2C3D4E5F6
+              streams:
+                -
+                  id: temperature
+                  unit: celsius
+                -
+                  id: light
+                  unit: lumen
+                -
+                  id: pressure
+                  unit: hPa
+        '404':
+          description: 'Device not found'
+    put:
+      operationId: Update
+      tags:
+        - DeviceManager
+      parameters:
+        -
+          name: body
+          in: body
+          description: 'The request body describing a device'
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceDefinition'
+          examples:
+            application/json:
+              deviceId: bleA1B2C3D4E5F6
+              address: 'A1:B2:C3:D4:E5:F6'
+              name: SensorTag
+              description: ""
+              protocol: org.eclipse.agail.protocol.ble
+              path: /org/eclipse/agail/Device/bleA1B2C3D4E5F6
+              streams:
+                -
+                  id: temperature
+                  unit: celsius
+                -
+                  id: light
+                  unit: lumen
+                -
+                  id: pressure
+                  unit: hPa
+                -
+                  id: optical
+                  unit: unit
+      description: 'Update a device definition'
+      responses:
+        '200':
+          description: 'Device updated'
+        '404':
+          description: 'Device not found'
+    delete:
+      operationId: Delete
+      tags:
+        - DeviceManager
+      description: 'Delete a device definition and unregister it'
+      responses:
+        '200':
+          description: 'Device removed'
+        '404':
+          description: 'Device not found'
+  '/protocol/{protocolId}/connection/{deviceId}':
+    parameters:
+      -
+        name: protocolId
+        in: path
+        description: 'Agile Id of the protocol'
+        required: true
+        type: string
+      -
+        name: deviceId
+        in: path
+        description: 'Agile internal Id of the protocol'
+        required: true
+        type: string
+    post:
+      operationId: Connect
+      tags:
+        - Protocol
+      description: 'Connect to the device'
+      responses:
+        '200':
+          description: 'Connection initialized'
+        '404':
+          description: 'Device not found'
+    delete:
+      operationId: Disconnect
+      tags:
+        - Protocol
+      description: 'Disconnect from the device'
+      responses:
+        '200':
+          description: 'Disconnection completed'
+        '404':
+          description: 'Device not found'
+  '/protocol/{protocolId}/discovery':
+    parameters:
+      -
+        name: protocolId
+        in: path
+        description: 'Agile Id of the protocol'
+        required: true
+        type: string
+    post:
+      operationId: StartDiscovery
+      tags:
+        - Protocol
+      description: 'Start the discovery process'
+      responses:
+        '200':
+          description: 'Discovery started'
+        '404':
+          description: 'Device not found'
+    delete:
+      operationId: StopDiscovery
+      tags:
+        - Protocol
+      description: 'Stop the discovery process'
+      responses:
+        '200':
+          description: 'Discovery process stopped'
+        '404':
+          description: 'Device not found'
+  '/protocol/{protocolId}/{deviceId}':
+    parameters:
+      -
+        name: protocolId
+        in: path
+        description: 'Agile internal Id of the protocol'
+        required: true
+        type: string
+      -
+        name: deviceId
+        in: path
+        description: 'Agile protocol Id of the device'
+        required: true
+        type: string
+    post:
+      operationId: Write
+      tags:
+        - Protocol
+      description: 'Call a write via protocol'
+      parameters:
+        -
+          name: data
+          in: body
+          description: 'An object containing the content to write'
+          required: true
+          schema:
+            $ref: '#/definitions/ProtocolMessage'
+      responses:
+        '200':
+          description: 'Write suceeded'
+        '404':
+          description: 'Device or component not found'
+    get:
+      operationId: Read
+      tags:
+        - Protocol
+      description: 'Call a read via protocol'
+      responses:
+        '200':
+          description: 'Read suceeded'
+          schema:
+            $ref: '#/definitions/RecordObject'
+        '404':
+          description: 'Device or component not found'
+  /protocols:
+    get:
+      operationId: Protocols
+      tags:
+        - ProtocolManager
+      description: 'Get the list of registered protocols'
+      responses:
+        '200':
+          description: 'Protocols list provided'
+          schema:
+            $ref: '#/definitions/ProtocolOverview'
+          examples:
+            application/json:
+              -
+                id: BLE
+                name: 'Bluetooth LE'
+                interface: org.eclipse.agail.protocol.BLE
+                status: AVAILABLE
+              -
+                id: ZigBee
+                name: 'ZigBee communication protocol'
+                interface: org.eclipse.agail.protocol.ZigBee
+                status: AVAILABLE
+        '204':
+          description: 'No protocols registered.'
+  '/protocols/{protocolId}':
+    parameters:
+      -
+        name: protocolId
+        in: path
+        description: 'Agile protocol Id'
+        required: true
+        type: string
+    post:
+      operationId: Add
+      tags:
+        - ProtocolManager
+      description: 'Register a new Dbus object implementing the protocol API'
+      responses:
+        '202':
+          description: 'Protocol has been added'
+        '400':
+          description: 'An error occured processing the request'
+    delete:
+      operationId: Remove
+      tags:
+        - ProtocolManager
+      description: 'Unregister a Dbus Protocol object reference'
+      responses:
+        '200':
+          description: 'Protocol unregistered'
+        '404':
+          description: 'Protocol not found'
+  /protocols/devices:
+    get:
+      operationId: Devices
+      tags:
+        - ProtocolManager
+      description: 'List all discovered devices on all available protocols'
+      responses:
+        '200':
+          description: "The list of devices found via discovery\n"
+          schema:
+            type: array
+            $ref: '#/definitions/DeviceOverview'
+          examples:
+            application/json:
+              -
+                name: SensorTag
+                id: 'AA:BB:CC:DD'
+                protocol: org.eclipse.agail.protocol.BLE
+                status: AVAILABLE
+              -
+                name: LightDimmer
+                id: 'CC:DD:AA:BB'
+                protocol: org.eclipse.agail.protocol.Zwave
+                status: AVAILABLE
+  /protocols/discovery:
+    get:
+      operationId: DiscoveryStatus
+      tags:
+        - ProtocolManager
+      description: 'Return the status of discovery on the available protocols'
+      responses:
+        '200':
+          description: "Return the list of protocol discovery status\n"
+          schema:
+            $ref: '#/definitions/DiscoveryStatus'
+          examples:
+            application/json:
+              -
+                name: BLE
+                status: RUNNING
+              -
+                name: ZigBee
+                status: NONE
+              -
+                name: ZWave
+                status: FAILURE
+    post:
+      operationId: StartDiscovery
+      tags:
+        - ProtocolManager
+      description: 'Start a device discovery on all available protocols'
+      responses:
+        '204':
+          description: "The discovery has been successfully started on all the regitered\nprotocols; asynchronous updates will be sent via websocket\n"
+        '409':
+          description: "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
+    delete:
+      operationId: StopDiscovery
+      tags:
+        - ProtocolManager
+      description: 'Stop a device discovery if previously initiated'
+      responses:
+        '204':
+          description: "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
+        '409':
+          description: "Indicates that discovery has been requested to stop on the underlying\nprotocols but one or more reported a failure\n"
+  
+definitions:
+  DeviceOverview:
+    description: 'An overview of a device a protocol knows about'
+    type: object
+    properties:
+      name:
+        description: 'Friendly name of the device'
+        type: string
+      protocol:
+        description: 'Protocol reference for this device'
+        type: string
+      id:
+        description: 'Protocol level id used to identify and access the device'
+        type: string
+      status:
+        enum:
+          - CONNECTED
+          - DISCONNECTED
+          - AVAILABLE
+          - UNAVAILABLE
+  DiscoveryStatus:
+    type: object
+    properties:
+      name:
+        description: 'Name of the protocol'
+        type: string
+      status:
+        enum:
+          - NONE
+          - RUNNING
+          - FAILURE
+  ProtocolMessage:
+    type: object
+    properties:
+      data:
+        type: string
+      format:
+        type: string
+  ProtocolOverview:
+    type: object
+    properties:
+      name:
+        description: 'The protocol name'
+        type: string
+      id:
+        description: 'the internal code identifying the protocol'
+        type: string
+      interface:
+        description: 'The DBus interface reference'
+        type: string
+      status:
+        $ref: '#/definitions/ProtocolStatus'
+  ProtocolStatus:
+    description: "Identify a status of the Protocol, indicating if operational (AVAILABLE) or\nif for some reason further user-side checks are required.\n"
+    enum:
+      - AVAILABLE
+      - UNAVAILABLE
+      - NOT_CONFIGURED
+      - DISABLED
+      - ENABLED
+      - FAILURE
+  ChannelTypeEnum:
+    enum:
+      - Number
+      - String
+      - Boolean
+      - GeoPoint
+      - Object
+  DeviceComponent:
+    description: 'A device component from which get a data stream, like a sensor'
+    type: object
+    properties:
+      id:
+        type: string
+      unit:
+        type: string
+      properties:
+        $ref: '#/definitions/KeyValue'
+  DeviceDefinition:
+    description: 'A device definition that contains informations describing the current device'
+    type: object
+    properties:
+      deviceId:
+        description: 'Agile specific device ID'
+        type: string
+      address:
+        description: 'Protocol specific device address'
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      protocol:
+        type: string
+      path:
+        description: 'DBus specific path to reach the object instance'
+        type: string
+      streams:
+        description: 'A list of components from which get data streams'
+        type: array
+        items:
+          $ref: '#/definitions/DeviceComponent'
+  RegisterPayload:
+    description: Payload
+    type: object
+    properties:
+      overview:
+        $ref: '#/definitions/DeviceOverview'
+      type:
+        type: string
+  StatusType:
+    enum:
+      - CONNECTED
+      - DISCONNECTED
+  RecordObject:
+    description: 'Contains the measurment from a sensor and the metadata regarding its source'
+    type: object
+    properties:
+      DeviceId:
+        description: 'The Agile Id that generated the value'
+        type: string
+      ComponentId:
+        description: 'The component Id or sensor from where the value comes from'
+        type: string
+      Value:
+        description: 'The value, stored as string'
+        type: string
+      Unit:
+        description: 'The measurment unit for the value'
+        type: string
+      Format:
+        description: 'A format description to read the data value'
+        type: string
+      LastUpdate:
+        description: 'A UNIX timestamp rapresenting the last update of a record'
+        type: number
+  KeyValue:
+    description: 'A list of key/value pairs'
+    type: object
+  

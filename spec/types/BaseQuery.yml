@@ -1,0 +1,31 @@
+#-------------------------------------------------------------------------------
+# Copyright (C) 2017 Create-Net / FBK.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License 2.0
+# which accompanies this distribution, and is available at
+# https://www.eclipse.org/legal/epl-2.0/
+#
+# SPDX-License-Identifier: EPL-2.0
+# 
+# Contributors:
+#     Create-Net / FBK - initial API and implementation
+#-------------------------------------------------------------------------------
+BaseQuery:
+  type: Object
+  fields:
+    Criteria:
+      description: |
+        A key-value series of field-value to query for.
+        - Use `*` to indicate a fuzzy search
+        - Use an Array to indicate an IN like query
+      type: Object*
+    OrderBy:
+      description: |
+        A key-value series of field-value to order the result for.
+      type: Object*
+    Limit:
+      description: The limit of records founds to return
+      type: Number
+    Offset:
+      description: The position for the first record to take from the list of results
+      type: Number

@@ -1,0 +1,10417 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2017 Create-Net / FBK.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License 2.0
+which accompanies this distribution, and is available at
+https://www.eclipse.org/legal/epl-2.0/
+
+SPDX-License-Identifier: EPL-2.0
+
+Contributors:
+    Create-Net / FBK - initial API and implementation
+-->
+<html>
+
+<head>
+  <title>AGILE API spec</title>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/plugins/foundation.sticky.js"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.7.1/lunr.min.js"></script>
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <meta name="Description" content="AGILE API specification documentation">
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+  <style>
+
+    .overview {
+      cursor: pointer;
+    }
+
+    h5
+    {
+      border-bottom: 1px dotted #EEE;
+      margin: 0.15em 0;
+    }
+
+    .overview
+    {
+    }
+    .overview:hover
+    {
+    }
+
+    .description, .type {
+      color: #333;
+    }
+    .type {
+      font-size: 80%;
+    }
+    .name {
+      font-weight: bold;
+    }
+    .pad-left {
+      padding-left: .5em;
+      margin-left: 1em;
+      border-left: 1px solid #EEE;
+    }
+
+    nav.menu {
+      overflow-y: scroll;
+      max-height: 480px;
+    }
+
+    .top-bar, .top-bar ul {
+      background-color: white;
+    }
+
+    .hidden {
+      display: block;
+    }
+
+    .color-black {
+      color: black !important;
+    }
+    .color-grey {
+      color: #BBB !important;
+    }
+
+    .text-bigger, .text-bigger:before {
+      font-size: 140%;
+    }
+    .text-smaller, .text-smaller:before {
+      font-size: 70%;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="title-bar"
+  data-responsive-toggle="example-menu"
+  data-hide-for="medium"
+  class="sticky"
+  data-sticky
+>
+  <button class="menu-icon" type="button" data-toggle></button>
+  <div class="title-bar-title">Menu</div>
+</div>
+
+<div id="main-menu" class="top-bar" >
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+
+      <li class="">
+        <a href="https://github.com/Agile-IoT" class="inline">
+          <img
+            src="http://www.agile-project-iot.eu/wp-content/uploads/2016/03/logo-png-transparent-02_small.png"
+            style="max-width: 40px"
+          />
+        </a>
+        <b class="text-small">API spec</b>
+      </li>
+
+      
+        <li>
+          <a href="#">Objects</a>
+          <ul class="menu vertical object">
+            
+              <li>
+                <a href="#org_eclipse_agail_Apps" data-for="org_eclipse_agail_Apps">
+                  org.eclipse.agail.Apps
+                </a>
+              </li>
+              
+              <li>
+                <a href="#org_eclipse_agail_Device" data-for="org_eclipse_agail_Device">
+                  org.eclipse.agail.Device
+                </a>
+              </li>
+              
+              <li>
+                <a href="#org_eclipse_agail_DeviceManager" data-for="org_eclipse_agail_DeviceManager">
+                  org.eclipse.agail.DeviceManager
+                </a>
+              </li>
+              
+              <li>
+                <a href="#org_eclipse_agail_Protocol" data-for="org_eclipse_agail_Protocol">
+                  org.eclipse.agail.Protocol
+                </a>
+              </li>
+              
+              <li>
+                <a href="#org_eclipse_agail_ProtocolManager" data-for="org_eclipse_agail_ProtocolManager">
+                  org.eclipse.agail.ProtocolManager
+                </a>
+              </li>
+              
+              <li>
+                <a href="#org_eclipse_agail_Network" data-for="org_eclipse_agail_Network">
+                  org.eclipse.agail.Network
+                </a>
+              </li>
+              
+              <li>
+                <a href="#org_eclipse_agail_Storage_Driver" data-for="org_eclipse_agail_Storage_Driver">
+                  org.eclipse.agail.Storage.Driver
+                </a>
+              </li>
+              
+              <li>
+                <a href="#org_eclipse_agail_Storage_DriverManager" data-for="org_eclipse_agail_Storage_DriverManager">
+                  org.eclipse.agail.Storage.DriverManager
+                </a>
+              </li>
+              
+              <li>
+                <a href="#org_eclipse_agail_Storage" data-for="org_eclipse_agail_Storage">
+                  org.eclipse.agail.Storage
+                </a>
+              </li>
+              
+          </ul>
+        </li>
+        
+        <li>
+          <a href="#">Types</a>
+          <ul class="menu vertical types">
+            
+              <li>
+                <a href="#DeviceOverview" data-for="DeviceOverview">
+                  DeviceOverview
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DiscoverParam" data-for="DiscoverParam">
+                  DiscoverParam
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DiscoveryStatus" data-for="DiscoveryStatus">
+                  DiscoveryStatus
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolMessage" data-for="ProtocolMessage">
+                  ProtocolMessage
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolOverview" data-for="ProtocolOverview">
+                  ProtocolOverview
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolProfile" data-for="ProtocolProfile">
+                  ProtocolProfile
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ProtocolStatus" data-for="ProtocolStatus">
+                  ProtocolStatus
+                </a>
+              </li>
+              
+              <li>
+                <a href="#ChannelTypeEnum" data-for="ChannelTypeEnum">
+                  ChannelTypeEnum
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DeviceComponent" data-for="DeviceComponent">
+                  DeviceComponent
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DeviceDefinition" data-for="DeviceDefinition">
+                  DeviceDefinition
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DeviceStreamChannel" data-for="DeviceStreamChannel">
+                  DeviceStreamChannel
+                </a>
+              </li>
+              
+              <li>
+                <a href="#RegisterPayload" data-for="RegisterPayload">
+                  RegisterPayload
+                </a>
+              </li>
+              
+              <li>
+                <a href="#StatusType" data-for="StatusType">
+                  StatusType
+                </a>
+              </li>
+              
+              <li>
+                <a href="#DriverStatus" data-for="DriverStatus">
+                  DriverStatus
+                </a>
+              </li>
+              
+              <li>
+                <a href="#RecordObject" data-for="RecordObject">
+                  RecordObject
+                </a>
+              </li>
+              
+              <li>
+                <a href="#BaseQuery" data-for="BaseQuery">
+                  BaseQuery
+                </a>
+              </li>
+              
+              <li>
+                <a href="#KeyValue" data-for="KeyValue">
+                  KeyValue
+                </a>
+              </li>
+              
+          </ul>
+        </li>
+        
+
+        <li>
+          <a href="#">Restful HTTP API</a>
+          <ul class="menu vertical">
+            <li> <a href="http://petstore.swagger.io/?url=http://agile-iot.github.io/agile-api-spec/docs/swagger/api.swagger.yml">REST API docs </a> </li>
+            <li> <a href="../swagger/api.swagger.yml">SWAGGER API spec</a> </li>
+            <!-- <li> <a href="../raml/api.raml"><small>[alpha]</small>RAML API spec</a> </li> -->
+          </ul>
+        </li>
+
+        <li>
+          <a href="https://github.com/Agile-IoT/agile-api-spec/tree/master/docs/dbus-xml">
+            DBus XML Instrospection
+          </a>
+        </li>
+
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li><form id="searchbox">
+  <div class="row">
+    <div class="medium-12 columns">
+      <input type="search" placeholder="search.." id="searchtxt">
+    </div>
+  </div>
+</form>
+
+<script>
+  jQuery(function() {
+
+    var JSON_API_URL = '../json/api.json';
+
+    var index = lunr(function () {
+      this.field('object', {boost: 8})
+      this.field('method', {boost: 8})
+      this.field('property', {boost: 8})
+      this.field('description', {boost: 6})
+      this.field('type', {boost: 8})
+      this.ref('id')
+    })
+
+    var doSearch = function() {
+
+
+      var log = function() {
+        if(localStorage.DEBUG)
+          console.log.apply(console, arguments);
+      }
+
+      var hideAll = function() {
+        log("hideAll")
+        $('.api-class, .api-type').hide();
+        // $('.menu .types li, .menu .object li').hide();
+      };
+
+      var showAll = function() {
+        log("showAll")
+        $('.api-class, .api-type').show();
+        // $('.menu .types li, .menu .object li').show();
+      };
+
+      var text = $('#searchtxt').val();
+
+      if(text.length < 2) {
+        return showAll();
+      }
+
+      log("search for %s", text)
+      var results = index.search(text);
+
+      if(!results.length) {
+        log("No results")
+        return hideAll();
+      }
+
+      hideAll();
+
+      log("Show results", results);
+      results.forEach(function(result) {
+
+        var res = result.ref.split('|');
+        var type = res.pop();
+
+        log("Record %s", type, res);
+
+        if(type === 'class' || type === 'property' || type === 'method') {
+          var classNameId = res[0].replace(/\./g, '_');
+          log("Show %s", classNameId);
+          $('#' + classNameId).show();
+        }
+        else {
+          var typeName = res[0];
+          log("Show type %s", typeName);
+          $('#' + typeName).show();
+        }
+      });
+
+    }
+
+    $('#searchbox').on('submit', function() {
+      doSearch();
+      return false;
+    })
+    $('#searchbox').on('keyup', function() {
+      doSearch();
+    });
+
+
+    $.getJSON(JSON_API_URL).then(function(res) {
+
+      // console.warn(res);
+
+      Object.keys(res.types).forEach(function(typeName) {
+
+        var type = res.types[typeName];
+
+        index.add({
+          id: typeName + '|type',
+          type: typeName,
+          description: type.description,
+          _type: 'type',
+        })
+      });
+
+      Object.keys(res.classes).forEach(function(className) {
+
+        var clazz = res.classes[className];
+
+        index.add({
+          id: className + '|class',
+          object: className,
+          description: clazz.description,
+          _type: 'class',
+        })
+
+        Object.keys(clazz.methods).forEach(function(methodName) {
+
+          var method = clazz.methods[methodName];
+
+          index.add({
+            id: className + '|' + methodName + '|method',
+            object: className,
+            method: methodName,
+            description: method.description,
+            _type: 'method',
+          })
+        });
+
+        Object.keys(clazz.properties).forEach(function(propName) {
+
+          var prop = clazz.properties[propName];
+
+          index.add({
+            id: className + '|' + propName + '|property',
+            object: className,
+            property: propName,
+            description: prop.description,
+            _type: 'property',
+          })
+        });
+
+      });
+
+    })
+  });
+</script>
+</li>
+      <li>
+        <a href="https://github.com/Agile-IoT/agile-api-spec" title="Go to repository">
+          <i class="fa fa-github text-bigger color-black" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/agile_iot" title="Get in touch on Twitter">
+          <i class="fa fa-twitter text-bigger color-black" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+  <hr />
+
+  <div class="row">
+    <div class="columns large-12 medium-12 small-12">
+      <div class="api-class"
+  data-type="class"
+  data-magellan-target="org_eclipse_agail_Apps"
+  id="org_eclipse_agail_Apps"  
+  >
+
+  <h3>
+    <a
+      href="#org_eclipse_agail_Apps"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
+    org.eclipse.agail.Apps
+  </h3>
+  <div class="description">Apps API enable the management of AGILE apps and components
+</div>
+  <hr />
+
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
+  <ul class="api-class-properties" data-type="properties">
+    <li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Apps.Logs"
+  id="org.eclipse.agail.Apps_Logs"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    <span class="name" id="Logs">
+      Logs
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Apps.Logs">
+
+    
+      <div class="description">
+        System path to Apps log file.
+Contains per-app filterable output.
+
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Apps.Settings"
+  id="org.eclipse.agail.Apps_Settings"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    <span class="name" id="Settings">
+      Settings
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Apps.Settings">
+
+    
+
+    
+
+    
+
+  </div>
+</li>
+
+  </ul>
+
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
+  <ul class="api-class-methods" data-type="methods">
+    <li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Apps.Start"
+  id="org.eclipse.agail.Apps_Start"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    Boolean
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Start(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Array
+  
+</span>
+
+<span class="name">
+  params
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Apps.Start">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="app">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        app
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Application name to start
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="params">
+
+  <div class="overview">
+    <span class="type">
+      
+        Array[String]
+      
+    </span>
+
+    
+      <span class="name">
+        params
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Application parameters to pass
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">`[ --start, --verbose, --config, ~/myapp/config.json ]`</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Boolean
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Return informations regarding the operation results.
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Apps.Stop"
+  id="org.eclipse.agail.Apps_Stop"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    Number
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Stop(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Apps.Stop">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="app">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        app
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Application name to stop
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Return the exit code, if available.
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Apps.Restart"
+  id="org.eclipse.agail.Apps_Restart"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    Boolean
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Restart(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Apps.Restart">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="app">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        app
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Application name to restart
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Boolean
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Apps.Install"
+  id="org.eclipse.agail.Apps_Install"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    Boolean
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Install(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Apps.Install">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="app">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        app
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Application name to install
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Boolean
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Apps.Uninstall"
+  id="org.eclipse.agail.Apps_Uninstall"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    Boolean
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Uninstall(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Apps.Uninstall">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="app">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        app
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Application name to uninstall
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Boolean
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Apps.Status"
+  id="org.eclipse.agail.Apps_Status"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    Object
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Status(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  app
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Apps.Status">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="app">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        app
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Application name to uninstall
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="running">
+
+  <div class="overview">
+    <span class="type">
+      
+        Boolean
+      
+    </span>
+
+    
+      <span class="name">
+        running
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="message">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        message
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="pid">
+
+  <div class="overview">
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+      <span class="name">
+        pid
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+
+  </ul>
+
+</div>
+<div class="api-class"
+  data-type="class"
+  data-magellan-target="org_eclipse_agail_Device"
+  id="org_eclipse_agail_Device"  
+  >
+
+  <h3>
+    <a
+      href="#org_eclipse_agail_Device"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
+    org.eclipse.agail.Device
+  </h3>
+  <div class="description">The Device API abstracts operations over the real device.
+It send commands to a Protocol API instance to which is binded.
+</div>
+  <hr />
+
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
+  <ul class="api-class-properties" data-type="properties">
+    <li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Device.Id"
+  id="org.eclipse.agail.Device_Id"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    <span class="name" id="Id">
+      Id
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Device.Id">
+
+    
+      <div class="description">
+        The unique device id in the gateway
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Device.Name"
+  id="org.eclipse.agail.Device_Name"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    <span class="name" id="Name">
+      Name
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Device.Name">
+
+    
+      <div class="description">
+        The device name
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Device.Status"
+  id="org.eclipse.agail.Device_Status"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#StatusType">StatusType</a>
+      
+    </span>
+
+    <span class="name" id="Status">
+      Status
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Device.Status">
+
+    
+      <div class="description">
+        Indicate the current device status
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Device.Configuration"
+  id="org.eclipse.agail.Device_Configuration"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#KeyValue">KeyValue</a>
+      
+    </span>
+
+    <span class="name" id="Configuration">
+      Configuration
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Device.Configuration">
+
+    
+      <div class="description">
+        User configurations storage
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Device.Profile"
+  id="org.eclipse.agail.Device_Profile"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    <span class="name" id="Profile">
+      Profile
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Device.Profile">
+
+    
+      <div class="description">
+        Contains protocol specific provided information on device in order to handle at Protocol level the specific implementation
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Device.Data"
+  id="org.eclipse.agail.Device_Data"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    <span class="name" id="Data">
+      Data
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Device.Data">
+
+    
+      <div class="description">
+        Retain the most recent updates from a sensor or data stream, received asynchronously from Subscribe call
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Device.Protocol"
+  id="org.eclipse.agail.Device_Protocol"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Protocol">org.eclipse.agail.Protocol</a>
+      
+    </span>
+
+    <span class="name" id="Protocol">
+      Protocol
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Device.Protocol">
+
+    
+      <div class="description">
+        Device-specific communication Protocol instance. Available to access protocol specific methods and properties
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+
+  </ul>
+
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
+  <ul class="api-class-methods" data-type="methods">
+    <li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Device.Read"
+  id="org.eclipse.agail.Device_Read"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#RecordObject"><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">Read(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  component
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Read data from the component
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Device.Read">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="component">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        component
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Device.ReadAll"
+  id="org.eclipse.agail.Device_ReadAll"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#org.eclipse.agail.RecordObject"><span class="type">
+  
+    <a href="#org.eclipse.agail.RecordObject">Array</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">ReadAll(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Read from all components of the device
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Device.ReadAll">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.RecordObject">Array[RecordObject]</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Device.LastUpdate"
+  id="org.eclipse.agail.Device_LastUpdate"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#RecordObject"><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">LastUpdate(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  component
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Last update from the component
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Device.LastUpdate">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="component">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        component
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Device.LastUpdateAll"
+  id="org.eclipse.agail.Device_LastUpdateAll"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#org.eclipse.agail.RecordObject"><span class="type">
+  
+    <a href="#org.eclipse.agail.RecordObject">Array</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">LastUpdateAll(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Last update of all components of the device
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Device.LastUpdateAll">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.RecordObject">Array[RecordObject]</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Device.Execute"
+  id="org.eclipse.agail.Device_Execute"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Execute(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  op
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Object*
+  
+</span>
+
+<span class="name">
+  payload
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Perform an action on the device or sensor side triggering the
+underline Protocol specific implementation.
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Device.Execute">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="op">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        op
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Operation name or code as string
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="payload">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="name">
+        payload
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Arguments for the actuation on the device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Device.Connect"
+  id="org.eclipse.agail.Device_Connect"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Connect(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Connect or initialize the underlying Protocol connection implementation if required or available.
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Device.Connect">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Device.Disconnect"
+  id="org.eclipse.agail.Device_Disconnect"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Disconnect(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Disconnect or clean up the underlying Protocol connection implementation if required or available.
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Device.Disconnect">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Device.Write"
+  id="org.eclipse.agail.Device_Write"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Write(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  component
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+
+<span class="name">
+  data
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Device.Write">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="component">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        component
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="data">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+      <span class="name">
+        data
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Device.Subscribe"
+  id="org.eclipse.agail.Device_Subscribe"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Subscribe(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  component
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Enable subscription to a specific sensor or data stream, triggering
+the underlying Protocol implementation if supported.
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Device.Subscribe">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="component">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        component
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The stream or sensor reference to subscribe for updates
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Device.Unsubscribe"
+  id="org.eclipse.agail.Device_Unsubscribe"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Unsubscribe(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  component
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Disable a subscription to a specific sensor or data stream, triggering
+the underlying Protocol implementation if supported.
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Device.Unsubscribe">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="component">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        component
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The stream or sensor reference to unsubscribe from
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+
+  </ul>
+
+</div>
+<div class="api-class"
+  data-type="class"
+  data-magellan-target="org_eclipse_agail_DeviceManager"
+  id="org_eclipse_agail_DeviceManager"  
+  >
+
+  <h3>
+    <a
+      href="#org_eclipse_agail_DeviceManager"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
+    org.eclipse.agail.DeviceManager
+  </h3>
+  <div class="description">The DeviceManager list the registered devices available from the gateway available protocols.
+This API is responsible to instantiate the reference DBus object for every device
+and offer management and integration points.
+</div>
+  <hr />
+
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
+  <ul class="api-class-properties" data-type="properties">
+    <li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.DeviceManager.Devices"
+  id="org.eclipse.agail.DeviceManager_Devices"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#DeviceDefinition">Array[DeviceDefinition]</a>
+      
+    </span>
+
+    <span class="name" id="Devices">
+      Devices
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.DeviceManager.Devices">
+
+    
+      <div class="description">
+        Return all registered devices
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+
+  </ul>
+
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
+  <ul class="api-class-methods" data-type="methods">
+    <li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.DeviceManager.MatchingDeviceTypes"
+  id="org.eclipse.agail.DeviceManager_MatchingDeviceTypes"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    Array
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">MatchingDeviceTypes(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#DeviceOverview">DeviceOverview</a>
+  
+</span>
+
+<span class="name">
+  overview
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Get matching types for a device overview
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.DeviceManager.MatchingDeviceTypes">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="overview">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#DeviceOverview">DeviceOverview</a>
+      
+    </span>
+
+    
+      <span class="name">
+        overview
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The request body describing a device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Array[String]
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        list of possible device types
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.DeviceManager.Find"
+  id="org.eclipse.agail.DeviceManager_Find"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#org.eclipse.agail.Device"><span class="type">
+  
+    <a href="#org.eclipse.agail.Device">Array</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">Find(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#BaseQuery">BaseQuery</a>
+  
+</span>
+
+<span class="name">
+  query
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Search for devices by specific criteria
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.DeviceManager.Find">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="query">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#BaseQuery">BaseQuery</a>
+      
+    </span>
+
+    
+      <span class="name">
+        query
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        An query object to search for a device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Device">Array[org.eclipse.agail.Device]</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A list with all matching registered devices results, eventually sorted and sliced
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.DeviceManager.Create"
+  id="org.eclipse.agail.DeviceManager_Create"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#DeviceDefinition"><span class="type">
+  
+    <a href="#DeviceDefinition">DeviceDefinition</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">Create(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#DeviceDefinition">DeviceDefinition</a>
+  
+</span>
+
+<span class="name">
+  device
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Create (register) a new device in the manager
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.DeviceManager.Create">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="device">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#DeviceDefinition">DeviceDefinition</a>
+      
+    </span>
+
+    
+      <span class="name">
+        device
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#DeviceDefinition">DeviceDefinition</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Return the DeviceDefinition of the device with Agile specific device id field to identify assigned.
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.DeviceManager.Read"
+  id="org.eclipse.agail.DeviceManager_Read"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#DeviceDefinition"><span class="type">
+  
+    <a href="#DeviceDefinition">DeviceDefinition</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">Read(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Load a device definition by its agile ID
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.DeviceManager.Read">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="Id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        Id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#DeviceDefinition">DeviceDefinition</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Return the DeviceDefinition of the device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.DeviceManager.Update"
+  id="org.eclipse.agail.DeviceManager_Update"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Update(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#DeviceDefinition">DeviceDefinition</a>
+  
+</span>
+
+<span class="name">
+  Definition
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Updates a device definition by its agile ID
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.DeviceManager.Update">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="Id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        Id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="Definition">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#DeviceDefinition">DeviceDefinition</a>
+      
+    </span>
+
+    
+      <span class="name">
+        Definition
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.DeviceManager.Delete"
+  id="org.eclipse.agail.DeviceManager_Delete"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Delete(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Delete a device definition by its ID. This will deactivate the Device DBus object
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.DeviceManager.Delete">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="Id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        Id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.DeviceManager.Batch"
+  id="org.eclipse.agail.DeviceManager_Batch"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Batch(</span>
+      <span class="args"><span class="type">
+  
+    Enum
+  
+</span>
+
+<span class="name">
+  operation
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Object*
+  
+</span>
+
+<span class="name">
+  arguments
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Perform a batch operation over a set of devices.
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.DeviceManager.Batch">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="operation">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        operation
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>Create</li><li>Update</li><li>Delete</li><li>Read</li>
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="arguments">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="name">
+        arguments
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        An object to be passed to the underlying function call (Create, Update, Delete, Read)
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+
+  </ul>
+
+</div>
+<div class="api-class"
+  data-type="class"
+  data-magellan-target="org_eclipse_agail_Protocol"
+  id="org_eclipse_agail_Protocol"  
+  >
+
+  <h3>
+    <a
+      href="#org_eclipse_agail_Protocol"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
+    org.eclipse.agail.Protocol
+  </h3>
+  <div class="description">A Protocol object abstract operations over a specific protocol implementation.
+Every Device has one Protocol used to establish and use a communication exchange.
+</div>
+  <hr />
+
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
+  <ul class="api-class-properties" data-type="properties">
+    <li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Protocol.Status"
+  id="org.eclipse.agail.Protocol_Status"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#ProtocolStatus">ProtocolStatus</a>
+      
+    </span>
+
+    <span class="name" id="Status">
+      Status
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Protocol.Status">
+
+    
+      <div class="description">
+        Return the status for the protocol
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Protocol.Driver"
+  id="org.eclipse.agail.Protocol_Driver"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    <span class="name" id="Driver">
+      Driver
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Protocol.Driver">
+
+    
+      <div class="description">
+        Driver unique code name
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+      <div class="example-container">
+        <h5>Example:</h5>
+        <pre class="example">ble</pre>
+      </div>
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Protocol.Name"
+  id="org.eclipse.agail.Protocol_Name"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    <span class="name" id="Name">
+      Name
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Protocol.Name">
+
+    
+      <div class="description">
+        Driver name
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+      <div class="example-container">
+        <h5>Example:</h5>
+        <pre class="example">Bluetooth LE</pre>
+      </div>
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Protocol.Data"
+  id="org.eclipse.agail.Protocol_Data"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    <span class="name" id="Data">
+      Data
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Protocol.Data">
+
+    
+      <div class="description">
+        Store the last record(s) received by a Read or Subscribe operation.
+Is up to the Protocol implementation decide how. Devices will receive data
+from different sensor an will need to filter out the correct ones
+
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Protocol.Devices"
+  id="org.eclipse.agail.Protocol_Devices"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#DeviceOverview">Array[DeviceOverview]</a>
+      
+    </span>
+
+    <span class="name" id="Devices">
+      Devices
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Protocol.Devices">
+
+    
+      <div class="description">
+        A list of devices found or available via this protocol.
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+
+  </ul>
+
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
+  <ul class="api-class-methods" data-type="methods">
+    <li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Protocol.Connect"
+  id="org.eclipse.agail.Protocol_Connect"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Connect(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  deviceId
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Abstract a connection, setup or initialization for a protocol managed device
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Protocol.Connect">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="deviceId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        deviceId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The protocol internal reference of a device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Protocol.Disconnect"
+  id="org.eclipse.agail.Protocol_Disconnect"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Disconnect(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  deviceId
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Abstract disconnect, tear down or uninitailization process for a managed device
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Protocol.Disconnect">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="deviceId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        deviceId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The protocol internal reference of a device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Protocol.StartDiscovery"
+  id="org.eclipse.agail.Protocol_StartDiscovery"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">StartDiscovery(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Initiate a discovery operation
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Protocol.StartDiscovery">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Protocol.StopDiscovery"
+  id="org.eclipse.agail.Protocol_StopDiscovery"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">StopDiscovery(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Stop a discovery operation
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Protocol.StopDiscovery">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Protocol.Write"
+  id="org.eclipse.agail.Protocol_Write"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#ProtocolMessage"><span class="type">
+  
+    <a href="#ProtocolMessage">ProtocolMessage</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">Write(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  deviceId
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#KeyValue">KeyValue</a>
+  
+</span>
+
+<span class="name">
+  arguments
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Send data over the protocol
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Protocol.Write">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="deviceId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        deviceId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The internal device reference identifier
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="arguments">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#KeyValue">KeyValue</a>
+      
+    </span>
+
+    
+      <span class="name">
+        arguments
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A list of specific parameters to pass to the protocol
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#ProtocolMessage">ProtocolMessage</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Protocol.Read"
+  id="org.eclipse.agail.Protocol_Read"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#RecordObject"><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">Read(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  deviceId
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#KeyValue">KeyValue</a>
+  
+</span>
+
+<span class="name">
+  arguments
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Read data over the Protocol, may be cached in the Data property
+depending on implementation to save resources
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Protocol.Read">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="deviceId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        deviceId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The internal device reference identifier
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="arguments">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#KeyValue">KeyValue</a>
+      
+    </span>
+
+    
+      <span class="name">
+        arguments
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A list of specific parameters to pass to the protocol
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Protocol.Subscribe"
+  id="org.eclipse.agail.Protocol_Subscribe"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Subscribe(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  deviceId
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#KeyValue">KeyValue</a>
+  
+</span>
+
+<span class="name">
+  arguments
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Subscribe to data updates over the Protocol
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Protocol.Subscribe">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="deviceId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        deviceId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The internal device reference identifier
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="arguments">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#KeyValue">KeyValue</a>
+      
+    </span>
+
+    
+      <span class="name">
+        arguments
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Additional arguments required to contextualize the subscription request
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Protocol.Unsubscribe"
+  id="org.eclipse.agail.Protocol_Unsubscribe"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#RecordObject"><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">Unsubscribe(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  deviceId
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#KeyValue">KeyValue</a>
+  
+</span>
+
+<span class="name">
+  arguments
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Unsubscribe to data updates over the Protocol
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Protocol.Unsubscribe">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="deviceId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        deviceId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The internal device reference identifier
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="arguments">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#KeyValue">KeyValue</a>
+      
+    </span>
+
+    
+      <span class="name">
+        arguments
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Additional arguments required to contextualize the subscription request
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+
+  </ul>
+
+</div>
+<div class="api-class"
+  data-type="class"
+  data-magellan-target="org_eclipse_agail_ProtocolManager"
+  id="org_eclipse_agail_ProtocolManager"  
+  >
+
+  <h3>
+    <a
+      href="#org_eclipse_agail_ProtocolManager"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
+    org.eclipse.agail.ProtocolManager
+  </h3>
+  <div class="description">The ProtocolManager list the managed protocols in the gateway. From this
+interface is possible to add and remove protocols and start/stop multiprotocol discovery.
+The discovery process will list all found devices under the `Devices` property.
+Those discovered devices may be added to the [DeviceManager](#org.eclipse.agail.DeviceManager) to be
+configured and made operational.
+</div>
+  <hr />
+
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
+  <ul class="api-class-properties" data-type="properties">
+    <li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.ProtocolManager.Devices"
+  id="org.eclipse.agail.ProtocolManager_Devices"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#DeviceOverview">Array[DeviceOverview]</a>
+      
+    </span>
+
+    <span class="name" id="Devices">
+      Devices
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.ProtocolManager.Devices">
+
+    
+      <div class="description">
+        All devices a Protocol knows about. This list may be updated by the StartDiscovery method.
+Devices may also be provisioned programmatically during the initialization phase.
+
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.ProtocolManager.DiscoveryStatus"
+  id="org.eclipse.agail.ProtocolManager_DiscoveryStatus"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#DiscoveryStatus">Array[DiscoveryStatus]</a>
+      
+    </span>
+
+    <span class="name" id="DiscoveryStatus">
+      DiscoveryStatus
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.ProtocolManager.DiscoveryStatus">
+
+    
+      <div class="description">
+        List the status of protocols discovery, inidicating if it is running or not
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.ProtocolManager.Protocols"
+  id="org.eclipse.agail.ProtocolManager_Protocols"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#ProtocolOverview">Array[ProtocolOverview]</a>
+      
+    </span>
+
+    <span class="name" id="Protocols">
+      Protocols
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.ProtocolManager.Protocols">
+
+    
+      <div class="description">
+        The list of managed Protocols
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+
+  </ul>
+
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
+  <ul class="api-class-methods" data-type="methods">
+    <li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.ProtocolManager.StartDiscovery"
+  id="org.eclipse.agail.ProtocolManager_StartDiscovery"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">StartDiscovery(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#DiscoverParam">DiscoverParam</a>
+  
+</span>
+
+<span class="name">
+  params
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Start discovery on all the managed Protocols
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.ProtocolManager.StartDiscovery">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="params">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#DiscoverParam">DiscoverParam</a>
+      
+    </span>
+
+    
+      <span class="name">
+        params
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.ProtocolManager.StopDiscovery"
+  id="org.eclipse.agail.ProtocolManager_StopDiscovery"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">StopDiscovery(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Stop the ongoing discovery on all the managed Protocols
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.ProtocolManager.StopDiscovery">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.ProtocolManager.Add"
+  id="org.eclipse.agail.ProtocolManager_Add"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Add(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#org.eclipse.agail.Protocol">org.eclipse.agail.Protocol</a>
+  
+</span>
+
+<span class="name">
+  protocol
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Add a new Protocol
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.ProtocolManager.Add">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="protocol">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Protocol">org.eclipse.agail.Protocol</a>
+      
+    </span>
+
+    
+      <span class="name">
+        protocol
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The DBus object interface reference of the Protocol
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.ProtocolManager.Remove"
+  id="org.eclipse.agail.ProtocolManager_Remove"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Remove(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#org.eclipse.agail.Protocol">org.eclipse.agail.Protocol</a>
+  
+</span>
+
+<span class="name">
+  protocol
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Remove a managed Protocol
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.ProtocolManager.Remove">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="protocol">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Protocol">org.eclipse.agail.Protocol</a>
+      
+    </span>
+
+    
+      <span class="name">
+        protocol
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The DBus object interface reference of the Protocol
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+
+  </ul>
+
+</div>
+<div class="api-class"
+  data-type="class"
+  data-magellan-target="org_eclipse_agail_Network"
+  id="org_eclipse_agail_Network"  
+  >
+
+  <h3>
+    <a
+      href="#org_eclipse_agail_Network"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
+    org.eclipse.agail.Network
+  </h3>
+  <div class="description"></div>
+  <hr />
+
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
+  <ul class="api-class-properties" data-type="properties">
+    <li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Network.Status"
+  id="org.eclipse.agail.Network_Status"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        Boolean
+      
+    </span>
+
+    <span class="name" id="Status">
+      Status
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Network.Status">
+
+    
+      <div class="description">
+        Indicates if an internet connection is available
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Network.Connections"
+  id="org.eclipse.agail.Network_Connections"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        Array[String]
+      
+    </span>
+
+    <span class="name" id="Connections">
+      Connections
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Network.Connections">
+
+    
+      <div class="description">
+        List available internet connections
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Network.Devices"
+  id="org.eclipse.agail.Network_Devices"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        Array[String]
+      
+    </span>
+
+    <span class="name" id="Devices">
+      Devices
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Network.Devices">
+
+    
+      <div class="description">
+        List available network system devices
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+
+  </ul>
+
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
+  <ul class="api-class-methods" data-type="methods">
+    <li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Network.CreateAP"
+  id="org.eclipse.agail.Network_CreateAP"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">CreateAP(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  subnet
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  gateway
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  password
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Create a local access point
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Network.CreateAP">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="subnet">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        subnet
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A valid subnet to use to setup the access point
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">10.0.0.0/8</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="gateway">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        gateway
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The default gateway to use for routing / natting
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">192.168.0.1</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="password">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        password
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The default access password / key used to login depending on AP setup
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Network.ScanWiFi"
+  id="org.eclipse.agail.Network_ScanWiFi"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">ScanWiFi(</span>
+      <span class="args"></span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Search for available WiFi
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Network.ScanWiFi">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+
+  </ul>
+
+</div>
+<div class="api-class"
+  data-type="class"
+  data-magellan-target="org_eclipse_agail_Storage_Driver"
+  id="org_eclipse_agail_Storage_Driver"  
+  >
+
+  <h3>
+    <a
+      href="#org_eclipse_agail_Storage_Driver"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
+    org.eclipse.agail.Storage.Driver
+  </h3>
+  <div class="description">A Driver component is in charge of data storage and
+retrieval on a specific implementation.
+It may be a local database or an online services via APIs
+</div>
+  <hr />
+
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
+  <ul class="api-class-properties" data-type="properties">
+    <li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Storage.Driver.Name"
+  id="org.eclipse.agail.Storage.Driver_Name"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    <span class="name" id="Name">
+      Name
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Storage.Driver.Name">
+
+    
+      <div class="description">
+        The driver friendly name
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Storage.Driver.Enabled"
+  id="org.eclipse.agail.Storage.Driver_Enabled"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        Boolean
+      
+    </span>
+
+    <span class="name" id="Enabled">
+      Enabled
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Storage.Driver.Enabled">
+
+    
+
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Storage.Driver.Status"
+  id="org.eclipse.agail.Storage.Driver_Status"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#DriverStatus">DriverStatus</a>
+      
+    </span>
+
+    <span class="name" id="Status">
+      Status
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Storage.Driver.Status">
+
+    
+      <div class="description">
+        Indicate the overall status of the Driver.
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Storage.Driver.Error"
+  id="org.eclipse.agail.Storage.Driver_Error"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        Boolean
+      
+    </span>
+
+    <span class="name" id="Error">
+      Error
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Storage.Driver.Error">
+
+    
+      <div class="description">
+        Indicates if an error occured. May be reset once notified.
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>W</b>rite
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Storage.Driver.Params"
+  id="org.eclipse.agail.Storage.Driver_Params"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    <span class="name" id="Params">
+      Params
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Storage.Driver.Params">
+
+    
+      <div class="description">
+        Contains Driver specific configurations
+
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>W</b>rite
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Storage.Driver.Logs"
+  id="org.eclipse.agail.Storage.Driver_Logs"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    <span class="name" id="Logs">
+      Logs
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Storage.Driver.Logs">
+
+    
+      <div class="description">
+        A system path to read the logs from
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+
+  </ul>
+
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
+  <ul class="api-class-methods" data-type="methods">
+    <li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.Driver.Create"
+  id="org.eclipse.agail.Storage.Driver_Create"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    String
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Create(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+
+<span class="name">
+  record
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Creates a record
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.Driver.Create">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="record">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+      <span class="name">
+        record
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Return the Id of the created record
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.Driver.Read"
+  id="org.eclipse.agail.Storage.Driver_Read"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#RecordObject"><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">Read(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  id
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Load a record by Id
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.Driver.Read">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Return the corresponding record
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.Driver.Update"
+  id="org.eclipse.agail.Storage.Driver_Update"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Update(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  id
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+
+<span class="name">
+  record
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Updates a record
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.Driver.Update">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="record">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+      <span class="name">
+        record
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.Driver.Delete"
+  id="org.eclipse.agail.Storage.Driver_Delete"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Delete(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  id
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Delete a record by Id
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.Driver.Delete">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.Driver.Find"
+  id="org.eclipse.agail.Storage.Driver_Find"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    Array
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Find(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#BaseQuery">BaseQuery</a>
+  
+</span>
+
+<span class="name">
+  query
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Search for a set of records by criterias
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.Driver.Find">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="query">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#BaseQuery">BaseQuery</a>
+      
+    </span>
+
+    
+      <span class="name">
+        query
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Array[RecordObject]
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+
+  </ul>
+
+</div>
+<div class="api-class"
+  data-type="class"
+  data-magellan-target="org_eclipse_agail_Storage_DriverManager"
+  id="org_eclipse_agail_Storage_DriverManager"  
+  >
+
+  <h3>
+    <a
+      href="#org_eclipse_agail_Storage_DriverManager"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
+    org.eclipse.agail.Storage.DriverManager
+  </h3>
+  <div class="description">The DriverManager component is in charge for handling the status
+of different Drivers available in the system.
+</div>
+  <hr />
+
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
+  <ul class="api-class-properties" data-type="properties">
+    <li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Storage.DriverManager.Enabled"
+  id="org.eclipse.agail.Storage.DriverManager_Enabled"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Storage.Driver">Array[org.eclipse.agail.Storage.Driver]</a>
+      
+    </span>
+
+    <span class="name" id="Enabled">
+      Enabled
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Storage.DriverManager.Enabled">
+
+    
+      <div class="description">
+        List of enabled Drivers.
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+<li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Storage.DriverManager.List"
+  id="org.eclipse.agail.Storage.DriverManager_List"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Storage.Driver">Array[org.eclipse.agail.Storage.Driver]</a>
+      
+    </span>
+
+    <span class="name" id="List">
+      List
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Storage.DriverManager.List">
+
+    
+      <div class="description">
+        List of all available Drivers.
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</li>
+
+  </ul>
+
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
+  <ul class="api-class-methods" data-type="methods">
+    <li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.DriverManager.Add"
+  id="org.eclipse.agail.Storage.DriverManager_Add"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Add(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#org.eclipse.agail.Storage.Driver">org.eclipse.agail.Storage.Driver</a>
+  
+</span>
+
+<span class="name">
+  driver
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    Boolean
+  
+</span>
+
+<span class="name">
+  enable
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Add a driver reference instance
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.DriverManager.Add">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="driver">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Storage.Driver">org.eclipse.agail.Storage.Driver</a>
+      
+    </span>
+
+    
+      <span class="name">
+        driver
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The driver instance to be added
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">org/eclipse/agail/Storage/Driver/Influx0</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="enable">
+
+  <div class="overview">
+    <span class="type">
+      
+        Boolean
+      
+    </span>
+
+    
+      <span class="name">
+        enable
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Specify if the Driver should be enabled and
+immediately available
+
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.DriverManager.Remove"
+  id="org.eclipse.agail.Storage.DriverManager_Remove"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Remove(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#org.eclipse.agail.Storage.Driver">org.eclipse.agail.Storage.Driver</a>
+  
+</span>
+
+<span class="name">
+  driver
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Remove (and implicitly disable) a driver reference
+instance
+
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.DriverManager.Remove">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="driver">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Storage.Driver">org.eclipse.agail.Storage.Driver</a>
+      
+    </span>
+
+    
+      <span class="name">
+        driver
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The driver instance
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">org/eclipse/agail/Storage/Driver/Sqlite0</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.DriverManager.Enable"
+  id="org.eclipse.agail.Storage.DriverManager_Enable"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Enable(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#org.eclipse.agail.Storage.Driver">org.eclipse.agail.Storage.Driver</a>
+  
+</span>
+
+<span class="name">
+  driver
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Enable a driver reference instance
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.DriverManager.Enable">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="driver">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Storage.Driver">org.eclipse.agail.Storage.Driver</a>
+      
+    </span>
+
+    
+      <span class="name">
+        driver
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The driver instance
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">org/eclipse/agail/Storage/Driver/Sqlite0</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.DriverManager.Disable"
+  id="org.eclipse.agail.Storage.DriverManager_Disable"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Disable(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#org.eclipse.agail.Storage.Driver">org.eclipse.agail.Storage.Driver</a>
+  
+</span>
+
+<span class="name">
+  driver
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Disable a driver reference instance
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.DriverManager.Disable">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="driver">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Storage.Driver">org.eclipse.agail.Storage.Driver</a>
+      
+    </span>
+
+    
+      <span class="name">
+        driver
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The driver instance
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">org/eclipse/agail/Storage/Driver/Sqlite0</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.DriverManager.Status"
+  id="org.eclipse.agail.Storage.DriverManager_Status"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    Object
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Status(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#org.eclipse.agail.Storage.Driver">org.eclipse.agail.Storage.Driver</a>
+  
+</span>
+
+<span class="name">
+  driver
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Query a Driver to report the current status.
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.DriverManager.Status">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="driver">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Storage.Driver">org.eclipse.agail.Storage.Driver</a>
+      
+    </span>
+
+    
+      <span class="name">
+        driver
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The driver instance
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">org/eclipse/agail/Storage/Driver/Sqlite0</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="enabled">
+
+  <div class="overview">
+    <span class="type">
+      
+        Boolean
+      
+    </span>
+
+    
+      <span class="name">
+        enabled
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="status">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#DriverStatus">DriverStatus</a>
+      
+    </span>
+
+    
+      <span class="name">
+        status
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="logs">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        logs
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A system path where to read the Driver logs
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">/var/log/agile-driver/storage.log</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+
+  </ul>
+
+</div>
+<div class="api-class"
+  data-type="class"
+  data-magellan-target="org_eclipse_agail_Storage"
+  id="org_eclipse_agail_Storage"  
+  >
+
+  <h3>
+    <a
+      href="#org_eclipse_agail_Storage"
+      >
+      <i
+        title="Permanent link"
+        class="fa fa-link text-smaller color-grey"
+        aria-hidden="true"></i>
+    </a>
+    org.eclipse.agail.Storage
+  </h3>
+  <div class="description">The Storage component offer an abstraction for Devices to store and fetch data
+in a generic way.
+Write operations happens on all the enabled Drivers;
+Failure of a single Driver doesn't make faile the whole write but only reported
+Read operations work on a default driver, if specified, which acts as preferred source.
+In case default is not available or fails, read will be executed in cascade on
+the enabled Driver. If none replies the operation fails.
+</div>
+  <hr />
+
+  <h4>
+    <small class="fa fa-tags" aria-hidden="true"></small>
+    Properties
+  </h4>
+  <ul class="api-class-properties" data-type="properties">
+    <li
+  class="api-class-property"
+  data-type="property"
+  data-id="org.eclipse.agail.Storage.Drivers"
+  id="org.eclipse.agail.Storage_Drivers"
+>
+
+  <div class="overview">
+
+    <span class="type">
+      
+        <a href="#org.eclipse.agail.Storage.Driver">Array[org.eclipse.agail.Storage.Driver]</a>
+      
+    </span>
+
+    <span class="name" id="Drivers">
+      Drivers
+    </span>
+
+  </div>
+
+  <div class="pad-left details hidden" data-for="org.eclipse.agail.Storage.Drivers">
+
+    
+      <div class="description">
+        List the enabled drivers in use
+      </div>
+    
+
+    
+      <div class="access-container">
+        <h5>Access types:</h5>
+        <ul>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>R</b>ead
+              </span>
+            </li>
+          
+            <li>
+              <span class="property-access access-[object Object]">
+                <b>S</b>ubscribe
+              </span>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+  </div>
+</li>
+
+  </ul>
+
+  <h4>
+    <small class="fa fa-cogs" aria-hidden="true"></small>
+    Methods
+  </h4>
+  <ul class="api-class-methods" data-type="methods">
+    <li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.Create"
+  id="org.eclipse.agail.Storage_Create"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    String
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Create(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+
+<span class="name">
+  record
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Creates a record
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.Create">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="record">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+      <span class="name">
+        record
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Return the Id of the created record
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.Read"
+  id="org.eclipse.agail.Storage_Read"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <a href="#RecordObject"><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+</a>
+      
+    </span>
+
+    <span class="name">Read(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Load a record by Id
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.Read">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="Id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        Id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Return the corresponding record
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.Update"
+  id="org.eclipse.agail.Storage_Update"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Update(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+<span class="args-glue">, </span><span class="type">
+  
+    <a href="#RecordObject">RecordObject</a>
+  
+</span>
+
+<span class="name">
+  Record
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Updates a record
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.Update">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="Id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        Id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="Record">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#RecordObject">RecordObject</a>
+      
+    </span>
+
+    
+      <span class="name">
+        Record
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.Delete"
+  id="org.eclipse.agail.Storage_Delete"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    void
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Delete(</span>
+      <span class="args"><span class="type">
+  
+    String
+  
+</span>
+
+<span class="name">
+  Id
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Delete a record by Id
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.Delete">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="Id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        Id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        void
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+<li
+  class="api-class-method"
+  data-type="method"
+  data-id="org.eclipse.agail.Storage.Find"
+  id="org.eclipse.agail.Storage_Find"
+>
+
+  <div class="overview">
+
+    <span class="returnType type secondary">
+      
+        <span class="type">
+  
+    Array
+  
+</span>
+
+      
+    </span>
+
+    <span class="name">Find(</span>
+      <span class="args"><span class="type">
+  
+    <a href="#BaseQuery">BaseQuery</a>
+  
+</span>
+
+<span class="name">
+  query
+</span>
+</span>
+    <span class="name">)</span>
+
+    
+      <div class="description">
+        Search for a set of records by criterias
+      </div>
+    
+
+  </div>
+
+  <div class="details hidden pad-left" data-for="org.eclipse.agail.Storage.Find">
+
+    
+
+    
+      <div class="method-overview">
+        <div class="wrapper">
+  <h5 class="title">
+    Arguments
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="query">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#BaseQuery">BaseQuery</a>
+      
+    </span>
+
+    
+      <span class="name">
+        query
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+<div class="wrapper">
+  <h5 class="title">
+    Return type
+  </h5>
+  <ul class="content">
+    <li class="api-type" data-type="type" id="">
+
+  <div class="overview">
+    <span class="type">
+      
+        Array[RecordObject]
+      
+    </span>
+
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </ul>
+</div>
+
+      </div>
+    
+  </div>
+
+</li>
+
+  </ul>
+
+</div>
+
+<div class="api-types" data-type="root-types">
+
+  <h2>Types</h2>
+  <hr />
+
+  <div class="types-list">
+    <li class="api-type" data-type="type" id="DeviceOverview">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DeviceOverview
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        An overview of a device a protocol knows about
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Friendly name of the device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="protocol">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        protocol
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Protocol reference for this device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Protocol level id used to identify and access the device
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="status">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        status
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>CONNECTED</li><li>DISCONNECTED</li><li>AVAILABLE</li><li>UNAVAILABLE</li>
+      </ul>
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="DiscoverParam">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DiscoverParam
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="duration">
+
+  <div class="overview">
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+      <span class="name">
+        duration
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The duration in seconds the discovery process will last before
+it should be stopped
+
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="DiscoveryStatus">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DiscoveryStatus
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Name of the protocol
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="status">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        status
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>NONE</li><li>RUNNING</li><li>FAILURE</li>
+      </ul>
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolMessage">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        ProtocolMessage
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="data">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        data
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="format">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        format
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolOverview">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        ProtocolOverview
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The protocol name
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">Bluetooth LE</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        the internal code identifying the protocol
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">BLE</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="interface">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        interface
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The DBus interface reference
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">org.eclipse.agail.protocol.BLE</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="status">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#ProtocolStatus">ProtocolStatus</a>
+      
+    </span>
+
+    
+      <span class="name">
+        status
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolProfile">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="name">
+        ProtocolProfile
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A Protocol set of settings that translate human readable properties
+to actual Protocol implementation details.
+
+For example, the user request the temperature value over a BLE connected
+device and the Protocol receive all the specific informations (like
+services and characteristics ids) to enable the data reading.
+
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ProtocolStatus">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        ProtocolStatus
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Identify a status of the Protocol, indicating if operational (AVAILABLE) or
+if for some reason further user-side checks are required.
+
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>AVAILABLE</li><li>UNAVAILABLE</li><li>NOT_CONFIGURED</li><li>DISABLED</li><li>ENABLED</li><li>FAILURE</li>
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ChannelTypeEnum">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        ChannelTypeEnum
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>Number</li><li>String</li><li>Boolean</li><li>GeoPoint</li><li>Object</li>
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="DeviceComponent">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DeviceComponent
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A device component from which get a data stream, like a sensor
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="id">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        id
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="unit">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        unit
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="properties">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#KeyValue">KeyValue</a>
+      
+    </span>
+
+    
+      <span class="name">
+        properties
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="DeviceDefinition">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DeviceDefinition
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A device definition that contains informations describing the current device
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="deviceId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        deviceId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Agile specific device ID
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="address">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        address
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Protocol specific device address
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="description">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        description
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="protocol">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        protocol
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="path">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        path
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        DBus specific path to reach the object instance
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="streams">
+
+  <div class="overview">
+    <span class="type">
+      
+        Array[DeviceComponent]
+      
+    </span>
+
+    
+      <span class="name">
+        streams
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A list of components from which get data streams
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="DeviceStreamChannel">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        DeviceStreamChannel
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A channel contains the definition of a component like a sensor
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="name">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        name
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="type">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#ChannelTypeEnum">ChannelTypeEnum</a>
+      
+    </span>
+
+    
+      <span class="name">
+        type
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="RegisterPayload">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        RegisterPayload
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Payload
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="overview">
+
+  <div class="overview">
+    <span class="type">
+      
+        <a href="#DeviceOverview">DeviceOverview</a>
+      
+    </span>
+
+    
+      <span class="name">
+        overview
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="type">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        type
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="StatusType">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        StatusType
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>CONNECTED</li><li>DISCONNECTED</li>
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="DriverStatus">
+
+  <div class="overview">
+    <span class="type">
+      
+        Enum
+      
+    </span>
+
+    
+      <span class="name">
+        DriverStatus
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li>ACTIVE</li><li>NOT_CONFIGURED</li><li>ERROR</li><li>FAILURE</li>
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="RecordObject">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        RecordObject
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        Contains the measurment from a sensor and the metadata regarding its source
+      </span>
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="DeviceId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        DeviceId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The Agile Id that generated the value
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="ComponentId">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        ComponentId
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The component Id or sensor from where the value comes from
+      </span>
+    
+
+    
+      <div class="example-container">
+        Example <pre class="example">temperature</pre>
+      </div>
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="Value">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        Value
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The value, stored as string
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="Unit">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        Unit
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The measurment unit for the value
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="Format">
+
+  <div class="overview">
+    <span class="type">
+      
+        String
+      
+    </span>
+
+    
+      <span class="name">
+        Format
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A format description to read the data value
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="LastUpdate">
+
+  <div class="overview">
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+      <span class="name">
+        LastUpdate
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A UNIX timestamp rapresenting the last update of a record
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="BaseQuery">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object
+      
+    </span>
+
+    
+      <span class="name">
+        BaseQuery
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+
+    
+
+    
+      <ul class="fields pad-left no-bullet">
+        <li class="api-type" data-type="type" id="Criteria">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="name">
+        Criteria
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A key-value series of field-value to query for.
+- Use `*` to indicate a fuzzy search
+- Use an Array to indicate an IN like query
+
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="OrderBy">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="name">
+        OrderBy
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A key-value series of field-value to order the result for.
+
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="Limit">
+
+  <div class="overview">
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+      <span class="name">
+        Limit
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The limit of records founds to return
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="Offset">
+
+  <div class="overview">
+    <span class="type">
+      
+        Number
+      
+    </span>
+
+    
+      <span class="name">
+        Offset
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        The position for the first record to take from the list of results
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+      </ul>
+    
+  </div>
+
+</li>
+<li class="api-type" data-type="type" id="KeyValue">
+
+  <div class="overview">
+    <span class="type">
+      
+        Object*
+      
+    </span>
+
+    
+      <span class="name">
+        KeyValue
+      </span>
+    
+  </div>
+
+  <div class="details hidden">
+
+    
+      <span class="description">
+        A list of key/value pairs
+      </span>
+    
+
+    
+
+    
+  </div>
+
+</li>
+
+  </div>
+
+</div>
+
+    </div>
+  </div>
+
+  <script>
+    jQuery(function($) {
+
+      $('body').foundation();
+
+      $(".api-class .hidden").hide();
+
+      $(".api-class .overview").click(function() {
+        // $(this).toggleClass("open");
+        $(this).next().toggle();
+      })
+
+      $(".api-class .details .overview").off("click");
+      $(".api-class .details .hidden").show();
+
+    });
+  </script>
+</body>
+</html>

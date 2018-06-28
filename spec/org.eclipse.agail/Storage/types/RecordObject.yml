@@ -1,0 +1,36 @@
+#-------------------------------------------------------------------------------
+# Copyright (C) 2017 Create-Net / FBK.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License 2.0
+# which accompanies this distribution, and is available at
+# https://www.eclipse.org/legal/epl-2.0/
+#
+# SPDX-License-Identifier: EPL-2.0
+# 
+# Contributors:
+#     Create-Net / FBK - initial API and implementation
+#-------------------------------------------------------------------------------
+RecordObject:
+  group: Data storage
+  type: Object
+  description: Contains the measurment from a sensor and the metadata regarding its source
+  fields:
+    DeviceId:
+      description: The Agile Id that generated the value
+      type: String
+    ComponentId:
+      description: The component Id or sensor from where the value comes from
+      type: String
+      example: temperature
+    Value:
+      type: String
+      description: The value, stored as string
+    Unit:
+      type: String
+      description: The measurment unit for the value
+    Format:
+      type: String
+      description: A format description to read the data value
+    LastUpdate:
+      description: A UNIX timestamp rapresenting the last update of a record
+      type: Number

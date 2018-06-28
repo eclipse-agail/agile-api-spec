@@ -1,0 +1,11 @@
+deps
+/agile-dbus-java-interface/target/
+.settings/
+.classpath
+.project
+.log
+.metadata/
+.recommenders
+*/*.log
+*.log
+/bluez-5.39/

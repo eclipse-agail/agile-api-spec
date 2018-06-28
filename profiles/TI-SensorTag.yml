@@ -1,0 +1,115 @@
+#-------------------------------------------------------------------------------
+# Copyright (C) 2017 Create-Net / FBK.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License 2.0
+# which accompanies this distribution, and is available at
+# https://www.eclipse.org/legal/epl-2.0/
+#
+# SPDX-License-Identifier: EPL-2.0
+# 
+# Contributors:
+#     Create-Net / FBK - initial API and implementation
+#-------------------------------------------------------------------------------
+Device:
+
+  ## Mandatory fields
+  # Protocol type
+  Protocol: BLE
+  Version: 1.0
+  Name: "CC2650 SensorTag"
+  Address: "C4:BE:84:70:69:09"
+  Description: "TI Sensor tag"
+  Url: http://www.ti.com/product/cc2541
+
+  ## Additional informations in Properties
+  Properties:
+    BaseUUID: F000XXXX-0451-4000-B000-000000000000
+    Url:
+      Product: http://www.ti.com/product/cc2541
+      Datasheet: http://www.ti.com/lit/ds/symlink/cc2541.pdf
+      Guide: http://processors.wiki.ti.com/index.php/SensorTag_User_Guide
+      GATT: http://processors.wiki.ti.com/images/a/a8/BLE_SensorTag_GATT_Server.pdf
+
+  # Streams are groups of single data sources
+  Streams:
+
+    # Temperature is the human readable name
+    Temperature:
+      Id: "f000aa00-0451-4000-b000-000000000000"
+      Description: "IR Temperature Service"
+      Address: 0xAA00
+      # In channels we list the available single sources of data
+      Channels:
+        # Data is the human readable name
+        Data:
+          Type: data
+          Id: "f000aa01-0451-4000-b000-000000000000"
+          Description: "IR Temperature Data"
+          Address: 0xAA01
+          # Type describes what kind of op supported
+          # (R)ead, (W)rite, (S)ubscribe
+          Type: [R, S]
+          # Specific configurations, readable by the Protocol implementation
+          Read:
+            Id: 54:65:6D:70:2E:20:44:61:74:61
+            Address: 0x2901
+            Return: Number
+          Subscribe:
+            Address: 0x2902
+            # Those may be exposed to user
+            Values:
+              On: 01:00
+              Off: 00:00
+
+        Period:
+          Type: config
+          Description: "IR Temperature Measurement Period"
+          Id: "f000aa03-0451-4000-b000-000000000000"
+          Address: 0xAA03
+          Type: [ R, W ]
+          Address: 0x2901
+          Return: Number
+          Values:
+            Unit: ms
+            Type: Number
+            Min: 300
+            Default: 1000
+
+    Accelerometer:
+      Id: "f000aa11-0451-4000-b000-000000000000"
+      Description: "Accelerometer Service, returning X:Y:Z Coordinates"
+      Address: 0xAA11
+      Channels:
+        Data:
+          Id: "f000aa01-0451-4000-b000-000000000000"
+          Description: "IR Temperature Data"
+          Address: 0xAA12
+          Type: [R, W, S]
+          Write:
+            Values:
+              2G: 01
+              4G: 02
+              8G: 03
+              Off: 00
+          Read:
+            Id: 54:65:6D:70:2E:20:44:61:74:61
+            Address: 0x2901
+            Return: Number
+          Subscribe:
+            Address: 0x2902
+            Values:
+              On: 01:00
+              Off: 00:00
+
+        Period:
+          Description: "IR Temperature Measurement Period"
+          Id: "f000aa13-0451-4000-b000-000000000000"
+          Address: 0xAA13
+          Type: [ r, w ]
+          Address: 0x2901
+          Return: Number
+          Values:
+            Unit: ms
+            Type: Number
+            Min: 300
+            Default: 1000

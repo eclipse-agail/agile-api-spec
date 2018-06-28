@@ -1,0 +1,94 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/org/eclipse/agail/Apps">
+
+  <interface name="org.eclipse.agail.Apps">
+    <!--
+    @see org.eclipse.agail.Apps.Start
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Apps_Start
+  -->
+  <method name="Start">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="params" type="(s)" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Apps.Stop
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Apps_Stop
+  -->
+  <method name="Stop">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="return" type="d" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Apps.Restart
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Apps_Restart
+  -->
+  <method name="Restart">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Apps.Install
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Apps_Install
+  -->
+  <method name="Install">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Apps.Uninstall
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Apps_Uninstall
+  -->
+  <method name="Uninstall">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="return" type="b" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Apps.Status
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Apps_Status
+  -->
+  <method name="Status">
+  
+      <arg name="app" type="s" direction="in"/>
+      <arg name="return" type="{bsd}" direction="out"/>
+  
+  </method>
+  <!--
+    @see org.eclipse.agail.Apps.Logs
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Apps_Logs
+  -->
+  <property
+    name="Logs"
+    type="s"
+    access="read"
+    />
+
+  <!--
+    @see org.eclipse.agail.Apps.Settings
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Apps_Settings
+  -->
+  <property
+    name="Settings"
+    type="v"
+    access="read"
+    />
+
+  </interface>
+
+</node>

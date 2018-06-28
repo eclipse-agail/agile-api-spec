@@ -1,0 +1,2379 @@
+{
+  "classes": {
+    "org.eclipse.agail.Apps": {
+      "description": "Apps API enable the management of AGILE apps and components\n",
+      "group": "Apps",
+      "methods": {
+        "Start": {
+          "args": {
+            "app": {
+              "description": "Application name to start",
+              "type": "String"
+            },
+            "params": {
+              "description": "Application parameters to pass",
+              "example": "`[ --start, --verbose, --config, ~/myapp/config.json ]`",
+              "type": "Array",
+              "fields": "String"
+            }
+          },
+          "return": {
+            "description": "Return informations regarding the operation results.",
+            "type": "Boolean"
+          }
+        },
+        "Stop": {
+          "args": {
+            "app": {
+              "description": "Application name to stop",
+              "type": "String"
+            }
+          },
+          "return": {
+            "description": "Return the exit code, if available.",
+            "type": "Number"
+          }
+        },
+        "Restart": {
+          "args": {
+            "app": {
+              "description": "Application name to restart",
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "Boolean"
+          }
+        },
+        "Install": {
+          "args": {
+            "app": {
+              "description": "Application name to install",
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "Boolean"
+          }
+        },
+        "Uninstall": {
+          "args": {
+            "app": {
+              "description": "Application name to uninstall",
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "Boolean"
+          }
+        },
+        "Status": {
+          "args": {
+            "app": {
+              "description": "Application name to uninstall",
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "Object",
+            "fields": {
+              "running": {
+                "type": "Boolean",
+                "required": true
+              },
+              "message": {
+                "type": "String",
+                "required": true
+              },
+              "pid": {
+                "type": "Number",
+                "required": true
+              }
+            }
+          }
+        }
+      },
+      "properties": {
+        "Logs": {
+          "description": "System path to Apps log file.\nContains per-app filterable output.\n",
+          "type": "String"
+        },
+        "Settings": {
+          "type": "Object*",
+          "fields": {
+            "Provider": {
+              "description": "Define an installer provider",
+              "example": "docker",
+              "type": "String",
+              "required": true
+            },
+            "ApiKey": {
+              "description": "User apiKey if required",
+              "type": "String",
+              "required": true
+            },
+            "RepositoryUrl": {
+              "description": "Repository / Marketplace API  url",
+              "type": "String",
+              "required": true
+            }
+          }
+        }
+      }
+    },
+    "org.eclipse.agail.Device": {
+      "description": "The Device API abstracts operations over the real device.\nIt send commands to a Protocol API instance to which is binded.\n",
+      "group": "Device",
+      "methods": {
+        "Read": {
+          "description": "Read data from the component",
+          "args": {
+            "component": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "RecordObject"
+          }
+        },
+        "ReadAll": {
+          "description": "Read from all components of the device",
+          "return": {
+            "type": "Array",
+            "fields": "RecordObject",
+            "reference": "org.eclipse.agail.RecordObject"
+          }
+        },
+        "LastUpdate": {
+          "description": "Last update from the component",
+          "args": {
+            "component": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "RecordObject"
+          }
+        },
+        "LastUpdateAll": {
+          "description": "Last update of all components of the device",
+          "return": {
+            "type": "Array",
+            "fields": "RecordObject",
+            "reference": "org.eclipse.agail.RecordObject"
+          }
+        },
+        "Execute": {
+          "description": "Perform an action on the device or sensor side triggering the\nunderline Protocol specific implementation.\n",
+          "args": {
+            "op": {
+              "description": "Operation name or code as string",
+              "type": "String"
+            },
+            "payload": {
+              "description": "Arguments for the actuation on the device",
+              "type": "Object*"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Connect": {
+          "description": "Connect or initialize the underlying Protocol connection implementation if required or available.",
+          "return": {
+            "type": "void"
+          }
+        },
+        "Disconnect": {
+          "description": "Disconnect or clean up the underlying Protocol connection implementation if required or available.",
+          "return": {
+            "type": "void"
+          }
+        },
+        "Write": {
+          "args": {
+            "component": {
+              "type": "String"
+            },
+            "data": {
+              "type": "RecordObject"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Subscribe": {
+          "description": "Enable subscription to a specific sensor or data stream, triggering\nthe underlying Protocol implementation if supported.\n",
+          "args": {
+            "component": {
+              "description": "The stream or sensor reference to subscribe for updates",
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Unsubscribe": {
+          "description": "Disable a subscription to a specific sensor or data stream, triggering\nthe underlying Protocol implementation if supported.\n",
+          "args": {
+            "component": {
+              "description": "The stream or sensor reference to unsubscribe from",
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        }
+      },
+      "properties": {
+        "Id": {
+          "description": "The unique device id in the gateway",
+          "type": "String"
+        },
+        "Name": {
+          "description": "The device name",
+          "type": "String"
+        },
+        "Status": {
+          "description": "Indicate the current device status",
+          "type": "StatusType"
+        },
+        "Configuration": {
+          "description": "User configurations storage",
+          "type": "KeyValue"
+        },
+        "Profile": {
+          "description": "Contains protocol specific provided information on device in order to handle at Protocol level the specific implementation",
+          "type": "Object*"
+        },
+        "Data": {
+          "description": "Retain the most recent updates from a sensor or data stream, received asynchronously from Subscribe call",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
+          "type": "RecordObject"
+        },
+        "Protocol": {
+          "description": "Device-specific communication Protocol instance. Available to access protocol specific methods and properties",
+          "reference": "org.eclipse.agail.Protocol"
+        }
+      },
+      "http": {
+        "/device/{deviceId}/status": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "get": {
+            "operationId": "Status",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Indicate the current device status",
+            "responses": {
+              "200": {
+                "description": "Status read done",
+                "schema": {
+                  "$ref": "#/definitions/StatusType"
+                },
+                "examples": {
+                  "application/json": {
+                    "status": "CONNECTED"
+                  }
+                }
+              },
+              "204": {
+                "description": "No data available"
+              }
+            }
+          }
+        },
+        "/device/{deviceId}": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "get": {
+            "operationId": "ReadAll",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Read values of all components from the device",
+            "responses": {
+              "200": {
+                "description": "Read done",
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "0": {
+                      "deviceID": "bleA0E6F8B62304",
+                      "componentID": "Temperature",
+                      "value": "23.46875",
+                      "unit": "Degree celsius",
+                      "format": "",
+                      "lastUpdate": "1477491668082"
+                    },
+                    "1": {
+                      "deviceID": "bleA0E6F8B62304",
+                      "componentID": "Humidity",
+                      "value": "58.929443",
+                      "unit": "Relative humidity",
+                      "format": "",
+                      "lastUpdate": "1477491668082"
+                    }
+                  }
+                }
+              },
+              "204": {
+                "description": "No data available"
+              }
+            }
+          }
+        },
+        "/device/{deviceId}/connection": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "operationId": "Connect",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Connect the device at protocol level",
+            "(reference)": "Device.Connect",
+            "responses": {
+              "200": {
+                "description": "Device connected"
+              }
+            }
+          },
+          "delete": {
+            "operationId": "Disconnect",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Disconnect device at protocol level",
+            "(reference)": "Device.Disconnect",
+            "responses": {
+              "200": {
+                "description": "Device disconnected"
+              }
+            }
+          }
+        },
+        "/device/{deviceId}/execute/{command}": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "command",
+              "in": "path",
+              "description": "Operation name to be performed",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "operationId": "Execute",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Perform an action on the device",
+            "(reference)": "Device.Execute",
+            "responses": {
+              "200": {
+                "description": "Action sent"
+              },
+              "204": {
+                "description": "Action sent, no response received"
+              }
+            }
+          }
+        },
+        "/device/{deviceId}/{componentId}/subscribe": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "componentId",
+              "in": "path",
+              "description": "Agile component name, like a sensor",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "operationId": "Subscribe",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Enable a subscription to a data stream. Asynchronous data updates will\nbe delivered via websocket.\n",
+            "(reference)": "Device.Subscribe",
+            "responses": {
+              "200": {
+                "description": "Subscription registered"
+              }
+            }
+          },
+          "delete": {
+            "operationId": "Unsubscribe",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Unsubscribe from a data stream",
+            "(reference)": "Device.Unsubscribe",
+            "responses": {
+              "200": {
+                "description": "Unsubscribed"
+              }
+            }
+          }
+        },
+        "/device/{deviceId}/{componentId}": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "componentId",
+              "in": "path",
+              "description": "Device component name, like a Temperature",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "get": {
+            "operationId": "Read",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Read from a device component",
+            "responses": {
+              "200": {
+                "description": "Read done",
+                "schema": {
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceID": "bleA0E6F8B62304",
+                    "componentID": "Temperature",
+                    "value": "23.46875",
+                    "unit": "Degree celsius",
+                    "format": "",
+                    "lastUpdate": "1477491668082"
+                  }
+                }
+              },
+              "204": {
+                "description": "No data available"
+              }
+            }
+          },
+          "post": {
+            "operationId": "Write",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Write to a device component",
+            "(reference)": "Device.Write",
+            "responses": {
+              "200": {
+                "description": "Write sent"
+              },
+              "204": {
+                "description": "Write sent, no results returned"
+              }
+            }
+          }
+        },
+        "/device/{deviceId}/{componentId}/{payload}": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "componentId",
+              "in": "path",
+              "description": "Device component name, like a Temperature",
+              "required": true,
+              "type": "string"
+            },
+            "2": {
+              "name": "payload",
+              "in": "path",
+              "description": "Data needs to send to the component",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "operationId": "Write",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Write to a device component",
+            "responses": {
+              "200": {
+                "description": "Write sent"
+              },
+              "204": {
+                "description": "Write sent, no response received"
+              }
+            }
+          }
+        },
+        "/device/{deviceId}/{componentId}/lastUpdate": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "componentId",
+              "in": "path",
+              "description": "Agile component name, like a sensor",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "get": {
+            "operationId": "LastUpdate",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Get the last record fetched from the component",
+            "responses": {
+              "200": {
+                "description": "Record fetched",
+                "schema": {
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceID": "bleA0E6F8B62304",
+                    "componentID": "Temperature",
+                    "value": "23.46875",
+                    "unit": "Degree celsius",
+                    "format": "",
+                    "lastUpdate": "1477491668082"
+                  }
+                }
+              },
+              "204": {
+                "description": "No data available"
+              },
+              "404": {
+                "description": "Device not available"
+              }
+            }
+          }
+        },
+        "/device/{deviceId}/lastUpdate": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "get": {
+            "operationId": "LastUpdateAll",
+            "tags": {
+              "0": "Device"
+            },
+            "description": "Get the last record fetched from the device",
+            "responses": {
+              "200": {
+                "description": "Record fetched",
+                "schema": {
+                  "$ref": "#/definitions/RecordObject"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceID": "bleA0E6F8B62304",
+                    "componentID": "Temperature",
+                    "value": "23.46875",
+                    "unit": "Degree celsius",
+                    "format": "",
+                    "lastUpdate": "1477491668082"
+                  }
+                }
+              },
+              "204": {
+                "description": "No data available"
+              },
+              "404": {
+                "description": "Device not available"
+              }
+            }
+          }
+        }
+      },
+      "dbus": {
+        "name": "/org/eclipse/agail/Device/Example"
+      }
+    },
+    "org.eclipse.agail.DeviceManager": {
+      "description": "The DeviceManager list the registered devices available from the gateway available protocols.\nThis API is responsible to instantiate the reference DBus object for every device\nand offer management and integration points.\n",
+      "group": "Device",
+      "methods": {
+        "MatchingDeviceTypes": {
+          "description": "Get matching types for a device overview",
+          "args": {
+            "overview": {
+              "description": "The request body describing a device",
+              "type": "DeviceOverview"
+            }
+          },
+          "return": {
+            "description": "list of possible device types",
+            "type": "Array",
+            "fields": "String"
+          }
+        },
+        "Find": {
+          "description": "Search for devices by specific criteria",
+          "args": {
+            "query": {
+              "description": "An query object to search for a device",
+              "type": "BaseQuery"
+            }
+          },
+          "return": {
+            "description": "A list with all matching registered devices results, eventually sorted and sliced",
+            "type": "Array",
+            "reference": "org.eclipse.agail.Device"
+          }
+        },
+        "Create": {
+          "description": "Create (register) a new device in the manager",
+          "args": {
+            "device": {
+              "type": "DeviceDefinition"
+            }
+          },
+          "return": {
+            "description": "Return the DeviceDefinition of the device with Agile specific device id field to identify assigned.",
+            "type": "DeviceDefinition"
+          }
+        },
+        "Read": {
+          "description": "Load a device definition by its agile ID",
+          "args": {
+            "Id": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "description": "Return the DeviceDefinition of the device",
+            "type": "DeviceDefinition"
+          }
+        },
+        "Update": {
+          "description": "Updates a device definition by its agile ID",
+          "args": {
+            "Id": {
+              "type": "String"
+            },
+            "Definition": {
+              "type": "DeviceDefinition"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Delete": {
+          "description": "Delete a device definition by its ID. This will deactivate the Device DBus object",
+          "args": {
+            "Id": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Batch": {
+          "description": "Perform a batch operation over a set of devices.",
+          "args": {
+            "operation": {
+              "type": "Enum",
+              "fields": {
+                "0": {
+                  "type": "Create",
+                  "required": true
+                },
+                "1": {
+                  "type": "Update",
+                  "required": true
+                },
+                "2": {
+                  "type": "Delete",
+                  "required": true
+                },
+                "3": {
+                  "type": "Read",
+                  "required": true
+                }
+              }
+            },
+            "arguments": {
+              "description": "An object to be passed to the underlying function call (Create, Update, Delete, Read)",
+              "type": "Object*"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        }
+      },
+      "properties": {
+        "Devices": {
+          "description": "Return all registered devices",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
+          "type": "Array",
+          "reference": "DeviceDefinition",
+          "events": {
+            "0": "DevicesChanged"
+          }
+        }
+      },
+      "http": {
+        "/devices": {
+          "get": {
+            "operationId": "Devices",
+            "tags": {
+              "0": "DeviceManager"
+            },
+            "description": "List all registered devices",
+            "responses": {
+              "200": {
+                "description": "List the registered device",
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/definitions/DeviceDefinition"
+                },
+                "examples": {
+                  "application/json": {
+                    "0": {
+                      "deviceId": "bleA1B2C3D4E5F6",
+                      "address": "A1:B2:C3:D4:E5:F6",
+                      "name": "MyFirstSensorTag",
+                      "description": "",
+                      "protocol": "org.eclipse.agail.protocol.ble",
+                      "path": "/org/eclipse/agail/Device/bleA1B2C3D4E5F6",
+                      "streams": {
+                        "0": {
+                          "id": "temperature",
+                          "unit": "celsius"
+                        },
+                        "1": {
+                          "id": "light",
+                          "unit": "lumen"
+                        },
+                        "2": {
+                          "id": "pressure",
+                          "unit": "hPa"
+                        }
+                      }
+                    },
+                    "1": {
+                      "deviceId": "bleA6B5C4D3E2F1",
+                      "address": "A6:B5:C4:D3:E2:F1",
+                      "name": "MySecondSensorTag",
+                      "description": "",
+                      "protocol": "org.eclipse.agail.protocol.ble",
+                      "path": "/org/eclipse/agail/Device/bleA6B5C4D3E2F1",
+                      "streams": {
+                        "0": {
+                          "id": "temperature",
+                          "unit": "celsius"
+                        },
+                        "1": {
+                          "id": "light",
+                          "unit": "lumen"
+                        },
+                        "2": {
+                          "id": "pressure",
+                          "unit": "hPa"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "204": {
+                "description": "Device list is empty"
+              }
+            }
+          },
+          "post": {
+            "operationId": "Register",
+            "description": "Register a new device based on information from ProtocolManager and device type",
+            "tags": {
+              "0": "DeviceManager"
+            },
+            "parameters": {
+              "0": {
+                "name": "payload",
+                "in": "body",
+                "description": "The request body describing a device and the intended type",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/RegisterPayload"
+                },
+                "examples": {
+                  "application/json": {
+                    "overview": {
+                      "id": "A0:E6:F8:B6:F2:00",
+                      "name": "CC2650 SensorTag",
+                      "protocol": "org.eclipse.agail.protocol.BLE",
+                      "status": "AVAILABLE"
+                    },
+                    "type": "TI SensorTag"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Device created",
+                "schema": {
+                  "$ref": "#/definitions/DeviceDefinition"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceId": "bleA1B2C3D4E5F6",
+                    "address": "A1:B2:C3:D4:E5:F6",
+                    "name": "MyFirstSensorTag",
+                    "description": "",
+                    "protocol": "org.eclipse.agail.protocol.ble",
+                    "path": "/org/eclipse/agail/Device/bleA1B2C3D4E5F6",
+                    "streams": {
+                      "0": {
+                        "id": "temperature",
+                        "unit": "celsius"
+                      },
+                      "1": {
+                        "id": "light",
+                        "unit": "lumen"
+                      },
+                      "2": {
+                        "id": "pressure",
+                        "unit": "hPa"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/devices/typeof": {
+          "post": {
+            "operationId": "MatchingDeviceTypes",
+            "description": "Get matching types for a device overview",
+            "tags": {
+              "0": "DeviceManager"
+            },
+            "parameters": {
+              "0": {
+                "name": "overview",
+                "in": "body",
+                "description": "The request body describing a device",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/DeviceOverview"
+                },
+                "examples": {
+                  "application/json": {
+                    "id": "A0:E6:F8:B6:F2:00",
+                    "name": "CC2650 SensorTag",
+                    "protocol": "org.eclipse.agail.protocol.BLE",
+                    "status": "AVAILABLE"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "list of possible device types",
+                "schema": {
+                  "type": "array",
+                  "items": "string"
+                }
+              }
+            }
+          }
+        },
+        "/devices/{deviceId}": {
+          "parameters": {
+            "0": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile device Id",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "get": {
+            "operationId": "Read",
+            "description": "Get a device definition",
+            "tags": {
+              "0": "DeviceManager"
+            },
+            "responses": {
+              "200": {
+                "description": "Device loaded",
+                "schema": {
+                  "$ref": "#/definitions/DeviceDefinition"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceId": "bleA1B2C3D4E5F6",
+                    "address": "A1:B2:C3:D4:E5:F6",
+                    "name": "SensorTag",
+                    "description": "",
+                    "protocol": "org.eclipse.agail.protocol.ble",
+                    "path": "/org/eclipse/agail/Device/bleA1B2C3D4E5F6",
+                    "streams": {
+                      "0": {
+                        "id": "temperature",
+                        "unit": "celsius"
+                      },
+                      "1": {
+                        "id": "light",
+                        "unit": "lumen"
+                      },
+                      "2": {
+                        "id": "pressure",
+                        "unit": "hPa"
+                      }
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          },
+          "put": {
+            "operationId": "Update",
+            "tags": {
+              "0": "DeviceManager"
+            },
+            "parameters": {
+              "0": {
+                "name": "body",
+                "in": "body",
+                "description": "The request body describing a device",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/DeviceDefinition"
+                },
+                "examples": {
+                  "application/json": {
+                    "deviceId": "bleA1B2C3D4E5F6",
+                    "address": "A1:B2:C3:D4:E5:F6",
+                    "name": "SensorTag",
+                    "description": "",
+                    "protocol": "org.eclipse.agail.protocol.ble",
+                    "path": "/org/eclipse/agail/Device/bleA1B2C3D4E5F6",
+                    "streams": {
+                      "0": {
+                        "id": "temperature",
+                        "unit": "celsius"
+                      },
+                      "1": {
+                        "id": "light",
+                        "unit": "lumen"
+                      },
+                      "2": {
+                        "id": "pressure",
+                        "unit": "hPa"
+                      },
+                      "3": {
+                        "id": "optical",
+                        "unit": "unit"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Update a device definition",
+            "responses": {
+              "200": {
+                "description": "Device updated"
+              },
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          },
+          "delete": {
+            "operationId": "Delete",
+            "tags": {
+              "0": "DeviceManager"
+            },
+            "description": "Delete a device definition and unregister it",
+            "responses": {
+              "200": {
+                "description": "Device removed"
+              },
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          }
+        }
+      }
+    },
+    "org.eclipse.agail.Protocol": {
+      "description": "A Protocol object abstract operations over a specific protocol implementation.\nEvery Device has one Protocol used to establish and use a communication exchange.\n",
+      "group": "Device",
+      "methods": {
+        "Connect": {
+          "description": "Abstract a connection, setup or initialization for a protocol managed device\n",
+          "args": {
+            "deviceId": {
+              "description": "The protocol internal reference of a device",
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Disconnect": {
+          "description": "Abstract disconnect, tear down or uninitailization process for a managed device\n",
+          "args": {
+            "deviceId": {
+              "description": "The protocol internal reference of a device",
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "StartDiscovery": {
+          "description": "Initiate a discovery operation\n",
+          "return": {
+            "type": "void",
+            "reference": "Devices"
+          }
+        },
+        "StopDiscovery": {
+          "description": "Stop a discovery operation\n",
+          "return": {
+            "type": "void"
+          }
+        },
+        "Write": {
+          "description": "Send data over the protocol\n",
+          "args": {
+            "deviceId": {
+              "description": "The internal device reference identifier",
+              "type": "String"
+            },
+            "arguments": {
+              "description": "A list of specific parameters to pass to the protocol",
+              "type": "KeyValue"
+            }
+          },
+          "return": {
+            "type": "ProtocolMessage"
+          }
+        },
+        "Read": {
+          "description": "Read data over the Protocol, may be cached in the Data property\ndepending on implementation to save resources\n",
+          "args": {
+            "deviceId": {
+              "description": "The internal device reference identifier",
+              "type": "String"
+            },
+            "arguments": {
+              "description": "A list of specific parameters to pass to the protocol",
+              "type": "KeyValue"
+            }
+          },
+          "return": {
+            "type": "RecordObject"
+          }
+        },
+        "Subscribe": {
+          "description": "Subscribe to data updates over the Protocol\n",
+          "args": {
+            "deviceId": {
+              "description": "The internal device reference identifier",
+              "type": "String"
+            },
+            "arguments": {
+              "description": "Additional arguments required to contextualize the subscription request",
+              "type": "KeyValue"
+            }
+          },
+          "return": {
+            "type": "void",
+            "reference": "Data"
+          }
+        },
+        "Unsubscribe": {
+          "description": "Unsubscribe to data updates over the Protocol\n",
+          "args": {
+            "deviceId": {
+              "description": "The internal device reference identifier",
+              "type": "String"
+            },
+            "arguments": {
+              "description": "Additional arguments required to contextualize the subscription request",
+              "type": "KeyValue"
+            }
+          },
+          "return": {
+            "type": "RecordObject",
+            "reference": "Data"
+          }
+        }
+      },
+      "properties": {
+        "Status": {
+          "description": "Return the status for the protocol",
+          "access": {
+            "0": "r"
+          },
+          "type": "ProtocolStatus"
+        },
+        "Driver": {
+          "description": "Driver unique code name",
+          "access": {
+            "0": "r"
+          },
+          "example": "ble",
+          "type": "String"
+        },
+        "Name": {
+          "description": "Driver name",
+          "access": {
+            "0": "r"
+          },
+          "example": "Bluetooth LE",
+          "type": "String"
+        },
+        "Data": {
+          "description": "Store the last record(s) received by a Read or Subscribe operation.\nIs up to the Protocol implementation decide how. Devices will receive data\nfrom different sensor an will need to filter out the correct ones\n",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
+          "type": "RecordObject"
+        },
+        "Devices": {
+          "description": "A list of devices found or available via this protocol.",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
+          "type": "Array",
+          "reference": "DeviceOverview"
+        }
+      },
+      "http": {
+        "/protocol/{protocolId}/connection/{deviceId}": {
+          "parameters": {
+            "0": {
+              "name": "protocolId",
+              "in": "path",
+              "description": "Agile Id of the protocol",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile internal Id of the protocol",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "operationId": "Connect",
+            "tags": {
+              "0": "Protocol"
+            },
+            "description": "Connect to the device",
+            "responses": {
+              "200": {
+                "description": "Connection initialized"
+              },
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          },
+          "delete": {
+            "operationId": "Disconnect",
+            "tags": {
+              "0": "Protocol"
+            },
+            "description": "Disconnect from the device",
+            "responses": {
+              "200": {
+                "description": "Disconnection completed"
+              },
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          }
+        },
+        "/protocol/{protocolId}/discovery": {
+          "parameters": {
+            "0": {
+              "name": "protocolId",
+              "in": "path",
+              "description": "Agile Id of the protocol",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "operationId": "StartDiscovery",
+            "tags": {
+              "0": "Protocol"
+            },
+            "description": "Start the discovery process",
+            "responses": {
+              "200": {
+                "description": "Discovery started"
+              },
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          },
+          "delete": {
+            "operationId": "StopDiscovery",
+            "tags": {
+              "0": "Protocol"
+            },
+            "description": "Stop the discovery process",
+            "responses": {
+              "200": {
+                "description": "Discovery process stopped"
+              },
+              "404": {
+                "description": "Device not found"
+              }
+            }
+          }
+        },
+        "/protocol/{protocolId}/{deviceId}": {
+          "parameters": {
+            "0": {
+              "name": "protocolId",
+              "in": "path",
+              "description": "Agile internal Id of the protocol",
+              "required": true,
+              "type": "string"
+            },
+            "1": {
+              "name": "deviceId",
+              "in": "path",
+              "description": "Agile protocol Id of the device",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "operationId": "Write",
+            "tags": {
+              "0": "Protocol"
+            },
+            "description": "Call a write via protocol",
+            "parameters": {
+              "0": {
+                "name": "data",
+                "in": "body",
+                "description": "An object containing the content to write",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/ProtocolMessage"
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Write suceeded"
+              },
+              "404": {
+                "description": "Device or component not found"
+              }
+            }
+          },
+          "get": {
+            "operationId": "Read",
+            "tags": {
+              "0": "Protocol"
+            },
+            "description": "Call a read via protocol",
+            "responses": {
+              "200": {
+                "description": "Read suceeded",
+                "schema": {
+                  "$ref": "#/definitions/RecordObject"
+                }
+              },
+              "404": {
+                "description": "Device or component not found"
+              }
+            }
+          }
+        }
+      }
+    },
+    "org.eclipse.agail.ProtocolManager": {
+      "description": "The ProtocolManager list the managed protocols in the gateway. From this\ninterface is possible to add and remove protocols and start/stop multiprotocol discovery.\nThe discovery process will list all found devices under the `Devices` property.\nThose discovered devices may be added to the [DeviceManager](#org.eclipse.agail.DeviceManager) to be\nconfigured and made operational.\n",
+      "group": "Protocol",
+      "methods": {
+        "StartDiscovery": {
+          "description": "Start discovery on all the managed Protocols",
+          "args": {
+            "params": {
+              "type": "DiscoverParam"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "StopDiscovery": {
+          "description": "Stop the ongoing discovery on all the managed Protocols",
+          "return": {
+            "type": "void"
+          }
+        },
+        "Add": {
+          "description": "Add a new Protocol",
+          "args": {
+            "protocol": {
+              "description": "The DBus object interface reference of the Protocol",
+              "type": "org.eclipse.agail.Protocol"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Remove": {
+          "description": "Remove a managed Protocol",
+          "args": {
+            "protocol": {
+              "description": "The DBus object interface reference of the Protocol",
+              "type": "org.eclipse.agail.Protocol"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        }
+      },
+      "properties": {
+        "Devices": {
+          "description": "All devices a Protocol knows about. This list may be updated by the StartDiscovery method.\nDevices may also be provisioned programmatically during the initialization phase.\n",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
+          "type": "Array",
+          "reference": "DeviceOverview"
+        },
+        "DiscoveryStatus": {
+          "description": "List the status of protocols discovery, inidicating if it is running or not",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
+          "type": "Array",
+          "reference": "DiscoveryStatus"
+        },
+        "Protocols": {
+          "description": "The list of managed Protocols",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
+          "type": "Array",
+          "reference": "ProtocolOverview"
+        }
+      },
+      "http": {
+        "/protocols": {
+          "get": {
+            "operationId": "Protocols",
+            "tags": {
+              "0": "ProtocolManager"
+            },
+            "description": "Get the list of registered protocols",
+            "responses": {
+              "200": {
+                "description": "Protocols list provided",
+                "schema": {
+                  "$ref": "#/definitions/ProtocolOverview"
+                },
+                "examples": {
+                  "application/json": {
+                    "0": {
+                      "id": "BLE",
+                      "name": "Bluetooth LE",
+                      "interface": "org.eclipse.agail.protocol.BLE",
+                      "status": "AVAILABLE"
+                    },
+                    "1": {
+                      "id": "ZigBee",
+                      "name": "ZigBee communication protocol",
+                      "interface": "org.eclipse.agail.protocol.ZigBee",
+                      "status": "AVAILABLE"
+                    }
+                  }
+                }
+              },
+              "204": {
+                "description": "No protocols registered."
+              }
+            }
+          }
+        },
+        "/protocols/{protocolId}": {
+          "parameters": {
+            "0": {
+              "name": "protocolId",
+              "in": "path",
+              "description": "Agile protocol Id",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "post": {
+            "operationId": "Add",
+            "tags": {
+              "0": "ProtocolManager"
+            },
+            "description": "Register a new Dbus object implementing the protocol API",
+            "responses": {
+              "202": {
+                "description": "Protocol has been added"
+              },
+              "400": {
+                "description": "An error occured processing the request"
+              }
+            }
+          },
+          "delete": {
+            "operationId": "Remove",
+            "tags": {
+              "0": "ProtocolManager"
+            },
+            "(reference)": "ProtocolManager.Remove",
+            "description": "Unregister a Dbus Protocol object reference",
+            "responses": {
+              "200": {
+                "description": "Protocol unregistered"
+              },
+              "404": {
+                "description": "Protocol not found"
+              }
+            }
+          }
+        },
+        "/protocols/devices": {
+          "get": {
+            "operationId": "Devices",
+            "tags": {
+              "0": "ProtocolManager"
+            },
+            "(reference)": "ProtocolManager.Devices",
+            "description": "List all discovered devices on all available protocols",
+            "responses": {
+              "200": {
+                "description": "The list of devices found via discovery\n",
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/definitions/DeviceOverview"
+                },
+                "examples": {
+                  "application/json": {
+                    "0": {
+                      "name": "SensorTag",
+                      "id": "AA:BB:CC:DD",
+                      "protocol": "org.eclipse.agail.protocol.BLE",
+                      "status": "AVAILABLE"
+                    },
+                    "1": {
+                      "name": "LightDimmer",
+                      "id": "CC:DD:AA:BB",
+                      "protocol": "org.eclipse.agail.protocol.Zwave",
+                      "status": "AVAILABLE"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/protocols/discovery": {
+          "get": {
+            "operationId": "DiscoveryStatus",
+            "tags": {
+              "0": "ProtocolManager"
+            },
+            "description": "Return the status of discovery on the available protocols",
+            "responses": {
+              "200": {
+                "description": "Return the list of protocol discovery status\n",
+                "schema": {
+                  "$ref": "#/definitions/DiscoveryStatus"
+                },
+                "examples": {
+                  "application/json": {
+                    "0": {
+                      "name": "BLE",
+                      "status": "RUNNING"
+                    },
+                    "1": {
+                      "name": "ZigBee",
+                      "status": "NONE"
+                    },
+                    "2": {
+                      "name": "ZWave",
+                      "status": "FAILURE"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "post": {
+            "operationId": "StartDiscovery",
+            "tags": {
+              "0": "ProtocolManager"
+            },
+            "description": "Start a device discovery on all available protocols",
+            "responses": {
+              "204": {
+                "description": "The discovery has been successfully started on all the regitered\nprotocols; asynchronous updates will be sent via websocket\n"
+              },
+              "409": {
+                "description": "Indicates that discovery has been requested to the underlying\nprotocols but one or more reported a failure\n"
+              }
+            }
+          },
+          "delete": {
+            "operationId": "StopDiscovery",
+            "tags": {
+              "0": "ProtocolManager"
+            },
+            "description": "Stop a device discovery if previously initiated",
+            "responses": {
+              "204": {
+                "description": "The discovery has been successfully stopped on all the regitered\nprotocols; There will be no further device updates via websocket\n"
+              },
+              "409": {
+                "description": "Indicates that discovery has been requested to stop on the underlying\nprotocols but one or more reported a failure\n"
+              }
+            }
+          }
+        }
+      }
+    },
+    "org.eclipse.agail.Network": {
+      "methods": {
+        "CreateAP": {
+          "description": "Create a local access point",
+          "args": {
+            "subnet": {
+              "description": "A valid subnet to use to setup the access point",
+              "example": "10.0.0.0/8",
+              "type": "String"
+            },
+            "gateway": {
+              "description": "The default gateway to use for routing / natting",
+              "example": "192.168.0.1",
+              "type": "String"
+            },
+            "password": {
+              "description": "The default access password / key used to login depending on AP setup",
+              "type": "String"
+            }
+          }
+        },
+        "ScanWiFi": {
+          "description": "Search for available WiFi",
+          "return": {
+            "type": "void"
+          }
+        }
+      },
+      "properties": {
+        "Status": {
+          "description": "Indicates if an internet connection is available",
+          "type": "Boolean"
+        },
+        "Connections": {
+          "description": "List available internet connections",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
+          "type": "Array",
+          "fields": "String"
+        },
+        "Devices": {
+          "description": "List available network system devices",
+          "type": "Array",
+          "fields": "String"
+        }
+      }
+    },
+    "org.eclipse.agail.Storage.Driver": {
+      "description": "A Driver component is in charge of data storage and\nretrieval on a specific implementation.\nIt may be a local database or an online services via APIs\n",
+      "group": "Data storage",
+      "methods": {
+        "Create": {
+          "description": "Creates a record",
+          "args": {
+            "record": {
+              "type": "RecordObject"
+            }
+          },
+          "return": {
+            "description": "Return the Id of the created record",
+            "type": "String"
+          }
+        },
+        "Read": {
+          "description": "Load a record by Id",
+          "args": {
+            "id": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "description": "Return the corresponding record",
+            "type": "RecordObject"
+          }
+        },
+        "Update": {
+          "description": "Updates a record",
+          "args": {
+            "id": {
+              "type": "String"
+            },
+            "record": {
+              "type": "RecordObject"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Delete": {
+          "description": "Delete a record by Id",
+          "args": {
+            "id": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Find": {
+          "description": "Search for a set of records by criterias",
+          "args": {
+            "query": {
+              "type": "BaseQuery"
+            }
+          },
+          "return": {
+            "type": "Array",
+            "fields": "RecordObject"
+          }
+        }
+      },
+      "properties": {
+        "Name": {
+          "description": "The driver friendly name",
+          "access": {
+            "0": "r"
+          },
+          "type": "String"
+        },
+        "Enabled": {
+          "type": "Boolean"
+        },
+        "Status": {
+          "description": "Indicate the overall status of the Driver.",
+          "access": {
+            "0": "r"
+          },
+          "type": "DriverStatus"
+        },
+        "Error": {
+          "description": "Indicates if an error occured. May be reset once notified.",
+          "access": {
+            "0": "r",
+            "1": "w",
+            "2": "s"
+          },
+          "type": "Boolean"
+        },
+        "Params": {
+          "description": "Contains Driver specific configurations\n",
+          "access": {
+            "0": "r",
+            "1": "w"
+          },
+          "type": "Object",
+          "fields": {
+            "uri": {
+              "description": "A parsable connection string composed of key value\nindicated by `=` symbol, separated with `;`.\nIf value contains a separator (`=` or `;`) it must be escaped with a backslash.\nThis may be exposed to the users with a proper UI to allow insertion of personal keys\n",
+              "example": "hostname=localhost;password=my \\;password;",
+              "type": "String",
+              "required": true
+            },
+            "options": {
+              "type": "Object*",
+              "required": true
+            }
+          }
+        },
+        "Logs": {
+          "description": "A system path to read the logs from",
+          "type": "String"
+        }
+      }
+    },
+    "org.eclipse.agail.Storage.DriverManager": {
+      "description": "The DriverManager component is in charge for handling the status\nof different Drivers available in the system.\n",
+      "group": "Data storage",
+      "methods": {
+        "Add": {
+          "description": "Add a driver reference instance",
+          "args": {
+            "driver": {
+              "description": "The driver instance to be added",
+              "example": "org/eclipse/agail/Storage/Driver/Influx0",
+              "type": "org.eclipse.agail.Storage.Driver"
+            },
+            "enable": {
+              "description": "Specify if the Driver should be enabled and\nimmediately available\n",
+              "type": "Boolean"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Remove": {
+          "description": "Remove (and implicitly disable) a driver reference\ninstance\n",
+          "args": {
+            "driver": {
+              "description": "The driver instance",
+              "example": "org/eclipse/agail/Storage/Driver/Sqlite0",
+              "type": "org.eclipse.agail.Storage.Driver"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Enable": {
+          "description": "Enable a driver reference instance",
+          "args": {
+            "driver": {
+              "description": "The driver instance",
+              "example": "org/eclipse/agail/Storage/Driver/Sqlite0",
+              "type": "org.eclipse.agail.Storage.Driver"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Disable": {
+          "description": "Disable a driver reference instance",
+          "args": {
+            "driver": {
+              "description": "The driver instance",
+              "example": "org/eclipse/agail/Storage/Driver/Sqlite0",
+              "type": "org.eclipse.agail.Storage.Driver"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Status": {
+          "description": "Query a Driver to report the current status.",
+          "args": {
+            "driver": {
+              "description": "The driver instance",
+              "example": "org/eclipse/agail/Storage/Driver/Sqlite0",
+              "type": "org.eclipse.agail.Storage.Driver"
+            }
+          },
+          "return": {
+            "type": "Object",
+            "fields": {
+              "enabled": {
+                "type": "Boolean",
+                "required": true
+              },
+              "status": {
+                "type": "DriverStatus",
+                "required": true
+              },
+              "logs": {
+                "description": "A system path where to read the Driver logs",
+                "example": "/var/log/agile-driver/storage.log",
+                "type": "String",
+                "required": true
+              }
+            }
+          }
+        }
+      },
+      "properties": {
+        "Enabled": {
+          "description": "List of enabled Drivers.",
+          "type": "Array",
+          "reference": "org.eclipse.agail.Storage.Driver"
+        },
+        "List": {
+          "description": "List of all available Drivers.",
+          "type": "Array",
+          "reference": "org.eclipse.agail.Storage.Driver"
+        }
+      }
+    },
+    "org.eclipse.agail.Storage": {
+      "description": "The Storage component offer an abstraction for Devices to store and fetch data\nin a generic way.\nWrite operations happens on all the enabled Drivers;\nFailure of a single Driver doesn't make faile the whole write but only reported\nRead operations work on a default driver, if specified, which acts as preferred source.\nIn case default is not available or fails, read will be executed in cascade on\nthe enabled Driver. If none replies the operation fails.\n",
+      "group": "Data storage",
+      "methods": {
+        "Create": {
+          "description": "Creates a record",
+          "args": {
+            "record": {
+              "type": "RecordObject"
+            }
+          },
+          "return": {
+            "description": "Return the Id of the created record",
+            "type": "String"
+          }
+        },
+        "Read": {
+          "description": "Load a record by Id",
+          "args": {
+            "Id": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "description": "Return the corresponding record",
+            "type": "RecordObject"
+          }
+        },
+        "Update": {
+          "description": "Updates a record",
+          "args": {
+            "Id": {
+              "type": "String"
+            },
+            "Record": {
+              "type": "RecordObject"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Delete": {
+          "description": "Delete a record by Id",
+          "args": {
+            "Id": {
+              "type": "String"
+            }
+          },
+          "return": {
+            "type": "void"
+          }
+        },
+        "Find": {
+          "description": "Search for a set of records by criterias",
+          "args": {
+            "query": {
+              "type": "BaseQuery"
+            }
+          },
+          "return": {
+            "type": "Array",
+            "fields": "RecordObject"
+          }
+        }
+      },
+      "properties": {
+        "Drivers": {
+          "description": "List the enabled drivers in use",
+          "access": {
+            "0": "r",
+            "1": "s"
+          },
+          "type": "Array",
+          "reference": "org.eclipse.agail.Storage.Driver"
+        }
+      }
+    }
+  },
+  "types": {
+    "DeviceOverview": {
+      "description": "An overview of a device a protocol knows about",
+      "type": "Object",
+      "fields": {
+        "name": {
+          "description": "Friendly name of the device",
+          "type": "String",
+          "required": true
+        },
+        "protocol": {
+          "description": "Protocol reference for this device",
+          "type": "String",
+          "required": true
+        },
+        "id": {
+          "description": "Protocol level id used to identify and access the device",
+          "type": "String",
+          "required": true
+        },
+        "status": {
+          "type": "Enum",
+          "fields": {
+            "0": {
+              "type": "CONNECTED",
+              "required": true
+            },
+            "1": {
+              "type": "DISCONNECTED",
+              "required": true
+            },
+            "2": {
+              "type": "AVAILABLE",
+              "required": true
+            },
+            "3": {
+              "type": "UNAVAILABLE",
+              "required": true
+            }
+          },
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "DiscoverParam": {
+      "type": "Object",
+      "fields": {
+        "duration": {
+          "description": "The duration in seconds the discovery process will last before\nit should be stopped\n",
+          "type": "Number",
+          "required": false
+        }
+      },
+      "required": true
+    },
+    "DiscoveryStatus": {
+      "type": "Object",
+      "fields": {
+        "name": {
+          "description": "Name of the protocol",
+          "type": "String",
+          "required": true
+        },
+        "status": {
+          "type": "Enum",
+          "fields": {
+            "0": {
+              "type": "NONE",
+              "required": true
+            },
+            "1": {
+              "type": "RUNNING",
+              "required": true
+            },
+            "2": {
+              "type": "FAILURE",
+              "required": true
+            }
+          },
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "ProtocolMessage": {
+      "type": "Object",
+      "fields": {
+        "data": {
+          "type": "String",
+          "required": true
+        },
+        "format": {
+          "type": "String",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "ProtocolOverview": {
+      "type": "Object",
+      "fields": {
+        "name": {
+          "description": "The protocol name",
+          "example": "Bluetooth LE",
+          "type": "String",
+          "required": false
+        },
+        "id": {
+          "description": "the internal code identifying the protocol",
+          "example": "BLE",
+          "type": "String",
+          "required": true
+        },
+        "interface": {
+          "description": "The DBus interface reference",
+          "example": "org.eclipse.agail.protocol.BLE",
+          "type": "String",
+          "required": false
+        },
+        "status": {
+          "type": "ProtocolStatus",
+          "required": false
+        }
+      },
+      "required": true
+    },
+    "ProtocolProfile": {
+      "description": "A Protocol set of settings that translate human readable properties\nto actual Protocol implementation details.\n\nFor example, the user request the temperature value over a BLE connected\ndevice and the Protocol receive all the specific informations (like\nservices and characteristics ids) to enable the data reading.\n",
+      "type": "Object*",
+      "required": true
+    },
+    "ProtocolStatus": {
+      "description": "Identify a status of the Protocol, indicating if operational (AVAILABLE) or\nif for some reason further user-side checks are required.\n",
+      "type": "Enum",
+      "fields": {
+        "0": {
+          "type": "AVAILABLE",
+          "required": true
+        },
+        "1": {
+          "type": "UNAVAILABLE",
+          "required": true
+        },
+        "2": {
+          "type": "NOT_CONFIGURED",
+          "required": true
+        },
+        "3": {
+          "type": "DISABLED",
+          "required": true
+        },
+        "4": {
+          "type": "ENABLED",
+          "required": true
+        },
+        "5": {
+          "type": "FAILURE",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "ChannelTypeEnum": {
+      "type": "Enum",
+      "fields": {
+        "0": {
+          "type": "Number",
+          "required": true
+        },
+        "1": {
+          "type": "String",
+          "required": true
+        },
+        "2": {
+          "type": "Boolean",
+          "required": true
+        },
+        "3": {
+          "type": "GeoPoint",
+          "required": true
+        },
+        "4": {
+          "type": "Object",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "DeviceComponent": {
+      "description": "A device component from which get a data stream, like a sensor",
+      "type": "Object",
+      "fields": {
+        "id": {
+          "type": "String",
+          "required": true
+        },
+        "unit": {
+          "type": "String",
+          "required": false
+        },
+        "properties": {
+          "type": "KeyValue",
+          "required": false
+        }
+      },
+      "required": true
+    },
+    "DeviceDefinition": {
+      "description": "A device definition that contains informations describing the current device",
+      "type": "Object",
+      "fields": {
+        "deviceId": {
+          "description": "Agile specific device ID",
+          "type": "String",
+          "required": true
+        },
+        "address": {
+          "description": "Protocol specific device address",
+          "type": "String",
+          "required": true
+        },
+        "name": {
+          "type": "String",
+          "required": true
+        },
+        "description": {
+          "type": "String",
+          "required": true
+        },
+        "protocol": {
+          "type": "String",
+          "required": true
+        },
+        "path": {
+          "description": "DBus specific path to reach the object instance",
+          "type": "String",
+          "required": true
+        },
+        "streams": {
+          "description": "A list of components from which get data streams",
+          "type": "Array",
+          "fields": "DeviceComponent",
+          "required": true
+        }
+      },
+      "required": {
+        "0": "deviceId"
+      }
+    },
+    "DeviceStreamChannel": {
+      "description": "A channel contains the definition of a component like a sensor",
+      "type": "Object",
+      "fields": {
+        "name": {
+          "type": "String",
+          "required": true
+        },
+        "type": {
+          "type": "ChannelTypeEnum",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "RegisterPayload": {
+      "description": "Payload",
+      "type": "Object",
+      "fields": {
+        "overview": {
+          "type": "DeviceOverview",
+          "required": true
+        },
+        "type": {
+          "type": "String",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "StatusType": {
+      "type": "Enum",
+      "fields": {
+        "0": {
+          "type": "CONNECTED",
+          "required": true
+        },
+        "1": {
+          "type": "DISCONNECTED",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "DriverStatus": {
+      "type": "Enum",
+      "fields": {
+        "0": {
+          "type": "ACTIVE",
+          "required": true
+        },
+        "1": {
+          "type": "NOT_CONFIGURED",
+          "required": true
+        },
+        "2": {
+          "type": "ERROR",
+          "required": true
+        },
+        "3": {
+          "type": "FAILURE",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "RecordObject": {
+      "description": "Contains the measurment from a sensor and the metadata regarding its source",
+      "type": "Object",
+      "fields": {
+        "DeviceId": {
+          "description": "The Agile Id that generated the value",
+          "type": "String",
+          "required": true
+        },
+        "ComponentId": {
+          "description": "The component Id or sensor from where the value comes from",
+          "example": "temperature",
+          "type": "String",
+          "required": true
+        },
+        "Value": {
+          "description": "The value, stored as string",
+          "type": "String",
+          "required": true
+        },
+        "Unit": {
+          "description": "The measurment unit for the value",
+          "type": "String",
+          "required": true
+        },
+        "Format": {
+          "description": "A format description to read the data value",
+          "type": "String",
+          "required": true
+        },
+        "LastUpdate": {
+          "description": "A UNIX timestamp rapresenting the last update of a record",
+          "type": "Number",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "BaseQuery": {
+      "type": "Object",
+      "fields": {
+        "Criteria": {
+          "description": "A key-value series of field-value to query for.\n- Use `*` to indicate a fuzzy search\n- Use an Array to indicate an IN like query\n",
+          "type": "Object*",
+          "required": true
+        },
+        "OrderBy": {
+          "description": "A key-value series of field-value to order the result for.\n",
+          "type": "Object*",
+          "required": true
+        },
+        "Limit": {
+          "description": "The limit of records founds to return",
+          "type": "Number",
+          "required": true
+        },
+        "Offset": {
+          "description": "The position for the first record to take from the list of results",
+          "type": "Number",
+          "required": true
+        }
+      },
+      "required": true
+    },
+    "KeyValue": {
+      "description": "A list of key/value pairs",
+      "type": "Object*",
+      "required": true
+    }
+  }
+}

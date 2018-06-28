@@ -1,0 +1,22 @@
+#-------------------------------------------------------------------------------
+# Copyright (C) 2017 Create-Net / FBK.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License 2.0
+# which accompanies this distribution, and is available at
+# https://www.eclipse.org/legal/epl-2.0/
+#
+# SPDX-License-Identifier: EPL-2.0
+# 
+# Contributors:
+#     Create-Net / FBK - initial API and implementation
+#-------------------------------------------------------------------------------
+ProtocolProfile:
+  group: Device
+  description: |
+    A Protocol set of settings that translate human readable properties
+    to actual Protocol implementation details.
+
+    For example, the user request the temperature value over a BLE connected
+    device and the Protocol receive all the specific informations (like
+    services and characteristics ids) to enable the data reading.
+  type: Object*
