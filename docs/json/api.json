@@ -507,22 +507,6 @@
                 "description": "No data available"
               }
             }
-          },
-          "post": {
-            "operationId": "Write",
-            "tags": {
-              "0": "Device"
-            },
-            "description": "Write to a device component",
-            "(reference)": "Device.Write",
-            "responses": {
-              "200": {
-                "description": "Write sent"
-              },
-              "204": {
-                "description": "Write sent, no results returned"
-              }
-            }
           }
         },
         "/device/{deviceId}/{componentId}/{payload}": {
