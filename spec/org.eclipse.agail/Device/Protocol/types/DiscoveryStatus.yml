@@ -10,22 +10,15 @@
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
 #-------------------------------------------------------------------------------
-BaseQuery:
+DiscoveryStatus:
   type: Object
   fields:
-    Criteria:
-      description: |
-        A key-value series of field-value to query for.
-        - Use `*` to indicate a fuzzy search
-        - Use an Array to indicate an IN like query
-      type: Object*
-    OrderBy:
-      description: |
-        A key-value series of field-value to order the result for.
-      type: Object*
-    Limit:
-      description: The limit of records founds to return
-      type: Number
-    Offset:
-      description: The position for the first record to take from the list of results
-      type: Number
+    name:
+      description: Name of the protocol
+      type: String
+    status:
+      type: Enum
+      fields:
+        - NONE
+        - RUNNING
+        - FAILURE

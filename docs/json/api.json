@@ -1,6 +1,6 @@
 {
   "classes": {
-    "iot.agile.Apps": {
+    "org.eclipse.agail.Apps": {
       "description": "Apps API enable the management of AGILE apps and components\n",
       "group": "Apps",
       "methods": {
@@ -121,7 +121,7 @@
         }
       }
     },
-    "iot.agile.Device": {
+    "org.eclipse.agail.Device": {
       "description": "The Device API abstracts operations over the real device.\nIt send commands to a Protocol API instance to which is binded.\n",
       "group": "Device",
       "methods": {
@@ -141,7 +141,7 @@
           "return": {
             "type": "Array",
             "fields": "RecordObject",
-            "reference": "iot.agile.RecordObject"
+            "reference": "org.eclipse.agail.RecordObject"
           }
         },
         "LastUpdate": {
@@ -160,7 +160,7 @@
           "return": {
             "type": "Array",
             "fields": "RecordObject",
-            "reference": "iot.agile.RecordObject"
+            "reference": "org.eclipse.agail.RecordObject"
           }
         },
         "Execute": {
@@ -260,7 +260,7 @@
         },
         "Protocol": {
           "description": "Device-specific communication Protocol instance. Available to access protocol specific methods and properties",
-          "reference": "iot.agile.Protocol"
+          "reference": "org.eclipse.agail.Protocol"
         }
       },
       "http": {
@@ -642,10 +642,10 @@
         }
       },
       "dbus": {
-        "name": "/iot/agile/Device/Example"
+        "name": "/org/eclipse/agail/Device/Example"
       }
     },
-    "iot.agile.DeviceManager": {
+    "org.eclipse.agail.DeviceManager": {
       "description": "The DeviceManager list the registered devices available from the gateway available protocols.\nThis API is responsible to instantiate the reference DBus object for every device\nand offer management and integration points.\n",
       "group": "Device",
       "methods": {
@@ -674,7 +674,7 @@
           "return": {
             "description": "A list with all matching registered devices results, eventually sorted and sliced",
             "type": "Array",
-            "reference": "iot.agile.Device"
+            "reference": "org.eclipse.agail.Device"
           }
         },
         "Create": {
@@ -796,8 +796,8 @@
                       "address": "A1:B2:C3:D4:E5:F6",
                       "name": "MyFirstSensorTag",
                       "description": "",
-                      "protocol": "iot.agile.protocol.ble",
-                      "path": "/iot/agile/Device/bleA1B2C3D4E5F6",
+                      "protocol": "org.eclipse.agail.protocol.ble",
+                      "path": "/org/eclipse/agail/Device/bleA1B2C3D4E5F6",
                       "streams": {
                         "0": {
                           "id": "temperature",
@@ -818,8 +818,8 @@
                       "address": "A6:B5:C4:D3:E2:F1",
                       "name": "MySecondSensorTag",
                       "description": "",
-                      "protocol": "iot.agile.protocol.ble",
-                      "path": "/iot/agile/Device/bleA6B5C4D3E2F1",
+                      "protocol": "org.eclipse.agail.protocol.ble",
+                      "path": "/org/eclipse/agail/Device/bleA6B5C4D3E2F1",
                       "streams": {
                         "0": {
                           "id": "temperature",
@@ -863,7 +863,7 @@
                     "overview": {
                       "id": "A0:E6:F8:B6:F2:00",
                       "name": "CC2650 SensorTag",
-                      "protocol": "iot.agile.protocol.BLE",
+                      "protocol": "org.eclipse.agail.protocol.BLE",
                       "status": "AVAILABLE"
                     },
                     "type": "TI SensorTag"
@@ -883,8 +883,8 @@
                     "address": "A1:B2:C3:D4:E5:F6",
                     "name": "MyFirstSensorTag",
                     "description": "",
-                    "protocol": "iot.agile.protocol.ble",
-                    "path": "/iot/agile/Device/bleA1B2C3D4E5F6",
+                    "protocol": "org.eclipse.agail.protocol.ble",
+                    "path": "/org/eclipse/agail/Device/bleA1B2C3D4E5F6",
                     "streams": {
                       "0": {
                         "id": "temperature",
@@ -925,7 +925,7 @@
                   "application/json": {
                     "id": "A0:E6:F8:B6:F2:00",
                     "name": "CC2650 SensorTag",
-                    "protocol": "iot.agile.protocol.BLE",
+                    "protocol": "org.eclipse.agail.protocol.BLE",
                     "status": "AVAILABLE"
                   }
                 }
@@ -970,8 +970,8 @@
                     "address": "A1:B2:C3:D4:E5:F6",
                     "name": "SensorTag",
                     "description": "",
-                    "protocol": "iot.agile.protocol.ble",
-                    "path": "/iot/agile/Device/bleA1B2C3D4E5F6",
+                    "protocol": "org.eclipse.agail.protocol.ble",
+                    "path": "/org/eclipse/agail/Device/bleA1B2C3D4E5F6",
                     "streams": {
                       "0": {
                         "id": "temperature",
@@ -1014,8 +1014,8 @@
                     "address": "A1:B2:C3:D4:E5:F6",
                     "name": "SensorTag",
                     "description": "",
-                    "protocol": "iot.agile.protocol.ble",
-                    "path": "/iot/agile/Device/bleA1B2C3D4E5F6",
+                    "protocol": "org.eclipse.agail.protocol.ble",
+                    "path": "/org/eclipse/agail/Device/bleA1B2C3D4E5F6",
                     "streams": {
                       "0": {
                         "id": "temperature",
@@ -1066,7 +1066,7 @@
         }
       }
     },
-    "iot.agile.Protocol": {
+    "org.eclipse.agail.Protocol": {
       "description": "A Protocol object abstract operations over a specific protocol implementation.\nEvery Device has one Protocol used to establish and use a communication exchange.\n",
       "group": "Device",
       "methods": {
@@ -1370,8 +1370,8 @@
         }
       }
     },
-    "iot.agile.ProtocolManager": {
-      "description": "The ProtocolManager list the managed protocols in the gateway. From this\ninterface is possible to add and remove protocols and start/stop multiprotocol discovery.\nThe discovery process will list all found devices under the `Devices` property.\nThose discovered devices may be added to the [DeviceManager](#iot.agile.DeviceManager) to be\nconfigured and made operational.\n",
+    "org.eclipse.agail.ProtocolManager": {
+      "description": "The ProtocolManager list the managed protocols in the gateway. From this\ninterface is possible to add and remove protocols and start/stop multiprotocol discovery.\nThe discovery process will list all found devices under the `Devices` property.\nThose discovered devices may be added to the [DeviceManager](#org.eclipse.agail.DeviceManager) to be\nconfigured and made operational.\n",
       "group": "Protocol",
       "methods": {
         "StartDiscovery": {
@@ -1396,7 +1396,7 @@
           "args": {
             "protocol": {
               "description": "The DBus object interface reference of the Protocol",
-              "type": "iot.agile.Protocol"
+              "type": "org.eclipse.agail.Protocol"
             }
           },
           "return": {
@@ -1408,7 +1408,7 @@
           "args": {
             "protocol": {
               "description": "The DBus object interface reference of the Protocol",
-              "type": "iot.agile.Protocol"
+              "type": "org.eclipse.agail.Protocol"
             }
           },
           "return": {
@@ -1464,13 +1464,13 @@
                     "0": {
                       "id": "BLE",
                       "name": "Bluetooth LE",
-                      "interface": "iot.agile.protocol.BLE",
+                      "interface": "org.eclipse.agail.protocol.BLE",
                       "status": "AVAILABLE"
                     },
                     "1": {
                       "id": "ZigBee",
                       "name": "ZigBee communication protocol",
-                      "interface": "iot.agile.protocol.ZigBee",
+                      "interface": "org.eclipse.agail.protocol.ZigBee",
                       "status": "AVAILABLE"
                     }
                   }
@@ -1544,13 +1544,13 @@
                     "0": {
                       "name": "SensorTag",
                       "id": "AA:BB:CC:DD",
-                      "protocol": "iot.agile.protocol.BLE",
+                      "protocol": "org.eclipse.agail.protocol.BLE",
                       "status": "AVAILABLE"
                     },
                     "1": {
                       "name": "LightDimmer",
                       "id": "CC:DD:AA:BB",
-                      "protocol": "iot.agile.protocol.Zwave",
+                      "protocol": "org.eclipse.agail.protocol.Zwave",
                       "status": "AVAILABLE"
                     }
                   }
@@ -1624,7 +1624,7 @@
         }
       }
     },
-    "iot.agile.Network": {
+    "org.eclipse.agail.Network": {
       "methods": {
         "CreateAP": {
           "description": "Create a local access point",
@@ -1673,7 +1673,7 @@
         }
       }
     },
-    "iot.agile.Storage.Driver": {
+    "org.eclipse.agail.Storage.Driver": {
       "description": "A Driver component is in charge of data storage and\nretrieval on a specific implementation.\nIt may be a local database or an online services via APIs\n",
       "group": "Data storage",
       "methods": {
@@ -1792,7 +1792,7 @@
         }
       }
     },
-    "iot.agile.Storage.DriverManager": {
+    "org.eclipse.agail.Storage.DriverManager": {
       "description": "The DriverManager component is in charge for handling the status\nof different Drivers available in the system.\n",
       "group": "Data storage",
       "methods": {
@@ -1801,8 +1801,8 @@
           "args": {
             "driver": {
               "description": "The driver instance to be added",
-              "example": "iot/agile/Storage/Driver/Influx0",
-              "type": "iot.agile.Storage.Driver"
+              "example": "org/eclipse/agail/Storage/Driver/Influx0",
+              "type": "org.eclipse.agail.Storage.Driver"
             },
             "enable": {
               "description": "Specify if the Driver should be enabled and\nimmediately available\n",
@@ -1818,8 +1818,8 @@
           "args": {
             "driver": {
               "description": "The driver instance",
-              "example": "iot/agile/Storage/Driver/Sqlite0",
-              "type": "iot.agile.Storage.Driver"
+              "example": "org/eclipse/agail/Storage/Driver/Sqlite0",
+              "type": "org.eclipse.agail.Storage.Driver"
             }
           },
           "return": {
@@ -1831,8 +1831,8 @@
           "args": {
             "driver": {
               "description": "The driver instance",
-              "example": "iot/agile/Storage/Driver/Sqlite0",
-              "type": "iot.agile.Storage.Driver"
+              "example": "org/eclipse/agail/Storage/Driver/Sqlite0",
+              "type": "org.eclipse.agail.Storage.Driver"
             }
           },
           "return": {
@@ -1844,8 +1844,8 @@
           "args": {
             "driver": {
               "description": "The driver instance",
-              "example": "iot/agile/Storage/Driver/Sqlite0",
-              "type": "iot.agile.Storage.Driver"
+              "example": "org/eclipse/agail/Storage/Driver/Sqlite0",
+              "type": "org.eclipse.agail.Storage.Driver"
             }
           },
           "return": {
@@ -1857,8 +1857,8 @@
           "args": {
             "driver": {
               "description": "The driver instance",
-              "example": "iot/agile/Storage/Driver/Sqlite0",
-              "type": "iot.agile.Storage.Driver"
+              "example": "org/eclipse/agail/Storage/Driver/Sqlite0",
+              "type": "org.eclipse.agail.Storage.Driver"
             }
           },
           "return": {
@@ -1886,16 +1886,16 @@
         "Enabled": {
           "description": "List of enabled Drivers.",
           "type": "Array",
-          "reference": "iot.agile.Storage.Driver"
+          "reference": "org.eclipse.agail.Storage.Driver"
         },
         "List": {
           "description": "List of all available Drivers.",
           "type": "Array",
-          "reference": "iot.agile.Storage.Driver"
+          "reference": "org.eclipse.agail.Storage.Driver"
         }
       }
     },
-    "iot.agile.Storage": {
+    "org.eclipse.agail.Storage": {
       "description": "The Storage component offer an abstraction for Devices to store and fetch data\nin a generic way.\nWrite operations happens on all the enabled Drivers;\nFailure of a single Driver doesn't make faile the whole write but only reported\nRead operations work on a default driver, if specified, which acts as preferred source.\nIn case default is not available or fails, read will be executed in cascade on\nthe enabled Driver. If none replies the operation fails.\n",
       "group": "Data storage",
       "methods": {
@@ -1969,7 +1969,7 @@
             "1": "s"
           },
           "type": "Array",
-          "reference": "iot.agile.Storage.Driver"
+          "reference": "org.eclipse.agail.Storage.Driver"
         }
       }
     }
@@ -2090,7 +2090,7 @@
         },
         "interface": {
           "description": "The DBus interface reference",
-          "example": "iot.agile.protocol.BLE",
+          "example": "org.eclipse.agail.protocol.BLE",
           "type": "String",
           "required": false
         },

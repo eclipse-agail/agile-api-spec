@@ -1,9 +1,11 @@
 <!--
 # Copyright (C) 2017 Create-Net / FBK.
 # All rights reserved. This program and the accompanying materials
-# are made available under the terms of the Eclipse Public License v1.0
+# are made available under the terms of the Eclipse Public License 2.0
 # which accompanies this distribution, and is available at
-# http://www.eclipse.org/legal/epl-v10.html
+# https://www.eclipse.org/legal/epl-2.0/
+#
+# SPDX-License-Identifier: EPL-2.0
 # 
 # Contributors:
 #     Create-Net / FBK - initial API and implementation
@@ -44,7 +46,7 @@ Contributors shall follow those guidelines in order to get their contribution ac
 
 ```yaml
 
-iot.agile.ObjectName:
+org.eclipse.agail.ObjectName:
 
   MethodName:
     description: <method description>
@@ -61,7 +63,7 @@ iot.agile.ObjectName:
 
   ReferenceProperties:
     description: <method description>
-    reference: [iot.agile.AnotherObject]
+    reference: [org.eclipse.agail.AnotherObject]
 
 ```
 
@@ -117,7 +119,7 @@ ArrayField:
 
 ```yaml
 
-iot.agile.Device:
+org.eclipse.agail.Device:
   Name:
     description: The device name
     type: String
@@ -129,7 +131,7 @@ iot.agile.Device:
     type: Object*
   Protocol:
     description: Protocol instance
-    reference: iot.agile.Protocol
+    reference: org.eclipse.agail.Protocol
   Read:
     args:
       sensorName: String

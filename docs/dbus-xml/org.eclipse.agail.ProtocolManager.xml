@@ -1,0 +1,91 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/org/eclipse/agail/ProtocolManager">
+
+  <interface name="org.eclipse.agail.ProtocolManager">
+    <!--
+    @see org.eclipse.agail.ProtocolManager.StartDiscovery
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_StartDiscovery
+  -->
+  <method name="StartDiscovery">
+  
+      <arg name="params" type="{d}" direction="in"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.ProtocolManager.StopDiscovery
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_StopDiscovery
+  -->
+  <method name="StopDiscovery">
+  
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.ProtocolManager.Add
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_Add
+  -->
+  <method name="Add">
+  
+      <arg name="protocol" type="o" direction="in"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.ProtocolManager.Remove
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_Remove
+  -->
+  <method name="Remove">
+  
+      <arg name="protocol" type="o" direction="in"/>
+  
+  </method>
+  <!--
+    @see org.eclipse.agail.ProtocolManager.Devices
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_Devices
+  -->
+  <property
+    name="Devices"
+    type="{sss(i)}"
+    access="read"
+    />
+<signal name="DevicesChanged">
+
+  <arg name="Devices" type="{sss(i)}" />
+
+</signal>
+
+  <!--
+    @see org.eclipse.agail.ProtocolManager.DiscoveryStatus
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_DiscoveryStatus
+  -->
+  <property
+    name="DiscoveryStatus"
+    type="{s(i)}"
+    access="read"
+    />
+<signal name="DiscoveryStatusChanged">
+
+  <arg name="DiscoveryStatus" type="{s(i)}" />
+
+</signal>
+
+  <!--
+    @see org.eclipse.agail.ProtocolManager.Protocols
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_ProtocolManager_Protocols
+  -->
+  <property
+    name="Protocols"
+    type="{sss(i)}"
+    access="read"
+    />
+<signal name="ProtocolsChanged">
+
+  <arg name="Protocols" type="{sss(i)}" />
+
+</signal>
+
+  </interface>
+
+</node>

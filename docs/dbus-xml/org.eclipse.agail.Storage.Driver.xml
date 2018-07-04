@@ -1,0 +1,126 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+       "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/org/eclipse/agail/Storage/Driver">
+
+  <interface name="org.eclipse.agail.Storage.Driver">
+    <!--
+    @see org.eclipse.agail.Storage.Driver.Create
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Create
+  -->
+  <method name="Create">
+  
+      <arg name="record" type="{sssssd}" direction="in"/>
+      <arg name="return" type="s" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Storage.Driver.Read
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Read
+  -->
+  <method name="Read">
+  
+      <arg name="id" type="s" direction="in"/>
+      <arg name="return" type="{sssssd}" direction="out"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Storage.Driver.Update
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Update
+  -->
+  <method name="Update">
+  
+      <arg name="id" type="s" direction="in"/>
+      <arg name="record" type="{sssssd}" direction="in"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Storage.Driver.Delete
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Delete
+  -->
+  <method name="Delete">
+  
+      <arg name="id" type="s" direction="in"/>
+  
+  </method>
+
+  <!--
+    @see org.eclipse.agail.Storage.Driver.Find
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Find
+  -->
+  <method name="Find">
+  
+      <arg name="query" type="{vvdd}" direction="in"/>
+      <arg name="return" type="({sssssd})" direction="out"/>
+  
+  </method>
+  <!--
+    @see org.eclipse.agail.Storage.Driver.Name
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Name
+  -->
+  <property
+    name="Name"
+    type="s"
+    access="read"
+    />
+
+  <!--
+    @see org.eclipse.agail.Storage.Driver.Enabled
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Enabled
+  -->
+  <property
+    name="Enabled"
+    type="b"
+    access="read"
+    />
+
+  <!--
+    @see org.eclipse.agail.Storage.Driver.Status
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Status
+  -->
+  <property
+    name="Status"
+    type="(i)"
+    access="read"
+    />
+
+  <!--
+    @see org.eclipse.agail.Storage.Driver.Error
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Error
+  -->
+  <property
+    name="Error"
+    type="b"
+    access="readwrite"
+    />
+<signal name="ErrorChanged">
+
+  <arg name="Error" type="b" />
+
+</signal>
+
+  <!--
+    @see org.eclipse.agail.Storage.Driver.Params
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Params
+  -->
+  <property
+    name="Params"
+    type="{sv}"
+    access="readwrite"
+    />
+
+  <!--
+    @see org.eclipse.agail.Storage.Driver.Logs
+    @link http://agile-iot.github.io/agile-api-spec/docs/html/api.html#org_eclipse_agail_Storage_Driver_Logs
+  -->
+  <property
+    name="Logs"
+    type="s"
+    access="read"
+    />
+
+  </interface>
+
+</node>
